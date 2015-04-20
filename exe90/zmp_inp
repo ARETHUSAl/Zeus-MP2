@@ -1,0 +1,81 @@
+&GEOMCONF  LGEOM    = 1,
+           LDIMEN   = 3 /
+&PHYSCONF  LRAD     = 0, 
+           XHYDRO   = .TRUE., 
+           XFORCE   = .TRUE., 
+           XMHD     = .TRUE.,
+           XTOTNRG  = .false.,
+           XGRAV    = .false., 
+           XGRVFFT  = .false., 
+           XPTMASS  = .false., 
+           XISO     = .TRUE.,
+           XSUBAV   = .false., 
+           XVGRID   = .false. 
+           XCHEM    = .false./
+&IOCONF    XASCII   = .false.,
+           XHDF     = .TRUE., 
+           XRESTART = .false., 
+           XTSL     = .false. /
+&PRECONF   SMALL_NO = 1.0D-99, 
+           LARGE_NO = 1.0D+99 /
+&ARRAYCONF IZONES   = 32, 
+           JZONES   = 32, 
+           KZONES   = 32,
+           MAXIJK   = 32 /
+&MPITOP ntiles(1)=2, ntiles(2)=1, ntiles(3)=1, periodic=3*.TRUE. /
+&rescon 
+ irestart=0, 
+ resfile='resaa000000.001',
+ tdump=1.0,
+ dtdump=1.0
+/
+&pcon 
+ nlim=100000, 
+ tlim=10., 
+ cpulim= 100000.0, 
+ mbatch=1 
+/
+&hycon 
+ qcon=2.0,
+ courno=0.5 
+/
+&rtcon /
+&chemcon /
+&iib niis(1)= 4 /
+&oib nois(1)= 4 /
+&ijb nijs(1)= 4 /
+&ojb nojs(1)= 4 /
+&ikb niks(1)= 4 /
+&okb noks(1)= 4 /
+&ggen1 nbl=32 ,x1min=-3.14, x1max=3.14, igrid=1, x1rat=1., lgrid=.true.  /
+&ggen2 nbl=32, x2min=-3.14, x2max=3.14, igrid=1, x2rat=1., lgrid=.true.  /
+&ggen3 nbl=32, x3min=-3.14, x3max=3.14, igrid=1, x3rat=1., lgrid=.true.  /
+&grvcon /
+&RADCON ipcflag=2,cgerrcrit=1/
+&EQOS   
+ gamma=1.6666667,
+ mmw=1.0D0 
+/
+&pgen 
+ l_unit=1.0, 
+ v_unit=1.0, 
+ rho_unit=1.0, 
+! diff_eta=1.0D-3, 
+! diff_nu=1.0D-3, 
+ rho0=1.0D0, 
+ b0=1.0D-1, 
+ v0=1.0D-1, 
+ p0=1.0,
+ nmodes_B=10, 
+ nmodes_V=10,
+ idx_A=4,
+ idx_V=2,
+ helic=1.0
+/
+&iocon tusr=1.0, dtusr=1.0 /
+&gcon /
+&rchmconf 
+ ichem=0,
+ iRT=0
+/
+

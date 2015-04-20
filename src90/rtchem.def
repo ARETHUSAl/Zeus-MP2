@@ -1,0 +1,10 @@
+/*================= RT/CHEM MACRO DEFINITION FILE ================== */
+/*  This file has the ZEUS-MP macro definitions used in the          */
+/*  primordial chemistry and radiative transfer modules that         */
+/*  control compilation.                                             */
+/*===================================================================*/
+#define H  */           
+#define He */             
+#define H2 */ 
+/*#define HD */ 
+#define RT            
