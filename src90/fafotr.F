@@ -113,9 +113,12 @@ c
 50      continue
 60    continue
 
-      write(6, 2020) 'im_av  = ', im_av/re_av
-      write(6, 2020) 'im_rms = ', sqrt(im_rms/re_rms)
-
+#ifdef MPI_USED
+      if(myid_w.eq.0) then
+        write(6, 2020) 'im_av  = ', im_av/re_av
+        write(6, 2020) 'im_rms = ', sqrt(im_rms/re_rms)
+      endif 
+#endif /* MPI_USED */
 
 2010  format('FAFOTR   : ' )
 2020  format('FAFOTR   : ', a10, 1pe13.6 )

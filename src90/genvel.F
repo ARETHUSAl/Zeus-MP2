@@ -245,10 +245,14 @@ c
 
 c   Diagnostic output to screen
 c       
-      write(*,*) 'GENVEL                 : ------------------ '
-      write(*,*) 'GENVEL                 : generation of '
-      write(*,*) 'GENVEL                 : velocity field '
-      write(*,*) 'GENVEL                 : finished !! '
-      write(*,*) 'GENVEL                 : ------------------ '
+#ifdef MPI_USED
+      if(myid_w.eq.0) then
+        write(*,*) 'GENVEL                 : ------------------ '
+        write(*,*) 'GENVEL                 : generation of '
+        write(*,*) 'GENVEL                 : velocity field '
+        write(*,*) 'GENVEL                 : finished !! '
+        write(*,*) 'GENVEL                 : ------------------ '
+      endif 
+#endif /* MPI_USED */
 
       end
