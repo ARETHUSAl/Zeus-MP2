@@ -534,7 +534,7 @@ c         are not contained in DM so icico should remain on.
 c
 c Broadcast chemcon to the others.
 c
-      call MPI_BCAST(ibuf_in, 9,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
+c      call MPI_BCAST(ibuf_in, 9,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
       call MPI_BCAST(ibuf_in,11,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
       call MPI_BCAST( buf_in,4,MPI_FLOAT  
      .,0,MPI_COMM_WORLD,ierr)
@@ -567,7 +567,6 @@ c
         write(*,*) 'Doing some chemistry'
         call ctable
       endif
-
 c
 c------------------------  BOUNDARY CONTROL ----------------------------
 c
@@ -800,7 +799,7 @@ c  tile.
 c
 #ifdef MPI_USED
       call MPI_BARRIER(comm3d, ierr)
-#endif
+#endif 
       call ggen
 #ifdef MPI_USED
 c
@@ -896,7 +895,7 @@ c     gsup       I   Cycle number to calculate gravitational potential
         gsup      = 1
         xwedge    = .false.
 c
-        read (1,grvcon)
+        read (1,grvcon, iostat=iost)
         write(2,grvcon)
       endif
       igcall = 0
@@ -1692,8 +1691,7 @@ C      if(xvgrid) then
 330    continue
        do 340 k=ks-2,ke+3
          vg3(k) = 0.0
-340    continue
-C      endif
+340    continue  
 c
 c----------------------  INITIAL TIMESTEP  -----------------------------
 c

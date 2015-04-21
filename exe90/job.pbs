@@ -1,17 +1,18 @@
 #!/bin/csh
-#PBS -l nodes=8:ppn=6
+#PBS -l nodes=4:ppn=12
 #PBS -l walltime=99:00:00
 #PBS -l arch=gpulinux
 #PBS -mae 
 #PBS -j oe
+#PBS -k oe
 #PBS -M johannes.reppin@hs.uni-hamburg.de
-#PBS -N test1
+#PBS -N zeus_mp2
 #PBS -V
 cd $PBS_O_HOME
 source /etc/profile.d/modules.sh
 source .bashrc
 
-##cd $PBS_O_WORKDIR
+cd $PBS_O_WORKDIR
 ##touch jobinfo.txt
 ##echo $PBS_O_WORKDIR >> ./jobinfo.txt
 ##echo $PBS_JOBID >> ./jobinfo.txt
@@ -19,4 +20,4 @@ source .bashrc
 ##lamboot $PBS_NODEFILE
 ##./mpiwrap.pl -wd $PBS_O_WORKDIR
 ##wipe $PBS_NODEFILE
-mpirun -np 48  -machinefile $PBS_NODEFILE zeusmp.x
+mpirun --hostfile $PBS_NODEFILE -np 48 zeusmp.x

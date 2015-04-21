@@ -254,6 +254,8 @@ c
       if(ldimen .eq. 3) call transprt
       if(ldimen .eq. 2) call transprt_2D
       if(ldimen .eq. 1) call transprt_1D
+
+c      if(myid_w .eq. 0) write(*,*) 'transport done'
 c      call vzero
 c
 c Update the step counter and current time value.

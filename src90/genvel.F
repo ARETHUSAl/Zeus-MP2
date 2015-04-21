@@ -38,6 +38,7 @@ c
 c  EXTERNALS:
 c
 c-----------------------------------------------------------------------
+      use IFPORT
       use real_prec
       use param
       use field
@@ -53,8 +54,7 @@ c-----------------------------------------------------------------------
       use mpipar
       use vcvars
       implicit NONE   
-      real(rl)   ::   ran1
-*     external  bperiodic, fouramp, fafotr, normvel, ran1
+      external  bperiodic, fouramp, fafotr, normvel
 c     1        , divergence, variance
 
 *
@@ -87,8 +87,7 @@ c
         write(*,*) 'GENVEL                 : start generate of  '
         write(*,*) 'GENVEL                 : velocity field     '
         write(*,*) 'GENVEL                 : ------------------ '
-        write(*,*) 'GENVEL                 : ', ran1(-iseed)
-        write(*,*) 'GENVEL                 : ------------------ '
+        call srand(-iseed)
       endif
 #endif /* MPI_USED */
 

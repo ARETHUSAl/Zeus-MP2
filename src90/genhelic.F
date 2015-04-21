@@ -8,6 +8,7 @@ c =======================================================================
 c 
       subroutine genhelic(nmodes, Brms, idx, helic)
 c
+      use IFPORT
       use real_prec
       use param
       use field
@@ -52,8 +53,7 @@ c
 c-----------------------------------------------------------------------
 c
       real(rl)    ::  normmag
-      real(rl)    ::  ran1
-      external ::  bvalb1,bvalb2,bvalb3, fouramp, fafotr, normmag, ran1
+      external ::  bvalb1,bvalb2,bvalb3, fouramp, fafotr, normmag
 c 
 c input variables
 c 
@@ -78,13 +78,14 @@ c
       integer ::  iseed
       integer ::  i, j, k
       integer ::  ip, jp, kp
+      integer, dimension(6) :: st
  
-      allocate(a1(in,jn,kn))
-      allocate(a2(in,jn,kn))
-      allocate(a3(in,jn,kn))
-      allocate(ah1i(in,jn,kn))
-      allocate(ah2i(in,jn,kn))
-      allocate(ah3i(in,jn,kn))
+      allocate(a1(in,jn,kn), stat=st(1))
+      allocate(a2(in,jn,kn), stat=st(2))
+      allocate(a3(in,jn,kn), stat=st(3))
+      allocate(ah1i(in,jn,kn), stat=st(4))
+      allocate(ah2i(in,jn,kn), stat=st(5))
+      allocate(ah3i(in,jn,kn), stat=st(6))
 
 #ifdef MPI_USED
       if (myid_w .eq. 0) then
@@ -101,7 +102,8 @@ c
 #ifdef MPI_USED
       if (myid_w .eq. 0) then
         write(6,2040) 'frac = ',frac
-        write(6,2040) 'start random number ',ran1(-iseed)
+        write(6,2040) 'start random number generator'
+        call srand(-iseed)
       endif
 #endif */ MPI_USED */
 
@@ -370,12 +372,12 @@ c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
         enddo
       enddo
 
-      deallocate(a1)
-      deallocate(a2)
-      deallocate(a3)
-      deallocate(ah1i)
-      deallocate(ah2i)
-      deallocate(ah3i)
+      deallocate(a1, stat=st(1))
+      deallocate(a2, stat=st(2))
+      deallocate(a3, stat=st(3))
+      deallocate(ah1i, stat=st(4))
+      deallocate(ah2i, stat=st(5))
+      deallocate(ah3i, stat=st(6))
 
 #ifdef MPI_USED
       if (myid_w .eq. 0) then      

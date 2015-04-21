@@ -59,9 +59,8 @@ c
       periodic(2) = .false.
       periodic(3) = .false.
       if (myid_w .eq. 0) then 
-        write(*,*) 'Reading in MPITOP namelist'
-        read(1,nml=mpitop)
-        write(2,nml=mpitop)
+        read(1,mpitop)
+        write(2,mpitop)
       endif
 c
 #ifdef MPI_USED
@@ -277,7 +276,7 @@ c
 c  Close unit=1 (input deck).  Unit=2 (zeuslp) is kept open throughout
 c  entire run to accept warning messages.  It is closed in zeusmp.
 c
-      if (myid_w .eq. 0) close(unit=1)
+      if (myid_w .eq. 0) close(1)
 c
 c Write out initial data dumps.
 c

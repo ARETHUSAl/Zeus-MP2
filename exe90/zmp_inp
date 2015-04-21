@@ -18,11 +18,11 @@
            XTSL     = .false. /
 &PRECONF   SMALL_NO = 1.0D-99, 
            LARGE_NO = 1.0D+99 /
-&ARRAYCONF IZONES   = 32, 
-           JZONES   = 32, 
-           KZONES   = 32,
-           MAXIJK   = 32 /
-&MPITOP ntiles(1)=2, ntiles(2)=1, ntiles(3)=1, periodic=3*.TRUE. /
+&ARRAYCONF IZONES   = 240, 
+           JZONES   = 240, 
+           KZONES   = 240,
+           MAXIJK   = 240 /
+&MPITOP ntiles(1)=4, ntiles(2)=4, ntiles(3)=3, periodic=3*.TRUE. /
 &rescon 
  irestart=0, 
  resfile='resaa000000.001',
@@ -31,7 +31,7 @@
 /
 &pcon 
  nlim=100000, 
- tlim=10., 
+ tlim=100., 
  cpulim= 100000.0, 
  mbatch=1 
 /
@@ -47,9 +47,9 @@
 &ojb nojs(1)= 4 /
 &ikb niks(1)= 4 /
 &okb noks(1)= 4 /
-&ggen1 nbl=32 ,x1min=-3.14, x1max=3.14, igrid=1, x1rat=1., lgrid=.true.  /
-&ggen2 nbl=32, x2min=-3.14, x2max=3.14, igrid=1, x2rat=1., lgrid=.true.  /
-&ggen3 nbl=32, x3min=-3.14, x3max=3.14, igrid=1, x3rat=1., lgrid=.true.  /
+&ggen1 nbl=240 ,x1min=-3.14, x1max=3.14, igrid=1, x1rat=1., lgrid=.true.  /
+&ggen2 nbl=240, x2min=-3.14, x2max=3.14, igrid=1, x2rat=1., lgrid=.true.  /
+&ggen3 nbl=240, x3min=-3.14, x3max=3.14, igrid=1, x3rat=1., lgrid=.true.  /
 &grvcon /
 &RADCON ipcflag=2,cgerrcrit=1/
 &EQOS   
@@ -63,13 +63,13 @@
 ! diff_eta=1.0D-3, 
 ! diff_nu=1.0D-3, 
  rho0=1.0D0, 
- b0=1.0D-1, 
- v0=1.0D-1, 
+ b0=5.0D-1, 
+ v0=5.0D-1, 
  p0=1.0,
- nmodes_B=10, 
- nmodes_V=10,
+ nmodes_B=240, 
+ nmodes_V=240,
  idx_A=4,
- idx_V=2,
+ idx_V=0,
  helic=1.0
 /
 &iocon tusr=1.0, dtusr=1.0 /

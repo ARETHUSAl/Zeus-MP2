@@ -12,7 +12,6 @@ c  variables are initialized.
 c
 c  LOCALS:
 c
-c  LAST MODIFIED: 8/10/99
 c  Modified 09/01/2006 by John Hayes; implemented Matthias Vigelius's
 c  correction to DO loops 36, 136, and 236.  The original versions
 c  resulted in incorrect computation of ratioed grids in multi-processor
@@ -39,7 +38,7 @@ c
       real(rl) :: x1rat,dx1min,dfndx1r,x1r,deltx1r,errx1r,
      .            x2rat,dx2min,dfndx2r,x2r,deltx2r,errx2r,
      .            x3rat,dx3min,dfndx3r,x3r,deltx3r,errx3r,
-     .            fn, dummy
+     .            fn
 c
       logical  :: lgrid
 c
@@ -83,7 +82,7 @@ c   lgrid  logical flag for additional blocks ( =.true. reads another)
 c   imax,imin  are indices of top and bottom of block
 c
       is   = 3
-      if (myid_w .eq. 0) then
+      if (myid .eq. 0) then
         imax = is
         nbl   = 1
         x1min = 0.0
@@ -554,7 +553,7 @@ c  Variable names and values are the same as used in x1 grid generator
 c
 c
       js   = 3
-      if (myid_w .eq. 0) then
+      if (myid .eq. 0) then
         jmax = js
         nbl   = 1
         x2min = 0.0
@@ -1028,7 +1027,7 @@ c
 c  Variable names and values are the same as used in x1 grid generator
 c
       ks   = 3
-      if (myid_w .eq. 0) then
+      if (myid .eq. 0) then
         kmax = ks
         nbl   = 1
         x3min = 0.0
@@ -1283,11 +1282,8 @@ c
 c Receive grid coords of the overlap zones from my "m" neighbor.
 c
         nreq = nreq + 1
-c      print*,"tag is:", n3m
-        dummy = abs(n3m)
-        call MPI_IRECV(buf_out(4),3,MPI_FLOAT,n3m,dummy
+        call MPI_IRECV(buf_out(4),3,MPI_FLOAT,n3m,n3m
      &               ,comm3d,req(nreq),ierr)
-c      print*,"calling mpi-irecv"
 c
 c Send grid coords of the overlap zones to my "m" neighbor.
 c

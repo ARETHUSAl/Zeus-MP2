@@ -82,17 +82,17 @@ c      skipped, even if qcon = 0.)  Momentum density boundary
 c      values are not needed.
 c
 CPS 
-      DO k=ks,ke
-         DO j=js,je
-           DO i=is,ie
+      do k=ks,ke
+         do j=js,je
+           do i=is,ie
              w3da(i,j,k) = v1(i,j,k) * 0.5 * (d(i-1,j  ,k  ) + d(i,j,k))
              w3db(i,j,k) = v2(i,j,k) * 0.5 * (d(i  ,j-1,k  ) + d(i,j,k))
      1                     * g2b(i)
              w3dc(i,j,k) = v3(i,j,k) * 0.5 * (d(i  ,j  ,k-1) + d(i,j,k))
      1                     * g31b(i) * g32b(j)
-           ENDDO
-         ENDDO
-       ENDDO
+           enddo
+         enddo
+       enddo
 CX       if(nhy .eq. 21) then
 CX        write(*,"('TRANSPRT: w3db = ',1p2d16.8)")w3db(4,4,3),w3db(4,4,4)
 CX       endif

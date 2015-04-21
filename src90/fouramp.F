@@ -26,6 +26,7 @@ C                cc = 0: A*(k) = +A(-k)
 C                   = 1: A*(k) = -A(-k) (for a helical field)
 C
       subroutine fouramp(ar,ai,nmodes,idx,cc)
+      use IFPORT
       use real_prec
       use param
       use field
@@ -48,15 +49,15 @@ c LOCAL VARIABLES
 c
       real(rl) :: kmag, kmin
       real(rl) :: help1 , help2
-      integer  :: iseed 
+      integer  :: iseed = 1
       integer  :: i,j,k
 c
 c EXTERNALS
 c
       real(rl)  ::    sigma
       external  sigma
-      real(rl)  ::   ran1, norm
-      external ran1, norm
+c      real(rl)  ::   norm
+c      external norm
 c      A is vector potential 
 c      i = 0: k=-N(pi/L), i=N: k=N(pi/L) Nyquist frequencies
 c      exclude Nyquist frequencies
@@ -96,9 +97,13 @@ c*nopar
      &               float((j-jn/2)**2)+float((i-in/2)**2))
 
             if ( kmag.ge.kmin ) then
-              help1 = sigma(kmag,idx)*norm(1)
-              help2 = two*pi*ran1(1)
-
+c              help1 = sigma(kmag,idx)*norm(1)
+c              help2 = two*pi*rand()
+              call gasdev(iseed, help1)
+              call ran1(iseed, help2)
+              help1 = help1*sigma(kmag,idx)
+              help2 = help2*two*pi
+c             write(*,*) kmag,help1, help2
               ar(i,j,k) = help1*cos(help2)
               ai(i,j,k) = help1*sin(help2)
 
@@ -116,6 +121,7 @@ c
 
               endif
 3             continue          
+ 
             endif
 
 4           continue

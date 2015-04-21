@@ -35,11 +35,13 @@ ZMP_CPP   = /lib/cpp -DPROBLEM=turbulence -DPROBRES=empty \
 #
 #--------------------  implicit rules  ---------------------------------
 #
-.SUFFIXES: .F .f .c .o
+.SUFFIXES: .F .f .f90 .c .o
 
 .f.o:
 	${ZMP_CPP} -P -traditional $*.F | tr -s "" "\012" > $*.f
 	${ZMP_FC} -I ${ZMP_MOD} ${ZMP_OPTS} $*.f
+.f90.o:
+	${ZMP_FC} -I ${ZMP_MOD} ${ZMP_OPTS} $*.f90
 
 .F.o:
 	${ZMP_CPP} -P -traditional $*.F | tr -s "" "\012" > $*.f
@@ -51,7 +53,7 @@ ZMP_CPP   = /lib/cpp -DPROBLEM=turbulence -DPROBRES=empty \
 #
 #-------------------  Fortran object files  ----------------------------
 #
-FOBJ = mod_files.o advx1.o advx2.o advx3.o alloc_arrays.o avisc.o avisc_d.o bndyflgs.o bval3d.o bvalabuns.o bvalemf.o bvalt.o cgsolve.o clocks.o configure.o ct.o ctable.o ct_1D.o ct_2D.o dataio.o difco1.o difco2.o difco3.o diverg.o dprd.o empty.o eos_d.o eos.o fftwgrav.o findno.o forces.o forces_d.o ggen.o gpbv.o gravity.o gravmg.o grav2dcg.o grav3dcg.o grdv.o hdfall.o hsmoc.o hsmoc_1D.o hsmoc_2D.o grey_fld.o intchk.o jacob.o lorentz.o lorentz_1D.o lorentz_2D.o lorentz_d.o mapin.o mapout.o matprop.o mnmx.o momx1.o momx2.o momx3.o msave.o msendrec.o mstart.o mul_sym.o offdiag.o newdt.o newgrid.o newvg.o newx1.o newx2.o newx3.o nudt.o opac_d.o opacity.o options.o pdv.o pdv_d.o rad_imp_dt.o rad_solve.o restart.o sendrec.o setup.o spectrum.o srcstep.o strtoi.o sym_diag.o sym_prcn.o transprt.o transprt_1D.o transprt_2D.o tranx1.o tranx2.o tranx3.o updtmtrxbnd.o updtvecbnd.o zeusmp.o gcollapse.o textdmp.o textdmp2.o linpck.o sod.o blast.o sedov.o stream.o rshock.o mhdshktube.o rotor.o mhdvortex.o noh.o marshak.o turbulence.o genhelic.o mk1dspc.o spcdump.o genvel.o norm.o normmag.o modecount.o sigma.o fafotr.o fouramp.o ran1.o normvel.o 
+FOBJ = mod_files.o advx1.o advx2.o advx3.o alloc_arrays.o avisc.o avisc_d.o bndyflgs.o bval3d.o bvalabuns.o bvalemf.o bvalt.o cgsolve.o clocks.o configure.o ct.o ctable.o ct_1D.o ct_2D.o dataio.o difco1.o difco2.o difco3.o diverg.o dprd.o empty.o eos_d.o eos.o fftwgrav.o findno.o forces.o forces_d.o ggen.o gpbv.o gravity.o gravmg.o grav2dcg.o grav3dcg.o grdv.o hdfall.o hsmoc.o hsmoc_1D.o hsmoc_2D.o grey_fld.o intchk.o jacob.o lorentz.o lorentz_1D.o lorentz_2D.o lorentz_d.o mapin.o mapout.o matprop.o mnmx.o momx1.o momx2.o momx3.o msave.o msendrec.o mstart.o mul_sym.o offdiag.o newdt.o newgrid.o newvg.o newx1.o newx2.o newx3.o nudt.o opac_d.o opacity.o options.o pdv.o pdv_d.o rad_imp_dt.o rad_solve.o restart.o sendrec.o setup.o spectrum.o srcstep.o strtoi.o sym_diag.o sym_prcn.o transprt.o transprt_1D.o transprt_2D.o tranx1.o tranx2.o tranx3.o updtmtrxbnd.o updtvecbnd.o zeusmp.o gcollapse.o textdmp.o textdmp2.o linpck.o sod.o blast.o sedov.o stream.o rshock.o mhdshktube.o rotor.o mhdvortex.o noh.o marshak.o turbulence.o genhelic.o mk1dspc.o spcdump.o genvel.o normmag.o modecount.o sigma.o fafotr.o fouramp.o normvel.o ran1.o gasdev.o
 #
 #-------------------  C object files  ----------------------------------
 #
@@ -251,7 +253,11 @@ newx3.o: newx3.F mod_files.o
 
 nudt.o: nudt.F mod_files.o  
 
-norm.o: norm.F mod_files.o
+#norm.o: norm.f90 mod_files.o
+
+gasdev.o: gasdev.f90
+
+ran1.o: ran1.f90
 
 normmag.o: normmag.F mod_files.o
 
@@ -268,8 +274,6 @@ options.o: options.F mod_files.o
 pdv.o: pdv.F mod_files.o  
 
 pdv_d.o: pdv_d.F mod_files.o  
-
-ran1.o: ran1.F mod_files.o
 
 sigma.o: sigma.F mod_files.o
 
