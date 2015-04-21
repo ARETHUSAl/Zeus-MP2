@@ -71,9 +71,10 @@ c      exclude Nyquist frequencies
 
 c initialize vector field
 #ifdef MPI_USED
-      if(myid_w.eq.0)
-      write(*,fmt=123) 'FOURAMP: Excited k-mode range: kmin:',kmin 
-     & ,'   kmax:',two*pi*sqrt(3.0)*real(nmodes)
+      if(myid_w.eq.0) then
+        write(*,fmt=123) 'FOURAMP: Excited k-mode range: kmin:',kmin 
+     &   ,'   kmax:',two*pi*sqrt(3.0)*real(nmodes)
+      endif
 #endif /* MPI_USED */
 123   format(A,F9.2,A,F9.2)
       ar = 0.0
