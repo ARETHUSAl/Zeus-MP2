@@ -1,14 +1,11 @@
-c  generates helical magnetic field
-c =======================================================================
-c 
-c     \\\\\\\\\\      B E G I N   S U B R O U T I N E      //////////
-c     //////////             G E N H E L I C               \\\\\\\\\\
-c 
-c =======================================================================
-c 
+! =======================================================================
+! 
+!     \\\\\\\\\\      B E G I N   S U B R O U T I N E      //////////
+!     //////////             G E N H E L I C               \\\\\\\\\\
+! 
+! =======================================================================
+! 
       subroutine genhelic(nmodes, Brms, idx, helic)
-c
-      use IFPORT
       use real_prec
       use param
       use field
@@ -22,49 +19,48 @@ c
       use mpino
 #endif
       use mpipar
-c
       implicit NONE
-c
-c    rb:zeus3d.helic <----------------------------------------------
-c                                                        july, 2001
-c
-c    written by: Robi Banerjee
-c    modified 1: ?
-c
-c  PURPOSE:          generate vector potential with explicit
-c                    helicity
-c                    We use the coordinate base {e_+,e_-,k}
-c                    to generate the vector potential
-c
-c  MODIFIED:         reduce of 3D variables        Robi Banerjee,  jan, 2002
-c
-c
-c  INPUT VARIABLES: 
-c                   nmodes  :  # of modes to excite
-c                   Brms    : rms value of magnetic field
-c                   idx     : spectral index
-c                   helic   : percentage (0.0 - 1.0) of the maximal helicity
-c
-c
-c  LOCAL VARIABLES:
-c
-c  EXTERNALS:
-c
-c-----------------------------------------------------------------------
-c
+!
+!-------------------------------------------------------------------
+!                                                        july, 2001
+!
+!    written by: Robi Banerjee
+!    modified 1: ?
+!
+!  PURPOSE:          generate vector potential with explicit
+!                    helicity
+!                    We use the coordinate base {e_+,e_-,k}
+!                    to generate the vector potential
+!
+!  MODIFIED:         reduce of 3D variables        Robi Banerjee,  jan, 2002
+!
+!
+!  INPUT VARIABLES: 
+!                   nmodes  :  # of modes to excite
+!                   Brms    : rms value of magnetic field
+!                   idx     : spectral index
+!                   helic   : percentage (0.0 - 1.0) of the maximal helicity
+!
+!
+!  LOCAL VARIABLES:
+!
+!  EXTERNALS:
+!
+!-----------------------------------------------------------------------
+!
       real(rl)    ::  normmag
       external ::  bvalb1,bvalb2,bvalb3, fouramp, fafotr, normmag
-c 
-c input variables
-c 
+! 
+! input variables
+! 
       real(rl), intent(in) ::  Brms, idx, helic
       integer, intent(in)  ::  nmodes 
-c  
-c EXTERNALS
-c 
-c 
-c local variables
-c
+!  
+! EXTERNALS
+! 
+! 
+! local variables
+!
       real(rl), dimension(:,:,:), allocatable, save  :: a1, a2, a3
       real(rl), dimension(:,:,:), allocatable, save  :: ah1i, ah2i, ah3i
       real(rl) :: k1, k2, k3 
@@ -73,19 +69,19 @@ c
       real(rl) :: kmag, en, e11, e12, e13, e21, e22, e23
       real(rl) :: A1r, A1i, A2r, A2i, A3r, A3i
       real(rl) :: var(3), sr2i
-      real(rl) :: helicity, norm, frac
+      real(rl) :: helicity, norm, frac, rnd
 
       integer ::  iseed
       integer ::  i, j, k
       integer ::  ip, jp, kp
       integer, dimension(6) :: st
  
-      allocate(a1(in,jn,kn), stat=st(1))
-      allocate(a2(in,jn,kn), stat=st(2))
-      allocate(a3(in,jn,kn), stat=st(3))
-      allocate(ah1i(in,jn,kn), stat=st(4))
-      allocate(ah2i(in,jn,kn), stat=st(5))
-      allocate(ah3i(in,jn,kn), stat=st(6))
+      allocate(a1(in,jn,kn))
+      allocate(a2(in,jn,kn))
+      allocate(a3(in,jn,kn))
+      allocate(ah1i(in,jn,kn))
+      allocate(ah2i(in,jn,kn))
+      allocate(ah3i(in,jn,kn))
 
 #ifdef MPI_USED
       if (myid_w .eq. 0) then
@@ -103,21 +99,21 @@ c
       if (myid_w .eq. 0) then
         write(6,2040) 'frac = ',frac
         write(6,2040) 'start random number generator'
-        call srand(-iseed)
+        call ran1(-iseed, rnd)
       endif
 #endif */ MPI_USED */
 
-c--------------------------------------------------------------------------
-c --------------- excite modes --------------------------------------------
-c -------------------------------------------------------------------------
+!--------------------------------------------------------------------------
+! --------------- excite modes --------------------------------------------
+! -------------------------------------------------------------------------
       call fouramp(a1,ah1i,nmodes,idx,1) 
       call fouramp(a2,ah2i,nmodes,idx,1) 
       call fouramp(a3,ah3i,nmodes,idx,1) 
-c
-c generate unit vectors
-c origin of coordinate system is at (N/2,N/2,N/2)
-c transform amplitudes to new basis
-c
+!
+! generate unit vectors
+! origin of coordinate system is at (N/2,N/2,N/2)
+! transform amplitudes to new basis
+!
       do k=1,kn
         do j=1,jn
           do i=1,in
@@ -177,9 +173,9 @@ c
 
             A3r = 0.0
             A3i = 0.0
-c
-c   1-vector potential
-c
+!
+!   1-vector potential
+!
             a1(i,j,k)    =   A1r*ep1r  
      &                     - A1i*ep1i  
      &                     + A2r*em1r  
@@ -190,9 +186,9 @@ c
      &                     + A2i*em1r  
      &                     + A2r*em1i  
      &                     + A3i*k1
-c 
-c   2-vector potential
-c
+! 
+!   2-vector potential
+!
             a2(i,j,k)    =   A1r*ep2r 
      &                     - A1i*ep2i 
      &                     + A2r*em2r 
@@ -203,9 +199,9 @@ c
      &                     + A2i*em2r  
      &                     + A2r*em2i 
      &                     + A3i*k2
-c 
-c   3-vector potential
-c
+! 
+!   3-vector potential
+!
             a3(i,j,k)    =   A1r*ep3r 
      &                     - A1i*ep3i 
      &                     + A2r*em3r  
@@ -221,15 +217,15 @@ c
          enddo
        enddo
 
-c -------------------------------------------------------------------------
-c ------- find real space variables by fft --------------------------------
-c -------------------------------------------------------------------------
+! -------------------------------------------------------------------------
+! ------- find real space variables by fft --------------------------------
+! -------------------------------------------------------------------------
       call fafotr(a1, ah1i)
       call fafotr(a2, ah2i)
       call fafotr(a3, ah3i)
-c -------------------------------------------------------------------------
-c ------- move A to edge centers ------------------------------------------
-c -------------------------------------------------------------------------
+! -------------------------------------------------------------------------
+! ------- move A to edge centers ------------------------------------------
+! -------------------------------------------------------------------------
       do k=1,kn
         if (k .NE. kn) then
           kp = k + 1 
@@ -267,34 +263,34 @@ c -------------------------------------------------------------------------
 420     enddo
 430   enddo
 
-c
-c  update all the boundary values of a
-c
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalb1(3,3,0,0,0,0,a1)
-c      call bvalb2(3,3,0,0,0,0,a2)
-c      call bvalb3(3,3,0,0,0,0,a3)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalb1(0,0,3,3,0,0,a1)
-c      call bvalb2(0,0,3,3,0,0,a2)
-c      call bvalb3(0,0,3,3,0,0,a3)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalb1(0,0,0,0,3,3,a1)
-c      call bvalb2(0,0,0,0,3,3,a2)
-c      call bvalb3(0,0,0,0,3,3,a3)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+!
+!  update all the boundary values of a
+!
+      nreq=0
+      nsub = nsub + 1
+      call bvalb1(3,3,0,0,0,0,a1)
+      call bvalb2(3,3,0,0,0,0,a2)
+      call bvalb3(3,3,0,0,0,0,a3)
 
-c ------------------------------------------------------------------------
-c ---- compute b out of curl A -------------------------------------------
-c ------------------------------------------------------------------------
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+      nreq=0
+      nsub = nsub + 1
+      call bvalb1(0,0,3,3,0,0,a1)
+      call bvalb2(0,0,3,3,0,0,a2)
+      call bvalb3(0,0,3,3,0,0,a3)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+      nreq=0
+      nsub = nsub + 1
+      call bvalb1(0,0,0,0,3,3,a1)
+      call bvalb2(0,0,0,0,3,3,a2)
+      call bvalb3(0,0,0,0,3,3,a3)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+
+! ------------------------------------------------------------------------
+! ---- compute b out of curl A -------------------------------------------
+! ------------------------------------------------------------------------
       do k=ks,ke
         kp = k + 1
         do j=js,je
@@ -318,30 +314,30 @@ c ------------------------------------------------------------------------
         enddo
       enddo
 
-c
-c  update all the boundary values of b 
-c
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalb1(3,3,0,0,0,0,b1)
-c      call bvalb2(3,3,0,0,0,0,b2)
-c      call bvalb3(3,3,0,0,0,0,b3)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalb1(0,0,3,3,0,0,b1)
-c      call bvalb2(0,0,3,3,0,0,b2)
-c      call bvalb3(0,0,3,3,0,0,b3)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalb1(0,0,0,0,3,3,b1)
-c      call bvalb2(0,0,0,0,3,3,b2)
-c      call bvalb3(0,0,0,0,3,3,b3)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+!
+!  update all the boundary values of b 
+!
+      nreq=0
+      nsub = nsub + 1
+      call bvalb1(3,3,0,0,0,0,b1)
+      call bvalb2(3,3,0,0,0,0,b2)
+      call bvalb3(3,3,0,0,0,0,b3)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+      nreq=0
+      nsub = nsub + 1
+      call bvalb1(0,0,3,3,0,0,b1)
+      call bvalb2(0,0,3,3,0,0,b2)
+      call bvalb3(0,0,3,3,0,0,b3)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+      nreq=0
+      nsub = nsub + 1
+      call bvalb1(0,0,0,0,3,3,b1)
+      call bvalb2(0,0,0,0,3,3,b2)
+      call bvalb3(0,0,0,0,3,3,b3)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
 
       norm = normmag(Brms)
 
@@ -372,12 +368,12 @@ c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
         enddo
       enddo
 
-      deallocate(a1, stat=st(1))
-      deallocate(a2, stat=st(2))
-      deallocate(a3, stat=st(3))
-      deallocate(ah1i, stat=st(4))
-      deallocate(ah2i, stat=st(5))
-      deallocate(ah3i, stat=st(6))
+      deallocate(a1)
+      deallocate(a2)
+      deallocate(a3)
+      deallocate(ah1i)
+      deallocate(ah2i)
+      deallocate(ah3i)
 
 #ifdef MPI_USED
       if (myid_w .eq. 0) then      

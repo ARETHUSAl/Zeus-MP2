@@ -1,44 +1,38 @@
-c=======================================================================
-c
-c    \\\\\\\\\\      B E G I N   S U B R O U T I N E      //////////
-c    //////////              G E N V E L                  \\\\\\\\\\
-c
-c=======================================================================
-c
-       subroutine genvel(nmodes,vrms,idx)
-C*********************************************************************
-C** DON'T USE INCLUDE STATEMENT WITHIN ZEUS-EDITOR:
-C** IT GETS CONFUSED WITH THIS "UNKNOWN" STATEMENT 
-C** AND TAKE CARE OF "SYNTAX", I.E. USE SUFFICIENT
-C** SPACE BETWEEN DECLARATION AND VARIABLES
-C*********************************************************************
-c
-c
-c    written by: Robi Banerjee             09/2001
-c    modified 1: ATTENTION                                  !!!!! 
-c                genvel must be called before generation    !!!!!
-c                of magnetic fields as genvel uses          !!!!!
-c                b1,b2 and b3 as help variables             !!!!!
-c                Robi Banerjee             01/2002
-c
-c  PURPOSE: generate stochastic velocity field
-c
-c           if VELDIVFREE is set the initial velocity field
-c           is divergence free
-c
-c
-c  INPUT VARIABLES: nmodes     number of excited modes
-c                   vrms  rms velocity
-c                   idx   spectral index
-c
-c  OUTPUT VARIABLES: 
-c
-c  LOCAL VARIABLES:
-c
-c  EXTERNALS:
-c
-c-----------------------------------------------------------------------
-      use IFPORT
+      subroutine genvel(nmodes,vrms,idx)
+!=======================================================================
+!
+!    \\\\\\\\\\      B E G I N   S U B R O U T I N E      //////////
+!    //////////              G E N V E L                  \\\\\\\\\\
+!
+!=======================================================================
+!
+!*********************************************************************
+!
+!
+!    written by: Robi Banerjee             09/2001
+!    modified 1: ATTENTION                                  !!!!! 
+!                genvel must be called before generation    !!!!!
+!                of magnetic fields as genvel uses          !!!!!
+!                b1,b2 and b3 as help variables             !!!!!
+!                Robi Banerjee             01/2002
+!
+!  PURPOSE: generate stochastic velocity field
+!
+!           if VELDIVFREE is set the initial velocity field
+!           is divergence free
+!
+!
+!  INPUT VARIABLES: nmodes     number of excited modes
+!                   vrms  rms velocity
+!                   idx   spectral index
+!
+!  OUTPUT VARIABLES: 
+!
+!  LOCAL VARIABLES:
+!
+!  EXTERNALS:
+!
+!-----------------------------------------------------------------------
       use real_prec
       use param
       use field
@@ -53,32 +47,30 @@ c-----------------------------------------------------------------------
 #endif
       use mpipar
       use vcvars
-      implicit NONE   
-      external  bperiodic, fouramp, fafotr, normvel
-c     1        , divergence, variance
-
-*
+      implicit none
+      external  bperiodic, fouramp, fafotr, normvel, ran1
+!     1        , divergence, variance
       integer, intent(in)   :: nmodes
       real(rl),intent(in)   :: vrms, idx
-c      integer               :: N
       integer, dimension(6) :: st
-c
-c local variables
-c
+!
+! local variables
+!
       real(rl), dimension(3) :: var
       integer :: iseed, i,j,k, ip, jp, kp
-c
-c allocate local memory (instead of equivalencing)
-c
-      allocate(vp1r(in, jn, kn), stat=st(1))
-      allocate(vp1i(in, jn, kn), stat=st(2))
-      allocate(vp2r(in, jn, kn), stat=st(3))
-      allocate(vp2i(in, jn, kn), stat=st(4))
-      allocate(vp3r(in, jn, kn), stat=st(5))
-      allocate(vp3i(in, jn, kn), stat=st(6))
-c
-c EXTERNALS
-c
+      real(rl) :: rnd
+!
+! allocate local memory (instead of equivalencing)
+!
+      allocate(vp1r(in, jn, kn))
+      allocate(vp1i(in, jn, kn))
+      allocate(vp2r(in, jn, kn))
+      allocate(vp2i(in, jn, kn))
+      allocate(vp3r(in, jn, kn))
+      allocate(vp3i(in, jn, kn))
+!
+! EXTERNALS
+!
       iseed = 500
 
 #ifdef MPI_USED
@@ -87,7 +79,7 @@ c
         write(*,*) 'GENVEL                 : start generate of  '
         write(*,*) 'GENVEL                 : velocity field     '
         write(*,*) 'GENVEL                 : ------------------ '
-        call srand(-iseed)
+        call ran1(-iseed, rnd)
       endif
 #endif /* MPI_USED */
 
@@ -98,10 +90,10 @@ c
       call fafotr(vp1r, vp1i)
       call fafotr(vp2r, vp2i)
       call fafotr(vp3r, vp3i)
-c
-c -------------------------------------------------------------------------
-c ------- move vector potential to edge centers ---------------------------
-c -------------------------------------------------------------------------
+!
+! -------------------------------------------------------------------------
+! ------- move vector potential to edge centers ---------------------------
+! -------------------------------------------------------------------------
       do 330 k=1,kn
         if (k .ne. kn) then
           kp = k + 1 
@@ -129,7 +121,7 @@ c -------------------------------------------------------------------------
 320     continue
 330   continue
 
-c   Used the loop from this version of Zeus, mot the one below
+!   Used the loop from this version of Zeus, mot the one below
       do 430 k=ks-2,ke+2
         do 420 j=js-2,je+2
           do 410 i=is-2,ie+2
@@ -139,39 +131,39 @@ c   Used the loop from this version of Zeus, mot the one below
 410        continue
 420      continue
 430    continue
-c
-c  update all the boundary values 
-c
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalv1(3,3,0,0,0,0,vp1i)
-c      call bvalv2(3,3,0,0,0,0,vp2i)
-c      call bvalv3(3,3,0,0,0,0,vp3i)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalv1(0,0,3,3,0,0,vp1i)
-c      call bvalv2(0,0,3,3,0,0,vp2i)
-c      call bvalv3(0,0,3,3,0,0,vp3i)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
-c      nreq=0
-c      nsub = nsub + 1
-c      call bvalv1(0,0,0,0,3,3,vp1i)
-c      call bvalv2(0,0,0,0,3,3,vp2i)
-c      call bvalv3(0,0,0,0,3,3,vp3i)
-c
-c      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+!
+!  update all the boundary values 
+!
+      nreq=0
+      nsub = nsub + 1
+      call bvalv1(3,3,0,0,0,0,vp1i)
+      call bvalv2(3,3,0,0,0,0,vp2i)
+      call bvalv3(3,3,0,0,0,0,vp3i)
 
-c      call bperiodic( vp1i )
-c      call bperiodic( vp2i )
-c      call bperiodic( vp3i )
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+      nreq=0
+      nsub = nsub + 1
+      call bvalv1(0,0,3,3,0,0,vp1i)
+      call bvalv2(0,0,3,3,0,0,vp2i)
+      call bvalv3(0,0,3,3,0,0,vp3i)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+      nreq=0
+      nsub = nsub + 1
+      call bvalv1(0,0,0,0,3,3,vp1i)
+      call bvalv2(0,0,0,0,3,3,vp2i)
+      call bvalv3(0,0,0,0,3,3,vp3i)
+
+      if (nreq .ne. 0) call MPI_WAITALL ( nreq, req, stat, ierr )
+
+!      call bperiodic( vp1i )
+!      call bperiodic( vp2i )
+!      call bperiodic( vp3i )
 
 #ifdef VELDIVFREE
-c
-c compute divergence free velocity field out of vector potential
-c
+!
+! compute divergence free velocity field out of vector potential
+!
 
       do 130 k=ks,ke
         kp = k + 1
@@ -213,38 +205,38 @@ c
       deallocate(vp2r)
       deallocate(vp3i)
       deallocate(vp3r)
-c
-c
-c  update all the boundary values of v 
-c
-c     nreq=0
-c     nsub = nsub + 1
-c     call bvalv1(3,3,0,0,0,0,v1)
-c     call bvalv2(3,3,0,0,0,0,v2)
-c     call bvalv3(3,3,0,0,0,0,v3)
-c
-c     if (nreq .ne. 0) call MPI_WAITALL(nreq, req, stat, ierr)
-c     nreq=0
-c     nsub = nsub + 1
-c     call bvalv1(0,0,3,3,0,0,v1)
-c     call bvalv2(0,0,3,3,0,0,v2)
-c     call bvalv3(0,0,3,3,0,0,v3)
-c
-c     if (nreq .ne. 0) call MPI_WAITALL(nreq, req, stat, ierr)
-c     nreq=0
-c     nsub = nsub + 1
-c     call bvalv1(0,0,0,0,3,3,v1)
-c     call bvalv2(0,0,0,0,3,3,v2)
-c     call bvalv3(0,0,0,0,3,3,v3)
-c
-c     if (nreq .ne. 0) call MPI_WAITALL(nreq, req, stat, ierr)
-c
-c   Normalize velocity field to vrms value
-c       
+!
+!
+!  update all the boundary values of v 
+!
+      nreq=0
+      nsub = nsub + 1
+      call bvalv1(3,3,0,0,0,0,v1)
+      call bvalv2(3,3,0,0,0,0,v2)
+      call bvalv3(3,3,0,0,0,0,v3)
+ 
+      if (nreq .ne. 0) call MPI_WAITALL(nreq, req, stat, ierr)
+      nreq=0
+      nsub = nsub + 1
+      call bvalv1(0,0,3,3,0,0,v1)
+      call bvalv2(0,0,3,3,0,0,v2)
+      call bvalv3(0,0,3,3,0,0,v3)
+ 
+      if (nreq .ne. 0) call MPI_WAITALL(nreq, req, stat, ierr)
+      nreq=0
+      nsub = nsub + 1
+      call bvalv1(0,0,0,0,3,3,v1)
+      call bvalv2(0,0,0,0,3,3,v2)
+      call bvalv3(0,0,0,0,3,3,v3)
+ 
+      if (nreq .ne. 0) call MPI_WAITALL(nreq, req, stat, ierr)
+!
+!   Normalize velocity field to vrms value
+!       
       call normvel(vrms)
 
-c   Diagnostic output to screen
-c       
+!   Diagnostic output to screen
+!       
 #ifdef MPI_USED
       if(myid_w.eq.0) then
         write(*,*) 'GENVEL                 : ------------------ '
@@ -255,4 +247,4 @@ c
       endif 
 #endif /* MPI_USED */
 
-      end
+      end subroutine genvel
