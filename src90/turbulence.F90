@@ -33,7 +33,7 @@ subroutine turbulence
       !real(rl)  ::  diff_eta, diff_nu 
       namelist / pgen  / &
             l_unit, v_unit, rho_unit, &
-!     &      diff_eta, diff_nu, &
+!            diff_eta, diff_nu, &
             rho0, b0, v0, e0, p0, &
             nmodes_B, idx_A, nmodes_V, idx_V, helic
 !
@@ -139,8 +139,14 @@ subroutine turbulence
 !
 ! set up density and other fields
 !
-      d(:,:,:) = rho0
-      e(:,:,:) = e0
+      do 11 i=1,in
+        do 22 j=1,jn
+          do 33 k=1,kn
+            d(i,j,k) = rho0
+            e(i,j,k) = e0
+33          enddo 
+22        enddo
+11      enddo
       v0 = v0 + tiny
       b0 = b0 + tiny
 !
