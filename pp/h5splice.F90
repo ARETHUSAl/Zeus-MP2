@@ -97,7 +97,8 @@ subroutine h5splice
 !-----------------------------------------------------------------------
 !
       character*8 phrase
-      character*16 hdf(max_pe), cmb
+      character*23 hdf(max_pe)
+      character*16 cmb
       character*120 line
 !
 !=======================================================================
@@ -162,7 +163,6 @@ subroutine h5splice
       allocate(zscmb(kzones))
 
       allocate(dcmb (izones, jzones, kzones))
-      write(*,*) shape(xscale), shape(xscmb), shape(data), shape(dcmb)
 !
 !-----------------------------------------------------------------------
 !   Read the "rescon" namelist to find the run's "id".
@@ -273,12 +273,13 @@ subroutine h5splice
 !     Generate names of hdf files to read.
 !-----------------------------------------------------------------------
 !
+!  Added DD000x directory
        indx = 0
        do 90 kt=0,ntiles(3)-1
          do 80 jt=0,ntiles(2)-1
            do 70 it=0,ntiles(1)-1
              indx = indx + 1
-             write(hdf(indx),"(a3,a2,3i2.2,'.',i4.4)") 'hdf',id &
+             write(hdf(indx),"(a2,i4.4,a1,a3,a2,3i2.2,'.',i4.4)") 'DD',ndump,'/', 'hdf',id &
              , it,jt,kt,ndump
    70      continue
    80    continue

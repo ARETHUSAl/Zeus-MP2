@@ -50,7 +50,7 @@ subroutine h4splice
                   x3min,x3max,x3rat,dx3min,dfndx3r,x3r,deltx3r,errx3r
 !
       character*8 phrase
-      character*15 hdf(max_pe), cmb
+      character*23 hdf(max_pe), cmb
       character*120 line
       character strng(max_fc)*32,qunit*1,qfrmt*1,qcoord*16
 !
@@ -194,8 +194,8 @@ subroutine h4splice
          do 80 jt=0,ntiles(2)-1
            do 70 it=0,ntiles(1)-1
              indx = indx + 1
-             write(hdf(indx),"(a3,a2,3i2.2,'.',i3.3)") 'hdf',id &
-             , it,jt,kt,ndump
+             write(hdf(indx),"(a2,i4.4,a1,a3,a2,3i2.2,'.',i3.3)") &
+                   'DD',ndump,'/','hdf',id, it,jt,kt,ndump
    70      continue
    80    continue
    90  continue
