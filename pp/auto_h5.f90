@@ -5,7 +5,6 @@
 !                 University of California at San Diego
 !
 subroutine auto_h5
-#ifdef USE_HDF5
 !
 ! ZEUS-MP Post-processor: AUTO_H5
 !
@@ -219,9 +218,6 @@ subroutine auto_h5
 !
       nfunc = 5
       if(xmhd) nfunc = nfunc + 3
-#ifdef VORTEX
-      nfunc = nfunc + 1 ! including dump of div(v)
-#endif
       if(lrad .ne. 0) nfunc = nfunc + 1
 !
       allocate(dsetname(nfunc))
@@ -434,6 +430,5 @@ subroutine auto_h5
 !
       ENDDO ! NDUMP
 !
-#endif /* USE_HDF5 */
       return
 end subroutine auto_h5

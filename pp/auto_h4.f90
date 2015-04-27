@@ -209,9 +209,6 @@
 !
        nfunc = 5
        if(xmhd) nfunc = nfunc + 3
-#ifdef VORTEX
-       nfunc = nfunc + 1
-#endif
        if(lrad .ne. 0) nfunc = nfunc + 1
 !
        do lfunc=1,nfunc
@@ -293,9 +290,7 @@
          ret = dssdisc(1,shcmb(1),xscmb)
          ret = dssdisc(2,shcmb(2),yscmb)
          ret = dssdisc(3,shcmb(3),zscmb)
-#ifndef SD
          ret = dssdast(strng(lfunc),' ',' ',qcoord)
-#endif
          if (lfunc.eq.1) then
 !
 !   Write the cmb mesh data into the combined file for this function.
