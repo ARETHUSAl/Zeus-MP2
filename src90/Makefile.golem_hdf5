@@ -32,7 +32,7 @@ ZMP_LIB   =   -L${FFTW_PATH}/lib -L${MPI_PATH}/lib \
              -lrfftw_mpi -lfftw_mpi -lrfftw -lfftw -lm \
              -lmpi_f90 -lmpi_f77 -lmpi -lopen-rte -lopen-pal -ldl -Wl,--export-dynamic -lnsl -lutil
              #-L/usr/lib -lmfhdf -lhdf5 -ldf -ljpeg -lz -lm
-ZMP_CPP   = /lib/cpp -DPROBLEM=turbulence -DPROBRES=empty \
+ZMP_CPP   = /lib/cpp -DPROBLEM=kh -DPROBRES=empty \
             -DMPI_USED -DUSE_HDF5 -DFFT \
             -DMPI_FLOAT=MPI_DOUBLE_PRECISION -DMPI_2FLOAT=MPI_2DOUBLE_PRECISION 
 #
@@ -50,7 +50,7 @@ ZMP_CPP   = /lib/cpp -DPROBLEM=turbulence -DPROBRES=empty \
 #
 #-------------------  Fortran object files  ----------------------------
 #
-FOBJ = mod_files.o advx1.o advx2.o advx3.o alloc_arrays.o avisc.o avisc_d.o bndyflgs.o bval3d.o bvalabuns.o bvalemf.o bvalt.o cgsolve.o clocks.o configure.o ct.o ctable.o ct_1D.o ct_2D.o dataio.o difco1.o difco2.o difco3.o diverg.o dprd.o empty.o eos_d.o eos.o fftwgrav.o findno.o forces.o forces_d.o ggen.o gpbv.o gravity.o gravmg.o grav2dcg.o grav3dcg.o grdv.o hdfall.o hsmoc.o hsmoc_1D.o hsmoc_2D.o grey_fld.o intchk.o jacob.o lorentz.o lorentz_1D.o lorentz_2D.o lorentz_d.o mapin.o mapout.o matprop.o mnmx.o momx1.o momx2.o momx3.o msave.o msendrec.o mstart.o mul_sym.o offdiag.o newdt.o newgrid.o newvg.o newx1.o newx2.o newx3.o nudt.o opac_d.o opacity.o options.o printd.o pdv.o pdv_d.o rad_imp_dt.o rad_solve.o restart.o sendrec.o setup.o spectrum.o srcstep.o strtoi.o sym_diag.o sym_prcn.o transprt.o transprt_1D.o transprt_2D.o tranx1.o tranx2.o tranx3.o updtmtrxbnd.o updtvecbnd.o zeusmp.o gcollapse.o textdmp.o textdmp2.o linpck.o sod.o blast.o sedov.o stream.o rshock.o mhdshktube.o rotor.o mhdvortex.o noh.o marshak.o turbulence.o genhelic.o mk1dspc.o spcdump.o genvel.o gasdev.o normmag.o modecount.o sigma.o fafotr.o fouramp.o ran1.o normvel.o 
+FOBJ = mod_files.o advx1.o advx2.o advx3.o alloc_arrays.o avisc.o avisc_d.o bndyflgs.o bval3d.o bvalabuns.o bvalemf.o bvalt.o cgsolve.o clocks.o configure.o ct.o ctable.o ct_1D.o ct_2D.o dataio.o difco1.o difco2.o difco3.o diverg.o dprd.o empty.o eos_d.o eos.o fftwgrav.o findno.o forces.o forces_d.o ggen.o gpbv.o gravity.o gravmg.o grav2dcg.o grav3dcg.o grdv.o hdfall.o hsmoc.o hsmoc_1D.o hsmoc_2D.o grey_fld.o intchk.o jacob.o lorentz.o lorentz_1D.o lorentz_2D.o lorentz_d.o mapin.o mapout.o matprop.o mnmx.o momx1.o momx2.o momx3.o msave.o msendrec.o mstart.o mul_sym.o offdiag.o newdt.o newgrid.o newvg.o newx1.o newx2.o newx3.o nudt.o opac_d.o opacity.o options.o printd.o pdv.o pdv_d.o rad_imp_dt.o rad_solve.o restart.o sendrec.o setup.o spectrum.o srcstep.o strtoi.o sym_diag.o sym_prcn.o transprt.o transprt_1D.o transprt_2D.o tranx1.o tranx2.o tranx3.o updtmtrxbnd.o updtvecbnd.o zeusmp.o gcollapse.o textdmp.o textdmp2.o linpck.o sod.o blast.o sedov.o stream.o rshock.o mhdshktube.o rotor.o mhdvortex.o noh.o marshak.o turbulence.o genhelic.o mk1dspc.o spcdump.o genvel.o gasdev.o normmag.o modecount.o sigma.o fafotr.o fouramp.o ran1.o normvel.o kh.o
 #
 #-------------------  C object files  ----------------------------------
 #
@@ -207,6 +207,8 @@ grey_fld.o: grey_fld.F90 mod_files.o
 intchk.o: intchk.F90 mod_files.o  
 
 jacob.o: jacob.F90 mod_files.o
+
+kh.o: kh.F90 mod_files.o
 
 lorentz.o: lorentz.F90 mod_files.o  
 
