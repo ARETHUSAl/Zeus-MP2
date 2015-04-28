@@ -9,12 +9,8 @@
 !
 !=======================================================================
 !
-       subroutine tranx3 (ibeg,iend,jbeg,jend,kbeg,kend &
-                         ,dlo,den &
-                         ,eod,edn &
-                         ,ero,ern &
-                         ,abo,abn &
-                         ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+subroutine tranx3 (ibeg,iend,jbeg,jend,kbeg,kend,dlo,den,eod,edn &
+                  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod,ero,ern,abo,abn)
 !
 !    dac:zeus3d.tranx3 <----- transports zone-centred variables along x3
 !    from jms:zeus2d.tranx2, mln:zeus04.tranz                  may, 1990
@@ -99,17 +95,24 @@
       real(rl) :: dqm, dqp, xi, q1
 !
       real(rl) :: atwid2(ijkn),  atwid(ijkn)
-      real(rl) :: mflux (ijkn,1), &
-                  dtwid (ijkn,1), dd  (ijkn,1), &
-                  etwid (ijkn,1), deod(ijkn,1), &
-                  rtwid (ijkn,1), dero(ijkn,1), &
-                  xtwid(ijkn,nspec),dxo(ijkn,nspec)
+      real(rl) :: mflux (ijkn,1)
+      real(rl) :: dtwid (ijkn,1), dd  (ijkn,1)
+      real(rl) :: etwid (ijkn,1), deod(ijkn,1)
+      real(rl), allocatable :: rtwid (:,:), dero(:,:)
+      real(rl), allocatable :: xtwid(:,:),dxo(:,:)
 !
-      real(rl) :: mflx(in,jn,kn), &
-                  dlo (in,jn,kn), den(in,jn,kn), &
-                  eod (in,jn,kn), edn(in,jn,kn), &
-                  ero (in,jn,kn), ern(in,jn,kn), &
-                  abo (in,jn,kn,nspec), abn(in,jn,kn,nspec)
+      real(rl) :: mflx(in,jn,kn)
+      real(rl) :: dlo (in,jn,kn), den(in,jn,kn)
+      real(rl) :: eod (in,jn,kn), edn(in,jn,kn)
+      real(rl), optional :: ero (in,jn,kn), ern(in,jn,kn)
+      real(rl), optional :: abo (in,jn,kn,nspec), abn(in,jn,kn,nspec)
+
+      if (present(ero)) then
+        allocate(rtwid (ijkn,1))
+        allocate(dero  (ijkn,1))
+        allocate(xtwid(ijkn,nspec))
+        allocate(dxo  (ijkn,nspec))
+      endif
 !-----------------------------------------------------------------------
 !
 ! Compute time-centered area factors.
@@ -366,8 +369,12 @@
        endif  !  j>=jbeg || j=js-1
 2100  continue
 !
+      if (allocated(rtwid))  deallocate(rtwid)
+      if (allocated(dero ))  deallocate(dero )
+      if (allocated(xtwid))  deallocate(xtwid)
+      if (allocated(dxo  ))  deallocate(dxo  )
       return
-      end
+end subroutine tranx3
 !
 !=======================================================================
 !

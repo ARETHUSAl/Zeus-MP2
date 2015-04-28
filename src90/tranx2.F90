@@ -9,12 +9,8 @@
 !
 !=======================================================================
 !
-       subroutine tranx2 (ibeg,iend,jbeg,jend,kbeg,kend &
-                         ,dlo,den &
-                         ,eod,edn &
-                         ,ero,ern &
-                         ,abo,abn &
-                         ,mflx,atwid)
+subroutine tranx2 (ibeg,iend,jbeg,jend,kbeg,kend,dlo,den,eod,edn &
+                   ,mflx,atwid,ero,ern,abo,abn)
 !
 !    dac:zeus3d.tranx2 <----- transports zone-centred variables along x2
 !    from jms:zeus2d.tranx2, mln:zeus04.tranz                  may, 1990
@@ -95,24 +91,29 @@
 !
       implicit NONE
 !
-      integer  :: i, j, k, ibeg, iend, jbeg, jend, kbeg, kend, kp1, l, &
-                  kstart, n, m
+      integer  :: i, j, k, ibeg, iend, jbeg, jend, kbeg, kend, kp1, l
+      integer  :: kstart, n, m
 !
       real(rl) :: dqm,dqp, xi,q1, atwid(ijkn)
 !
-      real(rl) :: mflux(ijkn), &
-                  dtwid(ijkn), dd  (ijkn), &
-                  etwid(ijkn), deod(ijkn)
+      real(rl) :: mflux(ijkn)
+      real(rl) :: dtwid(ijkn), dd  (ijkn)
+      real(rl) :: etwid(ijkn), deod(ijkn)
 !
-      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), mflx(in,jn,kn), &
-                  eod(in,jn,kn), edn(in,jn,kn), &
-                  ero(in,jn,kn), &
-                  ern(in,jn,kn), &
-                  abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
+      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), mflx(in,jn,kn)
+      real(rl) :: eod(in,jn,kn), edn(in,jn,kn)
+      real(rl),optional :: ero(in,jn,kn), ern(in,jn,kn)
+      real(rl),optional :: abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
 !
-      real(rl) :: rtwid(ijkn), dero(ijkn), &
-                  dxo(ijkn,nspec), &
-                  xtwid(ijkn,nspec)
+      real(rl), allocatable :: rtwid(:), dero(:)
+      real(rl), allocatable :: dxo(:,:), xtwid(:,:)
+
+      if (present(ero)) then 
+        allocate(rtwid(ijkn))
+        allocate(dero (ijkn))
+        allocate(dxo  (ijkn,nspec))
+        allocate(xtwid(ijkn,nspec))
+      endif
 !-----------------------------------------------------------------------
 !
 ! Compute time-centered area factors.
@@ -341,8 +342,13 @@
        endif  !  k=ks-1 || k>=kbeg
 2100   continue
 !
+       
+      if (allocated(rtwid))  deallocate(rtwid)
+      if (allocated(dero ))  deallocate(dero )
+      if (allocated(dxo  ))  deallocate(dxo  )
+      if (allocated(xtwid))  deallocate(xtwid)
       return
-      end
+end subroutine tranx2
 !
 !=======================================================================
 !

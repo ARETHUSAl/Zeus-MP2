@@ -9,12 +9,9 @@
 !
 !=======================================================================
 !
-       subroutine tranx1 (ibeg,iend,jbeg,jend,kbeg,kend &
-                         ,dlo,den &
-                         ,eod,edn &
-                         ,ero,ern &
-                         ,abo,abn &
-                         ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+subroutine tranx1 (ibeg,iend,jbeg,jend,kbeg,kend,dlo,den,eod,edn, &
+                   mflx,atwid,dtwid,etwid,mflux,dd,deod, &
+                   ero,ern,abo,abn)
 !
 !    dac:zeus3d.tranx1 <----- transports zone-centred variables along x1
 !    from jms:zeus2d.tranx1, mln:zeus04.tranz                  may, 1990
@@ -94,17 +91,24 @@
       integer  :: i, j, k, ibeg, iend, jbeg, jend, kbeg, kend, n, kp1
 !
       real(rl) :: dqm, dqp, xi,q1
-      real(rl) :: atwid(ijkn), mflux(ijkn), &
-                  dtwid(ijkn), dd   (ijkn), &
-                  etwid(ijkn), deod (ijkn), &
-                  rtwid(ijkn), dero (ijkn), &
-                  xtwid(ijkn,nspec), dxo (ijkn,nspec)
+      real(rl) :: atwid(ijkn), mflux(ijkn)
+      real(rl) :: dtwid(ijkn), dd   (ijkn)
+      real(rl) :: etwid(ijkn), deod (ijkn)
+      real(rl), allocatable :: rtwid(:), dero (:)
+      real(rl), allocatable :: xtwid(:,:), dxo (:,:)
 !
       real(rl) :: mflx(in,jn,kn)
-      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), &
-                  eod(in,jn,kn), edn(in,jn,kn), &
-                  ero(in,jn,kn), ern(in,jn,kn), &
-                  abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
+      real(rl) :: dlo(in,jn,kn), den(in,jn,kn)
+      real(rl) :: eod(in,jn,kn), edn(in,jn,kn)
+      real(rl),optional :: ero(in,jn,kn), ern(in,jn,kn)
+      real(rl),optional :: abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
+ 
+      if (present(ero)) then
+        allocate(rtwid(ijkn))
+        allocate(dero (ijkn))
+        allocate(xtwid(ijkn,nspec))
+        allocate( dxo (ijkn,nspec))
+      endif
 !-----------------------------------------------------------------------
 !
 ! Compute time-centered area factors.
@@ -313,8 +317,12 @@
 90      continue
 100    continue
 !
+      if (allocated(rtwid))  deallocate(rtwid)
+      if (allocated(xtwid))  deallocate(xtwid)
+      if (allocated(dero ))  deallocate(dero )
+      if (allocated(dxo  ))  deallocate( dxo )
       return
-      end
+end subroutine tranx1
 !
 !=======================================================================
 !
