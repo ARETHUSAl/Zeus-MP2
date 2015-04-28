@@ -81,6 +81,15 @@
         write(hdffile,"(a3,a2,3i2.2,'.',i4.4)") 'hdf',id,coords(1) &
                                             ,coords(2),coords(3),incr
 !
+!  history dump
+!
+      if(xhst) then
+        if (iswhst .eq. 1) then
+           call printd 
+           iswhst=0
+         endif 
+      endif
+!
 ! If an array of output times t_out has been defined, set the value
 ! of (thdf + dthdf) to the next desired output time.
 !

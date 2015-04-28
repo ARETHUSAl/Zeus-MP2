@@ -33,6 +33,7 @@
       character*39 :: MPI_OPTION      
       character*39 :: RES_DUMPS_OPTION 
       character*39 :: HDF_DUMP_OPTION 
+      character*39 :: HST_DUMP_OPTION
       character*39 :: TSL_DUMPS_OPTION
       character*39 :: TXT_DUMPS_OPTION
 !
@@ -120,6 +121,12 @@
 #endif
       else
       HDF_DUMP_OPTION =  "              * HDF VIZ dumps    OFF   "
+      endif
+!
+      if(xhst) then
+      HST_DUMP_OPTION = "              * history dump     ON    "
+      else
+      HST_DUMP_OPTION = "              * history dump     OFF   "
       endif
 !
       if(xtsl) then

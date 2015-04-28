@@ -257,6 +257,10 @@
          open (unit=31,file=tslfile,status='unknown')
        endif
       endif ! xtsl
+!
+      if(xhst) then
+       open (unit=3, file=hstfile, status='unknown')
+      endif ! xhst
       if (incr+1 .le. nbuff-10) then
 !
 ! Adjust dump times to hit the next t_out, if defined non-zero.

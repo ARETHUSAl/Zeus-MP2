@@ -43,7 +43,7 @@
                            xforce , xsphgrv, xhse , leos  , nspec  , &
                            lopac , xchem
       namelist /rchmconf/  ichem  , iRT    , nnu1 , nnu2  , nratec
-      namelist /ioconf/    xascii , xhdf, xrestart, xtsl
+      namelist /ioconf/    xascii , xhdf, xrestart, xtsl, xhst
       namelist /preconf/   small_no, large_no
       namelist /arrayconf/ izones, jzones, kzones, maxijk
 !
@@ -95,6 +95,7 @@
       xiso     = .false.
       xascii   = .true.
       xhdf     = .false.
+      xhst     = .false.
       xrestart = .false.
       xtsl     = .false.
       ichem    = 1
@@ -137,6 +138,7 @@
        confl_buf(14) = xhdf
        confl_buf(15) = xrestart
        confl_buf(16) = xtsl
+       confl_buf(17) = xhst
 !
        read(1,preconf)
        confr_buf(1) = small_no
@@ -161,7 +163,7 @@
 !
 #ifdef MPI_USED
        call MPI_BCAST(confi_buf,15,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-       call MPI_BCAST(confl_buf,16,MPI_LOGICAL,0,MPI_COMM_WORLD,ierr)
+       call MPI_BCAST(confl_buf,17,MPI_LOGICAL,0,MPI_COMM_WORLD,ierr)
        call MPI_BCAST(confr_buf,2,MPI_DOUBLE_PRECISION,0, &
                                   MPI_COMM_WORLD,ierr)
        if(myid_w .ne. 0) then
@@ -196,6 +198,7 @@
         xhdf     = confl_buf(14)
         xrestart = confl_buf(15)
         xtsl     = confl_buf(16)
+        xhst     = confl_buf(17)
         small_no = confr_buf(1)
         large_no = confr_buf(2)
        endif ! myid_w

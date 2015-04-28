@@ -100,7 +100,7 @@
 !     output control
 !----------------------------------------------------------------------
 !
-      logical  :: xascii, xhdf, xrestart, xtsl
+      logical  :: xascii, xhdf, xrestart, xtsl, xhst
       real(rl) :: t_out(nbuff-8)
 !
 !----------------------------------------------------------------------
