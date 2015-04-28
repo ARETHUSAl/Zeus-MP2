@@ -83,17 +83,17 @@
 !      values are not needed.
 !
 !PS 
-      DO k=ks,ke
-         DO j=js,je
-           DO i=is,ie
+      do k=ks,ke
+         do j=js,je
+           do i=is,ie
              w3da(i,j,k) = v1(i,j,k) * 0.5 * (d(i-1,j  ,k  ) + d(i,j,k))
              w3db(i,j,k) = v2(i,j,k) * 0.5 * (d(i  ,j  ,k  ) + d(i,j,k)) &
                            * g2b(i)
              w3dc(i,j,k) = v3(i,j,k) * 0.5 * (d(i  ,j  ,k  ) + d(i,j,k)) &
                            * g31b(i) * g32b(j)
-           ENDDO
-         ENDDO
-       ENDDO
+           enddo
+         enddo
+       enddo
 !
 !---------------- directional split in X1-X2-X3 fashion ----------------
 !
@@ -104,11 +104,12 @@
 !     &                  ,ero,ern
 !     &                  ,mflx,s1,s2,s3)
 !        
-         call advx1 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
+         if (lrad .ne. 0) then
+           call advx1 (w3dd,d ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh ,abun,w4da  )
+         else
+           call advx1 (w3dd,d ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+         endif
 !
 10     continue
 !

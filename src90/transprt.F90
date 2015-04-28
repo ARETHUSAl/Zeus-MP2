@@ -9,7 +9,7 @@
 !
 !=======================================================================
 !
-       subroutine transprt
+subroutine transprt
 !
 !    mln:zeus3d.transprt <------------------ controls the transport step
 !                                                          october, 1987
@@ -108,21 +108,18 @@
 !     &                  ,abo,abn
 !     &                  ,mflx,s1,s2,s3)
 !        
-         call advx1 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx2 (d   ,w3dd &
-                    ,w3dg,w3de &
-                    ,w3dh,er &
-                    ,w4da,abun &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx3 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
+         if (lrad .ne. 0) then
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da )
+           call advx2 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc &
+                      ,w3dh,er  ,w4da,abun )
+           call advx3 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da )
+         else
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx2 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
+           call advx3 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+         endif
 !
          ix1x2x3 = 2
          goto 10
@@ -131,21 +128,18 @@
 !
        else if (ix1x2x3 .eq. 2) then
 !
-         call advx2 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx1 (d   ,w3dd &
-                    ,w3dg,w3de &
-                    ,w3dh,er &
-                    ,w4da,abun &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx3 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
+         if (lrad .ne. 0) then
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+           call advx1 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc &
+                      ,w3dh,er  ,w4da,abun )
+           call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da )
+         else 
+           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx1 (d   ,w3dd ,w3dg,w3de,w3df,w3da,w3db,w3dc)
+           call advx3 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+         endif
 !
          ix1x2x3 = 3
          goto 10
@@ -158,21 +152,18 @@
 !     &                  ,eod,edn
 !     &                  ,mflx,s1,s2,s3)
 !
-         call advx2 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx3 (d   ,w3dd &
-                    ,w3dg,w3de &
-                    ,w3dh,er &
-                    ,w4da,abun &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx1 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
+         if (lrad .ne. 0) then
+           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh ,abun,w4da )
+           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc &
+                      ,w3dh,er   ,w4da,abun )
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh ,abun,w4da )
+         else
+           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+         endif
 !
          ix1x2x3 = 4
          goto 10
@@ -185,27 +176,18 @@
 !     &                  ,eod,edn
 !     &                  ,mflx,s1,s2,s3)
 !
-         call advx3 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-!X         if(nhy .eq. 21)
-!X     .    write(*,"('ADVX3: w3db = ',1p2d16.8)")w3db(4,4,3),w3db(4,4,4)
-         call advx2 (d   ,w3dd &
-                    ,w3dg,w3de &
-                    ,w3dh,er &
-                    ,w4da,abun &
-                    ,w3df,w3da,w3db,w3dc)
-!X         if(nhy .eq. 21)
-!X     .    write(*,"('ADVX2: w3db = ',12pd16.8)")w3db(4,4,3),w3db(4,4,4)
-         call advx1 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-!X         if(nhy .eq. 21)
-!X     .    write(*,"('ADVX1: w3db = ',1p2d16.8)")w3db(4,4,3),w3db(4,4,4)
+         if (lrad .ne. 0) then
+           call advx3 (w3dd,d   ,w3de,w3dg ,w3df ,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+           call advx2 (d   ,w3dd,w3dg,w3de ,w3df ,w3da,w3db,w3dc &
+                      ,w3dh,er  ,w4da,abun)
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df ,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+         else
+           call advx3 (w3dd,d    ,w3de,w3dg ,w3df ,w3da,w3db,w3dc)
+           call advx2 (d   ,w3dd ,w3dg,w3de ,w3df ,w3da,w3db,w3dc)
+           call advx1 (w3dd,d    ,w3de,w3dg ,w3df ,w3da,w3db,w3dc)
+         endif
 !
          ix1x2x3 = 5
          goto 10
@@ -218,21 +200,19 @@
 !     &                  ,eod,edn
 !     &                  ,mflx,s1,s2,s3)
 !
-         call advx3 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx1 (d   ,w3dd &
-                    ,w3dg,w3de &
-                    ,w3dh,er &
-                    ,w4da,abun &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx2 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
+         if (lrad .ne. 0) then
+           call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+           call advx1 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc &
+                      ,w3dh,er  ,w4da,abun)
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+         else
+           call advx3 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx1 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
+           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+         endif
+
 !
          ix1x2x3 = 6
          goto 10
@@ -245,21 +225,18 @@
 !     &                  ,eod,edn
 !     &                  ,mflx,s1,s2,s3)
 !
-         call advx1 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx3 (d   ,w3dd &
-                    ,w3dg,w3de &
-                    ,w3dh,er &
-                    ,w4da,abun &
-                    ,w3df,w3da,w3db,w3dc)
-         call advx2 (w3dd,d &
-                    ,w3de,w3dg &
-                    ,er  ,w3dh &
-                    ,abun,w4da &
-                    ,w3df,w3da,w3db,w3dc)
+         if (lrad .ne. 0 ) then
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc &
+                      ,w3dh,er  ,w4da,abun)
+           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+         else
+           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
+           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+         endif
 !
          ix1x2x3 = 1
          goto 10
@@ -303,7 +280,7 @@
       endif ! lrad
 !
 777   return
-      end
+end subroutine
 !
 !=======================================================================
 !
