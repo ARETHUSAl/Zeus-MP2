@@ -9,11 +9,7 @@
 !    
 !=======================================================================
 !
-       subroutine advx1 (dlo,den &
-                        ,eod,edn &
-                        ,ero,ern &
-                        ,abo,abn &
-                        ,mflx,s1,s2,s3)
+subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !
 !    RAF, 2/17/97
 !
@@ -60,19 +56,19 @@
 !
       real(rl) :: p1
 !
-      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), mflx(in,jn,kn), &
-                  s1 (in,jn,kn), s2 (in,jn,kn), s3  (in,jn,kn), &
-                  eod(in,jn,kn), edn(in,jn,kn), &
-                  ero(in,jn,kn), ern(in,jn,kn), &
-                  abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
+      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), mflx(in,jn,kn)
+      real(rl) :: s1 (in,jn,kn), s2 (in,jn,kn), s3  (in,jn,kn)
+      real(rl) :: eod(in,jn,kn), edn(in,jn,kn)
+      real(rl), optional :: ero(in,jn,kn), ern(in,jn,kn)
+      real(rl), optional :: abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
 !
-      real(rl) :: atwid (ijkn),  mflux (ijkn), &
-                  dtwid (ijkn),  dd    (ijkn), &
-                  etwid (ijkn),  deod  (ijkn)
+      real(rl) :: atwid (ijkn),  mflux (ijkn)
+      real(rl) :: dtwid (ijkn),  dd    (ijkn)
+      real(rl) :: etwid (ijkn),  deod  (ijkn)
 !
       real(rl) :: atwid1(ijkn)
-      real(rl) :: vtwid ( ijkn ), sflx  ( ijkn ), &
-                  dq ( ijkn )
+      real(rl) :: vtwid ( ijkn ), sflx  ( ijkn )
+      real(rl) :: dq ( ijkn )
 !
 !      Tunable data
 !
@@ -137,11 +133,14 @@
 !
 !    2) Do first portion of the interior points.
 !
-       call tranx1 (is+3,ie-2,js+1,je  ,ks+1,k1,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is+3,ie-2,js+1,je  ,ks+1,k1,dlo,den &
+                    ,eod , edn,  ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                    ,ero, ern,abo , abn )
+       else
+         call tranx1 (is+3,ie-2,js+1,je  ,ks+1,k1,dlo,den &
+                     ,eod , edn, mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is+4,ie-3,js+2,je  ,ks+2,k1,s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 #ifdef MPI_USED
@@ -163,27 +162,36 @@
 !
 !    2) Do second portion of the interior points, plus some on borders.
 !
-       call tranx1 (is  ,is+2,js+1,je  ,ks+1,k1,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,is+2,js+1,je  ,ks+1,k1,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo ,abn)
+       else
+         call tranx1 (is  ,is+2,js+1,je  ,ks+1,k1,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is  ,is+3,js+2,je  ,ks+2,k1,s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 !
-       call tranx1 (ie-1,ie  ,js+1,je  ,ks+1,k1,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (ie-1,ie  ,js+1,je  ,ks+1,k1,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern  ,abo ,abn)
+       else  
+         call tranx1 (ie-1,ie  ,js+1,je  ,ks+1,k1,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (ie-2,ie  ,js+2,je  ,ks+2,k1,s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 !
-       call tranx1 (is  ,ie  ,js+1,je  ,k1+1,k2,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,ie  ,js+1,je  ,k1+1,k2,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod,&
+                      ero ,ern ,abo ,abn )
+       else
+         call tranx1 (is  ,ie  ,js+1,je  ,k1+1,k2,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is  ,ie  ,js+2,je  ,k1+1,k2,s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 #ifdef MPI_USED
@@ -206,19 +214,25 @@
 !
 !    2) Do last portion of the interior points, plus some on borders.
 !
-       call tranx1 (is  ,ie  ,js  ,js  ,ks+1,k2,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,ie  ,js  ,js  ,ks+1,k2,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo,abn )
+       else 
+         call tranx1 (is  ,ie  ,js  ,js  ,ks+1,k2,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is  ,ie  ,js  ,js+1,ks+2,k2,s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 !
-       call tranx1 (is  ,ie  ,js  ,je  ,k2+1,ke  ,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,ie  ,js  ,je  ,k2+1,ke  ,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo ,abn )
+       else 
+         call tranx1 (is  ,ie  ,js  ,je  ,k2+1,ke  ,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is  ,ie  ,js  ,je  ,k2+1,ke  ,s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 !
@@ -241,11 +255,15 @@
 !
 ! Finally, do the remaining border zones.
 !
-       call tranx1 (is  ,ie  ,js  ,je  ,ks, ks, dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,ie  ,js  ,je  ,ks, ks, dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo,abn )
+       else
+         call tranx1 (is  ,ie  ,js  ,je  ,ks, ks, dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
+!
        call momx1  (is  ,ie  ,js  ,je  ,ks, ks+1, s1,s2,s3,mflx, &
                     atwid1,vtwid,sflx,dq)
 !
@@ -302,14 +320,17 @@
        if(nspec .gt. 1) call bvalabuns(3,3,0,0,0,0,abo)
 !
 !    2) Do first portion of the interior points.
-!
-       call tranx1 (is+3,ie-2,js+1,je  ,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+! 
+       if (lrad .ne. 0) then
+         call tranx1 (is+3,ie-2,js+1,je  ,ks,ks,dlo,den &
+                     ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo,abn )
+       else
+         call tranx1 (is+3,ie-2,js+1,je  ,ks,ks,dlo,den &
+                     ,eod,edn  ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is+4,ie-3,js+2,je  ,ks,ks,s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
 #ifdef MPI_USED
 !
 !    3) Wait for communications to complete.
@@ -329,21 +350,27 @@
 !
 !    2) Do second portion of the interior points, plus some on borders.
 !
-       call tranx1 (is  ,is+2,js+1,je  ,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,is+2,js+1,je  ,ks,ks,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero,ern  ,abo,abn )
+       else
+         call tranx1 (is  ,is+2,js+1,je  ,ks,ks,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is  ,is+3,js+2,je  ,ks,ks,s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
 !
-       call tranx1 (ie-1,ie  ,js+1,je  ,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       if (lrad .ne. 0) then
+         call tranx1 (ie-1,ie  ,js+1,je  ,ks,ks,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo,abn )
+       else
+         call tranx1 (ie-1,ie  ,js+1,je  ,ks,ks,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (ie-2,ie  ,js+2,je  ,ks,ks,s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
 !
 !    3) Wait for communications to complete.
 !
@@ -352,15 +379,18 @@
 #endif
 !
 ! Finally, do the remaining border zones.
-!
-       call tranx1 (is  ,ie  ,js  ,js  ,ks, ks, dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+! 
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,ie  ,js  ,js  ,ks, ks, dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod & 
+                     ,ero ,ern ,abo,abn )
+       else
+         call tranx1 (is  ,ie  ,js  ,js  ,ks, ks, dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
 !
        call momx1  (is  ,ie  ,js  ,js+1,ks, ks, s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
 !
 ! Mark d and e/d (e) boundary values out of date.
 !
@@ -424,14 +454,18 @@
        if(nspec .gt. 1) call bvalabuns(3,3,0,0,0,0,abo)
 !
 !    2) Do first portion of the interior points.
-!
-       call tranx1 (is+3,ie-2,js,js  ,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+!      
+       if  (lrad .ne. 0) then
+         call tranx1 (is+3,ie-2,js,js  ,ks,ks,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                      ,ero,ern ,abo,abn )
+       else 
+         call tranx1 (is+3,ie-2,js,js  ,ks,ks,dlo,den &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is+4,ie-3,js,js  ,ks,ks,s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
+      
 #ifdef MPI_USED
 !
 !    3) Wait for communications to complete.
@@ -442,23 +476,27 @@
 !
 ! Finally, do the remaining border zones.
 !
-       call tranx1 (is  ,is+2,js  ,js,ks, ks, dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
-!
+       if (lrad .ne. 0) then
+         call tranx1 (is  ,is+2,js  ,js,ks, ks, dlo,den &
+                     ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                      ,ero,ern ,abo,abn )
+       else 
+         call tranx1 (is  ,is+2,js  ,js,ks, ks, dlo,den ,eod,edn &
+                     ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (is  ,is+3,js  ,js,ks, ks, s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
 !
-       call tranx1 (ie-1,ie  ,js  ,js,ks, ks, dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
-!
+       if (lrad .ne. 0) then
+         call tranx1 (ie-1,ie  ,js  ,js,ks, ks, dlo,den &
+                     ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                      ,ero,ern ,abo,abn )
+       else
+         call tranx1 (ie-1,ie  ,js  ,js,ks, ks, dlo,den ,eod,edn &
+                     ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+       endif
        call momx1  (ie-2,ie  ,js  ,js,ks, ks, s1,s2,s3,mflx, &
-                    atwid1,vtwid,sflx,dq)
+                      atwid1,vtwid,sflx,dq)
 !
 ! Mark d and e/d (e) boundary values out of date.
 !
@@ -470,7 +508,7 @@
        enddo
 !
 999    return
-       end
+end subroutine advx1
 !
 !=======================================================================
 !

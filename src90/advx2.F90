@@ -9,11 +9,7 @@
 !
 !=======================================================================
 !
-       subroutine advx2 (dlo,den &
-                        ,eod,edn &
-                        ,ero,ern &
-                        ,abo,abn &
-                        ,mflx,s1,s2,s3)
+subroutine advx2 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !
 !    RAF, 2/17/97
 !
@@ -59,15 +55,15 @@
       integer  :: k1, k2, i, j, k
       real(rl) :: p2
 !
-      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), mflx(in,jn,kn), &
-                  s1 (in,jn,kn), s2 (in,jn,kn), s3  (in,jn,kn), &
-                  eod(in,jn,kn), edn(in,jn,kn), &
-                  ero(in,jn,kn), ern(in,jn,kn), &
-                  abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
+      real(rl) :: dlo(in,jn,kn), den(in,jn,kn), mflx(in,jn,kn)
+      real(rl) :: s1 (in,jn,kn), s2 (in,jn,kn), s3  (in,jn,kn)
+      real(rl) :: eod(in,jn,kn), edn(in,jn,kn)
+      real(rl), optional :: ero(in,jn,kn), ern(in,jn,kn)
+      real(rl), optional :: abo(in,jn,kn,nspec), abn(in,jn,kn,nspec)
 !
       real(rl) :: atwid (ijkn)
-      real(rl) :: atwid1 (ijkn), atwid2 (ijkn), atwid3 (ijkn), &
-                  atwidj (ijkn)
+      real(rl) :: atwid1 (ijkn), atwid2 (ijkn), atwid3 (ijkn)
+      real(rl) :: atwidj (ijkn)
 !
 !      Tunable data
 !
@@ -117,11 +113,12 @@
 !
 !    2) Do first portion of the interior points.
 !
-       call tranx2 (is+1,ie,js+3,je-2,ks+1,k1,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is+1,ie,js+3,je-2,ks+1,k1,dlo,den &
+                   ,eod,edn ,mflx,atwid,ero,ern  ,abo,abn)
+       else 
+         call tranx2 (is+1,ie,js+3,je-2,ks+1,k1,dlo,den ,eod,edn ,mflx,atwid)
+       endif
        call momx2  (is+2,ie,js+4,je-3,ks+2,k1,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 #ifdef MPI_USED
@@ -159,19 +156,21 @@
 !
 !    2) Do middle portion of the interior points, plus some on borders.
 !
-       call tranx2 (is  ,is  ,js+3,je-2,ks+1,k1,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,is  ,js+3,je-2,ks+1,k1,dlo,den &
+                     ,eod,edn  ,mflx,atwid,ero,ern  ,abo,abn)
+       else
+         call tranx2 (is  ,is  ,js+3,je-2,ks+1,k1,dlo,den ,eod,edn ,mflx,atwid)
+       endif
        call momx2  (is  ,is+1,js+4,je-3,ks+2,k1,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 !
-       call tranx2 (is  ,ie  ,js+3,je-2,k1+1,k2,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,js+3,je-2,k1+1,k2,dlo,den &
+                     ,eod,edn ,mflx,atwid ,ero,ern  ,abo,abn)
+       else 
+         call tranx2 (is  ,ie  ,js+3,je-2,k1+1,k2,dlo,den ,eod,edn ,mflx,atwid)
+       endif
        call momx2  (is  ,ie  ,js+4,je-3,k1+1,k2,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 #ifdef MPI_USED
@@ -193,27 +192,30 @@
 !
 !    2) Do last portion of the interior points, plus some on borders.
 !
-       call tranx2 (is  ,ie  ,js  ,js+2,ks+1,k2,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,js  ,js+2,ks+1,k2,dlo,den &
+                     ,eod,edn  ,mflx,atwid,ero,ern  ,abo,abn)
+       else
+         call tranx2 (is  ,ie  ,js  ,js+2,ks+1,k2,dlo,den ,eod,edn ,mflx,atwid)
+       endif
        call momx2  (is  ,ie  ,js  ,js+3,ks+2,k2,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 !
-       call tranx2 (is  ,ie  ,je-1,je  ,ks+1,k2,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,je-1,je  ,ks+1,k2,dlo,den &
+                     ,eod,edn ,mflx,atwid,ero,ern   ,abo,abn )
+       else
+         call tranx2 (is  ,ie  ,je-1,je  ,ks+1,k2,dlo,den ,eod,edn ,mflx,atwid) 
+       endif
        call momx2  (is  ,ie  ,je-2,je  ,ks+2,k2,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 !
-       call tranx2 (is  ,ie  ,js  ,je  ,k2+1,ke,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,js  ,je  ,k2+1,ke,dlo,den &
+                     ,eod,edn  ,mflx,atwid,ero,ern  ,abo,abn )
+       else
+         call tranx2 (is  ,ie  ,js  ,je  ,k2+1,ke,dlo,den ,eod,edn  ,mflx,atwid)
+       endif
        call momx2  (is  ,ie  ,js  ,je  ,k2+1,ke,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 !
@@ -235,11 +237,12 @@
 !
 ! Finally, do the remaining border zones.
 !
-       call tranx2 (is  ,ie  ,js  ,je  ,ks, ks, dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,js  ,je  ,ks, ks, dlo,den &
+                     ,eod,edn  ,mflx,atwid,ero,ern  ,abo,abn)
+       else
+         call tranx2 (is  ,ie  ,js  ,je  ,ks, ks, dlo,den ,eod,edn ,mflx,atwid)
+       endif
 !      write(*,"('ADVX2 before: s2 =',1pd13.5)")s2(3,3,3)
        call momx2  (is  ,ie  ,js  ,je  ,ks, ks+1, s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
@@ -282,11 +285,12 @@
 !
 !    2) Do first portion of the interior points.
 !
-       call tranx2 (is+1,ie,js+3,je-2,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is+1,ie,js+3,je-2,ks,ks,dlo,den &
+                     ,eod,edn ,mflx,atwid,ero,ern  ,abo,abn )
+       else
+         call tranx2 (is+1,ie,js+3,je-2,ks,ks,dlo,den ,eod,edn ,mflx,atwid)
+       endif
 !
        call momx2  (is+2,ie,js+4,je-3,ks,ks,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
@@ -325,11 +329,12 @@
 !
 !    2) Do middle portion of the interior points, plus some on borders.
 !
-       call tranx2 (is  ,is  ,js+3,je-2,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,is  ,js+3,je-2,ks,ks,dlo,den &
+                     ,eod,edn   ,mflx,atwid,ero,ern  ,abo,abn )
+       else
+         call tranx2 (is  ,is  ,js+3,je-2,ks,ks,dlo,den ,eod,edn  ,mflx,atwid)
+       endif
 !
        call momx2  (is  ,is+1,js+4,je-3,ks,ks,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
@@ -343,20 +348,21 @@
 !
 ! Finally, do the remaining border zones.
 !
-       call tranx2 (is  ,ie  ,js  ,js+2,ks, ks, dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
-!
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,js  ,js+2,ks, ks, dlo,den &
+                     ,eod,edn  ,mflx,atwid,ero,ern  ,abo,abn )
+       else
+         call tranx2 (is  ,ie  ,js  ,js+2,ks, ks, dlo,den ,eod,edn  ,mflx,atwid)
+       endif
        call momx2  (is  ,ie  ,js  ,js+3,ks,ks,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
 !
-       call tranx2 (is  ,ie  ,je-1,je  ,ks,ks,dlo,den &
-                   ,eod,edn &
-                   ,ero,ern &
-                   ,abo,abn &
-                   ,mflx,atwid)
+       if (lrad .ne. 0) then
+         call tranx2 (is  ,ie  ,je-1,je  ,ks,ks,dlo,den &
+                     ,eod,edn   ,mflx,atwid,ero,ern  ,abo,abn )
+       else
+         call tranx2 (is  ,ie  ,je-1,je  ,ks,ks,dlo,den ,eod,edn  ,mflx,atwid)
+       endif
 !
        call momx2  (is  ,ie  ,je-2,je  ,ks, ks, s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj)
@@ -373,7 +379,7 @@
        enddo
 !
        return
-       end
+end subroutine advx2
 !
 !=======================================================================
 !
