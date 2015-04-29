@@ -59,7 +59,7 @@ subroutine auto_h5
       namelist /physconf/  lrad   , xhydro , xgrav, xmhd    , xgrvfft, &
                            xptmass, xtotnrg, xiso , xvgrid  , xsubav, &
                            xforce , xsphgrv, leos , nspec, xchem
-      namelist /ioconf/    xascii , xhdf, xrestart, xtsl
+      namelist /ioconf/    xascii , xhdf, xrestart, xtsl, xhst
       namelist /preconf/   small_no, large_no
       namelist /arrayconf/ izones, jzones, kzones, maxijk
       namelist /rescon/ irestart,tdump,dtdump,id,resfile
@@ -98,7 +98,7 @@ subroutine auto_h5
 !
       character*8 phrase
       character*23 hdf(max_pe)
-      character*16 cmb
+      character*18 cmb
       character*120 line
 !
 !=======================================================================
@@ -279,7 +279,7 @@ subroutine auto_h5
          do 80 jt=0,ntiles(2)-1
            do 70 it=0,ntiles(1)-1
              indx = indx + 1
-             write(hdf(indx),"(a3,a2,3i2.2,'.',i4.4)") &
+             write(hdf(indx),"(a2,i4.4,a1,a3,a2,3i2.2,'.',i4.4)") &
                       'DD',ndump,'/','hdf',id, it,jt,kt,ndump
    70      continue
    80    continue
@@ -291,24 +291,25 @@ subroutine auto_h5
 !     the combined file 'cmb' ("hdf<id>.<ndump>").
 !-----------------------------------------------------------------------
 !
-      write(cmb,"(a3,a2,'.',i3.3)") 'hdf',id,ndump
+      call system('mkdir -p Combined')
+      write(cmb,"(a12,a2,'.',i3.3)") 'Combined/hdf',id,ndump
 !
-      CALL h5fcreate_f(cmb, H5F_ACC_TRUNC_F, cfile_id, error)
+      call h5fcreate_f(cmb, h5f_acc_trunc_f, cfile_id, error)
 !
 !=======================================================================
-!     Begin loop over data arrays (coords, velocities, rho, etc.)
+!     begin loop over data arrays (coords, velocities, rho, etc.)
 !=======================================================================
 !
-      DO LFUNC = 1, NFUNC  ! NFUNC counts only the 3-D data arrays.
+      do lfunc = 1, nfunc  ! nfunc counts only the 3-d data arrays.
 !
 !-----------------------------------------------------------------------
-!     Begin loop over tile files
+!     begin loop over tile files
 !-----------------------------------------------------------------------
 !
        indx = 0
-       DO KT = 0,ntiles(3)-1
-        DO JT = 0,ntiles(2)-1
-         DO IT = 0,ntiles(1)-1
+       do kt = 0,ntiles(3)-1
+        do jt = 0,ntiles(2)-1
+         do it = 0,ntiles(1)-1
 !
           indx = indx + 1
 !
@@ -319,7 +320,7 @@ subroutine auto_h5
 !         lfunc > 1, read arrays but discard.
 !-----------------------------------------------------------------------
 !
-          RANK      = 1
+          rank      = 1
           dims(1  ) = 1
           dims(2:7) = 0
           if(lfunc .eq. 1 .and. indx .eq. 1) then
@@ -398,25 +399,25 @@ subroutine auto_h5
         RANK = 1
         dims(1  ) = 1
         dims(2:7) = 0
-        call write_cmb(cfile_id,rank,dims,"   time",tval)
+        call write_cmb(cfile_id,rank,dims,"time",tval)
 !
-        dims(1  ) = izones*ntiles(1)
+        dims(1  ) = izones
         dims(2:7) = 0
-        call write_cmb(cfile_id,rank,dims,"i coord",xscmb)
+        call write_cmb(cfile_id,rank,dims,"i_coord",xscmb)
 !
-        dims(1  ) = jzones*ntiles(2)
+        dims(1  ) = jzones
         dims(2:7) = 0
-        call write_cmb(cfile_id,rank,dims,"j coord",yscmb)
+        call write_cmb(cfile_id,rank,dims,"j_coord",yscmb)
 !
-        dims(1  ) = kzones*ntiles(3)
+        dims(1  ) = kzones
         dims(2:7) = 0
-        call write_cmb(cfile_id,rank,dims,"k coord",zscmb)
+        call write_cmb(cfile_id,rank,dims,"k_coord",zscmb)
        endif ! lfunc
 !
        RANK = 3
-       dims(1  ) = izones*ntiles(1)
-       dims(2  ) = jzones*ntiles(2)
-       dims(3  ) = kzones*ntiles(3)
+       dims(1  ) = izones
+       dims(2  ) = jzones
+       dims(3  ) = kzones
        dims(4:7) = 0
        call write_cmb(cfile_id,rank,dims,dsetname(lfunc),dcmb)
 !
