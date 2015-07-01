@@ -27,7 +27,7 @@ subroutine benchmark
       integer :: i,j,k
       integer :: ip, jp, kp
 !
-      character (len=1) :: dummy
+      character (len=100) :: dummy
       complex :: ii=(0.,1.)
       integer :: jf,nvect,ivect
       real(rl), dimension(:,:,:), allocatable :: a1, a2, a3
@@ -38,7 +38,7 @@ subroutine benchmark
 !
 ! set default values
 !
-      ampl0=0.1
+      ampl0=1.0e-4
       if (myid .eq. 0) then
         read (1,pgen)
         write(2,pgen)
@@ -64,6 +64,7 @@ subroutine benchmark
       b1(:,:,:) = 0.0
       b2(:,:,:) = 0.0
       b3(:,:,:) = 0.0
+      d (:,:,:) = 1.0
 !
 !  read header
 !
@@ -113,8 +114,16 @@ subroutine benchmark
         enddo
       enddo
       deallocate(a1,a2,a3)
-      write(*,*) maxval(v1), maxval(b1)
-      write(*,*) maxval(v2), maxval(b2)
-      write(*,*) maxval(v3), maxval(b3)
-      write(*,*) minval(d), maxval(d)
+      if (myid .eq. 0) then
+        write(*,*) 'minimum & maximum velocity:'
+        write(*,*) 'min(u_x)=',minval(v1), 'max(u_x)=', maxval(v1)
+        write(*,*) 'min(u_y)=',minval(v2), 'max(u_y)=', maxval(v2)
+        write(*,*) 'min(u_z)=',minval(v3), 'max(u_z)=', maxval(v3)
+        write(*,*) 'minimum & maximum magnetic field:'
+        write(*,*) 'min(B_x)=',minval(b1), 'max(B_x)=', maxval(b1)
+        write(*,*) 'min(B_y)=',minval(b2), 'max(B_y)=', maxval(b2)
+        write(*,*) 'min(B_z)=',minval(b3), 'max(B_z)=', maxval(b3)
+        write(*,*) 'minimum & maximum densitiy:'
+        write(*,*) 'min(rho)=',minval(d),  'max(rho)=', maxval(d)
+      endif
 end subroutine benchmark
