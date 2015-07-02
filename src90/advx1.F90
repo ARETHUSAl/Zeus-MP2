@@ -9,7 +9,8 @@
 !    
 !=======================================================================
 !
-subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
+subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3, &
+                  ero,ern ,abo,abn )
 !
 !    RAF, 2/17/97
 !
@@ -135,8 +136,8 @@ subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !
        if (lrad .ne. 0) then
          call tranx1 (is+3,ie-2,js+1,je  ,ks+1,k1,dlo,den &
-                    ,eod , edn,  ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
-                    ,ero, ern,abo , abn )
+                     ,eod , edn, mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero , ern, abo , abn )
        else
          call tranx1 (is+3,ie-2,js+1,je  ,ks+1,k1,dlo,den &
                      ,eod , edn, mflx,atwid,dtwid,etwid,mflux,dd,deod)
@@ -176,7 +177,7 @@ subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
        if (lrad .ne. 0) then
          call tranx1 (ie-1,ie  ,js+1,je  ,ks+1,k1,dlo,den &
                      ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
-                     ,ero ,ern  ,abo ,abn)
+                     ,ero ,ern  ,abo,abn)
        else  
          call tranx1 (ie-1,ie  ,js+1,je  ,ks+1,k1,dlo,den &
                      ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
@@ -323,11 +324,11 @@ subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 ! 
        if (lrad .ne. 0) then
          call tranx1 (is+3,ie-2,js+1,je  ,ks,ks,dlo,den &
-                     ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
-                     ,ero ,ern ,abo,abn )
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,ero ,ern ,abo ,abn )
        else
          call tranx1 (is+3,ie-2,js+1,je  ,ks,ks,dlo,den &
-                     ,eod,edn  ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
        endif
        call momx1  (is+4,ie-3,js+2,je  ,ks,ks,s1,s2,s3,mflx, &
                       atwid1,vtwid,sflx,dq)
@@ -353,7 +354,7 @@ subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
        if (lrad .ne. 0) then
          call tranx1 (is  ,is+2,js+1,je  ,ks,ks,dlo,den &
                      ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
-                     ,ero,ern  ,abo,abn )
+                     ,ero ,ern ,abo ,abn )
        else
          call tranx1 (is  ,is+2,js+1,je  ,ks,ks,dlo,den &
                      ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
@@ -478,22 +479,22 @@ subroutine advx1 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !
        if (lrad .ne. 0) then
          call tranx1 (is  ,is+2,js  ,js,ks, ks, dlo,den &
-                     ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
                       ,ero,ern ,abo,abn )
        else 
-         call tranx1 (is  ,is+2,js  ,js,ks, ks, dlo,den ,eod,edn &
-                     ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+         call tranx1 (is  ,is+2,js  ,js,ks, ks, dlo,den & 
+                     ,eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
        endif
        call momx1  (is  ,is+3,js  ,js,ks, ks, s1,s2,s3,mflx, &
                       atwid1,vtwid,sflx,dq)
 !
        if (lrad .ne. 0) then
-         call tranx1 (ie-1,ie  ,js  ,js,ks, ks, dlo,den &
+         call tranx1 (ie-1,ie ,js  ,js,ks, ks, dlo,den &
                      ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod &
-                      ,ero,ern ,abo,abn )
+                     ,ero,ern ,abo,abn )
        else
-         call tranx1 (ie-1,ie  ,js  ,js,ks, ks, dlo,den ,eod,edn &
-                     ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
+         call tranx1 (ie-1,ie ,js  ,js,ks, ks, dlo,den &
+                     ,eod,edn ,mflx,atwid,dtwid,etwid,mflux,dd,deod)
        endif
        call momx1  (ie-2,ie  ,js  ,js,ks, ks, s1,s2,s3,mflx, &
                       atwid1,vtwid,sflx,dq)
