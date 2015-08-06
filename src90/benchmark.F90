@@ -46,8 +46,11 @@ subroutine benchmark
       endif
 !      call MPI_BCAST( ibuf_in, 8, MPI_INTEGER &
 !                     , 0, comm3d, ierr )
-      call MPI_BCAST(ibuf_in, 1, MPI_FLOAT &
+      call MPI_BCAST(buf_in, 1, MPI_FLOAT &
                      , 0, comm3d, ierr )
+      if (myid .ne. 0) then
+        ampl0 = buf_in(1)
+      endif
 !
 !
 ! allocate arrays 
@@ -68,14 +71,14 @@ subroutine benchmark
 !
 !  read header
 !
-      open(10,file='kvect.dat')
+      open(10,file='kvect.dat', status='old')
       read(10,*) nvect
       read(10,*) dummy
 !
 !  loop through all vectors
 !
       do ivect=1,nvect
-        read(10,*) kk,ee,phik,ampl
+        read(10,*) kk,ee,ampl,phik
         call cross(ee,kk,exk)
         call dot2(exk,exk2)
         exk=exk/sqrt(exk2)
@@ -98,11 +101,11 @@ subroutine benchmark
 ! ------------------------------------------------------------------------
 ! ---- compute b out of curl A -------------------------------------------
 ! ------------------------------------------------------------------------
-      do k=ks,ke
+      do k=ks-2,ke+2
         kp = k + 1
-        do j=js,je
+        do j=js-2,je+2
           jp = j + 1
-          do i=is,ie
+          do i=is-2,ie+2
             ip = i + 1
             b1(i,j,k) =  ( a3(i,jp,k) - a3(i,j,k) - &
                            a2(i,j,kp) + a2(i,j,k) )*real(ijkn)
