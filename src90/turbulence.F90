@@ -139,16 +139,18 @@ subroutine turbulence
 !
 ! set up density and other fields
 !
-      do 11 i=1,in
-        do 22 j=1,jn
-          do 33 k=1,kn
+      b0 = b0*  1.0D0 / sqrt(4.0D0*pi)
+      do k=1,kn
+        do j=1,jn
+          do i=1,in
             d(i,j,k) = rho0
             e(i,j,k) = e0
-33          enddo 
-22        enddo
-11      enddo
-      v0 = v0 + tiny
-      b0 = b0 + tiny
+            !v1(i,j,k) = 0
+            !v2(i,j,k) = 0
+            !v3(i,j,k) = 0
+          enddo 
+        enddo
+      enddo
 !
 ! generate stochastic velocity field
 !
@@ -157,10 +159,14 @@ subroutine turbulence
 ! generate stochastic B-field
 !        b0 = b0/sqrt(mu_0c2)
       call genhelic(nmodes_B, b0, idx_A, helic)
+   
 2010  format('TURB   : Initialization complete.')
 2020  format('TURB   : csiso(1) = ',1pe13.6)
 2030  format('TURB   : ',a50)
 2040  format('TURB   : ',a25,1pe13.6)
 2050  format('TURB   : ',a25,i7)
-!       return
+      write(*,*) maxval(v1), maxval(b1)
+      write(*,*) maxval(v2), maxval(b2)
+      write(*,*) maxval(v3), maxval(b3)
+      return
 end subroutine turbulence

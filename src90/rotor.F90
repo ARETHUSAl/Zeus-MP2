@@ -199,7 +199,7 @@
 !
       integer :: i, n, m
 !
-      real*8  :: t, rho, o0, r, omega(in), bphi(in), &
+      real(rl):: t, rho, o0, r, omega(in), bphi(in), &
                  sr, z, l1, l2, l3, dz
 !
       sr  = sqrt(rho)
@@ -319,7 +319,7 @@
 !
       integer :: i, n, m
 !
-      real*8  :: t, rho, o0, r, beta, omega(in), bphi(in), &
+      real(rl):: t, rho, o0, r, beta, omega(in), bphi(in), &
                  sr, z, i1, i2, i3, i4, i5, j1, j2, j3, j4, &
                  k1, k2, k3, l5
 !

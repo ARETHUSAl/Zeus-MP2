@@ -132,13 +132,13 @@ subroutine transprt
            call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
                       ,er  ,w3dh,abun,w4da)
            call advx1 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc &
-                      ,w3dh,er  ,w4da,abun )
+                      ,w3dh,er  ,w4da,abun)
            call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
-                      ,er  ,w3dh,abun,w4da )
+                      ,er  ,w3dh,abun,w4da)
          else 
-           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
-           call advx1 (d   ,w3dd ,w3dg,w3de,w3df,w3da,w3db,w3dc)
-           call advx3 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
+           call advx1 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc)
+           call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
          endif
 !
          ix1x2x3 = 3
@@ -153,16 +153,16 @@ subroutine transprt
 !     &                  ,mflx,s1,s2,s3)
 !
          if (lrad .ne. 0) then
-           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
-                      ,er  ,w3dh ,abun,w4da )
-           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc &
-                      ,w3dh,er   ,w4da,abun )
-           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
-                      ,er  ,w3dh ,abun,w4da )
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
+           call advx3 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc &
+                      ,w3dh,er  ,w4da,abun)
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
          else
-           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
-           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
-           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
+           call advx3 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc)
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
          endif
 !
          ix1x2x3 = 4
@@ -177,16 +177,16 @@ subroutine transprt
 !     &                  ,mflx,s1,s2,s3)
 !
          if (lrad .ne. 0) then
-           call advx3 (w3dd,d   ,w3de,w3dg ,w3df ,w3da,w3db,w3dc &
+           call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
                       ,er  ,w3dh,abun,w4da)
-           call advx2 (d   ,w3dd,w3dg,w3de ,w3df ,w3da,w3db,w3dc &
+           call advx2 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc &
                       ,w3dh,er  ,w4da,abun)
-           call advx1 (w3dd,d   ,w3de,w3dg ,w3df ,w3da,w3db,w3dc &
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
                       ,er  ,w3dh,abun,w4da)
          else
-           call advx3 (w3dd,d    ,w3de,w3dg ,w3df ,w3da,w3db,w3dc)
-           call advx2 (d   ,w3dd ,w3dg,w3de ,w3df ,w3da,w3db,w3dc)
-           call advx1 (w3dd,d    ,w3de,w3dg ,w3df ,w3da,w3db,w3dc)
+           call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
+           call advx2 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc)
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
          endif
 !
          ix1x2x3 = 5
@@ -208,9 +208,9 @@ subroutine transprt
            call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
                       ,er  ,w3dh,abun,w4da)
          else
-           call advx3 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
-           call advx1 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
-           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx3 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
+           call advx1 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc)
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
          endif
 
 !
@@ -226,16 +226,16 @@ subroutine transprt
 !     &                  ,mflx,s1,s2,s3)
 !
          if (lrad .ne. 0 ) then
-           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
                       ,er  ,w3dh,abun,w4da)
-           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc &
+           call advx3 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc &
                       ,w3dh,er  ,w4da,abun)
-           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
                       ,er  ,w3dh,abun,w4da)
          else
-           call advx1 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
-           call advx3 (d   ,w3dd,w3dg,w3de ,w3df,w3da,w3db,w3dc)
-           call advx2 (w3dd,d   ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
+           call advx3 (d   ,w3dd,w3dg,w3de,w3df,w3da,w3db,w3dc)
+           call advx2 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
          endif
 !
          ix1x2x3 = 1

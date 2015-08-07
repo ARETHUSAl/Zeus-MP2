@@ -9,9 +9,9 @@
 !
 !=======================================================================
 !
-subroutine tranx1 (ibeg,iend,jbeg,jend,kbeg,kend,dlo,den,eod,edn, &
-                   mflx,atwid,dtwid,etwid,mflux,dd,deod, &
-                   ero,ern,abo,abn)
+subroutine tranx1 (ibeg,iend,jbeg,jend ,kbeg ,kend , dlo ,den, &
+                   eod ,edn ,mflx,atwid,dtwid,etwid,mflux,dd ,deod, &
+                   ero ,ern ,abo ,abn)
 !
 !    dac:zeus3d.tranx1 <----- transports zone-centred variables along x1
 !    from jms:zeus2d.tranx1, mln:zeus04.tranz                  may, 1990
@@ -107,7 +107,7 @@ subroutine tranx1 (ibeg,iend,jbeg,jend,kbeg,kend,dlo,den,eod,edn, &
         allocate(rtwid(ijkn))
         allocate(dero (ijkn))
         allocate(xtwid(ijkn,nspec))
-        allocate( dxo (ijkn,nspec))
+        allocate(dxo  (ijkn,nspec))
       endif
 !-----------------------------------------------------------------------
 !

@@ -143,7 +143,7 @@
         do 310 j=js,je
           do 300 i=is,ie
             indx = (k-ks)*nx2z*nx1z + (j-js)*nx1z + (i-is) + 1
-	    data(indx)  = real(0.5*(v3(i,j,k) + v3(i,j,kp1)))
+            data(indx)  = real(0.5*(v3(i,j,k) + v3(i,j,kp1)))
 300       continue
 310     continue
 320   continue
@@ -173,7 +173,7 @@
         do 510 j=js,je
           do 500 i=is,ie
             indx = (k-ks)*nx2z*nx1z + (j-js)*nx1z + (i-is) + 1
-	    data(indx)  = real(0.5*(b2(i,j,k) + b2(i,j+1,k)))
+            data(indx)  = real(0.5*(b2(i,j,k) + b2(i,j+1,k)))
 500       continue
 510     continue
 520   continue
@@ -192,7 +192,7 @@
         do 610 j=js,je
           do 600 i=is,ie
             indx = (k-ks)*nx2z*nx1z + (j-js)*nx1z + (i-is) + 1
-	    data(indx)  = real(0.5*(b3(i,j,k) + b3(i,j,kp1)))
+            data(indx)  = real(0.5*(b3(i,j,k) + b3(i,j,kp1)))
 600       continue
 610     continue
 620   continue
@@ -347,7 +347,7 @@
       dims(1  ) = ie-is+1
       dims(2:7) = 0
 !
-!      call write_viz(file_id,rank,dims,"i_coord",icoord)
+      call write_viz(file_id,rank,dims,"i_coord",icoord)
 !
       do j = js, je
        jcoord(j-js+1) = x2b(j)
@@ -356,7 +356,7 @@
       dims(1  ) = je-js+1
       dims(2:7) = 0
 !
-!      call write_viz(file_id,rank,dims,"j_coord",jcoord)
+      call write_viz(file_id,rank,dims,"j_coord",jcoord)
 !
       do k = ks, ke
        kcoord(k-ks+1) = x3b(k)
@@ -365,7 +365,7 @@
       dims(1  ) = ke-ks+1
       dims(2:7) = 0
 !
-!      call write_viz(file_id,rank,dims,"k_coord",kcoord)
+      call write_viz(file_id,rank,dims,"k_coord",kcoord)
 !
 ! --- Species names
 !
@@ -395,40 +395,40 @@
 !
 ! --- i_coord
 !
-      !write(*,*)'ks,ke=', ks,ke, ' js,je=',js,je,' is,ie=',is,ie
-      do k=ks,ke
-       do j=js,je
-        do i=is,ie
-         data(i-is+1,j-js+1,k-ks+1) = real(icoord(i-is+1))
-        enddo
-       enddo
-      enddo
+!      !write(*,*)'ks,ke=', ks,ke, ' js,je=',js,je,' is,ie=',is,ie
+!      do k=ks,ke
+!       do j=js,je
+!        do i=is,ie
+!         data(i-is+1,j-js+1,k-ks+1) = real(icoord(i-is+1))
+!        enddo
+!       enddo
+!      enddo
+!!
+!      call write_viz(file_id,rank,dims,"i_coord",data)
+!!
+!! --- j_coord
+!!
+!      do k=ks,ke
+!       do j=js,je
+!        do i=is,ie
+!         data(i-is+1,j-js+1,k-ks+1) = real(jcoord(j-js+1))
+!        enddo
+!       enddo
+!      enddo
+!!
+!      call write_viz(file_id,rank,dims,"j_coord",data)
+!!
+!! --- k_coord
+!!
+!      do k=ks,ke
+!       do j=js,je
+!        do i=is,ie
+!         data(i-is+1,j-js+1,k-ks+1) = real(kcoord(k-ks+1))
+!        enddo
+!       enddo
+!      enddo
 !
-      call write_viz(file_id,rank,dims,"i_coord",data)
-!
-! --- j_coord
-!
-      do k=ks,ke
-       do j=js,je
-        do i=is,ie
-         data(i-is+1,j-js+1,k-ks+1) = real(jcoord(j-js+1))
-        enddo
-       enddo
-      enddo
-!
-      call write_viz(file_id,rank,dims,"j_coord",data)
-!
-! --- k_coord
-!
-      do k=ks,ke
-       do j=js,je
-        do i=is,ie
-         data(i-is+1,j-js+1,k-ks+1) = real(kcoord(k-ks+1))
-        enddo
-       enddo
-      enddo
-!
-      call write_viz(file_id,rank,dims,"k_coord",data)
+!      call write_viz(file_id,rank,dims,"k_coord",data)
 !
 ! --- 1-Velocity
 !

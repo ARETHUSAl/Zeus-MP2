@@ -12,7 +12,7 @@
 !     Written by: John Hayes
 !
 !=======================================================================
-      subroutine mhdvortex
+subroutine mhdvortex
 !
       use real_prec
       use param
@@ -64,6 +64,7 @@
          e (i,j,k) =  5.0D0 / (gamm1*(12.0D0 * pi))
          v1(i,j,k) = -sin(2.0D0*pi*x2b(j))
          v2(i,j,k) =  sin(2.0D0*pi*x1b(i))
+         !v3(i,j,k) =  cos(2.0D0*pi*x1b(i))
          v3(i,j,k) = 0.0D0
         enddo
        enddo
@@ -85,4 +86,4 @@
       enddo
 !
       return
-      end
+end subroutine mhdvortex

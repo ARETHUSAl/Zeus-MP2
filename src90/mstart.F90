@@ -44,7 +44,7 @@
       if (myid_w .eq. 0) then
         open(1,file='zmp_inp',status='old', iostat=iost)
 !        write(*,*) 'IOSTAT = ',iost
-        open(2,file='zmp_log',status='unknown')
+        !open(2,file='zmp_log',status='unknown')
       endif
 !JH
 !------------------------  MPI TOPOLOGY  -------------------------------c

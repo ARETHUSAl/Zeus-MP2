@@ -9,7 +9,7 @@
 !
 !=======================================================================
 !
-       subroutine srcstep
+subroutine srcstep
 !
 !    jms:zeus2d.srcstep <------------------------ source step controller
 !                                                          october, 1987
@@ -134,19 +134,19 @@
                             , MPI_MINLOC, comm3d, ierr)
           avisc_dt  =   buf_out(1)
 #endif
-       DO WHILE (subdt .GT. 0.0)
-          IF(subdt.GT.avisc_dt) THEN
+       do while (subdt .gt. 0.0)
+          if(subdt.gt.avisc_dt) then
              subdt=subdt-avisc_dt
-          ELSE
+          else
              avisc_dt=subdt
              subdt=-1.0
-          ENDIF
+          endif
           index=index+1
-          IF(mod(index,2).GT.0) THEN
+          if(mod(index,2).gt.0) then
              call avisc_d (w3dd,w3de,w3df,v1,v2,v3,w3da,w3db,w3dc)
-          ELSE
+          else
              call avisc_d (v1,v2,v3,w3dd,w3de,w3df,w3da,w3db,w3dc)
-          ENDIF
+          endif
           avisc_dt=courno / (SQRT(dtqqi2)+tiny)
 #ifdef MPI_USED
           buf_in(1) = avisc_dt
@@ -155,21 +155,21 @@
                             , MPI_MINLOC, comm3d, ierr)
           avisc_dt  =   buf_out(1)
 #endif
-       ENDDO
+       enddo
 !
-!  Update velocity arrays if necessary.
+!  update velocity arrays if necessary.
 !
-       IF(mod(index,2).EQ.0) THEN
-          DO k=ks,ke
-             DO j=js,je
-                DO i=is,ie
+       if(mod(index,2).eq.0) then
+          do k=ks,ke
+             do j=js,je
+                do i=is,ie
                    v1(i,j,k)=w3dd(i,j,k)
                    v2(i,j,k)=w3de(i,j,k)
                    v3(i,j,k)=w3df(i,j,k)
-                ENDDO
-             ENDDO
-          ENDDO
-       ENDIF
+                enddo
+             enddo
+          enddo
+       endif
       else ! xsubav
        call avisc_d (w3dd,w3de,w3df,v1,v2,v3,w3da,w3db,w3dc)
       endif ! xsubav
@@ -212,7 +212,7 @@
       endif ! xiso
 !
       return
-      end
+end subroutine srcstep
 !
 !=======================================================================
 !

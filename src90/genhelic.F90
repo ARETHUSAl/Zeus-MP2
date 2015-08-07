@@ -61,8 +61,8 @@
 ! 
 ! local variables
 !
-      real(rl), dimension(:,:,:), allocatable, save  :: a1, a2, a3
-      real(rl), dimension(:,:,:), allocatable, save  :: ah1i, ah2i, ah3i
+      real(rl), dimension(:,:,:), allocatable :: a1, a2, a3
+      real(rl), dimension(:,:,:), allocatable :: ah1i, ah2i, ah3i
       real(rl) :: k1, k2, k3 
       real(rl) :: ep1r, ep1i, ep2r, ep2i, ep3r, ep3i
       real(rl) :: em1r, em1i, em2r, em2i, em3r, em3i
@@ -74,12 +74,12 @@
       integer ::  i, j, k
       integer ::  ip, jp, kp
       integer, dimension(6) :: st
-      allocate(a1(in,jn,kn))
-      allocate(a2(in,jn,kn))
-      allocate(a3(in,jn,kn))
-      allocate(ah1i(in,jn,kn))
-      allocate(ah2i(in,jn,kn))
-      allocate(ah3i(in,jn,kn))
+      allocate(a1(in, jn, kn), stat=st(1))
+      allocate(a2(in, jn, kn), stat=st(2))
+      allocate(a3(in, jn, kn), stat=st(3))
+      allocate(ah1i(in, jn, kn), stat=st(4))
+      allocate(ah2i(in, jn, kn), stat=st(5))
+      allocate(ah3i(in, jn, kn), stat=st(6))
 #ifdef MPI_USED
       if (myid_w .eq. 0) then
         write(6,2030) '----------------------------------------------'
@@ -87,16 +87,16 @@
         write(6,2030) '----------------------------------------------'
       endif
 #endif */ MPI_USED */
-      iseed = 200
+      iseed = -252
       sr2i = 1.d0/sqrt(2.d0)
       frac = sqrt((1.d0-helic)/(1.d0+helic))
 #ifdef MPI_USED
       if (myid_w .eq. 0) then
         write(6,2040) 'frac = ',frac
         write(6,2040) 'start random number generator'
-        call ran1(-iseed, rnd)
       endif
 #endif */ MPI_USED */
+      call ran1(iseed, rnd)
 !--------------------------------------------------------------------------
 ! --------------- excite modes --------------------------------------------
 ! -------------------------------------------------------------------------
@@ -233,15 +233,15 @@
           enddo   
         enddo 
       enddo   
-      do 430 k=ks-2,ke+2
-        do 420 j=js-2,je+2
-          do 410 i=is-2,ie+2
+      do k=1,kn !ks-2,ke+2
+        do j=1,jn !js-2,je+2
+          do i=1,in !is-2,ie+2
             a1(i,j,k) = w3dd(i,j,k)
             a2(i,j,k) = w3de(i,j,k)
             a3(i,j,k) = w3df(i,j,k)
-410       enddo
-420     enddo
-430   enddo
+          enddo
+        enddo
+      enddo
 !
 !  update all the boundary values of a
 !
@@ -272,14 +272,11 @@
           jp = j + 1
           do i=is,ie
             ip = i + 1
-            b1(i,j,k) = &
-                         ( a3(i,jp,k) - a3(i,j,k) - &
+            b1(i,j,k) =  ( a3(i,jp,k) - a3(i,j,k) - &
                            a2(i,j,kp) + a2(i,j,k) )*real(ijkn)
-            b2(i,j,k) = &
-                         ( a1(i,j,kp) - a1(i,j,k) - &
+            b2(i,j,k) =  ( a1(i,j,kp) - a1(i,j,k) - &
                            a3(ip,j,k) + a3(i,j,k) )*real(ijkn)
-            b3(i,j,k) = &
-                         ( a2(ip,j,k) - a2(i,j,k) - &
+            b3(i,j,k) =  ( a2(ip,j,k) - a2(i,j,k) - &
                            a1(i,jp,k) + a1(i,j,k) )*real(ijkn)
           enddo
         enddo
@@ -330,12 +327,14 @@
           enddo
         enddo
       enddo
+
       deallocate(a1)
       deallocate(a2)
       deallocate(a3)
       deallocate(ah1i)
       deallocate(ah2i)
       deallocate(ah3i)
+
 #ifdef MPI_USED
       if (myid_w .eq. 0) then      
         write(6,2030) '----------------------------------------------'

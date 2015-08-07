@@ -10,7 +10,8 @@
 !=======================================================================
 !
 subroutine tranx3 (ibeg,iend,jbeg,jend,kbeg,kend,dlo,den,eod,edn &
-                  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod,ero,ern,abo,abn)
+                  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+                  ,ero,ern,abo,abn)
 !
 !    dac:zeus3d.tranx3 <----- transports zone-centred variables along x3
 !    from jms:zeus2d.tranx2, mln:zeus04.tranz                  may, 1990

@@ -64,7 +64,10 @@
 !     Open zmp_conf run configuration file
 !----------------------------------------------------------------------
 !
-      if (myid_w .eq. 0) open(unit=1,file='zmp_inp',status='old')
+      if (myid_w .eq. 0) then 
+        open(unit=1,file='zmp_inp',status='old')
+        open(unit=2,file='zmp_log',status='unknown')
+      endif
 !
 !
 !----------------------------------------------------------------------
@@ -98,8 +101,8 @@
       xhst     = .false.
       xrestart = .false.
       xtsl     = .false.
-      ichem    = 1
-      iRT      = 1
+      ichem    = 0
+      iRT      = 0
       nratec   = 600
       nnu1     = 0
       nnu2     = 1
@@ -112,10 +115,12 @@
 !
       if(myid_w .eq. 0) then
        read(1,geomconf)
+       write(2,geomconf)
        confi_buf(1) = lgeom
        confi_buf(2) = ldimen
 !
        read(1,physconf)
+       write(2,physconf)
        confi_buf(3) = lrad
        confi_buf(4) = lopac
        confi_buf(5) = leos

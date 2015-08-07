@@ -143,16 +143,16 @@
           dr2is      = g2bi (i) * dx2ai(j)
           dr3is      = g31bi(i) * g32bi(j) * dx3ai(k)
           drimaxs    =   max ( dr1is  , dr2is  , dr3is   )
-          v1(i,j,k)  = w3da(i,j,k) * 2.0 /(d(i-1,j     ,k)+d(i,j,k))
+          v1(i,j,k)  = w3da(i,j,k) * 2.0 /(d(i-1,j,k)+d(i,j,k))
           if(xvgrid) then
-           v2(i,j,k)  = w3db(i,j,k)*2.0/(d(i  ,j-jone,k  )+d(i,j,k)) &
+           v2(i,j,k)  = w3db(i,j,k)*2.0/(d(i,j-jone,k)+d(i,j,k)) &
                       * g2bni(i)
-           v3(i,j,k)  = w3dc(i,j,k)*2.0/(d(i  ,j  ,k-kone)+d(i,j,k)) &
+           v3(i,j,k)  = w3dc(i,j,k)*2.0/(d(i,j,k-kone)+d(i,j,k)) &
                       * g31bni(i) * g32bi(j)
            else
-            v2(i,j,k)  = w3db(i,j,k)*2.0/(d(i  ,j-jone,k  )+d(i,j,k)) &
+            v2(i,j,k)  = w3db(i,j,k)*2.0/(d(i,j-jone,k)+d(i,j,k)) &
                        * g2bi(i)
-            v3(i,j,k)  = w3dc(i,j,k)*2.0/(d(i  ,j  ,k-kone)+d(i,j,k)) &
+            v3(i,j,k)  = w3dc(i,j,k)*2.0/(d(i,j,k-kone)+d(i,j,k)) &
                        * g31bi(i) * g32bi(j)
            endif
            if(xiso) then
@@ -160,12 +160,12 @@
            else ! xiso
             if(xtotnrg) then
              se         = e(i,j,k) / d(i,j,k) &
-                        - ( ( v1(i,j,k) + w3da(i+1,j  ,k  ) * 2.0 &
-                              / ( d(i  ,j  ,k  ) + d(i+1,j  ,k  ) ) )**2 &
-                          + ( v2(i,j,k) + w3db(i  ,j+1,k  ) * 2.0 &
-                              / ( d(i  ,j  ,k  ) + d(i  ,j+1,k  ) ) )**2 &
-                          + ( v3(i,j,k) + w3dc(i  ,j  ,k+1) * 2.0 &
-                              / ( d(i  ,j  ,k  ) + d(i  ,j  ,k+1) ) )**2 &
+                        - ( (v1(i,j,k) + w3da(i+1,j  ,k  ) * 2.0 &
+                             / (d(i  ,j  ,k) + d(i+1,j  ,k  )))**2 &
+                          + (v2(i,j,k) + w3db(i  ,j+1,k  ) * 2.0 &
+                             / (d(i  ,j  ,k) + d(i  ,j+1,k  )))**2 &
+                          + (v3(i,j,k) + w3dc(i  ,j  ,k+1) * 2.0 &
+                             / (d(i  ,j  ,k) + d(i  ,j  ,k+1)))**2 &
                           ) * 0.125
             else ! xtotnrg
              se         = e(i,j,k) / d(i,j,k)

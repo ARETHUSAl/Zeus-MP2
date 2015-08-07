@@ -22,31 +22,41 @@ subroutine turb_simple
       use mpino
 #endif
       use mpipar
+      use subs, only: backskip_to_time
       implicit none
       integer :: i,j,k
       integer :: varfile, irho, iux, iuy, iuz, ibx, iby, ibz
-      integer :: mx, my, mz, mpar
-      integer :: st
-      real(rl), dimension(:,:,:,:), allocatable :: f
-      namelist / pgen  / varfile, irho, iux, iuy, iuz, ibx, iby, ibz
+      integer :: mxgrid, mygrid, mzgrid, nv
+      real(rl):: dx, dy, dz, tvar
+      real(rl), dimension (:,:,:,:), allocatable :: ga
+      real(rl), dimension (:,:),     allocatable :: buffer
+      real(rl), dimension (:),       allocatable :: x, y, z
+      integer, dimension (:),        allocatable :: input_vals
+      integer, parameter :: tag_ga=675, lun_input=111, ip=7
+      integer :: pz, pa, iz, io_len, alloc_err
+      integer(kind=8) :: rec_len
+      character(len=4) :: filename
+      logical :: luse_lnrho
+      namelist / pgen  / varfile, irho, iux, iuy, iuz, ibx, iby, ibz, luse_lnrho
 !
-!      default values
-!      fix all units according to the values of rho, c_s at z = 0 
+! default values
 !
-      mx = in+6
-      my = jn+6
-      mz = kn+6
+      mxgrid = in+1
+      mygrid = jn+1
+      mzgrid = kn+1
+      nv = 7
 !
 ! set default values
 !
       varfile = 0
-      irho = 1
-      iux = 2
-      iuy = 3
-      iuz = 4
+      iux = 1
+      iuy = 2
+      iuz = 3
+      irho= 4
       ibx = 5
       iby = 6
       ibz = 7
+      luse_lnrho = .true.
 
       if (myid .eq. 0) then
         read (1,pgen)
@@ -65,34 +75,66 @@ subroutine turb_simple
 !      call MPI_BCAST(ibuf_in, 13, MPI_FLOAT &
 !                     , 0, comm3d, ierr )
 !
-! allocate memory for VAR file
-!
-      allocate(f(mx,my,mz,mpar), stat=st)
-!
 ! write filename and open file, 
 ! then read in VAR file
 !   
-      if (varfile .eq. 0) then
-        filename = 'VAR0'
-      else if (varfile .eq. -1) then
+      if (varfile .eq. -1) then
         filename = 'var.dat'
       else
-        write(filename, "(A3,I1)") varfile
+        write(filename, "(A3,I1)") 'VAR',varfile
       endif
-      open(unit=22, file=varfile, form='unformatted', status='old')
-      read(unit=22) f
-     
-      d  = f(2:in+1, 2:jn+1, 2:kn+1, irho)
-      v1 = f(2:in+1, 2:jn+1, 2:kn+1, iux)
-      v2 = f(2:in+1, 2:jn+1, 2:kn+1, iuy)
-      v3 = f(2:in+1, 2:jn+1, 2:kn+1, iuz)
-      b1 = f(2:in+1, 2:jn+1, 2:kn+1, ibx)
-      b2 = f(2:in+1, 2:jn+1, 2:kn+1, iby)
-      b3 = f(2:in+1, 2:jn+1, 2:kn+1, ibz)
+!
+! allocate arrays 
+!
+      !if (myid .eq. 0) then
+        allocate(ga(mxgrid,mygrid,mzgrid,nv), stat=alloc_err)
+        allocate(buffer(mxgrid,mygrid), stat=alloc_err)
+!
+        if (ip <= 8) print *, 'input_snap: open VAR0'
+        inquire (IOLENGTH=io_len) tvar
+        open (lun_input, FILE=filename, access='direct', &
+              recl=mxgrid*mygrid*io_len, status='old')
+!
+        if (ip <= 8) print *, 'input_snap: read dim=', mxgrid, mygrid, mzgrid, nv
+        ! iterate through variables
+        do pa = 1, nv
+          ! iterate through xy-planes and read each plane separately
+          do iz = 1, mzgrid
+            read (lun_input, rec=iz+(pa-1)*mzgrid) buffer
+            ga(:,:,iz,pa) = buffer
+          enddo
+        enddo
+!
+! allocate x,y & z arrays and read the data
+!
+        allocate(x(mxgrid),y(mygrid),z(mzgrid), stat=alloc_err)
+!
+        close (lun_input)
+        open (lun_input, FILE=filename, & 
+              FORM='unformatted', status='old', position='append')
+        call backskip_to_time(lun_input)
+!
+        read (lun_input) tvar, x, y, z, dx, dy, dz
+        if (ip <= 8) print *, tvar, dx, x(1)
+    
+        if (ip <= 8) print *, shape(v1) 
+        if (luse_lnrho) then
+          d = exp(ga(1:in, 1:jn, 1:kn, irho))
+        else
+          d = ga(1:in, 1:jn, 1:kn, irho)
+        endif
+        v1 = ga(1:in, 1:jn, 1:kn, iux)
+        v2 = ga(1:in, 1:jn, 1:kn, iuy)
+        v3 = ga(1:in, 1:jn, 1:kn, iuz)
+        b1 = ga(1:in, 1:jn, 1:kn, ibx)
+        b2 = ga(1:in, 1:jn, 1:kn, iby)
+        b3 = ga(1:in, 1:jn, 1:kn, ibz)
+      !endif
 
       write(*,*) maxval(v1), maxval(b1)
       write(*,*) maxval(v2), maxval(b2)
       write(*,*) maxval(v3), maxval(b3)
-      if (allocated(f)) deallocate(f)
+      write(*,*) minval(d), maxval(d)
+      if (allocated(ga)) deallocate(ga)
       return
 end subroutine turb_simple

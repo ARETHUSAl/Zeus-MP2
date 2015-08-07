@@ -68,14 +68,14 @@
       if (myid .eq. 0) then
         read  (1, pgen)
         write (2, pgen)
-	nbins = nlines(nhalo)-1
+        nbins = nlines(nhalo)-1
         write(tablefile,"(a5,i2.2,a4)") 'halo0',nhalo,'.dat'
         open(unit=66, file=tablefile, status='unknown')
-	read(66,*) logrmin
+        read(66,*) logrmin
         do i=1,nbins+1
           read(66,*) rtable(i),dtable(i),Ttable(i),vrtable(i)
         enddo
-	read(66,*) logrmax
+        read(66,*) logrmax
         close(unit=66)
         if (ldimen .gt. 1) then
         open(unit=77, file='initial_profile.dat',status='unknown')

@@ -48,7 +48,7 @@ subroutine fouramp(ar,ai,nmodes,idx,cc)
 !
       real(rl) :: kmag, kmin
       real(rl) :: help1 , help2
-      integer  :: iseed = 1
+      integer,save  :: iseed = 192
       integer  :: i,j,k
 !
 ! EXTERNALS
@@ -77,9 +77,9 @@ subroutine fouramp(ar,ai,nmodes,idx,cc)
       ai = 0.0
 !
 !*nopar
-      do 30 k=kn/2, kn/2+nmodes-1
-        do 20 j=jn/2-nmodes+1, jn/2+nmodes-1         
-          do 10 i=in/2-nmodes+1, in/2+nmodes-1 
+      do k=kn/2, kn/2+nmodes-1
+        do j=jn/2-nmodes+1, jn/2+nmodes-1         
+          do i=in/2-nmodes+1, in/2+nmodes-1 
             if (k.eq.kn/2) then    ! lies in xy-plane, make sure only half-space
               if (j.gt.jn/2) go to 1
               if (i.eq.in/2.and.i.gt.in/2) go to 1                 
@@ -112,9 +112,9 @@ subroutine fouramp(ar,ai,nmodes,idx,cc)
 3             continue          
             endif
 4           continue
-10        continue ! ix
-20      continue ! iy
-30    continue ! iz
+          enddo ! i
+        enddo ! j
+      enddo ! k
 !
 !   zero mode
 !

@@ -169,6 +169,7 @@
       write(6,1) MPI_OPTION 
       write(6,1) RES_DUMPS_OPTION 
       write(6,1) HDF_DUMP_OPTION 
+      write(6,1) HST_DUMP_OPTION 
       write(6,1) TSL_DUMPS_OPTION 
       write(6,1) TXT_DUMPS_OPTION 
       write(6,"()")

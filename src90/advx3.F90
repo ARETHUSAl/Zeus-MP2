@@ -156,12 +156,12 @@ subroutine advx3 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !    2) Do first portion of the interior points.
 !
        if (lrad .ne. 0) then
-         call tranx3 (is+1,ie,js+1,je,ks+3,k1,dlo,den &
-                     ,eod,edn,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
-                     ,ero,ern  ,abo,abn ) 
+         call tranx3 (is+1,ie,js+1,je,ks+3,k1,dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+                     ,ero ,ern  ,abo,abn ) 
        else
-         call tranx3 (is+1,ie,js+1,je,ks+3,k1,dlo,den &
-                     ,eod,edn,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+         call tranx3 (is+1,ie,js+1,je,ks+3,k1,dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
        endif
        call momx3  (is+2,ie,js+2,je,ks+4,k1-1,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &
@@ -186,24 +186,24 @@ subroutine advx3 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !    2) Do second portion of the interior points, plus some on borders.
 !
        if (lrad .ne. 0) then
-         call tranx3 (is  ,is  ,js+1,je,ks+3,k1,dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
-                     ,ero,ern  ,abo,abn ) 
+         call tranx3 (is  ,is  ,js+1,je,ks+3,k1,dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+                     ,ero ,ern  ,abo,abn ) 
        else
-         call tranx3 (is  ,is  ,js+1,je,ks+3,k1,dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+         call tranx3 (is  ,is  ,js+1,je,ks+3,k1,dlo,den ,eod,edn  &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
        endif
-       call momx3  (is  ,is+1,js+2,je,ks+4,k1-1,s1,s2,s3,mflx, &
+       call momx3  (is  ,is+1,js+2,je,ks+4,k1-1,s1,s2,s3,mflx,  &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &
                     sflx,dq)
 !
        if (lrad .ne. 0) then
-         call tranx3 (is  ,ie  ,js+1,je,k1+1,k2,dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
-                     ,ero,ern  ,abo,abn ) 
+         call tranx3 (is  ,ie  ,js+1,je,k1+1,k2,dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+                     ,ero ,ern  ,abo,abn ) 
        else
-         call tranx3 (is  ,ie  ,js+1,je,k1+1,k2,dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+         call tranx3 (is  ,ie  ,js+1,je,k1+1,k2,dlo,den ,eod,edn  &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
        endif
        call momx3  (is  ,ie  ,js+2,je,k1  ,k2-1,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &
@@ -244,12 +244,12 @@ subroutine advx3 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 !    2) Do last portion of the interior points, plus some on borders.
 !
        if (lrad .ne. 0) then
-         call tranx3 (is  ,ie  ,js  ,js  ,ks+3,k2,dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
-                     ,ero,ern  ,abo,abn ) 
+         call tranx3 (is  ,ie  ,js  ,js  ,ks+3,k2,dlo,den ,eod,edn  &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+                     ,ero ,ern  ,abo,abn ) 
        else
-         call tranx3 (is  ,ie  ,js  ,js  ,ks+3,k2,dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+         call tranx3 (is  ,ie  ,js  ,js  ,ks+3,k2,dlo,den ,eod,edn  &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
        endif
        call momx3  (is  ,ie  ,js  ,js+1,ks+4,k2-1,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &
@@ -266,12 +266,12 @@ subroutine advx3 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
        do 35 kbeg = k2+1, k2+1 + kblocks*kskip, kskip 
          kend = min( kbeg + kskip - 1, ke-2 )
          if (lrad .ne. 0) then
-           call tranx3 (is  ,ie  ,js  ,je  ,kbeg,kend,dlo,den &
-                       ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
-                       ,ero,ern  ,abo,abn )
+           call tranx3 (is  ,ie  ,js  ,je  ,kbeg,kend,dlo,den ,eod,edn &
+                       ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+                       ,ero ,ern  ,abo,abn )
          else 
-           call tranx3 (is  ,ie  ,js  ,je  ,kbeg,kend,dlo,den &
-                       ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+           call tranx3 (is  ,ie  ,js  ,je  ,kbeg,kend,dlo,den ,eod,edn &
+                       ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
          endif
          call momx3  (is  ,ie  ,js  ,je  ,kbeg-1,kend-1,s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &
@@ -298,24 +298,24 @@ subroutine advx3 (dlo,den ,eod,edn ,mflx,s1,s2,s3,ero,ern ,abo,abn )
 ! Finally, do the remaining border zones.
 !
        if (lrad .ne. 0) then
-         call tranx3 (is  ,ie  ,js  ,je  ,ks, ks+2, dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+         call tranx3 (is  ,ie  ,js  ,je  ,ks, ks+2, dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
                      ,ero,ern  ,abo,abn ) 
        else
-         call tranx3 (is  ,ie  ,js  ,je  ,ks, ks+2, dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+         call tranx3 (is  ,ie  ,js  ,je  ,ks, ks+2, dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
        endif
        call momx3  (is  ,ie  ,js  ,je  ,ks, ks+3, s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &
                     sflx,dq)
 !
        if (lrad .ne. 0) then
-         call tranx3 (is  ,ie  ,js  ,je  ,ke-1, ke, dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
+         call tranx3 (is  ,ie  ,js  ,je  ,ke-1, ke, dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod &
                      ,ero,ern  ,abo,abn )
        else
-         call tranx3 (is  ,ie  ,js  ,je  ,ke-1, ke, dlo,den &
-                     ,eod,edn  ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
+         call tranx3 (is  ,ie  ,js  ,je  ,ke-1, ke, dlo,den ,eod,edn &
+                     ,mflx,atwid,atwid2,dtwid,dd,mflux,etwid,deod)
        endif
        call momx3  (is  ,ie  ,js  ,je  ,ke-2, ke, s1,s2,s3,mflx, &
                     atwid1,atwid2,atwid3,atwidj1,atwidj2,atwidj3, &

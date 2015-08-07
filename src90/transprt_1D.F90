@@ -105,10 +105,10 @@
 !     &                  ,mflx,s1,s2,s3)
 !        
          if (lrad .ne. 0) then
-           call advx1 (w3dd,d ,w3de,w3dg ,w3df,w3da,w3db,w3dc &
-                      ,er  ,w3dh ,abun,w4da  )
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc &
+                      ,er  ,w3dh,abun,w4da)
          else
-           call advx1 (w3dd,d ,w3de,w3dg ,w3df,w3da,w3db,w3dc)
+           call advx1 (w3dd,d   ,w3de,w3dg,w3df,w3da,w3db,w3dc)
          endif
 !
 10     continue

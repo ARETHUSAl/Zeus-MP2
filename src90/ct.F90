@@ -9,7 +9,7 @@
 !
 !=======================================================================
 !
-       subroutine ct
+subroutine ct
 !
 !    dac:zeus3d.ct <-------- updates B-field using constrained transport
 !    from jms:zeus2d.ct                                    october, 1989
@@ -99,11 +99,11 @@
       integer  :: i, ip1, j, jp1, k, kp1
       integer  :: kone, km1   !asif
 !
-      real(rl) :: qty1(ijkn), qty1ni(ijkn), qty2(ijkn), &
-                  qty2ni  (ijkn)
+      real(rl) :: qty1(ijkn), qty1ni(ijkn), qty2(ijkn)
+      real(rl) :: qty2ni  (ijkn)
 !
-      real(rl) :: emf1(in,jn,kn), emf2(in,jn,kn), &
-                  emf3(in,jn,kn)
+      real(rl) :: emf1(in,jn,kn), emf2(in,jn,kn)
+      real(rl) :: emf3(in,jn,kn)
 !
       real(rl) :: u1(in,jn,kn), u2(in,jn,kn), u3(in,jn,kn)
 !
@@ -285,7 +285,7 @@
 150    continue
 !
        return
-       end
+end subroutine ct
 !
 !=======================================================================
 !

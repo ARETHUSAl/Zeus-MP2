@@ -9,7 +9,7 @@
 !
 !=======================================================================
 !
-      program zeusmp
+program zeusmp
 !
 ! PURPOSE
 !   Main program for 3-D MPI version of ZEUS.
@@ -50,7 +50,7 @@
       real(rl4) :: cputime, wclock
 !
       real(rl) :: zcs, etot, etot_glb
-      real(rl) :: cpuall, rshock, vshkmax, rfront
+      real(rl) :: cpuall, rshock, vshkmax=0, rfront
 !
       integer :: i , j , k, nwrite, ie_orig, ie_new
       integer :: nx, ny, nz, snz, maxn, ie_prev, ie_old
@@ -175,11 +175,11 @@
 ! to all in buf_out.  This preserves solution concurrency among
 ! all the tiles
 !
-!      ibuf_in(1) = ie
-!      call MPI_ALLREDUCE( ibuf_in(1), ibuf_out(1), 1
-!     .                   , MPI_2INTEGER
-!     .                   , MPI_MAXLOC, comm3d, ierr)
-!      ie = ibuf_out(1)
+      ibuf_in(1) = ie
+      call MPI_ALLREDUCE( ibuf_in(1), ibuf_out(1), 1 &
+                         , MPI_2INTEGER &
+                         , MPI_MAXLOC, comm3d, ierr)
+      ie = ibuf_out(1)
 #endif /* MPI_USED */
 !c      print*,"ie is: ",ie
 !
@@ -347,4 +347,4 @@
 !
 !=======================================================================
 !
-      end
+end program zeusmp
