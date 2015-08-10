@@ -59,7 +59,7 @@ subroutine h5splice
       namelist /physconf/  lrad   , xhydro , xgrav, xmhd    , xgrvfft, &
                            xptmass, xtotnrg, xiso , xvgrid  , xsubav, &
                            xforce , xsphgrv, leos , nspec, xchem
-      namelist /ioconf/    xascii , xhdf, xrestart, xtsl
+      namelist /ioconf/    xascii , xhdf, xrestart, xtsl, xhst
       namelist /preconf/   small_no, large_no
       namelist /arrayconf/ izones, jzones, kzones, maxijk
       namelist /rescon/ irestart,tdump,dtdump,id,resfile
@@ -147,22 +147,22 @@ subroutine h5splice
        write(*,"('H5SPLICE: ntiles is ',3i6)") ntiles(1),ntiles(2) &
        , ntiles(3)
 !
-      allocate(data (izones/ntiles(1)*  & 
-                     jzones/ntiles(2)*  &
-                     kzones/ntiles(3)))
+      allocate(data(izones* jzones* kzones))
 !
-      allocate(xscale(izones/ntiles(1)))
-      allocate(scr_in(izones/ntiles(1)))
-      allocate(yscale(jzones/ntiles(2)))
-      allocate(scr_jn(jzones/ntiles(2)))
-      allocate(zscale(kzones/ntiles(3)))
-      allocate(scr_kn(kzones/ntiles(3)))
+      allocate(xscale(izones))
+      allocate(scr_in(izones))
+      allocate(yscale(jzones))
+      allocate(scr_jn(jzones))
+      allocate(zscale(kzones))
+      allocate(scr_kn(kzones))
 !
-      allocate(xscmb(izones))
-      allocate(yscmb(jzones))
-      allocate(zscmb(kzones))
+      allocate(xscmb(izones*ntiles(1)))
+      allocate(yscmb(jzones*ntiles(2)))
+      allocate(zscmb(kzones*ntiles(3)))
 
-      allocate(dcmb (izones, jzones, kzones))
+      allocate(dcmb (izones*ntiles(1), &
+                     jzones*ntiles(2), &
+                     kzones*ntiles(3)))
 !
 !-----------------------------------------------------------------------
 !   Read the "rescon" namelist to find the run's "id".
@@ -328,7 +328,7 @@ subroutine h5splice
           endif
 !
 !
-          dims(1  ) = izones/ntiles(1)
+          dims(1  ) = izones
           if(lfunc .eq. 1) then
            call read_viz(tfile_id,rank,dims,"i_coord",xscale)
            do i = 1, nx1z
@@ -338,7 +338,7 @@ subroutine h5splice
            call read_viz(tfile_id,rank,dims,"i_coord",scr_in)
           endif
 !
-          dims(1  ) = jzones/ntiles(2)
+          dims(1  ) = jzones
           if(lfunc .eq. 1) then
            call read_viz(tfile_id,rank,dims,"j_coord",yscale)
            do j = 1, nx2z
@@ -348,7 +348,7 @@ subroutine h5splice
            call read_viz(tfile_id,rank,dims,"j_coord",scr_jn)
           endif
 !
-          dims(1  ) = kzones/ntiles(3)
+          dims(1  ) = kzones
           if(lfunc .eq. 1) then
            call read_viz(tfile_id,rank,dims,"k_coord",zscale)
            do k = 1, nx3z
@@ -360,9 +360,9 @@ subroutine h5splice
 !
 !
           RANK      = 3
-          dims(1  ) = izones/ntiles(1)
-          dims(2  ) = jzones/ntiles(2)
-          dims(3  ) = kzones/ntiles(3)
+          dims(1  ) = izones
+          dims(2  ) = jzones
+          dims(3  ) = kzones
           dims(4:7) = 0
           call read_viz(tfile_id,rank,dims,dsetname(lfunc),data)
 !
@@ -371,10 +371,10 @@ subroutine h5splice
             do i=1,nx1z
              itil = i + (j-1)*nx1z + (k-1)*nx1z*nx2z
              !itil = i*j*k
-!             icmb       = i + it*nx1z 
-!     1                      + (j+jt*nx2z-1)*(ntiles(1)*nx1z)
-!     2                      + (k+kt*nx3z-1)*(ntiles(1)*nx1z)
-!     3                      * (ntiles(2)*nx2z)
+!             icmb       = i + it*nx1z  &
+!                            + (j+jt*nx2z-1)*(ntiles(1)*nx1z) &
+!                            + (k+kt*nx3z-1)*(ntiles(1)*nx1z) &
+!                            * (ntiles(2)*nx2z)
              icmb                 = i + it*nx1z 
              jcmb                 = j + jt*nx2z
              kcmb                 = k + kt*nx3z
@@ -400,23 +400,23 @@ subroutine h5splice
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"time",tval)
 !
-        dims(1  ) = izones
+        dims(1  ) = izones*ntiles(1)
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"i_coord",xscmb)
 !
-        dims(1  ) = jzones
+        dims(1  ) = jzones*ntiles(2)
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"j_coord",yscmb)
 !
-        dims(1  ) = kzones
+        dims(1  ) = kzones*ntiles(3)
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"k_coord",zscmb)
        endif ! lfunc
 !
        RANK = 3
-       dims(1  ) = izones
-       dims(2  ) = jzones
-       dims(3  ) = kzones
+       dims(1  ) = izones*ntiles(1)
+       dims(2  ) = jzones*ntiles(2)
+       dims(3  ) = kzones*ntiles(3)
        dims(4:7) = 0
        call write_cmb(cfile_id,rank,dims,dsetname(lfunc),dcmb)
 !
