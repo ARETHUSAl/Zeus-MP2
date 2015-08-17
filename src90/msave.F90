@@ -61,6 +61,7 @@
       character*16 :: filename
       character*56 :: filename2
       character*6 :: incrf
+      integer :: ngridv
 #ifdef USE_HDF5
 !
 !-----------------------------------------------------------------------
@@ -98,9 +99,14 @@
       allocate(rlfldvr(nfieldr))
 !
 !      nbdryr = (2*6*nspec) * (jn*kn + in*jn + in*kn) + 6*nbvar
-      nbdryr = 60*jn*kn + 60*in*jn + 60*in*kn + 6*nbvar
-      nbdryi = 10*jn*kn + 10*in*jn + 10*in*kn + 6*nbvar &
-                        + 18
+      ngridv = 22 
+      if (xmhd)         ngridv = ngridv + 30
+      if (lrad .ne. 0)  ngridv = ngridv + 4
+      if (xgrav)        ngridv = ngridv + 4
+      if (nspec .gt. 1) ngridv = ngridv + nspec
+!
+      nbdryr = ngridv*(jn*kn + in*jn + in*kn) + 6*nbvar
+      nbdryi = 10*jn*kn + 10*in*jn + 10*in*kn + 6*nbvar + 18
       allocate(rlbdryvr(nbdryr))
       allocate(ntbdryvr(nbdryi))
 !
