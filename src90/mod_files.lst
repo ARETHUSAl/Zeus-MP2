@@ -1,0 +1,2000 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- mod_files.f90 07/08/15 15:46:17
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** actual_types   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+    17|         SUBROUTINE __actual_types_NMOD__&&_actual_types ()
+    27|           RETURN
+                END SUBROUTINE __actual_types_NMOD__&&_actual_types
+
+
+    17|         SUBROUTINE __actual_types_NMOD__&&_actual_types ()
+    27|           RETURN
+                END SUBROUTINE __actual_types_NMOD__&&_actual_types
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __actual_types_NMOD__&&_actual_types
+   17|                                  PROC      
+   27| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** real_prec   === End of Compilation 2 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+    29|         SUBROUTINE __real_prec_NMOD__&&_real_prec ()
+    38|           RETURN
+                END SUBROUTINE __real_prec_NMOD__&&_real_prec
+
+
+    29|         SUBROUTINE __real_prec_NMOD__&&_real_prec ()
+    38|           RETURN
+                END SUBROUTINE __real_prec_NMOD__&&_real_prec
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __real_prec_NMOD__&&_real_prec
+   29|                                  PROC      
+   38| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** param   === End of Compilation 3 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+    40|         SUBROUTINE __param_NMOD__&&_param ()
+    66|           RETURN
+                END SUBROUTINE __param_NMOD__&&_param
+
+
+    40|         SUBROUTINE __param_NMOD__&&_param ()
+    66|           RETURN
+                END SUBROUTINE __param_NMOD__&&_param
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __param_NMOD__&&_param
+   40|                                  PROC      
+   66| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** config   === End of Compilation 4 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+    68|         SUBROUTINE __config_NMOD__&&_config ()
+   110|           RETURN
+                END SUBROUTINE __config_NMOD__&&_config
+
+
+    68|         SUBROUTINE __config_NMOD__&&_config ()
+   110|           RETURN
+                END SUBROUTINE __config_NMOD__&&_config
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __config_NMOD__&&_config
+   68|                                  PROC      
+  110| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** root   === End of Compilation 5 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   111|         SUBROUTINE __root_NMOD__&&_root ()
+   149|           RETURN
+                END SUBROUTINE __root_NMOD__&&_root
+
+
+   111|         SUBROUTINE __root_NMOD__&&_root ()
+   149|           RETURN
+                END SUBROUTINE __root_NMOD__&&_root
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __root_NMOD__&&_root
+  111|                                  PROC      
+  149| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** field   === End of Compilation 6 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   150|         SUBROUTINE __field_NMOD__&&_field ()
+   160|           RETURN
+                END SUBROUTINE __field_NMOD__&&_field
+
+
+   150|         SUBROUTINE __field_NMOD__&&_field ()
+   160|           RETURN
+                END SUBROUTINE __field_NMOD__&&_field
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __field_NMOD__&&_field
+  150|                                  PROC      
+  160| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** grid   === End of Compilation 7 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   161|         SUBROUTINE __grid_NMOD__&&_grid ()
+   255|           RETURN
+                END SUBROUTINE __grid_NMOD__&&_grid
+
+
+   161|         SUBROUTINE __grid_NMOD__&&_grid ()
+   255|           RETURN
+                END SUBROUTINE __grid_NMOD__&&_grid
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __grid_NMOD__&&_grid
+  161|                                  PROC      
+  255| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** bndry   === End of Compilation 8 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   256|         SUBROUTINE __bndry_NMOD__&&_bndry ()
+   341|           RETURN
+                END SUBROUTINE __bndry_NMOD__&&_bndry
+
+
+   256|         SUBROUTINE __bndry_NMOD__&&_bndry ()
+   341|           RETURN
+                END SUBROUTINE __bndry_NMOD__&&_bndry
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __bndry_NMOD__&&_bndry
+  256|                                  PROC      
+  341| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** gravmod   === End of Compilation 9 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   342|         SUBROUTINE __gravmod_NMOD__&&_gravmod ()
+   347|           RETURN
+                END SUBROUTINE __gravmod_NMOD__&&_gravmod
+
+
+   342|         SUBROUTINE __gravmod_NMOD__&&_gravmod ()
+   347|           RETURN
+                END SUBROUTINE __gravmod_NMOD__&&_gravmod
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __gravmod_NMOD__&&_gravmod
+  342|                                  PROC      
+  347| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** cons   === End of Compilation 10 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   348|         SUBROUTINE __cons_NMOD__&&_cons ()
+   392|           RETURN
+                END SUBROUTINE __cons_NMOD__&&_cons
+
+
+   348|         SUBROUTINE __cons_NMOD__&&_cons ()
+   392|           RETURN
+                END SUBROUTINE __cons_NMOD__&&_cons
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __cons_NMOD__&&_cons
+  348|                                  PROC      
+  392| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** mpiyes   === End of Compilation 11 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   393|         SUBROUTINE __mpiyes_NMOD__&&_mpiyes ()
+   398|           RETURN
+                END SUBROUTINE __mpiyes_NMOD__&&_mpiyes
+
+
+   393|         SUBROUTINE __mpiyes_NMOD__&&_mpiyes ()
+   398|           RETURN
+                END SUBROUTINE __mpiyes_NMOD__&&_mpiyes
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __mpiyes_NMOD__&&_mpiyes
+  393|                                  PROC      
+  398| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** mpino   === End of Compilation 12 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   399|         SUBROUTINE __mpino_NMOD__&&_mpino ()
+   401|           RETURN
+                END SUBROUTINE __mpino_NMOD__&&_mpino
+
+
+   399|         SUBROUTINE __mpino_NMOD__&&_mpino ()
+   401|           RETURN
+                END SUBROUTINE __mpino_NMOD__&&_mpino
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __mpino_NMOD__&&_mpino
+  399|                                  PROC      
+  401| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** mpipar   === End of Compilation 13 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   402|         SUBROUTINE __mpipar_NMOD__&&_mpipar ()
+   418|           RETURN
+                END SUBROUTINE __mpipar_NMOD__&&_mpipar
+
+
+   402|         SUBROUTINE __mpipar_NMOD__&&_mpipar ()
+   418|           RETURN
+                END SUBROUTINE __mpipar_NMOD__&&_mpipar
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __mpipar_NMOD__&&_mpipar
+  402|                                  PROC      
+  418| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** clockmod   === End of Compilation 14 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   419|         SUBROUTINE __clockmod_NMOD__&&_clockmod ()
+   424|           RETURN
+                END SUBROUTINE __clockmod_NMOD__&&_clockmod
+
+
+   419|         SUBROUTINE __clockmod_NMOD__&&_clockmod ()
+   424|           RETURN
+                END SUBROUTINE __clockmod_NMOD__&&_clockmod
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __clockmod_NMOD__&&_clockmod
+  419|                                  PROC      
+  424| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** scratch   === End of Compilation 15 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   425|         SUBROUTINE __scratch_NMOD__&&_scratch ()
+   453|           RETURN
+                END SUBROUTINE __scratch_NMOD__&&_scratch
+
+
+   425|         SUBROUTINE __scratch_NMOD__&&_scratch ()
+   453|           RETURN
+                END SUBROUTINE __scratch_NMOD__&&_scratch
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __scratch_NMOD__&&_scratch
+  425|                                  PROC      
+  453| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** lor_scr   === End of Compilation 16 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   454|         SUBROUTINE __lor_scr_NMOD__&&_lor_scr ()
+   458|           RETURN
+                END SUBROUTINE __lor_scr_NMOD__&&_lor_scr
+
+
+   454|         SUBROUTINE __lor_scr_NMOD__&&_lor_scr ()
+   458|           RETURN
+                END SUBROUTINE __lor_scr_NMOD__&&_lor_scr
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __lor_scr_NMOD__&&_lor_scr
+  454|                                  PROC      
+  458| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** restart_arrays   === End of Compilation 17 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   459|         SUBROUTINE __restart_arrays_NMOD__&&_restart_arrays ()
+   483|           RETURN
+                END SUBROUTINE __restart_arrays_NMOD__&&_restart_arrays
+
+
+   459|         SUBROUTINE __restart_arrays_NMOD__&&_restart_arrays ()
+   483|           RETURN
+                END SUBROUTINE __restart_arrays_NMOD__&&_restart_arrays
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __restart_arrays_NMOD__&&_restart_arrays
+  459|                                  PROC      
+  483| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** domain   === End of Compilation 18 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   484|         SUBROUTINE __domain_NMOD__&&_domain ()
+   490|           RETURN
+                END SUBROUTINE __domain_NMOD__&&_domain
+
+
+   484|         SUBROUTINE __domain_NMOD__&&_domain ()
+   490|           RETURN
+                END SUBROUTINE __domain_NMOD__&&_domain
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __domain_NMOD__&&_domain
+  484|                                  PROC      
+  490| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** eos_par   === End of Compilation 19 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   492|         SUBROUTINE __eos_par_NMOD__&&_eos_par ()
+   504|           RETURN
+                END SUBROUTINE __eos_par_NMOD__&&_eos_par
+
+
+   492|         SUBROUTINE __eos_par_NMOD__&&_eos_par ()
+   504|           RETURN
+                END SUBROUTINE __eos_par_NMOD__&&_eos_par
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __eos_par_NMOD__&&_eos_par
+  492|                                  PROC      
+  504| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** radiation   === End of Compilation 20 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   506|         SUBROUTINE __radiation_NMOD__&&_radiation ()
+   522|           RETURN
+                END SUBROUTINE __radiation_NMOD__&&_radiation
+
+
+   506|         SUBROUTINE __radiation_NMOD__&&_radiation ()
+   522|           RETURN
+                END SUBROUTINE __radiation_NMOD__&&_radiation
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __radiation_NMOD__&&_radiation
+  506|                                  PROC      
+  522| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** opac   === End of Compilation 21 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   523|         SUBROUTINE __opac_NMOD__&&_opac ()
+   531|           RETURN
+                END SUBROUTINE __opac_NMOD__&&_opac
+
+
+   523|         SUBROUTINE __opac_NMOD__&&_opac ()
+   531|           RETURN
+                END SUBROUTINE __opac_NMOD__&&_opac
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __opac_NMOD__&&_opac
+  523|                                  PROC      
+  531| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** opac_law   === End of Compilation 22 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   532|         SUBROUTINE __opac_law_NMOD__&&_opac_law ()
+   540|           RETURN
+                END SUBROUTINE __opac_law_NMOD__&&_opac_law
+
+
+   532|         SUBROUTINE __opac_law_NMOD__&&_opac_law ()
+   540|           RETURN
+                END SUBROUTINE __opac_law_NMOD__&&_opac_law
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __opac_law_NMOD__&&_opac_law
+  532|                                  PROC      
+  540| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** impsoln   === End of Compilation 23 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   541|         SUBROUTINE __impsoln_NMOD__&&_impsoln ()
+   547|           RETURN
+                END SUBROUTINE __impsoln_NMOD__&&_impsoln
+
+
+   541|         SUBROUTINE __impsoln_NMOD__&&_impsoln ()
+   547|           RETURN
+                END SUBROUTINE __impsoln_NMOD__&&_impsoln
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __impsoln_NMOD__&&_impsoln
+  541|                                  PROC      
+  547| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** chem   === End of Compilation 24 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   548|         SUBROUTINE __chem_NMOD__&&_chem ()
+   603|           RETURN
+                END SUBROUTINE __chem_NMOD__&&_chem
+
+
+   548|         SUBROUTINE __chem_NMOD__&&_chem ()
+   603|           RETURN
+                END SUBROUTINE __chem_NMOD__&&_chem
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __chem_NMOD__&&_chem
+  548|                                  PROC      
+  603| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** fftpars   === End of Compilation 25 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   604|         SUBROUTINE __fftpars_NMOD__&&_fftpars ()
+   612|           RETURN
+                END SUBROUTINE __fftpars_NMOD__&&_fftpars
+
+
+   604|         SUBROUTINE __fftpars_NMOD__&&_fftpars ()
+   612|           RETURN
+                END SUBROUTINE __fftpars_NMOD__&&_fftpars
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __fftpars_NMOD__&&_fftpars
+  604|                                  PROC      
+  612| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** vcvars   === End of Compilation 26 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   613|         SUBROUTINE __vcvars_NMOD__&&_vcvars ()
+   618|           RETURN
+                END SUBROUTINE __vcvars_NMOD__&&_vcvars
+
+
+   613|         SUBROUTINE __vcvars_NMOD__&&_vcvars ()
+   618|           RETURN
+                END SUBROUTINE __vcvars_NMOD__&&_vcvars
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     __vcvars_NMOD__&&_vcvars
+  613|                                  PROC      
+  618| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    mod_files.f90               07/08/15   15:46:17
+     1    /bgsys/drivers/V1R2M3/ppc64/comm/sys/include/mpif.h
+                                      30/03/15   22:35:58      0     395
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................    1134
+1501-510  Compilation successful for file mod_files.f90.
+1501-543  Object file created.

@@ -1,0 +1,473 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- rad_imp_dt.f90 07/08/15 15:48:30
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+ "rad_imp_dt.f90", line 95.1: 1515-021 (E) Syntax error: Token " & " is expected.
+** rad_imp_dt   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-534 (I) Loop (loop index 1) at rad_imp_dt.f90 <line 69> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 2) at rad_imp_dt.f90 <line 70> was not SIMD vectorized because the loop is not the innermost loop.
+1586-537 (I) Loop (loop index 3) at rad_imp_dt.f90 <line 72> was not SIMD vectorized because it contains operation in abs((((double *)((char *).ernew  + -8ll - (max((long long) in,0ll) * 8ll + 8ll * (max((long long) jn,0ll) * max((long long) in,0ll)))))->ernew[][(long long) ks + $$CIV2][(long long) js + $$CIV1][(long long) is + $$CIV0] - ((double *)((char *).erold  + -8ll - (max((long long) in,0ll) * 8ll + 8ll * (max((long long) jn,0ll) * max((long long) in,0ll)))))->erold[][(long long) ks + $$CIV2][(long long) js + $$CIV1][(long long) is + $$CIV0]) / (((double *)((char *).erold  + -8ll - (max((long long) in,0ll) * 8ll + 8ll * (max((long long) jn,0ll) * max((long long) in,0ll)))))->erold[][(long long) ks + $$CIV2][(long long) js + $$CIV1][(long long) is + $$CIV0] +  1.0000000000000000E-099)) which is not suitable for SIMD vectorization.
+1586-554 (I) Loop (loop index 3) at rad_imp_dt.f90 <line 72> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-537 (I) Loop (loop index 3) at rad_imp_dt.f90 <line 75> was not SIMD vectorized because it contains operation in ader > ader_max ? ader : ader_max which is not suitable for SIMD vectorization.
+1586-549 (I) Loop (loop index 3) at rad_imp_dt.f90 <line 75> was not SIMD vectorized because a data dependence  prevents SIMD vectorization.
+1586-554 (I) Loop (loop index 3) at rad_imp_dt.f90 <line 75> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"1">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+    11|         SUBROUTINE rad_imp_dt (erold, ernew)
+    11|           _alloca((8 * (max(int(%VAL(kn)),0) * (max(int(%VAL(jn)),0) * &
+                &   max(int(%VAL(in)),0)))))
+                  _alloca((8 * (max(int(%VAL(kn)),0) * (max(int(%VAL(jn)),0) * &
+                &   max(int(%VAL(in)),0)))))
+    67|           ader_max = abs((ernew(int(is),int(js),int(ks)) - erold(int(is)&
+                &   ,int(js),int(ks))) / (erold(int(is),int(js),int(ks)) +  &
+                &   1.0000000000000000E-099))
+    69|           IF ((1 + (int(ke) - int(ks)) > 0)) THEN
+                    $$CIV2 = 0
+       Id=1         DO $$CIV2 = $$CIV2, int((1 + (int(ke) - int(ks))))-1
+    70|               IF ((1 + (int(je) - int(js)) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int((1 + (int(je) - int(js))))-1
+    71|                   IF ((1 + (int(ie) - int(is)) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int((1 + (int(ie) - int(is))))&
+                &               -1
+    72|                       ader = abs((ernew(int(is) + $$CIV0,int(js) + &
+                &               $$CIV1,int(ks) + $$CIV2) - erold(int(is) + $$CIV0,&
+                &               int(js) + $$CIV1,int(ks) + $$CIV2)) / (erold(int(&
+                &               is) + $$CIV0,int(js) + $$CIV1,int(ks) + $$CIV2) + &
+                &                1.0000000000000000E-099))
+                              ader_max = MERGE(ader, ader_max, ader > ader_max)
+    80|                     ENDDO
+                          ENDIF
+    81|                 ENDDO
+                      ENDIF
+    82|             ENDDO
+                  ENDIF
+    87|           buf_in[].off1744 = ader_max
+    88|           buf_in[].off1752 = real(real(myid))
+    89|           T_2 = 1
+                  T_3 = 1275072547
+                  T_4 = 1476395020
+                  CALL mpi_allreduce(buf_in,buf_out,T_2,T_3,T_4,comm3d,ierr)
+   112|           IF ((buf_out[].off3344 <= epsmaxd)) THEN
+   113|             dtec = ( 1.0000000000000000E+000 / max(_sqrt(%VAL(dtimrdi2))&
+                &     , 1.0000000000000000E-099)) * fac_dt
+   114|           ELSE
+   115|             dtec =  1.0000000000000000E+000 / (max(_sqrt(%VAL(dtimrdi2))&
+                &     , 1.0000000000000000E-099) * fac_dt)
+   116|           ENDIF
+   117|           dtimrdi2 =  1.0000000000000000E+000 / (max(dtec, &
+                &   1.0000000000000000E-099) * max(dtec, 1.0000000000000000E-099))&
+                &   
+   120|           RETURN
+                END SUBROUTINE rad_imp_dt
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            69             1    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            70             2    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            72                  Loop was not SIMD vectorized because it contains 
+                                          operation in abs((((double *)((char *).ernew  + -8ll 
+                                          - (max((long long) in,0ll) * 8ll + 8ll * (max((long 
+                                          long) jn,0ll) * max((long long) 
+                                          in,0ll)))))->ernew[][(long long) ks + $$CIV2][(long 
+                                          long) js + $$CIV1][(long long) is + $$CIV0] - 
+                                          ((double *)((char *).erold  + -8ll - (max((long long) 
+                                          in,0ll) * 8ll + 8ll * (max((long long) jn,0ll) * 
+                                          max((long long) in,0ll)))))->erold[][(long long) ks + 
+                                          $$CIV2][(long long) js + $$CIV1][(long long) is + 
+                                          $$CIV0]) / (((double *)((char *).erold  + -8ll - 
+                                          (max((long long) in,0ll) * 8ll + 8ll * (max((long 
+                                          long) jn,0ll) * max((long long) 
+                                          in,0ll)))))->erold[][(long long) ks + $$CIV2][(long 
+                                          long) js + $$CIV1][(long long) is + $$CIV0] +  
+                                          1.0000000000000000E-099)) which is not  suitable for 
+                                          SIMD vectorization.
+         0            72                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            75                  Loop was not SIMD vectorized because it contains 
+                                          operation in ader > ader_max ? ader : ader_max which 
+                                          is not  suitable for SIMD vectorization.
+         0            75                  Loop was not SIMD vectorized because a data 
+                                          dependence  prevents SIMD  vectorization.
+         0            75                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+
+
+    11|         SUBROUTINE rad_imp_dt (erold, ernew)
+   113|           _alloca(8 * (max(int(%VAL(kn)),0) * (max(int(%VAL(jn)),0) * &
+                &   max(int(%VAL(in)),0))))
+                  _alloca(8 * (max(int(%VAL(kn)),0) * (max(int(%VAL(jn)),0) * &
+                &   max(int(%VAL(in)),0))))
+    67|           $$csx1 = (-8) - (8 * (max(int(jn),0) * max(int(in),0)) + max(&
+                &   int(in),0) * 8)
+                  $$csx0 = erold(int(is),int(js),int(ks))
+                  ader_max = abs((ernew(int(is),int(js),int(ks)) - $$csx0) / (&
+                &   $$csx0 +  1.0000000000000000E-099))
+    69|           IF ((1 + (int(ke) - int(ks)) > 0)) THEN
+                    $$CIV2 = 0
+       Id=1         DO $$CIV2 = $$CIV2, int((1 + (int(ke) - int(ks))))-1
+    70|               IF ((1 + (int(je) - int(js)) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int((1 + (int(je) - int(js))))-1
+    71|                   IF ((1 + (int(ie) - int(is)) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int((1 + (int(ie) - int(is))))&
+                &               -1
+    72|                       ader = abs((ernew(int(is) + $$CIV0,int(js) + &
+                &               $$CIV1,int(ks) + $$CIV2) - erold(int(is) + $$CIV0,&
+                &               int(js) + $$CIV1,int(ks) + $$CIV2)) / (erold(int(&
+                &               is) + $$CIV0,int(js) + $$CIV1,int(ks) + $$CIV2) + &
+                &                1.0000000000000000E-099))
+                              ader_max = MERGE(ader, ader_max, ader > ader_max)
+    80|                     ENDDO
+                          ENDIF
+    81|                 ENDDO
+                      ENDIF
+    82|             ENDDO
+                  ENDIF
+    87|           buf_in[].off1744 = ader_max
+    88|           buf_in[].off1752 = real(real(myid))
+    89|           T_2 = 1
+                  T_3 = 1275072547
+                  T_4 = 1476395020
+                  CALL mpi_allreduce(buf_in,buf_out,T_2,T_3,T_4,comm3d,ierr)
+   103|           $$csx2 =  1.0000000000000000E+000 / max(_sqrt(%VAL(dtimrdi2)),&
+                &    1.0000000000000000E-099)
+   112|           IF ((buf_out[].off3344 <= epsmaxd)) THEN
+   113|             dtec = $$csx2 * fac_dt
+   114|           ELSE
+   115|             dtec =  1.0000000000000000E+000 / (max(_sqrt(%VAL(dtimrdi2))&
+                &     , 1.0000000000000000E-099) * fac_dt)
+   116|           ENDIF
+   117|           dtimrdi2 =  1.0000000000000000E+000 / (max(dtec, &
+                &   1.0000000000000000E-099) * max(dtec, 1.0000000000000000E-099))&
+                &   
+   120|           RETURN
+                END SUBROUTINE rad_imp_dt
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   suus ssss ssss s---  ---- ---- ---- ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- --ss
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     rad_imp_dt
+   11|                                  PROC      .erold,.ernew,gr3,gr4
+    0| 000000 stfd     DBE1FFF8   1     STFL      #stack(gr1,-8)=fp31
+    0| 000004 stfd     DBC1FFF0   1     STFL      #stack(gr1,-16)=fp30
+    0| 000008 std      FBE1FFE8   1     ST8       #stack(gr1,-24)=gr31
+    0| 00000C std      FBC1FFE0   1     ST8       #stack(gr1,-32)=gr30
+    0| 000010 std      FBA1FFD8   1     ST8       #stack(gr1,-40)=gr29
+    0| 000014 std      FB81FFD0   1     ST8       #stack(gr1,-48)=gr28
+    0| 000018 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 00001C std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000020 stdu     F821FF21   1     ST8U      gr1,#stack(gr1,-224)=gr1
+    0| 000024 or       7C3F0B78   1     LR        gr31=gr1
+  113| 000028 ld       E8C20000   1     L8        gr6=.&&N&&param(gr2,0)
+   67| 00002C ld       E8A20000   1     L8        gr5=.&&N&&grid(gr2,0)
+   67| 000030 ld       EBC20000   1     L8        gr30=.+CONSTANT_AREA(gr2,0)
+  113| 000034 lwa      E9260006   1     L4A       gr9=<s12:d4:l4>(gr6,4)
+  113| 000038 lwa      E8C60002   1     L4A       gr6=<s12:d0:l4>(gr6,0)
+   67| 00003C lwa      E8E50012   1     L4A       gr7=<s42:d16:l4>(gr5,16)
+   67| 000040 lwa      E905000A   1     L4A       gr8=<s42:d8:l4>(gr5,8)
+   67| 000044 lwa      E9450002   1     L4A       gr10=<s42:d0:l4>(gr5,0)
+   67| 000048 lfd      CBFE0018   1     LFL       fp31=+CONSTANT_AREA(gr30,24)
+  113| 00004C sradi    7D20FE76   1     SRA8      gr0=gr9,63,ca"
+  113| 000050 sradi    7CCBFE76   1     SRA8      gr11=gr6,63,ca"
+  113| 000054 andc     7D290078   1     ANDC      gr9=gr9,gr0
+   67| 000058 rldicr   79201F24   1     SLL8      gr0=gr9,3
+  113| 00005C andc     7CC65878   1     ANDC      gr6=gr6,gr11
+   67| 000060 mulld    7C0031D2   1     M         gr0=gr0,gr6
+  113| 000064 mulld    7D2931D2   1     M         gr9=gr9,gr6
+   67| 000068 rldicr   78C61F24   1     SLL8      gr6=gr6,3
+  113| 00006C rldicr   792C1F24   1     SLL8      gr12=gr9,3
+   67| 000070 mulld    7D2039D2   1     M         gr9=gr0,gr7
+   67| 000074 mulld    7D6641D2   1     M         gr11=gr6,gr8
+   67| 000078 add      7D866214   1     A         gr12=gr6,gr12
+   67| 00007C rldicr   795D1F24   1     SLL8      gr29=gr10,3
+   67| 000080 subfic   218CFFF8   1     SFI       gr12=-8,gr12,ca"
+   67| 000084 add      7D6BEA14   1     A         gr11=gr11,gr29
+   67| 000088 add      7D296214   1     A         gr9=gr9,gr12
+   69| 00008C lwa      E9850016   1     L4A       gr12=<s42:d20:l4>(gr5,20)
+   67| 000090 add      7D295A14   1     A         gr9=gr9,gr11
+   67| 000094 lfdx     7C034CAE   1     LFL       fp0=erold[](gr3,gr9,0)
+   67| 000098 lfdx     7C244CAE   1     LFL       fp1=ernew[](gr4,gr9,0)
+   69| 00009C subf     7CE76050   1     S         gr7=gr12,gr7
+   69| 0000A0 addic.   34E70001   1     AI_R      gr7,cr0=gr7,1,ca"
+   67| 0000A4 fadd     FC40F82A   1     AFL       fp2=fp0,fp31,fcr
+   67| 0000A8 fsub     FC010028   2     SFL       fp0=fp1,fp0,fcr
+   67| 0000AC fdiv     FC001024   2     DFL       fp0=fp0,fp2,fcr
+   67| 0000B0 fabs     FCA00210   2     ABSFL     fp5=fp0
+   69| 0000B4 bc       408101F4   1     BF        CL.19,cr0,0x2/gt,taken=50%(0,0)
+   70| 0000B8 lwa      EBA5000E   1     L4A       gr29=<s42:d12:l4>(gr5,12)
+   71| 0000BC lwa      E9850006   1     L4A       gr12=<s42:d4:l4>(gr5,4)
+   69| 0000C0 addi     38A00000   1     LI        gr5=0
+    0| 0000C4 addi     3969FFF8   1     AI        gr11=gr9,-8
+   70| 0000C8 subf     7D08E850   1     S         gr8=gr29,gr8
+    0| 0000CC subf     7D2A6050   1     S         gr9=gr12,gr10
+   70| 0000D0 addic.   35080001   1     AI_R      gr8,cr0=gr8,1,ca"
+    0| 0000D4 bc       408101D4   1     BF        CL.19,cr0,0x2/gt,taken=20%(20,80)
+    0| 0000D8 subfic   214A0001   1     SFI       gr10=1,gr10,ca"
+    0| 0000DC addic.   35290001   1     AI_R      gr9,cr0=gr9,1,ca"
+    0| 0000E0 add      7D4A6214   1     A         gr10=gr10,gr12
+    0| 0000E4 add      7C635A14   1     A         gr3=gr3,gr11
+    0| 0000E8 rldicl   7949F842   1     SRL8      gr9=gr10,1
+    0| 0000EC add      7F845A14   1     A         gr28=gr4,gr11
+    0| 0000F0 mcrf     4C800000   1     LRCR      cr1=cr0
+    0| 0000F4 andi.    71440001   1     RN4_R     gr4,cr0=gr10,0,0x1
+    0| 0000F8 cmpdi    2FA90000   1     C8        cr7=gr9,0
+   72| 0000FC lfs      C3DE0020   1     LFS       fp30=+CONSTANT_AREA(gr30,32)
+   69|                              CL.20:
+   70| 000100 addi     38800000   1     LI        gr4=0
+    0| 000104 bc       40850190   1     BF        CL.21,cr1,0x2/gt,taken=20%(20,80)
+    0| 000108 or       7F8CE378   1     LR        gr12=gr28
+    0| 00010C or       7C7D1B78   1     LR        gr29=gr3
+   70|                              CL.22:
+   72| 000110 lfs      C01E0020   1     LFS       fp0=+CONSTANT_AREA(gr30,32)
+   72| 000114 or       7FAAEB78   1     LR        gr10=gr29
+   72| 000118 or       7D8B6378   1     LR        gr11=gr12
+   72| 00011C lfs      C03E0028   1     LFS       fp1=+CONSTANT_AREA(gr30,40)
+   72| 000120 lfs      C05E002C   1     LFS       fp2=+CONSTANT_AREA(gr30,44)
+    0| 000124 mtspr    7D2903A6   1     LCTR      ctr=gr9
+   72| 000128 fmr      FCE00090   1     LRFL      fp7=fp0
+    0| 00012C bc       41820044   1     BT        CL.115,cr0,0x4/eq,taken=50%(0,0)
+   72| 000130 lfdu     CC6A0008   1     LFDU      fp3,gr10=erold[](gr10,8)
+   72| 000134 lfdu     CC8B0008   1     LFDU      fp4,gr11=ernew[](gr11,8)
+   72| 000138 fadd     FCC3F82A   1     AFL       fp6=fp3,fp31,fcr
+   72| 00013C fsub     FC641828   2     SFL       fp3=fp4,fp3,fcr
+   72| 000140 fre      FC803030   1     FRED      fp4=fp6
+   72| 000144 fnmsub   FC06013C   1     FNMS      fp0=fp0,fp6,fp4,fcr
+   72| 000148 fmul     FC630132   2     MFL       fp3=fp3,fp4,fcr
+   72| 00014C fmadd    FC20083A   2     FMA       fp1=fp1,fp0,fp0,fcr
+   72| 000150 fmadd    FC83183A   2     FMA       fp4=fp3,fp3,fp0,fcr
+   72| 000154 fmadd    FC21107A   2     FMA       fp1=fp2,fp1,fp1,fcr
+   72| 000158 fmul     FC000132   2     MFL       fp0=fp0,fp4,fcr
+   72| 00015C fmadd    FC01183A   2     FMA       fp0=fp3,fp1,fp0,fcr
+   72| 000160 fabs     FC000210   2     ABSFL     fp0=fp0
+   75| 000164 fsub     FC250028   2     SFL       fp1=fp5,fp0,fcr
+   75| 000168 fsel     FCA1016E   2     FSEL      fp5=fp1,fp0,fp5
+    0| 00016C bc       419E0114   1     BT        CL.101,cr7,0x4/eq,taken=20%(20,80)
+    0|                              CL.115:
+   72| 000170 lfd      C84A0008   1     LFL       fp2=erold[](gr10,8)
+   72| 000174 lfd      C90B0008   1     LFL       fp8=ernew[](gr11,8)
+   72| 000178 lfdu     CC8A0010   1     LFDU      fp4,gr10=erold[](gr10,16)
+   72| 00017C lfdu     CCCB0010   1     LFDU      fp6,gr11=ernew[](gr11,16)
+   72| 000180 lfs      C01E0028   1     LFS       fp0=+CONSTANT_AREA(gr30,40)
+   72| 000184 lfs      C03E002C   1     LFS       fp1=+CONSTANT_AREA(gr30,44)
+   72| 000188 fadd     FC62F82A   1     AFL       fp3=fp2,fp31,fcr
+   72| 00018C fsub     FC481028   2     SFL       fp2=fp8,fp2,fcr
+   72| 000190 fadd     FD04F82A   2     AFL       fp8=fp4,fp31,fcr
+   72| 000194 fsub     FC862028   2     SFL       fp4=fp6,fp4,fcr
+   72| 000198 fre      FD201830   1     FRED      fp9=fp3
+   72| 00019C fnmsub   FC633A7C   1     FNMS      fp3=fp7,fp3,fp9,fcr
+   72| 0001A0 fre      FCC04030   1     FRED      fp6=fp8
+   72| 0001A4 fmul     FC420272   1     MFL       fp2=fp2,fp9,fcr
+   72| 0001A8 fnmsub   FCE839BC   2     FNMS      fp7=fp7,fp8,fp6,fcr
+   72| 0001AC fmul     FD2401B2   2     MFL       fp9=fp4,fp6,fcr
+   72| 0001B0 fmadd    FC8300FA   2     FMA       fp4=fp0,fp3,fp3,fcr
+   72| 0001B4 fmadd    FCC210FA   2     FMA       fp6=fp2,fp2,fp3,fcr
+   72| 0001B8 fmadd    FC84093A   2     FMA       fp4=fp1,fp4,fp4,fcr
+   72| 0001BC fmul     FCC301B2   2     MFL       fp6=fp3,fp6,fcr
+    0| 0001C0 bc       42400090   1     BCF       ctr=CL.119,taken=0%(0,100)
+   72| 0001C4 lfs      C07E002C   1     LFS       fp3=+CONSTANT_AREA(gr30,44)
+    0| 0001C8 ori      60210000   1     XNOP      
+    0|                              CL.120:
+   72| 0001CC lfd      C90A0008   1     LFL       fp8=erold[](gr10,8)
+   72| 0001D0 fmadd    FD6701FA   1     FMA       fp11=fp0,fp7,fp7,fcr
+   72| 0001D4 fmadd    FD4949FA   2     FMA       fp10=fp9,fp9,fp7,fcr
+   72| 0001D8 fmadd    FCC411BA   2     FMA       fp6=fp2,fp4,fp6,fcr
+   72| 0001DC lfs      C01E0028   1     LFS       fp0=+CONSTANT_AREA(gr30,40)
+   72| 0001E0 lfd      C84B0008   1     LFL       fp2=ernew[](gr11,8)
+   72| 0001E4 fmadd    FD6B0AFA   1     FMA       fp11=fp1,fp11,fp11,fcr
+   72| 0001E8 fmul     FDA702B2   2     MFL       fp13=fp7,fp10,fcr
+   72| 0001EC fabs     FCE03210   2     ABSFL     fp7=fp6
+   72| 0001F0 fadd     FCC8F82A   2     AFL       fp6=fp8,fp31,fcr
+   75| 0001F4 fsub     FD853828   2     SFL       fp12=fp5,fp7,fcr
+   72| 0001F8 lfdu     CC2A0010   1     LFDU      fp1,gr10=erold[](gr10,16)
+   72| 0001FC fsub     FC424028   1     SFL       fp2=fp2,fp8,fcr
+   72| 000200 lfdu     CD4B0010   1     LFDU      fp10,gr11=ernew[](gr11,16)
+   72| 000204 fmadd    FD0B4B7A   1     FMA       fp8=fp9,fp11,fp13,fcr
+   72| 000208 fre      FD203030   1     FRED      fp9=fp6
+   75| 00020C fsel     FCAC396E   1     FSEL      fp5=fp12,fp7,fp5
+   72| 000210 fnmsub   FCC6F27C   2     FNMS      fp6=fp30,fp6,fp9,fcr
+   72| 000214 fmul     FC420272   2     MFL       fp2=fp2,fp9,fcr
+   72| 000218 fadd     FCE1F82A   2     AFL       fp7=fp1,fp31,fcr
+   72| 00021C fabs     FD004210   2     ABSFL     fp8=fp8
+   72| 000220 fsub     FD2A0828   2     SFL       fp9=fp10,fp1,fcr
+   75| 000224 fsub     FD454028   2     SFL       fp10=fp5,fp8,fcr
+   72| 000228 fmadd    FD6601BA   2     FMA       fp11=fp0,fp6,fp6,fcr
+   72| 00022C fmadd    FD8211BA   2     FMA       fp12=fp2,fp2,fp6,fcr
+    0| 000230 fmr      FC201890   2     LRFL      fp1=fp3
+   72| 000234 fre      FDA03830   1     FRED      fp13=fp7
+   72| 000238 fnmsub   FCE7F37C   1     FNMS      fp7=fp30,fp7,fp13,fcr
+   72| 00023C fmul     FD290372   2     MFL       fp9=fp9,fp13,fcr
+   72| 000240 fmadd    FC8B1AFA   2     FMA       fp4=fp3,fp11,fp11,fcr
+   72| 000244 fmul     FCC60332   2     MFL       fp6=fp6,fp12,fcr
+   75| 000248 fsel     FCAA416E   2     FSEL      fp5=fp10,fp8,fp5
+    0| 00024C bc       4200FF80   1     BCT       ctr=CL.120,taken=100%(100,0)
+    0|                              CL.119:
+   72| 000250 fmadd    FC0701FA   1     FMA       fp0=fp0,fp7,fp7,fcr
+   72| 000254 fmadd    FC6949FA   2     FMA       fp3=fp9,fp9,fp7,fcr
+   72| 000258 fmadd    FC4411BA   2     FMA       fp2=fp2,fp4,fp6,fcr
+   72| 00025C fmadd    FC00083A   2     FMA       fp0=fp1,fp0,fp0,fcr
+   72| 000260 fmul     FC2700F2   2     MFL       fp1=fp7,fp3,fcr
+   72| 000264 fabs     FC401210   2     ABSFL     fp2=fp2
+   75| 000268 fsub     FC651028   2     SFL       fp3=fp5,fp2,fcr
+   72| 00026C fmadd    FC00487A   2     FMA       fp0=fp9,fp0,fp1,fcr
+   75| 000270 fsel     FC23116E   2     FSEL      fp1=fp3,fp2,fp5
+   72| 000274 fabs     FC000210   2     ABSFL     fp0=fp0
+   75| 000278 fsub     FC410028   2     SFL       fp2=fp1,fp0,fcr
+   75| 00027C fsel     FCA2006E   2     FSEL      fp5=fp2,fp0,fp1
+    0|                              CL.101:
+   81| 000280 addi     38840001   1     AI        gr4=gr4,1
+    0| 000284 add      7D866214   1     A         gr12=gr6,gr12
+   81| 000288 cmpld    7F244040   1     CL8       cr6=gr4,gr8
+    0| 00028C add      7FA6EA14   1     A         gr29=gr6,gr29
+   81| 000290 bc       4198FE80   1     BT        CL.22,cr6,0x8/llt,taken=80%(80,20)
+   81|                              CL.21:
+   82| 000294 addi     38A50001   1     AI        gr5=gr5,1
+    0| 000298 add      7C601A14   1     A         gr3=gr0,gr3
+   82| 00029C cmpld    7F253840   1     CL8       cr6=gr5,gr7
+    0| 0002A0 add      7F80E214   1     A         gr28=gr0,gr28
+   82| 0002A4 bc       4198FE5C   1     BT        CL.20,cr6,0x8/llt,taken=80%(80,20)
+   82|                              CL.19:
+   87| 0002A8 ld       EBA20000   1     L8        gr29=.&&N&&mpipar(gr2,0)
+   89| 0002AC addi     38000001   1     LI        gr0=1
+   89| 0002B0 addis    3C604C00   1     LIU       gr3=19456
+   89| 0002B4 stw      901F0080   1     ST4Z      T_2(gr31,128)=gr0
+   89| 0002B8 addis    3C805800   1     LIU       gr4=22528
+   89| 0002BC addi     38631023   1     AI        gr3=gr3,4131
+   88| 0002C0 lwa      E81D0006   1     L4A       gr0=<s52:d4:l4>(gr29,4)
+   89| 0002C4 stw      907F0084   1     ST4Z      T_3(gr31,132)=gr3
+   89| 0002C8 addi     3884000C   1     AI        gr4=gr4,12
+   89| 0002CC addi     387D06D0   1     AI        gr3=gr29,1744
+   87| 0002D0 stfd     D8BD06D0   1     STFL      <s52:d1744:l8>(gr29,1744)=fp5
+   89| 0002D4 stw      909F0088   1     ST4Z      T_4(gr31,136)=gr4
+   88| 0002D8 std      F81F0090   1     ST8       #MX_CONVF1_0(gr31,144)=gr0
+   89| 0002DC addi     393D0014   1     AI        gr9=gr29,20
+   89| 0002E0 addi     391D0020   1     AI        gr8=gr29,32
+   89| 0002E4 addi     38FF0088   1     AI        gr7=gr31,136
+   89| 0002E8 addi     38DF0084   1     AI        gr6=gr31,132
+   89| 0002EC addi     38BF0080   1     AI        gr5=gr31,128
+   89| 0002F0 addi     389D0D10   1     AI        gr4=gr29,3344
+   88| 0002F4 lfd      C81F0090   1     LFL       fp0=#MX_CONVF1_0(gr31,144)
+   88| 0002F8 fcfid    FC00069C   1     FCFID     fp0=fp0,fcr
+   88| 0002FC frsp     FC000018   2     CVLS      fp0=fp0,fcr
+   88| 000300 stfd     D81D06D8   1     STFL      <s52:d1752:l8>(gr29,1752)=fp0
+   89| 000304 bl       48000001   1     CALL      mpi_allreduce,7,buf_in[]",gr3,buf_out[]",gr4,T_2",gr5,T_3",gr6,T_4",gr7,comm3d",gr8,ierr",gr9,#ProcAlias",mpi_allreduce",fcr",#MX_TEMP1",gr1,gr31,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   89| 000308 ori      60000000   1
+  103| 00030C ld       E8620000   1     L8        gr3=.&&N&&root(gr2,0)
+  112| 000310 ld       E8820000   1     L8        gr4=.&&N&&radiation(gr2,0)
+  112| 000314 lfd      C83D0D10   1     LFL       fp1=<s52:d3344:l8>(gr29,3344)
+  103| 000318 lfs      C01E0020   1     LFS       fp0=+CONSTANT_AREA(gr30,32)
+  103| 00031C lfd      C84300C0   1     LFL       fp2=<s66:d192:l8>(gr3,192)
+  112| 000320 lfd      C8640048   1     LFL       fp3=<s72:d72:l8>(gr4,72)
+  103| 000324 fsqrt    FC40102C   1     SQRT      fp2=fp2,fcr
+  112| 000328 fcmpu    FC011800   2     CFL       cr0=fp1,fp3
+  103| 00032C fsub     FC3F1028   2     SFL       fp1=fp31,fp2,fcr
+  103| 000330 fsel     FC2117EE   2     FSEL      fp1=fp1,fp2,fp31
+  103| 000334 fdiv     FC400824   2     RCPFL     fp2=fp0,fp1,fcr
+  112| 000338 bc       41810048   1     BT        CL.17,cr0,0x40/fgt,taken=50%(0,0)
+  113| 00033C lfs      C03E0024   1     LFS       fp1=+CONSTANT_AREA(gr30,36)
+  113| 000340 fmul     FC220072   1     MFL       fp1=fp2,fp1,fcr
+  117| 000344 fsub     FC5F0828   2     SFL       fp2=fp31,fp1,fcr
+  117| 000348 fsel     FC220FEE   2     FSEL      fp1=fp2,fp1,fp31
+  117| 00034C fmul     FC210072   2     MFL       fp1=fp1,fp1,fcr
+  117| 000350 fdiv     FC000824   2     RCPFL     fp0=fp0,fp1,fcr
+  117| 000354 stfd     D80300C0   1     STFL      <s66:d192:l8>(gr3,192)=fp0
+  120|                              CL.47:
+  120| 000358 ld       E8210000   1     L8        gr1=#stack(gr1,0),gr31"
+  120| 00035C ld       E9810010   1     L8        gr12=#stack(gr1,16)
+  120| 000360 ld       EB81FFD0   1     L8        gr28=#stack(gr1,-48)
+  120| 000364 ld       EBA1FFD8   1     L8        gr29=#stack(gr1,-40)
+  120| 000368 ld       EBC1FFE0   1     L8        gr30=#stack(gr1,-32)
+  120| 00036C ld       EBE1FFE8   1     L8        gr31=#stack(gr1,-24)
+  120| 000370 lfd      CBE1FFF8   1     LFL       fp31=#stack(gr1,-8)
+  120| 000374 mtspr    7D8803A6   1     LLR       lr=gr12
+  120| 000378 lfd      CBC1FFF0   1     LFL       fp30=#stack(gr1,-16)
+  120| 00037C bclr     4E800020   1     BA        lr
+  114|                              CL.17:
+  115| 000380 lfs      C05E0024   1     LFS       fp2=+CONSTANT_AREA(gr30,36)
+  115| 000384 fmul     FC2100B2   1     MFL       fp1=fp1,fp2,fcr
+  115| 000388 fdiv     FC200824   2     RCPFL     fp1=fp0,fp1,fcr
+  117| 00038C fsub     FC5F0828   2     SFL       fp2=fp31,fp1,fcr
+  117| 000390 fsel     FC220FEE   2     FSEL      fp1=fp2,fp1,fp31
+  117| 000394 fmul     FC210072   2     MFL       fp1=fp1,fp1,fcr
+  117| 000398 fdiv     FC000824   2     RCPFL     fp0=fp0,fp1,fcr
+  117| 00039C stfd     D80300C0   1     STFL      <s66:d192:l8>(gr3,192)=fp0
+    0| 0003A0 b        4BFFFFB8   1     B         CL.47,-1
+     |               Tag Table
+     | 0003A4        00000000 00012221 82040000 000003A4 1F
+     |               Instruction count          233
+     |               Straight-line exec time    299
+     |               Constant Area
+     | 000000        3FF0F2B4 00000000 7261645F 696D705F 64742E66 39304942
+     | 000018        2B617F7D 4ED8C33E 3F800000 3F8795A0 3F000000 3F400000
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    rad_imp_dt.f90              07/08/15   15:48:30
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    1           0         0           1          0            0
+ 
+ 
+    Source records read.......................................     120
+1501-510  Compilation successful for file rad_imp_dt.f90.
+1501-543  Object file created.

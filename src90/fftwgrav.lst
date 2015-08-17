@@ -1,0 +1,91 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- fftwgrav.f90 07/08/15 15:47:35
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** fftwgrav   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+     9|         SUBROUTINE fftwgrav ()
+    11|           RETURN
+                END SUBROUTINE fftwgrav
+
+
+     9|         SUBROUTINE fftwgrav ()
+    11|           RETURN
+                END SUBROUTINE fftwgrav
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ---- ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ---- ----
+     | 000000                           PDEF     fftwgrav
+    9|                                  PROC      
+   11| 000000 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000004        00000000 00012000 00000000 00000004
+     |               Instruction count            1
+     |               Straight-line exec time      1
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    fftwgrav.f90                07/08/15   15:47:35
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................      11
+1501-510  Compilation successful for file fftwgrav.f90.
+1501-543  Object file created.

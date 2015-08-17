@@ -1,0 +1,1265 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- fouramp.f90 07/08/15 15:48:56
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** fouramp   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-534 (I) Loop (loop index 1) at fouramp.f90 <line 69> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 2) at fouramp.f90 <line 69> was not SIMD vectorized because the loop is not the innermost loop.
+1586-550 (I) Loop (loop index 3) at fouramp.f90 <line 69> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 3) at fouramp.f90 <line 69> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 3) at fouramp.f90 <line 69> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 3) at fouramp.f90 <line 69> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 3) at fouramp.f90 <line 69> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-534 (I) Loop (loop index 4) at fouramp.f90 <line 70> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 5) at fouramp.f90 <line 70> was not SIMD vectorized because the loop is not the innermost loop.
+1586-550 (I) Loop (loop index 6) at fouramp.f90 <line 70> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 6) at fouramp.f90 <line 70> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 6) at fouramp.f90 <line 70> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 6) at fouramp.f90 <line 70> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 6) at fouramp.f90 <line 70> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-534 (I) Loop (loop index 7) at fouramp.f90 <line 73> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 8) at fouramp.f90 <line 74> was not SIMD vectorized because the loop is not the innermost loop.
+1586-538 (I) Loop (loop index 9) at fouramp.f90 <line 75> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 9) at fouramp.f90 <line 75> was not SIMD vectorized because it contains control flow.
+1586-534 (I) Loop (loop index 13) at fouramp.f90 <line 70> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 14) at fouramp.f90 <line 70> was not SIMD vectorized because the loop is not the innermost loop.
+1586-550 (I) Loop (loop index 15) at fouramp.f90 <line 70> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 15) at fouramp.f90 <line 70> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-534 (I) Loop (loop index 19) at fouramp.f90 <line 69> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 20) at fouramp.f90 <line 69> was not SIMD vectorized because the loop is not the innermost loop.
+1586-550 (I) Loop (loop index 21) at fouramp.f90 <line 69> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 21) at fouramp.f90 <line 69> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"5">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+    27|         SUBROUTINE fouramp (ar, ai, nmodes, idx, cc)
+    58|           IF (.NOT.(nmodes > ijkn / 2)) GOTO lab_1
+    59|           #13 = _xlfBeginIO(6,257,#12,32768,NULL,0,NULL)
+                  CALL _xlfWriteLDChar(%VAL(#13),"FOURAMP: Two many modes !",25,&
+                &   1)
+                  _xlfEndIO(%VAL(#13))
+    60|           CALL _xlfStop(NULL,0)
+                  RETURN
+    61|           lab_1
+    64|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+                  #8 = max(int(in),0) * 8
+                  #9 = 8 * (max(int(jn),0) * max(int(in),0))
+                  IF ((myid_w == 0)) THEN
+    65|             #15 = _xlfBeginIO(6,259,#14,32772,NULL,0,|123)
+                    CALL _xlfWriteFmt(%VAL(#15),"FOURAMP: Excited k-mode range: &
+                &     kmin:",36,1,2)
+                    #16 =  0.0000000000000000E+000
+                    CALL _xlfWriteFmt(%VAL(#15),#16,8,8,4)
+                    CALL _xlfWriteFmt(%VAL(#15),"   kmax:",8,1,2)
+                    T_2 = ( 6.2831854820251464E+000 * real(_sqrtfs( &
+                &     3.00000000E+00))) * real(real(nmodes))
+                    CALL _xlfWriteFmt(%VAL(#15),T_2,8,8,4)
+                    _xlfEndIO(%VAL(#15))
+    67|           ENDIF
+    69|           IF ((MOD(max(int(kn),0), 4) > 0  .AND.  max(int(kn),0) > 0)) &
+                &   THEN
+                    $$CIV2 = 0
+       Id=19        DO $$CIV2 = $$CIV2, MOD(max(int(kn),0), int(4))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV1 = 0
+       Id=20            DO $$CIV1 = $$CIV1, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV0 = 0
+       Id=21                DO $$CIV0 = $$CIV0, int(max(int(in),0))-1
+                              ar($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) =  &
+                &               0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+                  IF ((max(int(kn),0) > 0  .AND.  max(int(kn),0) > MOD(max(int(&
+                &   kn),0), 4))) THEN
+                    $$CIV9 = int(0)
+       Id=1         DO $$CIV9 = $$CIV9, int((((max(int(kn),0) - MOD(max(int(&
+                &       kn),0), 4)) - 1) / 4 + 1))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int(max(int(in),0))-1
+                              ar($$CIV0 + 1,$$CIV1 + 1,1 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ar($$CIV0 + 1,$$CIV1 + 1,2 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ar($$CIV0 + 1,$$CIV1 + 1,3 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ar($$CIV0 + 1,$$CIV1 + 1,4 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+    70|           IF ((MOD(max(int(kn),0), 4) > 0  .AND.  max(int(kn),0) > 0)) &
+                &   THEN
+                    $$CIV5 = 0
+       Id=13        DO $$CIV5 = $$CIV5, MOD(max(int(kn),0), int(4))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV4 = 0
+       Id=14            DO $$CIV4 = $$CIV4, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV3 = 0
+       Id=15                DO $$CIV3 = $$CIV3, int(max(int(in),0))-1
+                              ai($$CIV3 + 1,$$CIV4 + 1,$$CIV5 + 1) =  &
+                &               0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+                  IF ((max(int(kn),0) > 0  .AND.  max(int(kn),0) > MOD(max(int(&
+                &   kn),0), 4))) THEN
+                    $$CIVA = int(0)
+       Id=4         DO $$CIVA = $$CIVA, int((((max(int(kn),0) - MOD(max(int(&
+                &       kn),0), 4)) - 1) / 4 + 1))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV4 = 0
+       Id=5             DO $$CIV4 = $$CIV4, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV3 = 0
+       Id=6                 DO $$CIV3 = $$CIV3, int(max(int(in),0))-1
+                              ai($$CIV3 + 1,$$CIV4 + 1,1 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ai($$CIV3 + 1,$$CIV4 + 1,2 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ai($$CIV3 + 1,$$CIV4 + 1,3 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ai($$CIV3 + 1,$$CIV4 + 1,4 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+    73|           IF ((1 + (int(((kn / 2 + nmodes) - 1)) - int((kn / 2))) > 0)) &
+                &   THEN
+                    $$INIT0 = kn / 2
+                    $$CIVFINAL8 = int((1 + (int(((kn / 2 + nmodes) - 1)) - int((&
+                &     kn / 2)))))
+                    $$CIV8 = 0
+       Id=7         DO $$CIV8 = $$CIV8, $$CIVFINAL8-1
+    74|               IF ((1 + (int(((jn / 2 + nmodes) - 1)) - int((1 + (jn / 2 &
+                &       - nmodes)))) > 0)) THEN
+                        $$INIT1 = 1 + (jn / 2 - nmodes)
+                        $$CIVFINAL7 = int((1 + (int(((jn / 2 + nmodes) - 1)) - &
+                &         int((1 + (jn / 2 - nmodes))))))
+                        $$CIV7 = 0
+       Id=8             DO $$CIV7 = $$CIV7, $$CIVFINAL7-1
+    75|                   IF ((1 + (int(((in / 2 + nmodes) - 1)) - int((1 + (in &
+                &           / 2 - nmodes)))) > 0)) THEN
+                            $$INIT2 = 1 + (in / 2 - nmodes)
+                            $$CIVFINAL6 = int((1 + (int(((in / 2 + nmodes) - 1))&
+                &              - int((1 + (in / 2 - nmodes))))))
+                            $$CIV6 = 0
+       Id=9                 DO $$CIV6 = $$CIV6, $$CIVFINAL6-1
+    76|                       IF (.NOT.($$INIT0 + int($$CIV8) == kn / 2)) GOTO &
+                &               lab_30
+    77|                       IF ($$INIT1 + int($$CIV7) > jn / 2) GOTO lab_32
+    78|                       IF (.NOT.(in / 2 - int($$CIV6) == $$INIT2)) GOTO &
+                &               lab_36
+                              IF (.NOT.($$INIT2 + int($$CIV6) > in / 2)) GOTO &
+                &               lab_36
+    80|                       lab_30
+    81|                       lab_32
+    82|                       kmag =  6.2831854820251464E+000 * real(_sqrtfs((&
+                &               real((((int(%VAL($$CIV6)) - %VAL(in) / 2) + %VAL(&
+                &               $$INIT2)) * ((int(%VAL($$CIV6)) - %VAL(in) / 2) + &
+                &               %VAL($$INIT2)))) + real((((int(%VAL($$CIV7)) + &
+                &               %VAL($$INIT1)) - %VAL(jn) / 2) * ((int(%VAL(&
+                &               $$CIV7)) + %VAL($$INIT1)) - %VAL(jn) / 2)))) + &
+                &               real((((int(%VAL($$CIV6)) - %VAL(in) / 2) + %VAL(&
+                &               $$INIT2)) * ((int(%VAL($$CIV6)) - %VAL(in) / 2) + &
+                &               %VAL($$INIT2))))))
+    84|                       IF (.NOT.(kmag >=  0.0000000000000000E+000)) GOTO &
+                &               lab_37
+    87|                       CALL gasdev(iseed,help1)
+    88|                       CALL ran1(iseed,help2)
+                              $$RET0 = sigma(kmag,idx)
+    89|                       help1 = help1 * $$RET0
+    90|                       help2 = (help2 *  2.0000000000000000E+000) *  &
+                &               3.1415927410125732E+000
+    92|                       ar(int($$INIT2) + $$CIV6,int($$INIT1) + $$CIV7,&
+                &               int($$INIT0) + $$CIV8) = help1 * _cos(%VAL(help2))&
+                &               
+    93|                       ai(int($$INIT2) + $$CIV6,int($$INIT1) + $$CIV7,&
+                &               int($$INIT0) + $$CIV8) = help1 * _sin(%VAL(help2))&
+                &               
+    94|                       IF (.NOT.(cc == 1)) GOTO lab_38
+    99|                       ar(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - (int($$CIV8) + &
+                &               $$INIT0)))) = -(help1 * _cos(%VAL(help2)))
+   100|                       ai(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - (int($$CIV8) + &
+                &               $$INIT0)))) = help1 * _sin(%VAL(help2))
+   101|                       GOTO lab_39
+                              lab_38
+   102|                       ar(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - (int($$CIV8) + &
+                &               $$INIT0)))) = help1 * _cos(%VAL(help2))
+   103|                       ai(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - (int($$CIV8) + &
+                &               $$INIT0)))) = -(help1 * _sin(%VAL(help2)))
+   104|                       lab_39
+   106|                       lab_37
+   107|                       lab_36
+   108|                     ENDDO
+                          ENDIF
+   109|                 ENDDO
+                      ENDIF
+   110|             ENDDO
+                  ENDIF
+   114|           ar(int((in / 2)),int((jn / 2)),int((kn / 2))) =  &
+                &   0.0000000000000000E+000
+   115|           ai(int((in / 2)),int((jn / 2)),int((kn / 2))) =  &
+                &   0.0000000000000000E+000
+   119|           RETURN
+                END SUBROUTINE fouramp
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            69            19    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            69            20    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            69            21    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0            69                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            69             1    Outer loop has been unrolled 4 time(s).
+         0            69             1    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            69             2    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            69             3    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0            69                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            69                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            69                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            69                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            70            13    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            70            14    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            70            15    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0            70                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            70             4    Outer loop has been unrolled 4 time(s).
+         0            70             4    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            70             5    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            70             6    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0            70                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            70                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            70                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            70                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            73             7    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            74             8    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            75             9    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            75             9    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+
+
+    27|         SUBROUTINE fouramp (ar, ai, nmodes, idx, cc)
+    58|           IF (.NOT.(nmodes > ijkn / 2)) GOTO lab_1
+    59|           #13 = _xlfBeginIO(6,257,#12,32768,NULL,0,NULL)
+                  CALL _xlfWriteLDChar(%VAL(#13),"FOURAMP: Two many modes !",25,&
+                &   1)
+                  _xlfEndIO(%VAL(#13))
+    60|           CALL _xlfStop(NULL,0)
+                  RETURN
+    61|           lab_1
+    64|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+                  #8 = max(int(in),0) * 8
+                  #9 = 8 * (max(int(jn),0) * max(int(in),0))
+                  IF ((myid_w == 0)) THEN
+    65|             #15 = _xlfBeginIO(6,259,#14,32772,NULL,0,|123)
+                    CALL _xlfWriteFmt(%VAL(#15),"FOURAMP: Excited k-mode range: &
+                &     kmin:",36,1,2)
+                    #16 =  0.0000000000000000E+000
+                    CALL _xlfWriteFmt(%VAL(#15),#16,8,8,4)
+                    CALL _xlfWriteFmt(%VAL(#15),"   kmax:",8,1,2)
+                    T_2 = ( 6.2831854820251464E+000 * real(_sqrtfs( &
+                &     3.00000000E+00))) * real(real(nmodes))
+                    CALL _xlfWriteFmt(%VAL(#15),T_2,8,8,4)
+                    _xlfEndIO(%VAL(#15))
+    67|           ENDIF
+    69|           IF ((MOD(max(int(kn),0), 4) > 0  .AND.  max(int(kn),0) > 0)) &
+                &   THEN
+                    $$CIV2 = 0
+       Id=19        DO $$CIV2 = $$CIV2, MOD(max(int(kn),0), int(4))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV1 = 0
+       Id=20            DO $$CIV1 = $$CIV1, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV0 = 0
+       Id=21                DO $$CIV0 = $$CIV0, int(max(int(in),0))-1
+                              ar($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) =  &
+                &               0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+                  IF ((max(int(kn),0) > 0  .AND.  max(int(kn),0) > MOD(max(int(&
+                &   kn),0), 4))) THEN
+                    $$CIV9 = int(0)
+       Id=1         DO $$CIV9 = $$CIV9, int((((max(int(kn),0) - MOD(max(int(&
+                &       kn),0), 4)) - 1) / 4 + 1))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int(max(int(in),0))-1
+                              ar($$CIV0 + 1,$$CIV1 + 1,1 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ar($$CIV0 + 1,$$CIV1 + 1,2 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ar($$CIV0 + 1,$$CIV1 + 1,3 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ar($$CIV0 + 1,$$CIV1 + 1,4 + ($$CIV9 * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+    70|           IF ((MOD(max(int(kn),0), 4) > 0  .AND.  max(int(kn),0) > 0)) &
+                &   THEN
+                    $$CIV5 = 0
+       Id=13        DO $$CIV5 = $$CIV5, MOD(max(int(kn),0), int(4))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV4 = 0
+       Id=14            DO $$CIV4 = $$CIV4, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV3 = 0
+       Id=15                DO $$CIV3 = $$CIV3, int(max(int(in),0))-1
+                              ai($$CIV3 + 1,$$CIV4 + 1,$$CIV5 + 1) =  &
+                &               0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+                  IF ((max(int(kn),0) > 0  .AND.  max(int(kn),0) > MOD(max(int(&
+                &   kn),0), 4))) THEN
+                    $$CIVA = int(0)
+       Id=4         DO $$CIVA = $$CIVA, int((((max(int(kn),0) - MOD(max(int(&
+                &       kn),0), 4)) - 1) / 4 + 1))-1
+                      IF ((max(int(jn),0) > 0)) THEN
+                        $$CIV4 = 0
+       Id=5             DO $$CIV4 = $$CIV4, int(max(int(jn),0))-1
+                          IF ((max(int(in),0) > 0)) THEN
+                            $$CIV3 = 0
+       Id=6                 DO $$CIV3 = $$CIV3, int(max(int(in),0))-1
+                              ai($$CIV3 + 1,$$CIV4 + 1,1 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ai($$CIV3 + 1,$$CIV4 + 1,2 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ai($$CIV3 + 1,$$CIV4 + 1,3 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                              ai($$CIV3 + 1,$$CIV4 + 1,4 + ($$CIVA * 4 + MOD(&
+                &               max(int(kn),0), 4))) =  0.0000000000000000E+000
+                            ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+    73|           $$csx0 = int((kn / 2))
+                  IF ((1 + (int(((kn / 2 + nmodes) - 1)) - $$csx0) > 0)) THEN
+                    $$INIT0 = kn / 2
+                    $$CIVFINAL8 = int((1 + (int(((kn / 2 + nmodes) - 1)) - &
+                &     $$csx0)))
+                    $$CIV8 = 0
+       Id=7         DO $$CIV8 = $$CIV8, $$CIVFINAL8-1
+    74|               $$csx1 = int((1 + (jn / 2 - nmodes)))
+                      IF ((1 + (int(((jn / 2 + nmodes) - 1)) - $$csx1) > 0)) &
+                &       THEN
+                        $$INIT1 = 1 + (jn / 2 - nmodes)
+                        $$CIVFINAL7 = int((1 + (int(((jn / 2 + nmodes) - 1)) - &
+                &         $$csx1)))
+                        $$CIV7 = 0
+       Id=8             DO $$CIV7 = $$CIV7, $$CIVFINAL7-1
+    75|                   $$csx2 = int((1 + (in / 2 - nmodes)))
+                          IF ((1 + (int(((in / 2 + nmodes) - 1)) - $$csx2) > 0))&
+                &            THEN
+                            $$INIT2 = 1 + (in / 2 - nmodes)
+                            $$CIVFINAL6 = int((1 + (int(((in / 2 + nmodes) - 1))&
+                &              - $$csx2)))
+                            $$CIV6 = 0
+    76|                     $$ICM0 = int($$CIV8) + $$INIT0
+    75|Id=9                 DO $$CIV6 = $$CIV6, $$CIVFINAL6-1
+    76|                       IF (.NOT.($$ICM0 == kn / 2)) GOTO lab_30
+    77|                       IF ($$INIT1 + int($$CIV7) > jn / 2) GOTO lab_32
+    78|                       IF (.NOT.(in / 2 - int($$CIV6) == $$INIT2)) GOTO &
+                &               lab_36
+                              IF (.NOT.($$INIT2 + int($$CIV6) > in / 2)) GOTO &
+                &               lab_36
+    80|                       lab_30
+    81|                       lab_32
+    82|                       kmag =  6.2831854820251464E+000 * real(_sqrtfs((&
+                &               real((((int(%VAL($$CIV6)) - %VAL(in) / 2) + %VAL(&
+                &               $$INIT2)) * ((int(%VAL($$CIV6)) - %VAL(in) / 2) + &
+                &               %VAL($$INIT2)))) + real((((int(%VAL($$CIV7)) + &
+                &               %VAL($$INIT1)) - %VAL(jn) / 2) * ((int(%VAL(&
+                &               $$CIV7)) + %VAL($$INIT1)) - %VAL(jn) / 2)))) + &
+                &               real((((int(%VAL($$CIV6)) - %VAL(in) / 2) + %VAL(&
+                &               $$INIT2)) * ((int(%VAL($$CIV6)) - %VAL(in) / 2) + &
+                &               %VAL($$INIT2))))))
+    84|                       IF (.NOT.(kmag >=  0.0000000000000000E+000)) GOTO &
+                &               lab_37
+    87|                       CALL gasdev(iseed,help1)
+    88|                       CALL ran1(iseed,help2)
+                              $$RET0 = sigma(kmag,idx)
+    89|                       help1 = help1 * $$RET0
+    90|                       help2 = (help2 *  2.0000000000000000E+000) *  &
+                &               3.1415927410125732E+000
+    92|                       $$csx3 = (-8) - (#5 + #4)
+                              $$csx4 = help1 * _cos(%VAL(help2))
+                              ar($$csx2 + $$CIV6,$$csx1 + $$CIV7,$$csx0 + &
+                &               $$CIV8) = $$csx4
+    93|                       $$csx5 = help1 * _sin(%VAL(help2))
+                              ai($$csx2 + $$CIV6,$$csx1 + $$CIV7,$$csx0 + &
+                &               $$CIV8) = $$csx5
+    94|                       IF (.NOT.(cc == 1)) GOTO lab_38
+    99|                       ar(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - $$ICM0))) = &
+                &               -$$csx4
+   100|                       ai(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - $$ICM0))) = &
+                &               $$csx5
+   101|                       GOTO lab_39
+                              lab_38
+   102|                       ar(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - $$ICM0))) = &
+                &               $$csx4
+   103|                       ai(int(((in - int($$CIV6)) - $$INIT2)),int((jn - (&
+                &               int($$CIV7) + $$INIT1))),int((kn - $$ICM0))) = &
+                &               -$$csx5
+   104|                       lab_39
+   106|                       lab_37
+   107|                       lab_36
+   108|                     ENDDO
+                          ENDIF
+   109|                 ENDDO
+                      ENDIF
+   110|             ENDDO
+                  ENDIF
+   114|           ar(int((in / 2)),int((jn / 2)),int((kn / 2))) =  &
+                &   0.0000000000000000E+000
+   115|           ai(int((in / 2)),int((jn / 2)),int((kn / 2))) =  &
+                &   0.0000000000000000E+000
+   119|           RETURN
+                END SUBROUTINE fouramp
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s-ss  ssss ssss ssss ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- --ss ssss
+ CCR's set/used:   ss-- ssss
+     | 000000                           PDEF     fouramp
+   27|                                  PROC      .ar,.ai,.nmodes,.idx,.cc,gr3-gr7
+    0| 000000 stfd     DBE1FFF8   1     STFL      #stack(gr1,-8)=fp31
+    0| 000004 stfd     DBC1FFF0   1     STFL      #stack(gr1,-16)=fp30
+    0| 000008 stfd     DBA1FFE8   1     STFL      #stack(gr1,-24)=fp29
+    0| 00000C stfd     DB81FFE0   1     STFL      #stack(gr1,-32)=fp28
+    0| 000010 stfd     DB61FFD8   1     STFL      #stack(gr1,-40)=fp27
+    0| 000014 stfd     DB41FFD0   1     STFL      #stack(gr1,-48)=fp26
+    0| 000018 std      FBE1FFC8   1     ST8       #stack(gr1,-56)=gr31
+    0| 00001C std      FBC1FFC0   1     ST8       #stack(gr1,-64)=gr30
+    0| 000020 std      FBA1FFB8   1     ST8       #stack(gr1,-72)=gr29
+    0| 000024 std      FB81FFB0   1     ST8       #stack(gr1,-80)=gr28
+    0| 000028 std      FB61FFA8   1     ST8       #stack(gr1,-88)=gr27
+    0| 00002C std      FB41FFA0   1     ST8       #stack(gr1,-96)=gr26
+    0| 000030 std      FB21FF98   1     ST8       #stack(gr1,-104)=gr25
+    0| 000034 std      FB01FF90   1     ST8       #stack(gr1,-112)=gr24
+    0| 000038 std      FAE1FF88   1     ST8       #stack(gr1,-120)=gr23
+    0| 00003C std      FAC1FF80   1     ST8       #stack(gr1,-128)=gr22
+    0| 000040 std      FAA1FF78   1     ST8       #stack(gr1,-136)=gr21
+    0| 000044 std      FA81FF70   1     ST8       #stack(gr1,-144)=gr20
+    0| 000048 std      FA61FF68   1     ST8       #stack(gr1,-152)=gr19
+    0| 00004C std      FA41FF60   1     ST8       #stack(gr1,-160)=gr18
+    0| 000050 std      FA21FF58   1     ST8       #stack(gr1,-168)=gr17
+    0| 000054 std      FA01FF50   1     ST8       #stack(gr1,-176)=gr16
+    0| 000058 std      F9E1FF48   1     ST8       #stack(gr1,-184)=gr15
+    0| 00005C std      F9C1FF40   1     ST8       #stack(gr1,-192)=gr14
+    0| 000060 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000064 mfcr     7D800026   1     LFCR      gr12=cr4,4
+    0| 000068 stw      91810008   1     ST4A      #stack(gr1,8)=gr12
+    0| 00006C std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000070 stdu     F821FDA1   1     ST8U      gr1,#stack(gr1,-608)=gr1
+    0| 000074 std      F86100E8   1     ST8       #SPILL1(gr1,232)=gr3
+   58| 000078 ld       EBE20000   1     L8        gr31=.&&N&&param(gr2,0)
+   58| 00007C lwz      81050000   1     L4Z       gr8=nmodes(gr5,0)
+    0| 000080 std      F88100F0   1     ST8       #SPILL2(gr1,240)=gr4
+    0| 000084 std      F8C100F8   1     ST8       #SPILL3(gr1,248)=gr6
+    0| 000088 std      F8E10100   1     ST8       #SPILL4(gr1,256)=gr7
+   58| 00008C lwz      801F000C   1     L4Z       gr0=<s19:d12:l4>(gr31,12)
+   58| 000090 extsw    7D0907B4   1     EXTS4     gr9=gr8
+   58| 000094 std      F90100E0   1     ST8       #SPILL0(gr1,224)=gr8
+   58| 000098 std      F9210108   1     ST8       #SPILL5(gr1,264)=gr9
+   58| 00009C srawi    7C000E70   1     SRA4CA    gr0,ca=gr0,1
+   58| 0000A0 addze    7C000194   1     ADDE      gr0,ca=gr0,0,ca
+   58| 0000A4 cmpw     7C080000   1     C4        cr0=gr8,gr0
+   58| 0000A8 bc       41810930   1     BT        CL.524,cr0,0x2/gt,taken=10%(10,90)
+   64| 0000AC lwz      81FF0004   1     L4Z       gr15=<s19:d4:l4>(gr31,4)
+   64| 0000B0 lwa      EBDF0002   1     L4A       gr30=<s19:d0:l4>(gr31,0)
+   64| 0000B4 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   64| 0000B8 extsw    7DFD07B4   1     EXTS4     gr29=gr15
+   64| 0000BC sradi    7FC4FE76   1     SRA8      gr4=gr30,63,ca"
+   64| 0000C0 sradi    7FA0FE76   1     SRA8      gr0=gr29,63,ca"
+   64| 0000C4 andc     7FDA2078   1     ANDC      gr26=gr30,gr4
+   64| 0000C8 andc     7FB90078   1     ANDC      gr25=gr29,gr0
+   64| 0000CC lwz      80630008   1     L4Z       gr3=<s48:d8:l4>(gr3,8)
+   64| 0000D0 mulld    7C19D1D2   1     M         gr0=gr25,gr26
+   64| 0000D4 cmpdi    2C230000   1     C8        cr0=gr3,0
+   64| 0000D8 rldicr   7B5C1F24   1     SLL8      gr28=gr26,3
+   64| 0000DC rldicr   781B1F24   1     SLL8      gr27=gr0,3
+   64| 0000E0 bc       408200D4   1     BF        CL.2,cr0,0x4/eq,taken=60%(60,40)
+   65| 0000E4 ld       E8A20000   1     L8        gr5=.$STATIC(gr2,0)
+   65| 0000E8 addi     3AC00000   1     LI        gr22=0
+   65| 0000EC addi     38600006   1     LI        gr3=6
+   65| 0000F0 addi     38800103   1     LI        gr4=259
+   65| 0000F4 ori      62C68004   1     OIL       gr6=gr22,0x8004
+   65| 0000F8 addi     38E00000   1     LI        gr7=0
+   65| 0000FC addi     39250020   1     AI        gr9=gr5,32
+   65| 000100 addi     38A500A0   1     AI        gr5=gr5,160
+   65| 000104 addi     39000000   1     LI        gr8=0
+   65| 000108 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#14",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|123,gr9,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 00010C ori      60000000   1
+   65| 000110 ld       EB020000   1     L8        gr24=.+CONSTANT_AREA(gr2,0)
+   65| 000114 or       7C771B78   1     LR        gr23=gr3
+   65| 000118 addi     38A00024   1     LI        gr5=36
+   65| 00011C addi     38C00001   1     LI        gr6=1
+   65| 000120 addi     38E00002   1     LI        gr7=2
+   65| 000124 addi     389800AC   1     AI        gr4=gr24,172
+   65| 000128 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 00012C ori      60000000   1
+   65| 000130 std      FAC10080   1     ST8       #16(gr1,128)=gr22
+   65| 000134 addi     38810080   1     AI        gr4=gr1,128
+   65| 000138 or       7EE3BB78   1     LR        gr3=gr23
+   65| 00013C addi     38A00008   1     LI        gr5=8
+   65| 000140 addi     38C00008   1     LI        gr6=8
+   65| 000144 addi     38E00004   1     LI        gr7=4
+   65| 000148 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#16,gr4-gr7,_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 00014C ori      60000000   1
+   65| 000150 or       7EE3BB78   1     LR        gr3=gr23
+   65| 000154 addi     389800D0   1     AI        gr4=gr24,208
+   65| 000158 addi     38A00008   1     LI        gr5=8
+   65| 00015C addi     38C00001   1     LI        gr6=1
+   65| 000160 addi     38E00002   1     LI        gr7=2
+   65| 000164 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 000168 ori      60000000   1
+   65| 00016C ld       EAA10108   1     L8        gr21=#SPILL5(gr1,264)
+   65| 000170 lfd      C83800D8   1     LFL       fp1=+CONSTANT_AREA(gr24,216)
+   65| 000174 addi     38810088   1     AI        gr4=gr1,136
+   65| 000178 or       7EE3BB78   1     LR        gr3=gr23
+   65| 00017C addi     38A00008   1     LI        gr5=8
+   65| 000180 addi     38C00008   1     LI        gr6=8
+   65| 000184 std      FAA100A8   1     ST8       #MX_CONVF1_0(gr1,168)=gr21
+   65| 000188 addi     38E00004   1     LI        gr7=4
+   65| 00018C lfd      C80100A8   1     LFL       fp0=#MX_CONVF1_0(gr1,168)
+   65| 000190 fcfid    FC00069C   1     FCFID     fp0=fp0,fcr
+   65| 000194 frsp     FC000018   2     CVLS      fp0=fp0,fcr
+   65| 000198 fmul     FC000072   2     MFL       fp0=fp0,fp1,fcr
+   65| 00019C stfd     D8010088   1     STFL      T_2(gr1,136)=fp0
+   65| 0001A0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,T_2,gr4-gr7,_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 0001A4 ori      60000000   1
+   65| 0001A8 or       7EE3BB78   1     LR        gr3=gr23
+   65| 0001AC bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 0001B0 ori      60000000   1
+   67|                              CL.2:
+   69| 0001B4 lwz      821F0008   1     L4Z       gr16=<s19:d8:l4>(gr31,8)
+   69| 0001B8 extsw    7E0007B4   1     EXTS4     gr0=gr16
+   69| 0001BC sradi    7C03FE76   1     SRA8      gr3=gr0,63,ca"
+   69| 0001C0 andc     7C061878   1     ANDC      gr6=gr0,gr3
+   69| 0001C4 sradi    7CC31674   1     SRA8CA    gr3,ca=gr6,2
+   69| 0001C8 cmpdi    2F260000   1     C8        cr6=gr6,0
+   69| 0001CC addze    7C630194   1     ADDE      gr3,ca=gr3,0,ca
+   69| 0001D0 rldicr   78711764   1     SLL8      gr17=gr3,2
+   69| 0001D4 subf     7D313051   1     S_R       gr9,cr0=gr6,gr17
+   69| 0001D8 crand    4E01CA02   1     CR_N      cr4=cr[06],0x1/lt,0x2/gt,0x2/gt,cr4
+   69| 0001DC bc       40900070   1     BF        CL.102,cr4,0x1/lt,taken=50%(0,0)
+    0| 0001E0 cmpdi    2C390000   1     C8        cr0=gr25,0
+   69| 0001E4 addi     38600000   1     LI        gr3=0
+    0| 0001E8 bc       408107DC   1     BF        CL.288,cr0,0x2/gt,taken=40%(40,60)
+    0| 0001EC ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+    0| 0001F0 ld       E8A100E8   1     L8        gr5=#SPILL1(gr1,232)
+    0| 0001F4 mulld    7CF9E1D2   1     M         gr7=gr25,gr28
+    0| 0001F8 addi     3945FFF8   1     AI        gr10=gr5,-8
+    0| 0001FC cmpdi    2C3A0000   1     C8        cr0=gr26,0
+    0| 000200 lfs      C00400E0   1     LFS       fp0=+CONSTANT_AREA(gr4,224)
+   69|                              CL.97:
+   69| 000204 addi     38800000   1     LI        gr4=0
+    0| 000208 bc       40810034   1     BF        CL.101,cr0,0x2/gt,taken=50%(0,0)
+    0| 00020C or       7D485378   1     LR        gr8=gr10
+   69|                              CL.98:
+    0| 000210 addi     38840001   1     AI        gr4=gr4,1
+   69| 000214 or       7D054378   1     LR        gr5=gr8
+    0| 000218 mtspr    7F4903A6   1     LCTR      ctr=gr26
+    0| 00021C ori      60210000   1     XNOP      
+    0| 000220 ori      60210000   1     XNOP      
+    0| 000224 ori      60210000   1     XNOP      
+   69|                              CL.99:
+   69| 000228 stfdu    DC050008   1     STFDU     gr5,ar[](gr5,8)=fp0
+   69| 00022C bc       4200FFFC   1     BCT       ctr=CL.99,taken=100%(100,0)
+   69| 000230 cmpld    7CA4C840   1     CL8       cr1=gr4,gr25
+    0| 000234 add      7D08E214   1     A         gr8=gr8,gr28
+   69| 000238 bc       4184FFD8   1     BT        CL.98,cr1,0x8/llt,taken=80%(80,20)
+   69|                              CL.101:
+   69| 00023C addi     38630001   1     AI        gr3=gr3,1
+    0| 000240 add      7D475214   1     A         gr10=gr7,gr10
+   69| 000244 cmpd     7CA91800   1     C8        cr1=gr9,gr3
+   69| 000248 bc       4185FFBC   1     BT        CL.97,cr1,0x2/gt,taken=80%(80,20)
+   69|                              CL.102:
+   69| 00024C cmpd     7C264800   1     C8        cr0=gr6,gr9
+   69| 000250 crand    4F21CA02   1     CR_N      cr6=cr[06],0x2/gt,0x2/gt,0x2/gt,cr6
+   69| 000254 bc       409900F0   1     BF        CL.49,cr6,0x2/gt,taken=50%(0,0)
+    0| 000258 mulld    7CD9E1D2   1     M         gr6=gr25,gr28
+    0| 00025C rldicr   7B431764   1     SLL8      gr3=gr26,2
+    0| 000260 rldicr   7B4426E4   1     SLL8      gr4=gr26,4
+    0| 000264 subf     7CBA1850   1     S         gr5=gr3,gr26
+   69| 000268 addi     3871FFFF   1     AI        gr3=gr17,-1
+    0| 00026C rldicr   78A51F24   1     SLL8      gr5=gr5,3
+    0| 000270 mulld    7D4649D2   1     M         gr10=gr6,gr9
+   69| 000274 sradi    7C671674   1     SRA8CA    gr7,ca=gr3,2
+    0| 000278 cmpdi    2C390000   1     C8        cr0=gr25,0
+   69| 00027C addi     38600000   1     LI        gr3=0
+   69| 000280 addze    7CE70194   1     ADDE      gr7,ca=gr7,0,ca
+    0| 000284 bc       408100C0   1     BF        CL.49,cr0,0x2/gt,taken=20%(20,80)
+    0| 000288 ld       EAA100E8   1     L8        gr21=#SPILL1(gr1,232)
+    0| 00028C mulld    7D05C9D2   1     M         gr8=gr5,gr25
+    0| 000290 rldicr   7B4C2EA4   1     SLL8      gr12=gr26,5
+    0| 000294 mulld    7CA4C9D2   1     M         gr5=gr4,gr25
+    0| 000298 ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+    0| 00029C addi     396AFFF8   1     AI        gr11=gr10,-8
+    0| 0002A0 mulld    7D4CC9D2   1     M         gr10=gr12,gr25
+    0| 0002A4 add      7D6BAA14   1     A         gr11=gr11,gr21
+    0| 0002A8 addi     39870001   1     AI        gr12=gr7,1
+    0| 0002AC add      7F085A14   1     A         gr24=gr8,gr11
+    0| 0002B0 add      7EE65A14   1     A         gr23=gr6,gr11
+    0| 0002B4 add      7EC55A14   1     A         gr22=gr5,gr11
+    0| 0002B8 cmpdi    2C3A0000   1     C8        cr0=gr26,0
+    0| 0002BC lfs      C00400E0   1     LFS       fp0=+CONSTANT_AREA(gr4,224)
+   69|                              CL.50:
+   69| 0002C0 addi     38800000   1     LI        gr4=0
+    0| 0002C4 bc       40810064   1     BF        CL.51,cr0,0x2/gt,taken=20%(20,80)
+    0| 0002C8 or       7F15C378   1     LR        gr21=gr24
+    0| 0002CC or       7ED4B378   1     LR        gr20=gr22
+    0| 0002D0 or       7D735B78   1     LR        gr19=gr11
+    0| 0002D4 or       7EF2BB78   1     LR        gr18=gr23
+   69|                              CL.52:
+    0| 0002D8 addi     38840001   1     AI        gr4=gr4,1
+   69| 0002DC or       7EA5AB78   1     LR        gr5=gr21
+   69| 0002E0 or       7E86A378   1     LR        gr6=gr20
+   69| 0002E4 or       7E479378   1     LR        gr7=gr18
+   69| 0002E8 or       7E689B78   1     LR        gr8=gr19
+    0| 0002EC mtspr    7F4903A6   1     LCTR      ctr=gr26
+    0| 0002F0 ori      60210000   1     XNOP      
+    0| 0002F4 ori      60210000   1     XNOP      
+    0| 0002F8 ori      60210000   1     XNOP      
+    0|                              CL.410:
+   69| 0002FC stfdu    DC080008   1     STFDU     gr8,ar[](gr8,8)=fp0
+   69| 000300 stfdu    DC070008   1     STFDU     gr7,ar[](gr7,8)=fp0
+   69| 000304 stfdu    DC060008   1     STFDU     gr6,ar[](gr6,8)=fp0
+   69| 000308 stfdu    DC050008   1     STFDU     gr5,ar[](gr5,8)=fp0
+    0| 00030C bc       4200FFF0   1     BCT       ctr=CL.410,taken=100%(100,0)
+   69| 000310 cmpld    7CA4C840   1     CL8       cr1=gr4,gr25
+    0| 000314 add      7EB5E214   1     A         gr21=gr21,gr28
+    0| 000318 add      7E94E214   1     A         gr20=gr20,gr28
+    0| 00031C add      7E73E214   1     A         gr19=gr19,gr28
+    0| 000320 add      7E52E214   1     A         gr18=gr18,gr28
+   69| 000324 bc       4184FFB4   1     BT        CL.52,cr1,0x8/llt,taken=80%(80,20)
+   69|                              CL.51:
+   69| 000328 addi     38630001   1     AI        gr3=gr3,1
+    0| 00032C add      7F0AC214   1     A         gr24=gr10,gr24
+   69| 000330 cmpld    7CA36040   1     CL8       cr1=gr3,gr12
+    0| 000334 add      7EEABA14   1     A         gr23=gr10,gr23
+    0| 000338 add      7ECAB214   1     A         gr22=gr10,gr22
+    0| 00033C add      7D6A5A14   1     A         gr11=gr10,gr11
+   69| 000340 bc       4184FF80   1     BT        CL.50,cr1,0x8/llt,taken=80%(80,20)
+   69|                              CL.49:
+   70| 000344 bc       40900068   1     BF        CL.90,cr4,0x1/lt,taken=50%(0,0)
+    0| 000348 cmpdi    2C390000   1     C8        cr0=gr25,0
+   70| 00034C addi     38600000   1     LI        gr3=0
+    0| 000350 bc       40810660   1     BF        CL.298,cr0,0x2/gt,taken=40%(40,60)
+    0| 000354 ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+    0| 000358 ld       E8A100F0   1     L8        gr5=#SPILL2(gr1,240)
+    0| 00035C mulld    7CD9E1D2   1     M         gr6=gr25,gr28
+    0| 000360 addi     3905FFF8   1     AI        gr8=gr5,-8
+    0| 000364 cmpdi    2C3A0000   1     C8        cr0=gr26,0
+    0| 000368 lfs      C00400E0   1     LFS       fp0=+CONSTANT_AREA(gr4,224)
+   70|                              CL.85:
+   70| 00036C addi     38800000   1     LI        gr4=0
+    0| 000370 bc       4081002C   1     BF        CL.89,cr0,0x2/gt,taken=50%(0,0)
+    0| 000374 or       7D074378   1     LR        gr7=gr8
+   70|                              CL.86:
+    0| 000378 addi     38840001   1     AI        gr4=gr4,1
+   70| 00037C or       7CE53B78   1     LR        gr5=gr7
+    0| 000380 mtspr    7F4903A6   1     LCTR      ctr=gr26
+    0| 000384 ori      60210000   1     XNOP      
+   70|                              CL.87:
+   70| 000388 stfdu    DC050008   1     STFDU     gr5,ai[](gr5,8)=fp0
+   70| 00038C bc       4200FFFC   1     BCT       ctr=CL.87,taken=100%(100,0)
+   70| 000390 cmpld    7CA4C840   1     CL8       cr1=gr4,gr25
+    0| 000394 add      7CE7E214   1     A         gr7=gr7,gr28
+   70| 000398 bc       4184FFE0   1     BT        CL.86,cr1,0x8/llt,taken=80%(80,20)
+   70|                              CL.89:
+   70| 00039C addi     38630001   1     AI        gr3=gr3,1
+    0| 0003A0 add      7D083214   1     A         gr8=gr8,gr6
+   70| 0003A4 cmpd     7CA91800   1     C8        cr1=gr9,gr3
+   70| 0003A8 bc       4185FFC4   1     BT        CL.85,cr1,0x2/gt,taken=80%(80,20)
+   70|                              CL.90:
+   70| 0003AC bc       409900E8   1     BF        CL.55,cr6,0x2/gt,taken=50%(0,0)
+    0| 0003B0 mulld    7CB9E1D2   1     M         gr5=gr25,gr28
+    0| 0003B4 rldicr   7B431764   1     SLL8      gr3=gr26,2
+    0| 0003B8 rldicr   7B4626E4   1     SLL8      gr6=gr26,4
+    0| 0003BC subf     7C9A1850   1     S         gr4=gr3,gr26
+   70| 0003C0 addi     3871FFFF   1     AI        gr3=gr17,-1
+    0| 0003C4 rldicr   78841F24   1     SLL8      gr4=gr4,3
+    0| 0003C8 mulld    7D2929D2   1     M         gr9=gr9,gr5
+   70| 0003CC sradi    7C671674   1     SRA8CA    gr7,ca=gr3,2
+    0| 0003D0 cmpdi    2C390000   1     C8        cr0=gr25,0
+   70| 0003D4 addi     38600000   1     LI        gr3=0
+   70| 0003D8 addze    7CE70194   1     ADDE      gr7,ca=gr7,0,ca
+    0| 0003DC bc       408100B8   1     BF        CL.55,cr0,0x2/gt,taken=20%(20,80)
+    0| 0003E0 ld       EAC100F0   1     L8        gr22=#SPILL2(gr1,240)
+    0| 0003E4 mulld    7D06C9D2   1     M         gr8=gr6,gr25
+    0| 0003E8 rldicr   7B4B2EA4   1     SLL8      gr11=gr26,5
+    0| 0003EC mulld    7CC4C9D2   1     M         gr6=gr4,gr25
+    0| 0003F0 ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+    0| 0003F4 addi     3949FFF8   1     AI        gr10=gr9,-8
+    0| 0003F8 mulld    7D2BC9D2   1     M         gr9=gr11,gr25
+    0| 0003FC add      7D4AB214   1     A         gr10=gr10,gr22
+    0| 000400 addi     39670001   1     AI        gr11=gr7,1
+    0| 000404 add      7D885214   1     A         gr12=gr8,gr10
+    0| 000408 add      7F055214   1     A         gr24=gr5,gr10
+    0| 00040C add      7EE65214   1     A         gr23=gr6,gr10
+    0| 000410 cmpdi    2C3A0000   1     C8        cr0=gr26,0
+    0| 000414 lfs      C00400E0   1     LFS       fp0=+CONSTANT_AREA(gr4,224)
+   70|                              CL.56:
+   70| 000418 addi     38800000   1     LI        gr4=0
+    0| 00041C bc       4081005C   1     BF        CL.57,cr0,0x2/gt,taken=20%(20,80)
+    0| 000420 or       7D966378   1     LR        gr22=gr12
+    0| 000424 or       7EF5BB78   1     LR        gr21=gr23
+    0| 000428 or       7D545378   1     LR        gr20=gr10
+    0| 00042C or       7F13C378   1     LR        gr19=gr24
+   70|                              CL.58:
+    0| 000430 addi     38840001   1     AI        gr4=gr4,1
+   70| 000434 or       7EC5B378   1     LR        gr5=gr22
+   70| 000438 or       7EA6AB78   1     LR        gr6=gr21
+   70| 00043C or       7E679B78   1     LR        gr7=gr19
+   70| 000440 or       7E88A378   1     LR        gr8=gr20
+    0| 000444 mtspr    7F4903A6   1     LCTR      ctr=gr26
+    0| 000448 ori      60210000   1     XNOP      
+    0|                              CL.411:
+   70| 00044C stfdu    DC080008   1     STFDU     gr8,ai[](gr8,8)=fp0
+   70| 000450 stfdu    DC070008   1     STFDU     gr7,ai[](gr7,8)=fp0
+   70| 000454 stfdu    DC050008   1     STFDU     gr5,ai[](gr5,8)=fp0
+   70| 000458 stfdu    DC060008   1     STFDU     gr6,ai[](gr6,8)=fp0
+    0| 00045C bc       4200FFF0   1     BCT       ctr=CL.411,taken=100%(100,0)
+   70| 000460 cmpld    7CA4C840   1     CL8       cr1=gr4,gr25
+    0| 000464 add      7ED6E214   1     A         gr22=gr22,gr28
+    0| 000468 add      7EB5E214   1     A         gr21=gr21,gr28
+    0| 00046C add      7E94E214   1     A         gr20=gr20,gr28
+    0| 000470 add      7E73E214   1     A         gr19=gr19,gr28
+   70| 000474 bc       4184FFBC   1     BT        CL.58,cr1,0x8/llt,taken=80%(80,20)
+   70|                              CL.57:
+   70| 000478 addi     38630001   1     AI        gr3=gr3,1
+    0| 00047C add      7D896214   1     A         gr12=gr9,gr12
+   70| 000480 cmpld    7CA35840   1     CL8       cr1=gr3,gr11
+    0| 000484 add      7F09C214   1     A         gr24=gr9,gr24
+    0| 000488 add      7EE9BA14   1     A         gr23=gr9,gr23
+    0| 00048C add      7D495214   1     A         gr10=gr9,gr10
+   70| 000490 bc       4184FF88   1     BT        CL.56,cr1,0x8/llt,taken=80%(80,20)
+   70|                              CL.55:
+   73| 000494 ld       EB410108   1     L8        gr26=#SPILL5(gr1,264)
+   70| 000498 srawi    7E030E70   1     SRA4CA    gr3,ca=gr16,1
+    0| 00049C ld       E98100E8   1     L8        gr12=#SPILL1(gr1,232)
+   70| 0004A0 addze    7D630194   1     ADDE      gr11,ca=gr3,0,ca
+    0| 0004A4 ld       EB2100F0   1     L8        gr25=#SPILL2(gr1,240)
+   70| 0004A8 std      F9610110   1     ST8       #SPILL6(gr1,272)=gr11
+   73| 0004AC add      7C8BD214   1     A         gr4=gr11,gr26
+   73| 0004B0 extsw    7D6307B4   1     EXTS4     gr3=gr11
+   73| 0004B4 addi     38A4FFFF   1     AI        gr5=gr4,-1
+    0| 0004B8 add      7D1BE214   1     A         gr8=gr27,gr28
+   73| 0004BC extsw    7CA507B4   1     EXTS4     gr5=gr5
+    0| 0004C0 mulld    7C83D9D2   1     M         gr4=gr3,gr27
+   73| 0004C4 subf     7CC32850   1     S         gr6=gr5,gr3
+    0| 0004C8 addi     394CFFF8   1     AI        gr10=gr12,-8
+   73| 0004CC addic.   37060001   1     AI_R      gr24,cr0=gr6,1,ca"
+   73| 0004D0 srawi    7DE60E70   1     SRA4CA    gr6,ca=gr15,1
+   73| 0004D4 std      FB010118   1     ST8       #SPILL7(gr1,280)=gr24
+    0| 0004D8 addi     3939FFF8   1     AI        gr9=gr25,-8
+    0| 0004DC subf     7CA86050   1     S         gr5=gr12,gr8
+    0| 0004E0 subf     7CE8C850   1     S         gr7=gr25,gr8
+   73| 0004E4 addze    7CC60194   1     ADDE      gr6,ca=gr6,0,ca
+   73| 0004E8 bc       4081031C   1     BF        CL.61,cr0,0x2/gt,taken=20%(20,80)
+    0| 0004EC ld       E8620000   1     L8        gr3=.+CONSTANT_AREA(gr2,0)
+   73| 0004F0 addi     3AE00000   1     LI        gr23=0
+    0| 0004F4 subf     7EC85050   1     S         gr22=gr10,gr8
+   73| 0004F8 std      FAE10120   1     ST8       #SPILL8(gr1,288)=gr23
+    0| 0004FC std      FAC10128   1     ST8       #SPILL9(gr1,296)=gr22
+    0| 000500 subf     7D484850   1     S         gr10=gr9,gr8
+    0| 000504 add      7D042A14   1     A         gr8=gr4,gr5
+    0| 000508 std      F9410130   1     ST8       #SPILL10(gr1,304)=gr10
+    0| 00050C std      F9010138   1     ST8       #SPILL11(gr1,312)=gr8
+    0| 000510 add      7CA43A14   1     A         gr5=gr4,gr7
+    0| 000514 lfs      C3E300E0   1     LFS       fp31=+CONSTANT_AREA(gr3,224)
+    0| 000518 std      F8A10140   1     ST8       #SPILL12(gr1,320)=gr5
+    0| 00051C lfs      C3C300E4   1     LFS       fp30=+CONSTANT_AREA(gr3,228)
+    0| 000520 lfs      C3A300E8   1     LFS       fp29=+CONSTANT_AREA(gr3,232)
+   73|                              CL.62:
+    0| 000524 ld       E9010108   1     L8        gr8=#SPILL5(gr1,264)
+   74| 000528 ld       E92100E0   1     L8        gr9=#SPILL0(gr1,224)
+    0| 00052C ld       EB410120   1     L8        gr26=#SPILL8(gr1,288)
+    0| 000530 ld       EB210110   1     L8        gr25=#SPILL6(gr1,272)
+    0| 000534 subf     7C683050   1     S         gr3=gr6,gr8
+    0| 000538 add      7CA64214   1     A         gr5=gr6,gr8
+    0| 00053C addi     38630001   1     AI        gr3=gr3,1
+    0| 000540 addi     38A5FFFF   1     AI        gr5=gr5,-1
+    0| 000544 extsw    7C6307B4   1     EXTS4     gr3=gr3
+   74| 000548 subf     7C893050   1     S         gr4=gr6,gr9
+    0| 00054C extsw    7CA707B4   1     EXTS4     gr7=gr5
+   74| 000550 addi     38840001   1     AI        gr4=gr4,1
+    0| 000554 mulld    7CA3E1D2   1     M         gr5=gr3,gr28
+    0| 000558 extsw    7C8A07B4   1     EXTS4     gr10=gr4
+   74| 00055C subf     7C633850   1     S         gr3=gr7,gr3
+    0| 000560 std      F9410148   1     ST8       #SPILL13(gr1,328)=gr10
+    0| 000564 rldicr   794B0FA4   1     SLL8      gr11=gr10,1
+   74| 000568 addic.   35830001   1     AI_R      gr12,cr0=gr3,1,ca"
+    0| 00056C std      F9610150   1     ST8       #SPILL14(gr1,336)=gr11
+   74| 000570 std      F9810158   1     ST8       #SPILL15(gr1,344)=gr12
+    0| 000574 or       7CA42B78   1     LR        gr4=gr5
+    0| 000578 add      7C79D214   1     A         gr3=gr25,gr26
+   74| 00057C bc       4081024C   1     BF        CL.63,cr0,0x2/gt,taken=20%(20,80)
+    0| 000580 ld       EB010138   1     L8        gr24=#SPILL11(gr1,312)
+   74| 000584 addi     38C00000   1     LI        gr6=0
+    0| 000588 neg      7CEB00D0   1     COMP      gr7=gr11
+   74| 00058C std      F8C10160   1     ST8       #SPILL16(gr1,352)=gr6
+    0| 000590 std      F8E10168   1     ST8       #SPILL17(gr1,360)=gr7
+    0| 000594 extsw    7C7A07B4   1     EXTS4     gr26=gr3
+    0| 000598 add      7EE5C214   1     A         gr23=gr5,gr24
+    0| 00059C ld       E8A10140   1     L8        gr5=#SPILL12(gr1,320)
+    0| 0005A0 std      FAE10170   1     ST8       #SPILL18(gr1,368)=gr23
+    0| 0005A4 add      7EC42A14   1     A         gr22=gr4,gr5
+    0| 0005A8 mulld    7C8A51D2   1     M         gr4=gr10,gr10
+    0| 0005AC std      FAC10178   1     ST8       #SPILL19(gr1,376)=gr22
+    0| 0005B0 std      F8810180   1     ST8       #SPILL20(gr1,384)=gr4
+   74|                              CL.64:
+    0| 0005B4 ld       E9410108   1     L8        gr10=#SPILL5(gr1,264)
+    0| 0005B8 srawi    7FC30E70   1     SRA4CA    gr3,ca=gr30,1
+   75| 0005BC ld       E96100E0   1     L8        gr11=#SPILL0(gr1,224)
+    0| 0005C0 addze    7CC30194   1     ADDE      gr6,ca=gr3,0,ca
+    0| 0005C4 ld       E9210160   1     L8        gr9=#SPILL16(gr1,352)
+    0| 0005C8 subf     7C6A3050   1     S         gr3=gr6,gr10
+    0| 0005CC add      7C865214   1     A         gr4=gr6,gr10
+   75| 0005D0 subf     7CCB3050   1     S         gr6=gr6,gr11
+    0| 0005D4 addi     38630001   1     AI        gr3=gr3,1
+    0| 0005D8 addi     3884FFFF   1     AI        gr4=gr4,-1
+   75| 0005DC addi     39060001   1     AI        gr8=gr6,1
+    0| 0005E0 extsw    7C6607B4   1     EXTS4     gr6=gr3
+    0| 0005E4 extsw    7C8307B4   1     EXTS4     gr3=gr4
+    0| 0005E8 extsw    7D2507B4   1     EXTS4     gr5=gr9
+   75| 0005EC subf     7C661850   1     S         gr3=gr3,gr6
+   82| 0005F0 mulld    7CE529D2   1     M         gr7=gr5,gr5
+   75| 0005F4 addic.   35830001   1     AI_R      gr12,cr0=gr3,1,ca"
+    0| 0005F8 extsw    7D1907B4   1     EXTS4     gr25=gr8
+   75| 0005FC std      F9810188   1     ST8       #SPILL21(gr1,392)=gr12
+    0| 000600 rldicr   78C61F24   1     SLL8      gr6=gr6,3
+    0| 000604 rldicr   78A40FA4   1     SLL8      gr4=gr5,1
+   75| 000608 bc       40810178   1     BF        CL.65,cr0,0x2/gt,taken=20%(20,80)
+   82| 00060C ld       E9010180   1     L8        gr8=#SPILL20(gr1,384)
+    0| 000610 ld       EA610170   1     L8        gr19=#SPILL18(gr1,368)
+    0| 000614 ld       E9C10128   1     L8        gr14=#SPILL9(gr1,296)
+    0| 000618 rldicr   7B380FA4   1     SLL8      gr24=gr25,1
+    0| 00061C rldicr   7B231F24   1     SLL8      gr3=gr25,3
+    0| 000620 mulld    7EF9C9D2   1     M         gr23=gr25,gr25
+   82| 000624 add      7EC74214   1     A         gr22=gr7,gr8
+    0| 000628 ld       E8E10178   1     L8        gr7=#SPILL19(gr1,376)
+    0| 00062C add      7E869A14   1     A         gr20=gr6,gr19
+   75| 000630 addi     3A600000   1     LI        gr19=0
+    0| 000634 neg      7E1800D0   1     COMP      gr16=gr24
+    0| 000638 subf     7DC37050   1     S         gr14=gr14,gr3
+    0| 00063C add      7EA63A14   1     A         gr21=gr6,gr7
+    0| 000640 ld       E8C10148   1     L8        gr6=#SPILL13(gr1,328)
+    0| 000644 add      7E453214   1     A         gr18=gr5,gr6
+    0| 000648 ld       E8A10168   1     L8        gr5=#SPILL17(gr1,360)
+    0| 00064C subf     7E242850   1     S         gr17=gr5,gr4
+    0| 000650 ld       E8810130   1     L8        gr4=#SPILL10(gr1,304)
+    0| 000654 subf     7DE32050   1     S         gr15=gr4,gr3
+    0| 000658 ori      60210000   1     XNOP      
+    0| 00065C ori      60210000   1     XNOP      
+   75|                              CL.66:
+   75| 000660 srawi    7C030E70   1     SRA4CA    gr3,ca=gr0,1
+    0| 000664 extsw    7E6607B4   1     EXTS4     gr6=gr19
+   75| 000668 addze    7C630194   1     ADDE      gr3,ca=gr3,0,ca
+   75| 00066C srawi    7FC40E70   1     SRA4CA    gr4,ca=gr30,1
+   76| 000670 cmpw     7C03D000   1     C4        cr0=gr3,gr26
+   75| 000674 addze    7CE40194   1     ADDE      gr7,ca=gr4,0,ca
+   76| 000678 srawi    7FA30E70   1     SRA4CA    gr3,ca=gr29,1
+   82| 00067C rldicr   78C40FA4   1     SLL8      gr4=gr6,1
+   76| 000680 addze    7CA30194   1     ADDE      gr5,ca=gr3,0,ca
+   76| 000684 bc       40820024   1     BF        CL.30,cr0,0x4/eq,taken=50%(0,0)
+   78| 000688 subf     7C733850   1     S         gr3=gr7,gr19
+   77| 00068C cmpw     7C059000   1     C4        cr0=gr5,gr18
+   77| 000690 bc       41800018   1     BT        CL.30,cr0,0x1/lt,taken=50%(0,0)
+   78| 000694 cmpw     7C03C800   1     C4        cr0=gr3,gr25
+   78| 000698 bc       408200C4   1     BF        CL.36,cr0,0x4/eq,taken=50%(0,0)
+   78| 00069C add      7C73CA14   1     A         gr3=gr19,gr25
+   78| 0006A0 cmpw     7C071800   1     C4        cr0=gr7,gr3
+   78| 0006A4 bc       408000B8   1     BF        CL.36,cr0,0x1/lt,taken=50%(0,0)
+   80|                              CL.30:
+    0| 0006A8 extsw    7CE307B4   1     EXTS4     gr3=gr7
+   82| 0006AC neg      7C8400D0   1     COMP      gr4=gr4
+    0| 0006B0 extsw    7CA507B4   1     EXTS4     gr5=gr5
+   82| 0006B4 mulld    7CC631D2   1     M         gr6=gr6,gr6
+   82| 0006B8 mulld    7CE319D2   1     M         gr7=gr3,gr3
+   82| 0006BC mulld    7D0381D2   1     M         gr8=gr3,gr16
+   82| 0006C0 mulld    7C6321D2   1     M         gr3=gr3,gr4
+   82| 0006C4 mulld    7C8529D2   1     M         gr4=gr5,gr5
+   82| 0006C8 mulld    7CA589D2   1     M         gr5=gr5,gr17
+   82| 0006CC add      7CC6BA14   1     A         gr6=gr6,gr23
+   82| 0006D0 add      7C634214   1     A         gr3=gr3,gr8
+   82| 0006D4 add      7CC63A14   1     A         gr6=gr6,gr7
+   82| 0006D8 add      7C84B214   1     A         gr4=gr4,gr22
+   82| 0006DC add      7C633214   1     A         gr3=gr3,gr6
+   82| 0006E0 add      7C842A14   1     A         gr4=gr4,gr5
+   82| 0006E4 extsw    7C6307B4   1     EXTS4     gr3=gr3
+   82| 0006E8 extsw    7C8407B4   1     EXTS4     gr4=gr4
+   82| 0006EC std      F86100B8   1     ST8       #MX_CONVF1_1(gr1,184)=gr3
+   82| 0006F0 std      F88100C8   1     ST8       #MX_CONVF1_2(gr1,200)=gr4
+   82| 0006F4 lfd      C80100B8   1     LFL       fp0=#MX_CONVF1_1(gr1,184)
+   82| 0006F8 lfd      C82100C8   1     LFL       fp1=#MX_CONVF1_2(gr1,200)
+   82| 0006FC fcfid    FC00069C   1     FCFID     fp0=fp0,fcr
+   82| 000700 fcfid    FC200E9C   2     FCFID     fp1=fp1,fcr
+   82| 000704 frsp     FC000018   2     CVLS      fp0=fp0,fcr
+   82| 000708 frsp     FC200818   2     CVLS      fp1=fp1,fcr
+   82| 00070C fadds    EC20082A   1     AFS       fp1=fp0,fp1,fcr
+   82| 000710 fadds    EC00082A   1     AFS       fp0=fp0,fp1,fcr
+   82| 000714 fsqrts   EC00002C   1     SQRTFS    fp0=fp0,fcr
+   82| 000718 fmul     FC0007B2   1     MFL       fp0=fp0,fp30,fcr
+   84| 00071C fcmpu    FC1F0000   2     CFL       cr0=fp31,fp0
+   82| 000720 stfd     D8010090   1     STFL      kmag(gr1,144)=fp0
+   84| 000724 bc       408101B0   1     BF        CL.526,cr0,0x40/fgt,taken=40%(40,60)
+    0| 000728 b        48000034   1     B         CL.36,-1
+  101|                              CL.38:
+  103| 00072C mulld    7CA3D9D2   1     M         gr5=gr3,gr27
+  103| 000730 fneg     FC000050   1     COMPFL    fp0=fp0
+  103| 000734 mulld    7CE4E1D2   1     M         gr7=gr4,gr28
+  102| 000738 rldicr   7BC31F24   1     SLL8      gr3=gr30,3
+  102| 00073C or       7CA62B78   1     LR        gr6=gr5
+  102| 000740 add      7D037214   1     A         gr8=gr3,gr14
+  103| 000744 add      7CA57A14   1     A         gr5=gr5,gr15
+  102| 000748 or       7CE43B78   1     LR        gr4=gr7
+  102| 00074C add      7CC64214   1     A         gr6=gr6,gr8
+  103| 000750 add      7CA53A14   1     A         gr5=gr5,gr7
+  102| 000754 stfdx    7F6625AE   1     STFL      ar[](gr6,gr4,0)=fp27
+  103| 000758 stfdx    7C051DAE   1     STFL      ai[](gr5,gr3,0)=fp0
+  107|                              CL.36:
+  108| 00075C ld       E8610188   1     L8        gr3=#SPILL21(gr1,392)
+  108| 000760 addi     3A730001   1     AI        gr19=gr19,1
+    0| 000764 add      7EF7C214   1     A         gr23=gr23,gr24
+    0| 000768 addi     39CEFFF8   1     AI        gr14=gr14,-8
+    0| 00076C addi     39EFFFF8   1     AI        gr15=gr15,-8
+    0| 000770 addi     3AB50008   1     AI        gr21=gr21,8
+  108| 000774 cmpld    7C331840   1     CL8       cr0=gr19,gr3
+    0| 000778 addi     3A940008   1     AI        gr20=gr20,8
+  108| 00077C bc       4180FEE4   1     BT        CL.66,cr0,0x8/llt,taken=80%(80,20)
+  108|                              CL.65:
+  109| 000780 ld       E8610160   1     L8        gr3=#SPILL16(gr1,352)
+    0| 000784 ld       E8810150   1     L8        gr4=#SPILL14(gr1,336)
+    0| 000788 ld       E8A10180   1     L8        gr5=#SPILL20(gr1,384)
+  109| 00078C ld       E8C10158   1     L8        gr6=#SPILL15(gr1,344)
+    0| 000790 ld       E8E10170   1     L8        gr7=#SPILL18(gr1,368)
+    0| 000794 ld       E9010178   1     L8        gr8=#SPILL19(gr1,376)
+  109| 000798 addi     38630001   1     AI        gr3=gr3,1
+  109| 00079C std      F8610160   1     ST8       #SPILL16(gr1,352)=gr3
+    0| 0007A0 add      7CA42A14   1     A         gr5=gr4,gr5
+  109| 0007A4 cmpld    7C233040   1     CL8       cr0=gr3,gr6
+    0| 0007A8 std      F8A10180   1     ST8       #SPILL20(gr1,384)=gr5
+    0| 0007AC add      7CE7E214   1     A         gr7=gr7,gr28
+    0| 0007B0 add      7D08E214   1     A         gr8=gr8,gr28
+    0| 0007B4 std      F8E10170   1     ST8       #SPILL18(gr1,368)=gr7
+    0| 0007B8 std      F9010178   1     ST8       #SPILL19(gr1,376)=gr8
+  109| 0007BC bc       4180FDF8   1     BT        CL.64,cr0,0x8/llt,taken=80%(80,20)
+    0| 0007C0 srawi    7FA30E70   1     SRA4CA    gr3,ca=gr29,1
+    0| 0007C4 addze    7CC30194   1     ADDE      gr6,ca=gr3,0,ca
+  109|                              CL.63:
+  110| 0007C8 ld       E8610120   1     L8        gr3=#SPILL8(gr1,288)
+    0| 0007CC ld       E8810138   1     L8        gr4=#SPILL11(gr1,312)
+  110| 0007D0 ld       E8A10118   1     L8        gr5=#SPILL7(gr1,280)
+    0| 0007D4 ld       E8E10140   1     L8        gr7=#SPILL12(gr1,320)
+  110| 0007D8 addi     38630001   1     AI        gr3=gr3,1
+    0| 0007DC add      7C84DA14   1     A         gr4=gr4,gr27
+  110| 0007E0 std      F8610120   1     ST8       #SPILL8(gr1,288)=gr3
+  110| 0007E4 cmpld    7C232840   1     CL8       cr0=gr3,gr5
+    0| 0007E8 std      F8810138   1     ST8       #SPILL11(gr1,312)=gr4
+    0| 0007EC add      7CE7DA14   1     A         gr7=gr7,gr27
+    0| 0007F0 std      F8E10140   1     ST8       #SPILL12(gr1,320)=gr7
+  110| 0007F4 bc       4180FD30   1     BT        CL.62,cr0,0x8/llt,taken=80%(80,20)
+    0| 0007F8 srawi    7C000E70   1     SRA4CA    gr0,ca=gr0,1
+    0| 0007FC addze    7C000194   1     ADDE      gr0,ca=gr0,0,ca
+    0| 000800 extsw    7C0307B4   1     EXTS4     gr3=gr0
+  110|                              CL.61:
+  114| 000804 ld       E90100E8   1     L8        gr8=#SPILL1(gr1,232)
+  114| 000808 srawi    7FC00E70   1     SRA4CA    gr0,ca=gr30,1
+  114| 00080C extsw    7CC507B4   1     EXTS4     gr5=gr6
+  114| 000810 ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+  115| 000814 ld       E92100F0   1     L8        gr9=#SPILL2(gr1,240)
+  114| 000818 addze    7C000194   1     ADDE      gr0,ca=gr0,0,ca
+  114| 00081C add      7CDBE214   1     A         gr6=gr27,gr28
+  114| 000820 extsw    7C0007B4   1     EXTS4     gr0=gr0
+  114| 000824 addi     38E8FFF8   1     AI        gr7=gr8,-8
+  114| 000828 mulld    7CA5E1D2   1     M         gr5=gr5,gr28
+  114| 00082C mulld    7C63D9D2   1     M         gr3=gr3,gr27
+  114| 000830 rldicr   78001F24   1     SLL8      gr0=gr0,3
+  114| 000834 subf     7CE63850   1     S         gr7=gr7,gr6
+  114| 000838 lfs      C00400E0   1     LFS       fp0=+CONSTANT_AREA(gr4,224)
+  115| 00083C addi     3889FFF8   1     AI        gr4=gr9,-8
+  114| 000840 add      7CE03A14   1     A         gr7=gr0,gr7
+  115| 000844 subf     7C862050   1     S         gr4=gr4,gr6
+  114| 000848 add      7CC33A14   1     A         gr6=gr3,gr7
+  115| 00084C add      7C632214   1     A         gr3=gr3,gr4
+  115| 000850 add      7C802A14   1     A         gr4=gr0,gr5
+  119| 000854 ld       E8010270   1     L8        gr0=#stack(gr1,624)
+  119| 000858 lwa      E981026A   1     L4A       gr12=#stack(gr1,616)
+  119| 00085C lfd      CBE10258   1     LFL       fp31=#stack(gr1,600)
+  119| 000860 lfd      CBC10250   1     LFL       fp30=#stack(gr1,592)
+  119| 000864 lfd      CBA10248   1     LFL       fp29=#stack(gr1,584)
+  119| 000868 lfd      CB810240   1     LFL       fp28=#stack(gr1,576)
+  114| 00086C stfdx    7C062DAE   1     STFL      ar[](gr6,gr5,0)=fp0
+  119| 000870 lfd      CB610238   1     LFL       fp27=#stack(gr1,568)
+  119| 000874 lfd      CB410230   1     LFL       fp26=#stack(gr1,560)
+  119| 000878 addi     38210260   1     AI        gr1=gr1,608
+  119| 00087C mtspr    7C0803A6   1     LLR       lr=gr0
+  119| 000880 mtcrf    7D808120   1     MTCRF     cr4=gr12
+  119| 000884 ld       E9C1FF40   1     L8        gr14=#stack(gr1,-192)
+  119| 000888 ld       E9E1FF48   1     L8        gr15=#stack(gr1,-184)
+  119| 00088C ld       EA01FF50   1     L8        gr16=#stack(gr1,-176)
+  119| 000890 ld       EA21FF58   1     L8        gr17=#stack(gr1,-168)
+  119| 000894 ld       EA41FF60   1     L8        gr18=#stack(gr1,-160)
+  119| 000898 ld       EA61FF68   1     L8        gr19=#stack(gr1,-152)
+  119| 00089C ld       EA81FF70   1     L8        gr20=#stack(gr1,-144)
+  119| 0008A0 ld       EAA1FF78   1     L8        gr21=#stack(gr1,-136)
+  119| 0008A4 ld       EAC1FF80   1     L8        gr22=#stack(gr1,-128)
+  119| 0008A8 ld       EAE1FF88   1     L8        gr23=#stack(gr1,-120)
+  119| 0008AC ld       EB01FF90   1     L8        gr24=#stack(gr1,-112)
+  119| 0008B0 ld       EB21FF98   1     L8        gr25=#stack(gr1,-104)
+  119| 0008B4 ld       EB41FFA0   1     L8        gr26=#stack(gr1,-96)
+  119| 0008B8 ld       EB61FFA8   1     L8        gr27=#stack(gr1,-88)
+  119| 0008BC ld       EB81FFB0   1     L8        gr28=#stack(gr1,-80)
+  119| 0008C0 ld       EBA1FFB8   1     L8        gr29=#stack(gr1,-72)
+  119| 0008C4 ld       EBC1FFC0   1     L8        gr30=#stack(gr1,-64)
+  119| 0008C8 ld       EBE1FFC8   1     L8        gr31=#stack(gr1,-56)
+  115| 0008CC stfdx    7C0325AE   1     STFL      ai[](gr3,gr4,0)=fp0
+  119| 0008D0 bclr     4E800020   1     BA        lr
+    0|                              CL.526:
+   87| 0008D4 ld       E8620000   1     L8        gr3=.$STATIC(gr2,0)
+   87| 0008D8 addi     38810098   1     AI        gr4=gr1,152
+   87| 0008DC bl       48000001   1     CALL      gasdev,2,iseed",gr3,help1",gr4,#ProcAlias",gasdev",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   87| 0008E0 ori      60000000   1
+   88| 0008E4 ld       E8620000   1     L8        gr3=.$STATIC(gr2,0)
+   88| 0008E8 addi     388100A0   1     AI        gr4=gr1,160
+   88| 0008EC bl       48000001   1     CALL      ran1,2,iseed",gr3,help2",gr4,ran1",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   88| 0008F0 ori      60000000   1
+   88| 0008F4 addi     38610090   1     AI        gr3=gr1,144
+   88| 0008F8 ld       E88100F8   1     L8        gr4=#SPILL3(gr1,248)
+   88| 0008FC bl       48000001   1     CALL      fp1=sigma,2,kmag",gr3,idx,gr4,sigma",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   88| 000900 ori      60000000   1
+   90| 000904 lfd      C80100A0   1     LFL       fp0=help2(gr1,160)
+   89| 000908 lfd      C8410098   1     LFL       fp2=help1(gr1,152)
+   90| 00090C fadd     FC00002A   1     AFL       fp0=fp0,fp0,fcr
+   89| 000910 fmul     FF420072   2     MFL       fp26=fp2,fp1,fcr
+   90| 000914 fmul     FF800772   2     MFL       fp28=fp0,fp29,fcr
+   89| 000918 stfd     DB410098   1     STFL      help1(gr1,152)=fp26
+   92| 00091C fmr      FC20E090   1     LRFL      fp1=fp28
+   90| 000920 stfd     DB8100A0   1     STFL      help2(gr1,160)=fp28
+   92| 000924 bl       48000001   1     CALLN     fp1=__xl_cos,1,fp1,__xl_cos,#MX_TEMP1",__xl_cos",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   92| 000928 ori      60000000   1
+   92| 00092C fmul     FF7A0072   1     MFL       fp27=fp26,fp1,fcr
+   93| 000930 fmr      FC20E090   2     LRFL      fp1=fp28
+   92| 000934 stfd     DB74FFF8   1     STFL      ar[](gr20,-8)=fp27
+   93| 000938 bl       48000001   1     CALLN     fp1=__xl_sin,1,fp1,__xl_sin,#MX_TEMP1",__xl_sin",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   93| 00093C ori      60000000   1
+   93| 000940 fmul     FC1A0072   1     MFL       fp0=fp26,fp1,fcr
+    0| 000944 lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+   99| 000948 fneg     FC20D850   1     COMPFL    fp1=fp27
+   94| 00094C ld       E8E10100   1     L8        gr7=#SPILL4(gr1,256)
+    0| 000950 lwz      80BF0004   1     L4Z       gr5=<s19:d4:l4>(gr31,4)
+    0| 000954 lwa      EBDF0002   1     L4A       gr30=<s19:d0:l4>(gr31,0)
+    0| 000958 subf     7C7A0050   1     S         gr3=gr0,gr26
+   93| 00095C stfd     D815FFF8   1     STFL      ai[](gr21,-8)=fp0
+   94| 000960 lwz      80C70000   1     L4Z       gr6=cc(gr7,0)
+    0| 000964 subf     7C922850   1     S         gr4=gr5,gr18
+    0| 000968 extsw    7C6307B4   1     EXTS4     gr3=gr3
+    0| 00096C extsw    7C8407B4   1     EXTS4     gr4=gr4
+    0| 000970 extsw    7CBD07B4   1     EXTS4     gr29=gr5
+    0| 000974 extsw    7C0007B4   1     EXTS4     gr0=gr0
+   94| 000978 cmpwi    2C060001   1     C4        cr0=gr6,1
+   94| 00097C bc       4082FDB0   1     BF        CL.38,cr0,0x4/eq,taken=50%(0,0)
+  100| 000980 mulld    7CE3D9D2   1     M         gr7=gr3,gr27
+  100| 000984 mulld    7CC4E1D2   1     M         gr6=gr4,gr28
+   99| 000988 rldicr   7BC31F24   1     SLL8      gr3=gr30,3
+   99| 00098C or       7CE53B78   1     LR        gr5=gr7
+   99| 000990 add      7D037214   1     A         gr8=gr3,gr14
+  100| 000994 add      7CE77A14   1     A         gr7=gr7,gr15
+   99| 000998 or       7CC43378   1     LR        gr4=gr6
+   99| 00099C add      7CA54214   1     A         gr5=gr5,gr8
+  100| 0009A0 add      7CC63A14   1     A         gr6=gr6,gr7
+   99| 0009A4 stfdx    7C2525AE   1     STFL      ar[](gr5,gr4,0)=fp1
+  100| 0009A8 stfdx    7C061DAE   1     STFL      ai[](gr6,gr3,0)=fp0
+  101| 0009AC b        4BFFFDB0   1     B         CL.36,-1
+   70|                              CL.298:
+    0| 0009B0 mtspr    7D2903A6   1     LCTR      ctr=gr9
+   70|                              CL.247:
+   70| 0009B4 addi     38630001   1     AI        gr3=gr3,1
+   70| 0009B8 cmpd     7C234800   1     C8        cr0=gr3,gr9
+   70| 0009BC bc       4100FFF8   1     BCTT      ctr=CL.247,cr0,0x1/lt,taken=80%(80,20)
+    0| 0009C0 b        4BFFF9EC   1     B         CL.90,-1
+   69|                              CL.288:
+    0| 0009C4 mtspr    7D2903A6   1     LCTR      ctr=gr9
+   69|                              CL.277:
+   69| 0009C8 addi     38630001   1     AI        gr3=gr3,1
+   69| 0009CC cmpd     7C234800   1     C8        cr0=gr3,gr9
+   69| 0009D0 bc       4100FFF8   1     BCTT      ctr=CL.277,cr0,0x1/lt,taken=80%(80,20)
+    0| 0009D4 b        4BFFF878   1     B         CL.102,-1
+    0|                              CL.524:
+   59| 0009D8 ld       E8A20000   1     L8        gr5=.$STATIC(gr2,0)
+   59| 0009DC addi     38000000   1     LI        gr0=0
+   59| 0009E0 addi     38800101   1     LI        gr4=257
+   59| 0009E4 addi     38600006   1     LI        gr3=6
+   59| 0009E8 ori      60068000   1     OIL       gr6=gr0,0x8000
+   59| 0009EC addi     38E00000   1     LI        gr7=0
+   59| 0009F0 addi     38A50060   1     AI        gr5=gr5,96
+   59| 0009F4 addi     39000000   1     LI        gr8=0
+   59| 0009F8 addi     39200000   1     LI        gr9=0
+   59| 0009FC bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#12",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,@PALI_SHADOW_CONST.rns0.,gr9,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   59| 000A00 ori      60000000   1
+   59| 000A04 ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+   59| 000A08 or       7C7F1B78   1     LR        gr31=gr3
+   59| 000A0C addi     38A00019   1     LI        gr5=25
+   59| 000A10 addi     38C00001   1     LI        gr6=1
+   59| 000A14 addi     38840090   1     AI        gr4=gr4,144
+   59| 000A18 bl       48000001   1     CALL      _xlfWriteLDChar,4,gr3-gr6,_xlfWriteLDChar",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   59| 000A1C ori      60000000   1
+   59| 000A20 or       7FE3FB78   1     LR        gr3=gr31
+   59| 000A24 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   59| 000A28 ori      60000000   1
+   60| 000A2C addi     38600000   1     LI        gr3=0
+   60| 000A30 addi     38800000   1     LI        gr4=0
+   60| 000A34 bl       48000001   1     CALL      _xlfStop,2,@PALI_SHADOW_CONST.rns0.,gr3,gr4,_xlfStop",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   60| 000A38 ori      60000000   1
+   60| 000A3C tw       7C8E7008   1     TRAP      9
+     | 000A40 b        48000000   1
+     |               Tag Table
+     | 000A44        00000000 00012203 86120000 00000A44
+     |               Instruction count          657
+     |               Straight-line exec time    666
+     |               Constant Area
+     | 000000        666F7572 616D702E 66393000 666F7572 616D702E 66393049
+     | 000018        00000000 80010000 00000000 0000000F 00000000 00000001
+     | 000030        00000000 00000006 00000000 00000000 00000000 80020000
+     | 000048        00000000 002C0000 00000000 001E0011 00000000 00000009
+     | 000060        00000000 00000002 00000000 002C0000 00000000 001E0011
+     | 000078        00000000 00000009 00000000 00000002 00000000 80050000
+     | 000090        464F5552 414D503A 2054776F 206D616E 79206D6F 64657320
+     | 0000A8        2149424D 464F5552 414D503A 20457863 69746564 206B2D6D
+     | 0000C0        6F646520 72616E67 653A206B 6D696E3A 2020206B 6D61783A
+     | 0000D8        4025C3FD E02E3DA0 00000000 40C90FDB 40490FDB
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    fouramp.f90                 07/08/15   15:48:56
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     119
+1501-510  Compilation successful for file fouramp.f90.
+1501-543  Object file created.

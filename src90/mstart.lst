@@ -1,0 +1,2731 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- mstart.f90 07/08/15 15:48:20
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+ "mstart.f90", line 74.1: 1515-021 (E) Syntax error: Token " & " is expected.
+ "mstart.f90", line 75.1: 1515-021 (E) Syntax error: Token " & " is expected.
+** mstart   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-550 (I) Loop (loop index 1) at mstart.f90 <line 159> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 1) at mstart.f90 <line 160> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-550 (I) Loop (loop index 2) at mstart.f90 <line 180> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 2) at mstart.f90 <line 181> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-550 (I) Loop (loop index 3) at mstart.f90 <line 201> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 3) at mstart.f90 <line 202> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"3">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+     7|         SUBROUTINE mstart ()
+    40|           IF (.NOT.(myid_w == 0)) GOTO lab_42
+    41|           |speclist%version = 129
+                  |speclist%spec_list%spec_key.off8 = 16
+                  |speclist%spec_list%spec_value_addr.off16 = "zmp_inp"
+                  |speclist%spec_list%spec_value_val.off24 = 7
+                  |speclist%spec_list%spec_key.off32 = 48
+                  |speclist%spec_list%spec_value_addr.off40 = NULL
+                  |speclist%spec_list%spec_key_int4.off48 = 34
+                  |speclist%spec_list%spec_key.off56 = 118
+                  |speclist%spec_list%spec_val_i4.off64 = 41
+                  |speclist%spec_list%spec_key.off80 = 120
+                  |speclist%spec_list%spec_value_addr.off88 = "mstart.f90"
+                  |speclist%spec_list%spec_value_val.off96 = 10
+                  |speclist%spec_count = 4
+                  _xlfIOCmd(1,0,|speclist,268435456,iost)
+                  GOTO lab_1
+    44|           lab_1
+    51|           ntiles[].off132 = 1
+    52|           ntiles[].off136 = 1
+    53|           ntiles[].off140 = 1
+    54|           periodic[].off108 = 0
+    55|           periodic[].off112 = 0
+    56|           periodic[].off116 = 0
+    58|           |mpitop%name_flags = 0
+                  #2 = _xlfBeginIO(1,2,#1,32768,NULL,0,|mpitop)
+                  _xlfEndIO(%VAL(#2))
+    59|           |mpitop%name_flags = 0
+                  #4 = _xlfBeginIO(2,258,#3,32768,NULL,0,|mpitop)
+                  _xlfEndIO(%VAL(#4))
+    41|           lab_42
+                  ntiles[].off132 = 1
+                  ntiles[].off136 = 1
+                  ntiles[].off140 = 1
+                  periodic[].off108 = 0
+                  periodic[].off112 = 0
+                  periodic[].off116 = 0
+                  GOTO lab_2
+    60|           lab_2
+    65|           T_2 = 3
+                  T_3 = 1275069467
+                  T_4 = 0
+                  T_5 = 1140850688
+                  CALL mpi_bcast(ntiles,T_2,T_3,T_4,T_5,ierr)
+    66|           T_6 = 3
+                  T_7 = 1275069469
+                  T_8 = 0
+                  T_9 = 1140850688
+                  CALL mpi_bcast(periodic,T_6,T_7,T_8,T_9,ierr)
+    71|           IF (.NOT.(nprocs_w <> ntiles[].off140 * (ntiles[].off136 * &
+                &   ntiles[].off132))) GOTO lab_3
+    72|           IF ((myid_w == 0)) THEN
+    73|             |fmt_args%version = 129
+                    |fmt_args%fmt_string_addr = NULL
+                    |fmt_args%fmt_string_len = int(("mpitopIB + 270))
+                    |fmt_args%stack_frame = NULL
+                    |fmt_args%call_back = NULL
+                    #6 = _xlfBeginIO(6,259,#5,32772,NULL,0,|fmt_args)
+                    CALL _xlfWriteFmt(%VAL(#6),nprocs_w,4,4,0)
+                    T_10 = ntiles[].off140 * (ntiles[].off136 * ntiles[].off132)&
+                &     
+                    CALL _xlfWriteFmt(%VAL(#6),T_10,4,4,0)
+                    _xlfEndIO(%VAL(#6))
+                  ENDIF
+    77|           CALL mpi_finalize(ierr)
+    78|           CALL _xlfStop(NULL,0)
+                  RETURN
+    79|           lab_3
+    83|           T_11 = 1140850688
+                  T_12 = 3
+                  CALL mpi_cart_create(T_11,T_12,ntiles,periodic,reorder,comm3d,&
+                &   ierr)
+    85|           CALL mpi_comm_rank(comm3d,myid,ierr)
+    86|           CALL mpi_comm_size(comm3d,nprocs,ierr)
+    90|           T_13 = 0
+                  T_14 = 1
+                  CALL mpi_cart_shift(comm3d,T_13,T_14,n1m,n1p,ierr)
+    91|           T_15 = 1
+                  T_16 = 1
+                  CALL mpi_cart_shift(comm3d,T_15,T_16,n2m,n2p,ierr)
+    92|           T_17 = 2
+                  T_18 = 1
+                  CALL mpi_cart_shift(comm3d,T_17,T_18,n3m,n3p,ierr)
+    94|           T_19 = 3
+                  CALL mpi_cart_coords(comm3d,myid,T_19,coords,ierr)
+   105|           IF ((myid_w == 0)) THEN
+   106|             irestart = 0
+   107|             tdump =  0.0000000000000000E+000
+   108|             dtdump =  0.0000000000000000E+000
+   109|             CALL _dconcat("aa",2,id,2)
+   110|             CALL _dconcat("resaa000000.0000",16,resfile,16)
+   111|             |rescon%name_flags = 0
+                    #8 = _xlfBeginIO(1,2,#7,32768,NULL,0,|rescon)
+                    _xlfEndIO(%VAL(#8))
+   112|             |rescon%name_flags = 0
+                    #10 = _xlfBeginIO(2,258,#9,32768,NULL,0,|rescon)
+                    _xlfEndIO(%VAL(#10))
+   113|           ENDIF
+   117|           T_20 = 1
+                  T_21 = 1275069467
+                  T_22 = 0
+                  T_23 = 1140850688
+                  CALL mpi_bcast(irestart,T_20,T_21,T_22,T_23,ierr)
+   118|           T_24 = 2
+                  T_25 = 1275068698
+                  T_26 = 0
+                  T_27 = 1140850688
+                  CALL mpi_bcast(id,T_24,T_25,T_26,T_27,ierr,2)
+   119|           T_28 = 16
+                  T_29 = 1275068698
+                  T_30 = 0
+                  T_31 = 1140850688
+                  CALL mpi_bcast(resfile,T_28,T_29,T_30,T_31,ierr,16)
+   123|           IF ((myid_w == 0)) THEN
+                    _xlfIOCmd(1,1,#11,0,NULL)
+                  ENDIF
+   124|           IF ((irestart == 0)) THEN
+   125|             CALL setup()
+   126|             time =  0.0000000000000000E+000
+   127|           ELSE
+   128|             T_32 = 13
+                    T_33 = 16
+                    incr.rnn6 = strtoi(resfile,T_32,T_33,16)
+   129|             |int_file%file_size = 
+                    |int_file%record_length = 16
+                    |int_file%address = loc(resfile)
+                    |fmt_args%version = 129
+                    |fmt_args%fmt_string_addr = NULL
+                    |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                    |fmt_args%stack_frame = NULL
+                    |fmt_args%call_back = NULL
+                    #13 = _xlfBeginIO(|int_file,8388867,#12,32772,NULL,0,&
+                &     |fmt_args)
+                    CALL _xlfWriteFmt(%VAL(#13),"res",3,1,2)
+                    CALL _xlfWriteFmt(%VAL(#13),id,2,1,2)
+                    CALL _xlfWriteFmt(%VAL(#13),(coords + (-4) + (4)*(1)),4,4,0)&
+                &     
+                    CALL _xlfWriteFmt(%VAL(#13),(coords + (-4) + (4)*(2)),4,4,0)&
+                &     
+                    CALL _xlfWriteFmt(%VAL(#13),(coords + (-4) + (4)*(3)),4,4,0)&
+                &     
+                    #14 = incr.rnn6
+                    CALL _xlfWriteFmt(%VAL(#13),#14,4,4,0)
+                    _xlfEndIO(%VAL(#13))
+   131|             CALL mget(resfile,16)
+   132|             nwarn = 0
+   133|             ifsen[].off632 = 0
+   134|             CALL restart()
+   135|           ENDIF
+   148|           IF ((myid_w == 0)) THEN
+   149|             |speclist%version = 129
+                    |speclist%spec_list%spec_key.off8 = 16
+                    |speclist%spec_list%spec_value_addr.off16 = "zmp_inp"
+                    |speclist%spec_list%spec_value_val.off24 = 7
+                    |speclist%spec_list%spec_key.off32 = 48
+                    |speclist%spec_list%spec_value_addr.off40 = NULL
+                    |speclist%spec_list%spec_key_int4.off48 = 34
+                    |speclist%spec_list%spec_key.off56 = 118
+                    |speclist%spec_list%spec_val_i4.off64 = 149
+                    |speclist%spec_list%spec_key.off80 = 120
+                    |speclist%spec_list%spec_value_addr.off88 = "mstart.f90"
+                    |speclist%spec_list%spec_value_val.off96 = 10
+                    |speclist%spec_count = 4
+                    _xlfIOCmd(1,0,|speclist,268435456,iost)
+   150|             IF ((irestart == 0)) THEN
+   151|               thdf =  0.0000000000000000E+000
+   152|               dthdf =  0.0000000000000000E+000
+   153|               ttsl =  0.0000000000000000E+000
+   154|               dttsl =  0.0000000000000000E+000
+   155|               thist =  0.0000000000000000E+000
+   156|               dthist =  0.0000000000000000E+000
+   157|               tusr =  0.0000000000000000E+000
+   158|               dtusr =  3.1536000000000000E+007
+   159|               IF (.FALSE.) GOTO lab_35
+                      CALL __alignx(32,((&&N&&config + (-8) + (8)*(1)) + 128))
+                      $$CIV0 = 0
+       Id=1           DO $$CIV0 = $$CIV0, 191
+   160|                 t_out($$CIV0 + 1) =  0.0000000000000000E+000
+   161|               ENDDO
+                      lab_35
+   162|               lab_10
+   163|               |iocon%name_flags = 0
+                      #16 = _xlfBeginIO(1,2,#15,32768,NULL,0,|iocon)
+                      _xlfEndIO(%VAL(#16))
+   164|               |iocon%name_flags = 0
+                      #18 = _xlfBeginIO(2,258,#17,32768,NULL,0,|iocon)
+                      _xlfEndIO(%VAL(#18))
+   168|               buf_in[].off1744 = thdf
+   169|               buf_in[].off1752 = dthdf
+   170|               buf_in[].off1760 = thist
+   171|               buf_in[].off1768 = dthist
+   172|               buf_in[].off1776 = tusr
+   173|               buf_in[].off1784 = dtusr
+   174|               buf_in[].off1792 = tdump
+   175|               buf_in[].off1800 = dtdump
+   176|               buf_in[].off1808 =  0.0000000000000000E+000
+   177|               buf_in[].off1816 =  0.0000000000000000E+000
+   178|               buf_in[].off1824 = ttsl
+   179|               buf_in[].off1832 = dttsl
+   180|               IF (.FALSE.) GOTO lab_37
+                      CALL __alignx(32,((&&N&&config + (-8) + (8)*(1)) + 128))
+                      $$CIV1 = 0
+       Id=2           DO $$CIV1 = $$CIV1, 187
+   181|                 buf_in($$CIV1 + 13) = t_out($$CIV1 + 1)
+   182|               ENDDO
+                      lab_37
+   183|               lab_15
+   188|               T_34 = 200
+                      T_35 = 1275070495
+                      T_36 = 0
+                      T_37 = 1140850688
+                      CALL mpi_bcast(buf_in,T_34,T_35,T_36,T_37,ierr)
+   190|               IF ((myid_w <> 0)) THEN
+   191|                 thdf = buf_in[].off1744
+   192|                 dthdf = buf_in[].off1752
+   193|                 thist = buf_in[].off1760
+   194|                 dthist = buf_in[].off1768
+   195|                 tusr = buf_in[].off1776
+   196|                 dtusr = buf_in[].off1784
+   197|                 tdump = buf_in[].off1792
+   198|                 dtdump = buf_in[].off1800
+   199|                 ttsl = buf_in[].off1824
+   200|                 dttsl = buf_in[].off1832
+   201|                 IF (.FALSE.) GOTO lab_39
+                        CALL __alignx(32,((&&N&&config + (-8) + (8)*(1)) + 128))&
+                &         
+                        $$CIV2 = 0
+       Id=3             DO $$CIV2 = $$CIV2, 187
+   202|                   t_out($$CIV2 + 1) = buf_in($$CIV2 + 13)
+   203|                 ENDDO
+                        lab_39
+   204|                 lab_20
+   209|                 IF ((irestart == 0)) THEN
+   210|                   incr = 0
+   211|                   ifsen[].off636 = 1
+   212|                   ifsen[].off640 = 1
+   213|                   ifsen[].off644 = 1
+   214|                   ifsen[].off648 = 1
+   215|                   ifsen[].off652 = 1
+   216|                   |int_file%file_size = 
+                          |int_file%record_length = 9
+                          |int_file%address = loc(tslfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 830))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #20 = _xlfBeginIO(|int_file,8388867,#19,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#20),"tsl",3,1,2)
+                          #21 = 0
+                          CALL _xlfWriteFmt(%VAL(#20),#21,4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#20),id,2,1,2)
+                          _xlfEndIO(%VAL(#20))
+   217|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(resfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #23 = _xlfBeginIO(|int_file,8388867,#22,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#23),"res",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#23),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#23),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#23),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#23),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #24 = 0
+                          CALL _xlfWriteFmt(%VAL(#23),#24,4,4,0)
+                          _xlfEndIO(%VAL(#23))
+   219|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(hdffile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #26 = _xlfBeginIO(|int_file,8388867,#25,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#26),"hdf",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#26),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#26),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#26),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#26),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #27 = 0
+                          CALL _xlfWriteFmt(%VAL(#26),#27,4,4,0)
+                          _xlfEndIO(%VAL(#26))
+   221|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(hstfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #29 = _xlfBeginIO(|int_file,8388867,#28,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#29),"hst",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#29),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#29),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#29),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#29),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #30 = 0
+                          CALL _xlfWriteFmt(%VAL(#29),#30,4,4,0)
+                          _xlfEndIO(%VAL(#29))
+   223|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(usrfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #32 = _xlfBeginIO(|int_file,8388867,#31,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#32),"usr",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#32),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#32),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#32),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#32),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #33 = 0
+                          CALL _xlfWriteFmt(%VAL(#32),#33,4,4,0)
+                          _xlfEndIO(%VAL(#32))
+   225|                 ELSE
+   226|                   ifsen[].off636 = 0
+   227|                   ifsen[].off640 = 0
+   228|                   ifsen[].off644 = 0
+   229|                   ifsen[].off648 = 0
+   230|                   ifsen[].off652 = 0
+   231|                   T_38 = 4
+                          T_39 = 7
+                          $$RET0 = strtoi(tslfile,T_38,T_39,9)
+   232|                   |int_file%file_size = 
+                          |int_file%record_length = 9
+                          |int_file%address = loc(tslfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 830))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #35 = _xlfBeginIO(|int_file,8388867,#34,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#35),"tsl",3,1,2)
+                          #36 = $$RET0 + 1
+                          CALL _xlfWriteFmt(%VAL(#35),#36,4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#35),id,2,1,2)
+                          _xlfEndIO(%VAL(#35))
+   233|                   T_40 = 13
+                          T_41 = 16
+                          $$RET1 = strtoi(resfile,T_40,T_41,16)
+   234|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(resfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #38 = _xlfBeginIO(|int_file,8388867,#37,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#38),"res",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#38),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#38),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#38),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#38),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #39 = $$RET1 + 1
+                          CALL _xlfWriteFmt(%VAL(#38),#39,4,4,0)
+                          _xlfEndIO(%VAL(#38))
+   236|                   T_42 = 13
+                          T_43 = 16
+                          $$RET2 = strtoi(hdffile,T_42,T_43,16)
+   237|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(hdffile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #41 = _xlfBeginIO(|int_file,8388867,#40,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#41),"hdf",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#41),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#41),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#41),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#41),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #42 = $$RET2 + 1
+                          CALL _xlfWriteFmt(%VAL(#41),#42,4,4,0)
+                          _xlfEndIO(%VAL(#41))
+   239|                   T_44 = 13
+                          T_45 = 16
+                          $$RET3 = strtoi(usrfile,T_44,T_45,16)
+                          incr = $$RET3 + 1
+   240|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(usrfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #44 = _xlfBeginIO(|int_file,8388867,#43,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#44),"usr",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#44),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#44),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#44),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#44),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #45 = $$RET3 + 1
+                          CALL _xlfWriteFmt(%VAL(#44),#45,4,4,0)
+                          _xlfEndIO(%VAL(#44))
+   242|                 ENDIF
+   243|                 IF ((0 <> (xtsl  .AND.  1))) THEN
+   244|                   IF (.NOT.(myid_w == 0)) GOTO lab_28
+   245|                   |speclist%version = 129
+                          |speclist%spec_list%spec_key.off8 = 16
+                          |speclist%spec_list%spec_value_addr.off16 = loc(&
+                &           tslfile)
+                          |speclist%spec_list%spec_value_val.off24 = 9
+                          |speclist%spec_list%spec_key.off32 = 48
+                          |speclist%spec_list%spec_value_addr.off40 = NULL
+                          |speclist%spec_list%spec_key_int4.off48 = 51
+                          |speclist%spec_list%spec_key.off56 = 118
+                          |speclist%spec_list%spec_val_i4.off64 = 245
+                          |speclist%spec_list%spec_key.off80 = 120
+                          |speclist%spec_list%spec_value_addr.off88 = &
+                &           "mstart.f90"
+                          |speclist%spec_list%spec_value_val.off96 = 10
+                          |speclist%spec_count = 4
+                          _xlfIOCmd(31,0,|speclist,268435456,NULL)
+   246|                   lab_28
+   247|                   lab_27
+   249|                   IF ((0 <> (xhst  .AND.  1))) THEN
+   250|                     |speclist%version = 129
+                            |speclist%spec_list%spec_key.off8 = 16
+                            |speclist%spec_list%spec_value_addr.off16 = loc(&
+                &             hstfile)
+                            |speclist%spec_list%spec_value_val.off24 = 16
+                            |speclist%spec_list%spec_key.off32 = 48
+                            |speclist%spec_list%spec_value_addr.off40 = NULL
+                            |speclist%spec_list%spec_key_int4.off48 = 51
+                            |speclist%spec_list%spec_key.off56 = 118
+                            |speclist%spec_list%spec_val_i4.off64 = 250
+                            |speclist%spec_list%spec_key.off80 = 120
+                            |speclist%spec_list%spec_value_addr.off88 = &
+                &             "mstart.f90"
+                            |speclist%spec_list%spec_value_val.off96 = 10
+                            |speclist%spec_count = 4
+                            _xlfIOCmd(3,0,|speclist,268435456,NULL)
+   251|                   ENDIF
+   252|                   IF ((incr + 1 <= 190)) THEN
+   256|                     IF (.NOT.(t_out(int((incr + 1))) >  &
+                &             0.0000000000000000E+000)) GOTO lab_31
+   257|                     tusr = t_out(int((incr + 1))) - dtusr
+   258|                     thdf = t_out(int((incr + 1))) - dthdf
+   259|                     lab_31
+   260|                     lab_30
+   265|                     IF ((myid_w == 0)) THEN
+                              _xlfIOCmd(1,1,#46,0,NULL)
+                            ENDIF
+   269|                     IF ((irestart == 0)) THEN
+   272|                       CALL dataio((ifsen + (-4) + (4)*(2)),(ifsen + (-4)&
+                &                + (4)*(3)),(ifsen + (-4) + (4)*(4)),(ifsen + (-4)&
+                &                + (4)*(5)),(ifsen + (-4) + (4)*(6)))
+   273|                       nhy = 0
+   274|                     ELSE
+   275|                       nhy = 0
+   279|                     ENDIF
+                            RETURN
+                          END SUBROUTINE mstart
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0           159             1    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0           160                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           180             2    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0           181                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           201             3    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0           202                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+
+
+     7|         SUBROUTINE mstart ()
+    40|           IF (.NOT.(myid_w == 0)) GOTO lab_42
+    41|           |speclist%version = 129
+                  |speclist%spec_list%spec_key.off8 = 16
+                  |speclist%spec_list%spec_value_addr.off16 = "zmp_inp"
+                  |speclist%spec_list%spec_value_val.off24 = 7
+                  |speclist%spec_list%spec_key.off32 = 48
+                  |speclist%spec_list%spec_value_addr.off40 = NULL
+                  |speclist%spec_list%spec_key_int4.off48 = 34
+                  |speclist%spec_list%spec_key.off56 = 118
+                  |speclist%spec_list%spec_val_i4.off64 = 41
+                  |speclist%spec_list%spec_key.off80 = 120
+                  |speclist%spec_list%spec_value_addr.off88 = "mstart.f90"
+                  |speclist%spec_list%spec_value_val.off96 = 10
+                  |speclist%spec_count = 4
+                  _xlfIOCmd(1,0,|speclist,268435456,iost)
+                  GOTO lab_1
+    44|           lab_1
+    51|           ntiles[].off132 = 1
+    52|           ntiles[].off136 = 1
+    53|           ntiles[].off140 = 1
+    54|           periodic[].off108 = 0
+    55|           periodic[].off112 = 0
+    56|           periodic[].off116 = 0
+    58|           |mpitop%name_flags = 0
+                  #2 = _xlfBeginIO(1,2,#1,32768,NULL,0,|mpitop)
+                  _xlfEndIO(%VAL(#2))
+    59|           |mpitop%name_flags = 0
+                  #4 = _xlfBeginIO(2,258,#3,32768,NULL,0,|mpitop)
+                  _xlfEndIO(%VAL(#4))
+    41|           lab_42
+                  ntiles[].off132 = 1
+                  ntiles[].off136 = 1
+                  ntiles[].off140 = 1
+                  periodic[].off108 = 0
+                  periodic[].off112 = 0
+                  periodic[].off116 = 0
+                  GOTO lab_2
+    60|           lab_2
+    65|           T_2 = 3
+                  T_3 = 1275069467
+                  T_4 = 0
+                  T_5 = 1140850688
+                  CALL mpi_bcast(ntiles,T_2,T_3,T_4,T_5,ierr)
+    66|           T_6 = 3
+                  T_7 = 1275069469
+                  T_8 = 0
+                  T_9 = 1140850688
+                  CALL mpi_bcast(periodic,T_6,T_7,T_8,T_9,ierr)
+    71|           $$csx0 = ntiles[].off140
+                  $$csx1 = ntiles[].off136
+                  $$csx2 = ntiles[].off132
+                  IF (.NOT.(nprocs_w <> $$csx0 * ($$csx1 * $$csx2))) GOTO lab_3
+    72|           IF ((myid_w == 0)) THEN
+    73|             |fmt_args%version = 129
+                    |fmt_args%fmt_string_addr = NULL
+                    |fmt_args%fmt_string_len = int(("mpitopIB + 270))
+                    |fmt_args%stack_frame = NULL
+                    |fmt_args%call_back = NULL
+                    #6 = _xlfBeginIO(6,259,#5,32772,NULL,0,|fmt_args)
+                    CALL _xlfWriteFmt(%VAL(#6),nprocs_w,4,4,0)
+                    T_10 = $$csx0 * ($$csx1 * $$csx2)
+                    CALL _xlfWriteFmt(%VAL(#6),T_10,4,4,0)
+                    _xlfEndIO(%VAL(#6))
+                  ENDIF
+    77|           CALL mpi_finalize(ierr)
+    78|           CALL _xlfStop(NULL,0)
+                  RETURN
+    79|           lab_3
+    83|           T_11 = 1140850688
+                  T_12 = 3
+                  CALL mpi_cart_create(T_11,T_12,ntiles,periodic,reorder,comm3d,&
+                &   ierr)
+    85|           CALL mpi_comm_rank(comm3d,myid,ierr)
+    86|           CALL mpi_comm_size(comm3d,nprocs,ierr)
+    90|           T_13 = 0
+                  T_14 = 1
+                  CALL mpi_cart_shift(comm3d,T_13,T_14,n1m,n1p,ierr)
+    91|           T_15 = 1
+                  T_16 = 1
+                  CALL mpi_cart_shift(comm3d,T_15,T_16,n2m,n2p,ierr)
+    92|           T_17 = 2
+                  T_18 = 1
+                  CALL mpi_cart_shift(comm3d,T_17,T_18,n3m,n3p,ierr)
+    94|           T_19 = 3
+                  CALL mpi_cart_coords(comm3d,myid,T_19,coords,ierr)
+   105|           IF ((myid_w == 0)) THEN
+   106|             irestart = 0
+   107|             tdump =  0.0000000000000000E+000
+   108|             dtdump =  0.0000000000000000E+000
+   109|             CALL _dconcat("aa",2,id,2)
+   110|             CALL _dconcat("resaa000000.0000",16,resfile,16)
+   111|             |rescon%name_flags = 0
+                    #8 = _xlfBeginIO(1,2,#7,32768,NULL,0,|rescon)
+                    _xlfEndIO(%VAL(#8))
+   112|             |rescon%name_flags = 0
+                    #10 = _xlfBeginIO(2,258,#9,32768,NULL,0,|rescon)
+                    _xlfEndIO(%VAL(#10))
+   113|           ENDIF
+   117|           T_20 = 1
+                  T_21 = 1275069467
+                  T_22 = 0
+                  T_23 = 1140850688
+                  CALL mpi_bcast(irestart,T_20,T_21,T_22,T_23,ierr)
+   118|           T_24 = 2
+                  T_25 = 1275068698
+                  T_26 = 0
+                  T_27 = 1140850688
+                  CALL mpi_bcast(id,T_24,T_25,T_26,T_27,ierr,2)
+   119|           T_28 = 16
+                  T_29 = 1275068698
+                  T_30 = 0
+                  T_31 = 1140850688
+                  CALL mpi_bcast(resfile,T_28,T_29,T_30,T_31,ierr,16)
+   123|           IF ((myid_w == 0)) THEN
+                    _xlfIOCmd(1,1,#11,0,NULL)
+                  ENDIF
+   124|           IF ((irestart == 0)) THEN
+   125|             CALL setup()
+   126|             time =  0.0000000000000000E+000
+   127|           ELSE
+   128|             T_32 = 13
+                    T_33 = 16
+                    incr.rnn6 = strtoi(resfile,T_32,T_33,16)
+   129|             |int_file%file_size = 
+                    |int_file%record_length = 16
+                    |int_file%address = loc(resfile)
+                    |fmt_args%version = 129
+                    |fmt_args%fmt_string_addr = NULL
+                    |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                    |fmt_args%stack_frame = NULL
+                    |fmt_args%call_back = NULL
+                    #13 = _xlfBeginIO(|int_file,8388867,#12,32772,NULL,0,&
+                &     |fmt_args)
+                    CALL _xlfWriteFmt(%VAL(#13),"res",3,1,2)
+                    CALL _xlfWriteFmt(%VAL(#13),id,2,1,2)
+                    CALL _xlfWriteFmt(%VAL(#13),(coords + (-4) + (4)*(1)),4,4,0)&
+                &     
+                    CALL _xlfWriteFmt(%VAL(#13),(coords + (-4) + (4)*(2)),4,4,0)&
+                &     
+                    CALL _xlfWriteFmt(%VAL(#13),(coords + (-4) + (4)*(3)),4,4,0)&
+                &     
+                    #14 = incr.rnn6
+                    CALL _xlfWriteFmt(%VAL(#13),#14,4,4,0)
+                    _xlfEndIO(%VAL(#13))
+   131|             CALL mget(resfile,16)
+   132|             nwarn = 0
+   133|             ifsen[].off632 = 0
+   134|             CALL restart()
+   135|           ENDIF
+   148|           IF ((myid_w == 0)) THEN
+   149|             |speclist%version = 129
+                    |speclist%spec_list%spec_key.off8 = 16
+                    |speclist%spec_list%spec_value_addr.off16 = "zmp_inp"
+                    |speclist%spec_list%spec_value_val.off24 = 7
+                    |speclist%spec_list%spec_key.off32 = 48
+                    |speclist%spec_list%spec_value_addr.off40 = NULL
+                    |speclist%spec_list%spec_key_int4.off48 = 34
+                    |speclist%spec_list%spec_key.off56 = 118
+                    |speclist%spec_list%spec_val_i4.off64 = 149
+                    |speclist%spec_list%spec_key.off80 = 120
+                    |speclist%spec_list%spec_value_addr.off88 = "mstart.f90"
+                    |speclist%spec_list%spec_value_val.off96 = 10
+                    |speclist%spec_count = 4
+                    _xlfIOCmd(1,0,|speclist,268435456,iost)
+   150|             IF ((irestart == 0)) THEN
+   151|               thdf =  0.0000000000000000E+000
+   152|               dthdf =  0.0000000000000000E+000
+   153|               ttsl =  0.0000000000000000E+000
+   154|               dttsl =  0.0000000000000000E+000
+   155|               thist =  0.0000000000000000E+000
+   156|               dthist =  0.0000000000000000E+000
+   157|               tusr =  0.0000000000000000E+000
+   158|               dtusr =  3.1536000000000000E+007
+   159|               IF (.FALSE.) GOTO lab_35
+                      CALL __alignx(32,((&&N&&config + (-8) + (8)*(1)) + 128))
+                      $$CIV0 = 0
+       Id=1           DO $$CIV0 = $$CIV0, 191
+   160|                 t_out($$CIV0 + 1) =  0.0000000000000000E+000
+   161|               ENDDO
+                      lab_35
+   162|               lab_10
+   163|               |iocon%name_flags = 0
+                      #16 = _xlfBeginIO(1,2,#15,32768,NULL,0,|iocon)
+                      _xlfEndIO(%VAL(#16))
+   164|               |iocon%name_flags = 0
+                      #18 = _xlfBeginIO(2,258,#17,32768,NULL,0,|iocon)
+                      _xlfEndIO(%VAL(#18))
+   168|               buf_in[].off1744 = thdf
+   169|               buf_in[].off1752 = dthdf
+   170|               buf_in[].off1760 = thist
+   171|               buf_in[].off1768 = dthist
+   172|               buf_in[].off1776 = tusr
+   173|               buf_in[].off1784 = dtusr
+   174|               buf_in[].off1792 = tdump
+   175|               buf_in[].off1800 = dtdump
+   176|               buf_in[].off1808 =  0.0000000000000000E+000
+   177|               buf_in[].off1816 =  0.0000000000000000E+000
+   178|               buf_in[].off1824 = ttsl
+   179|               buf_in[].off1832 = dttsl
+   180|               IF (.FALSE.) GOTO lab_37
+                      CALL __alignx(32,((&&N&&config + (-8) + (8)*(1)) + 128))
+                      $$CIV1 = 0
+       Id=2           DO $$CIV1 = $$CIV1, 187
+   181|                 buf_in($$CIV1 + 13) = t_out($$CIV1 + 1)
+   182|               ENDDO
+                      lab_37
+   183|               lab_15
+   188|               T_34 = 200
+                      T_35 = 1275070495
+                      T_36 = 0
+                      T_37 = 1140850688
+                      CALL mpi_bcast(buf_in,T_34,T_35,T_36,T_37,ierr)
+   190|               IF ((myid_w <> 0)) THEN
+   191|                 thdf = buf_in[].off1744
+   192|                 dthdf = buf_in[].off1752
+   193|                 thist = buf_in[].off1760
+   194|                 dthist = buf_in[].off1768
+   195|                 tusr = buf_in[].off1776
+   196|                 dtusr = buf_in[].off1784
+   197|                 tdump = buf_in[].off1792
+   198|                 dtdump = buf_in[].off1800
+   199|                 ttsl = buf_in[].off1824
+   200|                 dttsl = buf_in[].off1832
+   201|                 IF (.FALSE.) GOTO lab_39
+                        CALL __alignx(32,((&&N&&config + (-8) + (8)*(1)) + 128))&
+                &         
+                        $$CIV2 = 0
+       Id=3             DO $$CIV2 = $$CIV2, 187
+   202|                   t_out($$CIV2 + 1) = buf_in($$CIV2 + 13)
+   203|                 ENDDO
+                        lab_39
+   204|                 lab_20
+   209|                 IF ((irestart == 0)) THEN
+   210|                   incr = 0
+   211|                   ifsen[].off636 = 1
+   212|                   ifsen[].off640 = 1
+   213|                   ifsen[].off644 = 1
+   214|                   ifsen[].off648 = 1
+   215|                   ifsen[].off652 = 1
+   216|                   |int_file%file_size = 
+                          |int_file%record_length = 9
+                          |int_file%address = loc(tslfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 830))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #20 = _xlfBeginIO(|int_file,8388867,#19,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#20),"tsl",3,1,2)
+                          #21 = 0
+                          CALL _xlfWriteFmt(%VAL(#20),#21,4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#20),id,2,1,2)
+                          _xlfEndIO(%VAL(#20))
+   217|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(resfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #23 = _xlfBeginIO(|int_file,8388867,#22,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#23),"res",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#23),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#23),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#23),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#23),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #24 = 0
+                          CALL _xlfWriteFmt(%VAL(#23),#24,4,4,0)
+                          _xlfEndIO(%VAL(#23))
+   219|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(hdffile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #26 = _xlfBeginIO(|int_file,8388867,#25,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#26),"hdf",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#26),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#26),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#26),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#26),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #27 = 0
+                          CALL _xlfWriteFmt(%VAL(#26),#27,4,4,0)
+                          _xlfEndIO(%VAL(#26))
+   221|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(hstfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #29 = _xlfBeginIO(|int_file,8388867,#28,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#29),"hst",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#29),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#29),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#29),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#29),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #30 = 0
+                          CALL _xlfWriteFmt(%VAL(#29),#30,4,4,0)
+                          _xlfEndIO(%VAL(#29))
+   223|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(usrfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #32 = _xlfBeginIO(|int_file,8388867,#31,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#32),"usr",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#32),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#32),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#32),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#32),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #33 = 0
+                          CALL _xlfWriteFmt(%VAL(#32),#33,4,4,0)
+                          _xlfEndIO(%VAL(#32))
+   225|                 ELSE
+   226|                   ifsen[].off636 = 0
+   227|                   ifsen[].off640 = 0
+   228|                   ifsen[].off644 = 0
+   229|                   ifsen[].off648 = 0
+   230|                   ifsen[].off652 = 0
+   231|                   T_38 = 4
+                          T_39 = 7
+                          $$RET0 = strtoi(tslfile,T_38,T_39,9)
+   232|                   |int_file%file_size = 
+                          |int_file%record_length = 9
+                          |int_file%address = loc(tslfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 830))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #35 = _xlfBeginIO(|int_file,8388867,#34,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#35),"tsl",3,1,2)
+                          #36 = $$RET0 + 1
+                          CALL _xlfWriteFmt(%VAL(#35),#36,4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#35),id,2,1,2)
+                          _xlfEndIO(%VAL(#35))
+   233|                   T_40 = 13
+                          T_41 = 16
+                          $$RET1 = strtoi(resfile,T_40,T_41,16)
+   234|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(resfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #38 = _xlfBeginIO(|int_file,8388867,#37,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#38),"res",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#38),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#38),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#38),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#38),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #39 = $$RET1 + 1
+                          CALL _xlfWriteFmt(%VAL(#38),#39,4,4,0)
+                          _xlfEndIO(%VAL(#38))
+   236|                   T_42 = 13
+                          T_43 = 16
+                          $$RET2 = strtoi(hdffile,T_42,T_43,16)
+   237|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(hdffile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #41 = _xlfBeginIO(|int_file,8388867,#40,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#41),"hdf",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#41),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#41),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#41),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#41),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #42 = $$RET2 + 1
+                          CALL _xlfWriteFmt(%VAL(#41),#42,4,4,0)
+                          _xlfEndIO(%VAL(#41))
+   239|                   T_44 = 13
+                          T_45 = 16
+                          $$RET3 = strtoi(usrfile,T_44,T_45,16)
+                          incr = $$RET3 + 1
+   240|                   |int_file%file_size = 
+                          |int_file%record_length = 16
+                          |int_file%address = loc(usrfile)
+                          |fmt_args%version = 129
+                          |fmt_args%fmt_string_addr = NULL
+                          |fmt_args%fmt_string_len = int(("mpitopIB + 646))
+                          |fmt_args%stack_frame = NULL
+                          |fmt_args%call_back = NULL
+                          #44 = _xlfBeginIO(|int_file,8388867,#43,32772,NULL,0,&
+                &           |fmt_args)
+                          CALL _xlfWriteFmt(%VAL(#44),"usr",3,1,2)
+                          CALL _xlfWriteFmt(%VAL(#44),id,2,1,2)
+                          CALL _xlfWriteFmt(%VAL(#44),(coords + (-4) + (4)*(1)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#44),(coords + (-4) + (4)*(2)),&
+                &           4,4,0)
+                          CALL _xlfWriteFmt(%VAL(#44),(coords + (-4) + (4)*(3)),&
+                &           4,4,0)
+                          #45 = $$RET3 + 1
+                          CALL _xlfWriteFmt(%VAL(#44),#45,4,4,0)
+                          _xlfEndIO(%VAL(#44))
+   242|                 ENDIF
+   243|                 IF ((0 <> (xtsl  .AND.  1))) THEN
+   244|                   IF (.NOT.(myid_w == 0)) GOTO lab_28
+   245|                   |speclist%version = 129
+                          |speclist%spec_list%spec_key.off8 = 16
+                          |speclist%spec_list%spec_value_addr.off16 = loc(&
+                &           tslfile)
+                          |speclist%spec_list%spec_value_val.off24 = 9
+                          |speclist%spec_list%spec_key.off32 = 48
+                          |speclist%spec_list%spec_value_addr.off40 = NULL
+                          |speclist%spec_list%spec_key_int4.off48 = 51
+                          |speclist%spec_list%spec_key.off56 = 118
+                          |speclist%spec_list%spec_val_i4.off64 = 245
+                          |speclist%spec_list%spec_key.off80 = 120
+                          |speclist%spec_list%spec_value_addr.off88 = &
+                &           "mstart.f90"
+                          |speclist%spec_list%spec_value_val.off96 = 10
+                          |speclist%spec_count = 4
+                          _xlfIOCmd(31,0,|speclist,268435456,NULL)
+   246|                   lab_28
+   247|                   lab_27
+   249|                   IF ((0 <> (xhst  .AND.  1))) THEN
+   250|                     |speclist%version = 129
+                            |speclist%spec_list%spec_key.off8 = 16
+                            |speclist%spec_list%spec_value_addr.off16 = loc(&
+                &             hstfile)
+                            |speclist%spec_list%spec_value_val.off24 = 16
+                            |speclist%spec_list%spec_key.off32 = 48
+                            |speclist%spec_list%spec_value_addr.off40 = NULL
+                            |speclist%spec_list%spec_key_int4.off48 = 51
+                            |speclist%spec_list%spec_key.off56 = 118
+                            |speclist%spec_list%spec_val_i4.off64 = 250
+                            |speclist%spec_list%spec_key.off80 = 120
+                            |speclist%spec_list%spec_value_addr.off88 = &
+                &             "mstart.f90"
+                            |speclist%spec_list%spec_value_val.off96 = 10
+                            |speclist%spec_count = 4
+                            _xlfIOCmd(3,0,|speclist,268435456,NULL)
+   251|                   ENDIF
+   252|                   IF ((incr + 1 <= 190)) THEN
+   256|                     IF (.NOT.(t_out(int((incr + 1))) >  &
+                &             0.0000000000000000E+000)) GOTO lab_31
+   257|                     tusr = t_out(int((incr + 1))) - dtusr
+   258|                     thdf = t_out(int((incr + 1))) - dthdf
+   259|                     lab_31
+   260|                     lab_30
+   265|                     IF ((myid_w == 0)) THEN
+                              _xlfIOCmd(1,1,#46,0,NULL)
+                            ENDIF
+   269|                     IF ((irestart == 0)) THEN
+   272|                       CALL dataio((ifsen + (-4) + (4)*(2)),(ifsen + (-4)&
+                &                + (4)*(3)),(ifsen + (-4) + (4)*(4)),(ifsen + (-4)&
+                &                + (4)*(5)),(ifsen + (-4) + (4)*(6)))
+   273|                       nhy = 0
+   274|                     ELSE
+   275|                       nhy = 0
+   279|                     ENDIF
+                            RETURN
+                          END SUBROUTINE mstart
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s-ss  ssss ssss ssss ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   sss- ssss
+     | 000000                           PDEF     mstart
+    7|                                  PROC      
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 std      FB41FFD0   1     ST8       #stack(gr1,-48)=gr26
+    0| 000018 std      FB21FFC8   1     ST8       #stack(gr1,-56)=gr25
+    0| 00001C std      FB01FFC0   1     ST8       #stack(gr1,-64)=gr24
+    0| 000020 std      FAE1FFB8   1     ST8       #stack(gr1,-72)=gr23
+    0| 000024 std      FAC1FFB0   1     ST8       #stack(gr1,-80)=gr22
+    0| 000028 std      FAA1FFA8   1     ST8       #stack(gr1,-88)=gr21
+    0| 00002C std      FA81FFA0   1     ST8       #stack(gr1,-96)=gr20
+    0| 000030 std      FA61FF98   1     ST8       #stack(gr1,-104)=gr19
+    0| 000034 std      FA41FF90   1     ST8       #stack(gr1,-112)=gr18
+    0| 000038 std      FA21FF88   1     ST8       #stack(gr1,-120)=gr17
+    0| 00003C std      FA01FF80   1     ST8       #stack(gr1,-128)=gr16
+    0| 000040 std      F9E1FF78   1     ST8       #stack(gr1,-136)=gr15
+    0| 000044 std      F9C1FF70   1     ST8       #stack(gr1,-144)=gr14
+    0| 000048 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 00004C mfcr     7D800026   1     LFCR      gr12=cr[24],2
+    0| 000050 stw      91810008   1     ST4A      #stack(gr1,8)=gr12
+    0| 000054 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000058 stdu     F821F9C1   1     ST8U      gr1,#stack(gr1,-1600)=gr1
+   40| 00005C ld       EBE20000   1     L8        gr31=.&&N&&mpipar(gr2,0)
+   40| 000060 lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+   40| 000064 cmpdi    2C200000   1     C8        cr0=gr0,0
+   40| 000068 bc       408201A0   1     BF        CL.42,cr0,0x4/eq,taken=50%(0,0)
+   41| 00006C ld       EBC20000   1     L8        gr30=.+CONSTANT_AREA(gr2,0)
+   41| 000070 addi     38000081   1     LI        gr0=129
+   41| 000074 addi     38600010   1     LI        gr3=16
+   41| 000078 stw      900101C0   1     ST4Z      <a1:d448:l4>(gr1,448)=gr0
+   41| 00007C stw      906101C8   1     ST4Z      <a1:d456:l4>(gr1,456)=gr3
+   41| 000080 addi     38000007   1     LI        gr0=7
+   41| 000084 addi     387E03BC   1     AI        gr3=gr30,956
+   41| 000088 std      F80101D8   1     ST8       <a1:d472:l8>(gr1,472)=gr0
+   41| 00008C std      F86101D0   1     ST8       <a1:d464:l8>(gr1,464)=gr3
+   41| 000090 addi     38000030   1     LI        gr0=48
+   41| 000094 addi     3BA00000   1     LI        gr29=0
+   41| 000098 stw      900101E0   1     ST4Z      <a1:d480:l4>(gr1,480)=gr0
+   41| 00009C addi     38BE03B0   1     AI        gr5=gr30,944
+   41| 0000A0 addi     38C0000A   1     LI        gr6=10
+   41| 0000A4 std      F8A10218   1     ST8       <a1:d536:l8>(gr1,536)=gr5
+   41| 0000A8 addi     39000022   1     LI        gr8=34
+   41| 0000AC std      F8C10220   1     ST8       <a1:d544:l8>(gr1,544)=gr6
+   41| 0000B0 addi     38000076   1     LI        gr0=118
+   41| 0000B4 addi     38600029   1     LI        gr3=41
+   41| 0000B8 addi     38800078   1     LI        gr4=120
+   41| 0000BC stw      910101F0   1     ST4Z      <a1:d496:l4>(gr1,496)=gr8
+   41| 0000C0 addi     38E00004   1     LI        gr7=4
+   41| 0000C4 std      FBA101E8   1     ST8       <a1:d488:l8>(gr1,488)=gr29
+   41| 0000C8 stw      900101F8   1     ST4Z      <a1:d504:l4>(gr1,504)=gr0
+   41| 0000CC stw      90610200   1     ST4Z      <a1:d512:l4>(gr1,512)=gr3
+   41| 0000D0 stw      90810210   1     ST4Z      <a1:d528:l4>(gr1,528)=gr4
+   41| 0000D4 stw      90E101C4   1     ST4Z      <a1:d452:l4>(gr1,452)=gr7
+   41| 0000D8 addi     38E100A0   1     AI        gr7=gr1,160
+   41| 0000DC addi     38A101C0   1     AI        gr5=gr1,448
+   41| 0000E0 addi     38600001   1     LI        gr3=1
+   41| 0000E4 addi     38800000   1     LI        gr4=0
+   41| 0000E8 addis    3CC01000   1     LIU       gr6=4096
+   41| 0000EC bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,|speclist",gr5,gr6,iost",gr7,#use_xlfIOCmd11,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   41| 0000F0 ori      60000000   1
+   52| 0000F4 ld       EA7E03C8   1     L8        gr19=+CONSTANT_AREA(gr30,968)
+   58| 0000F8 ld       EB820000   1     L8        gr28=.$STATIC(gr2,0)
+   53| 0000FC addi     39C00001   1     LI        gr14=1
+   58| 000100 ori      63BB8000   1     OIL       gr27=gr29,0x8000
+   53| 000104 stw      91DF008C   1     ST4Z      <s19:d140:l4>(gr31,140)=gr14
+   55| 000108 std      FBBF006C   1     ST8       periodic[].off1|08#306|12#305_1(gr31,108)=gr29
+   52| 00010C std      FA7F0084   1     ST8       ntiles[].off13|2#303|6#302_1(gr31,132)=gr19
+   56| 000110 stw      93BF0074   1     ST4Z      <s19:d116:l4>(gr31,116)=gr29
+   58| 000114 stw      93BC04C4   1     ST4Z      <s33:d1220:l4>(gr28,1220)=gr29
+   58| 000118 addi     38600001   1     LI        gr3=1
+   58| 00011C addi     38800002   1     LI        gr4=2
+   58| 000120 or       7F85E378   1     LR        gr5=gr28
+   58| 000124 or       7F66DB78   1     LR        gr6=gr27
+   58| 000128 addi     38E00000   1     LI        gr7=0
+   58| 00012C addi     39000000   1     LI        gr8=0
+   58| 000130 addi     393C04C0   1     AI        gr9=gr28,1216
+   58| 000134 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#1",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|mpitop,gr9,#def_xlfBeginIO11",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   58| 000138 ori      60000000   1
+   58| 00013C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   58| 000140 ori      60000000   1
+   59| 000144 addi     38BC0040   1     AI        gr5=gr28,64
+   59| 000148 addi     38600002   1     LI        gr3=2
+   59| 00014C addi     38800102   1     LI        gr4=258
+   59| 000150 or       7F66DB78   1     LR        gr6=gr27
+   59| 000154 addi     38E00000   1     LI        gr7=0
+   59| 000158 addi     39000000   1     LI        gr8=0
+   59| 00015C addi     393C04C0   1     AI        gr9=gr28,1216
+   59| 000160 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#3",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|mpitop,gr9,#use_xlfBeginIO21,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   59| 000164 ori      60000000   1
+   59| 000168 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   59| 00016C ori      60000000   1
+   65| 000170 addis    3F004C00   1     LIU       gr24=19456
+   65| 000174 addi     3B800003   1     LI        gr28=3
+   65| 000178 addi     3B78041B   1     AI        gr27=gr24,1051
+   65| 00017C addis    3EA04400   1     LIU       gr21=17408
+   65| 000180 stw      9381008C   1     ST4Z      T_2(gr1,140)=gr28
+   65| 000184 stw      93610088   1     ST4Z      T_3(gr1,136)=gr27
+   65| 000188 stw      92A10080   1     ST4Z      T_5(gr1,128)=gr21
+   65| 00018C stw      93A10084   1     ST4Z      T_4(gr1,132)=gr29
+   65| 000190 addi     387F0084   1     AI        gr3=gr31,132
+   65| 000194 addi     3881008C   1     AI        gr4=gr1,140
+   65| 000198 addi     38A10088   1     AI        gr5=gr1,136
+   65| 00019C addi     38C10084   1     AI        gr6=gr1,132
+   65| 0001A0 addi     38E10080   1     AI        gr7=gr1,128
+   65| 0001A4 addi     391F0014   1     AI        gr8=gr31,20
+   65| 0001A8 bl       48000001   1     CALL      mpi_bcast,6,ntiles[]",gr3,T_2",gr4,T_3",gr5,T_4",gr6,T_5",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 0001AC ori      60000000   1
+   66| 0001B0 addi     3818041D   1     AI        gr0=gr24,1053
+   66| 0001B4 stw      9381009C   1     ST4Z      T_6(gr1,156)=gr28
+   66| 0001B8 stw      92A10090   1     ST4Z      T_9(gr1,144)=gr21
+   66| 0001BC stw      93A10094   1     ST4Z      T_8(gr1,148)=gr29
+   66| 0001C0 stw      90010098   1     ST4Z      T_7(gr1,152)=gr0
+   66| 0001C4 addi     387F006C   1     AI        gr3=gr31,108
+   66| 0001C8 addi     3881009C   1     AI        gr4=gr1,156
+   66| 0001CC addi     38A10098   1     AI        gr5=gr1,152
+   66| 0001D0 addi     38C10094   1     AI        gr6=gr1,148
+   66| 0001D4 addi     38E10090   1     AI        gr7=gr1,144
+   66| 0001D8 addi     391F0014   1     AI        gr8=gr31,20
+   66| 0001DC bl       48000001   1     CALL      mpi_bcast,6,periodic[]",gr3,T_6",gr4,T_7",gr5,T_8",gr6,T_9",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   66| 0001E0 ori      60000000   1
+   71| 0001E4 lwz      835F0088   1     L4Z       gr26=<s19:d136:l4>(gr31,136)
+   71| 0001E8 lwz      833F0084   1     L4Z       gr25=<s19:d132:l4>(gr31,132)
+   71| 0001EC lwz      82FF008C   1     L4Z       gr23=<s19:d140:l4>(gr31,140)
+   71| 0001F0 lwz      807F0010   1     L4Z       gr3=<s19:d16:l4>(gr31,16)
+   71| 0001F4 mulld    7C19D1D2   1     M         gr0=gr25,gr26
+   71| 0001F8 mulld    7C00B9D2   1     M         gr0=gr0,gr23
+   71| 0001FC cmpw     7C030000   1     C4        cr0=gr3,gr0
+   71| 000200 bc       41820180   1     BT        CL.3,cr0,0x4/eq,taken=40%(40,60)
+    0| 000204 b        480000B8   1     B         CL.51,-1
+   41|                              CL.42:
+   41| 000208 ld       EBC20000   1     L8        gr30=.+CONSTANT_AREA(gr2,0)
+   65| 00020C addis    3F004C00   1     LIU       gr24=19456
+   41| 000210 addi     39C00001   1     LI        gr14=1
+   41| 000214 addi     3BA00000   1     LI        gr29=0
+   41| 000218 stw      91DF008C   1     ST4Z      <s19:d140:l4>(gr31,140)=gr14
+   41| 00021C stw      93BF0074   1     ST4Z      <s19:d116:l4>(gr31,116)=gr29
+   41| 000220 ld       EA7E03C8   1     L8        gr19=+CONSTANT_AREA(gr30,968)
+   65| 000224 addi     3B800003   1     LI        gr28=3
+   65| 000228 addi     3B78041B   1     AI        gr27=gr24,1051
+   41| 00022C std      FBBF006C   1     ST8       periodic[].off1|08#306|12#305_1(gr31,108)=gr29
+   65| 000230 stw      93A10084   1     ST4Z      T_4(gr1,132)=gr29
+   65| 000234 addis    3EA04400   1     LIU       gr21=17408
+   41| 000238 std      FA7F0084   1     ST8       ntiles[].off13|2#303|6#302_1(gr31,132)=gr19
+   65| 00023C stw      92A10080   1     ST4Z      T_5(gr1,128)=gr21
+   65| 000240 stw      9381008C   1     ST4Z      T_2(gr1,140)=gr28
+   65| 000244 stw      93610088   1     ST4Z      T_3(gr1,136)=gr27
+   65| 000248 addi     387F0084   1     AI        gr3=gr31,132
+   65| 00024C addi     3881008C   1     AI        gr4=gr1,140
+   65| 000250 addi     38A10088   1     AI        gr5=gr1,136
+   65| 000254 addi     38C10084   1     AI        gr6=gr1,132
+   65| 000258 addi     38E10080   1     AI        gr7=gr1,128
+   65| 00025C addi     391F0014   1     AI        gr8=gr31,20
+   65| 000260 bl       48000001   1     CALL      mpi_bcast,6,ntiles[]",gr3,T_2",gr4,T_3",gr5,T_4",gr6,T_5",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   65| 000264 ori      60000000   1
+   66| 000268 addi     3818041D   1     AI        gr0=gr24,1053
+   66| 00026C stw      9381009C   1     ST4Z      T_6(gr1,156)=gr28
+   66| 000270 stw      90010098   1     ST4Z      T_7(gr1,152)=gr0
+   66| 000274 stw      93A10094   1     ST4Z      T_8(gr1,148)=gr29
+   66| 000278 stw      92A10090   1     ST4Z      T_9(gr1,144)=gr21
+   66| 00027C addi     387F006C   1     AI        gr3=gr31,108
+   66| 000280 addi     3881009C   1     AI        gr4=gr1,156
+   66| 000284 addi     38A10098   1     AI        gr5=gr1,152
+   66| 000288 addi     38C10094   1     AI        gr6=gr1,148
+   66| 00028C addi     38E10090   1     AI        gr7=gr1,144
+   66| 000290 addi     391F0014   1     AI        gr8=gr31,20
+   66| 000294 bl       48000001   1     CALL      mpi_bcast,6,periodic[]",gr3,T_6",gr4,T_7",gr5,T_8",gr6,T_9",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   66| 000298 ori      60000000   1
+   71| 00029C lwz      835F0088   1     L4Z       gr26=<s19:d136:l4>(gr31,136)
+   71| 0002A0 lwz      833F0084   1     L4Z       gr25=<s19:d132:l4>(gr31,132)
+   71| 0002A4 lwz      82FF008C   1     L4Z       gr23=<s19:d140:l4>(gr31,140)
+   71| 0002A8 lwz      807F0010   1     L4Z       gr3=<s19:d16:l4>(gr31,16)
+   71| 0002AC mulld    7C19D1D2   1     M         gr0=gr25,gr26
+   71| 0002B0 mulld    7C00B9D2   1     M         gr0=gr0,gr23
+   71| 0002B4 cmpw     7C030000   1     C4        cr0=gr3,gr0
+   71| 0002B8 bc       418200C8   1     BT        CL.3,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.51:
+   72| 0002BC lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+   72| 0002C0 cmpdi    2C200000   1     C8        cr0=gr0,0
+   72| 0002C4 bc       41820024   1     BT        CL.135,cr0,0x4/eq,taken=40%(40,60)
+   73|                              CL.4:
+   77| 0002C8 addi     387F0014   1     AI        gr3=gr31,20
+   77| 0002CC bl       48000001   1     CALL      mpi_finalize,1,ierr",gr3,mpi_finalize",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   77| 0002D0 ori      60000000   1
+   78| 0002D4 addi     38600000   1     LI        gr3=0
+   78| 0002D8 addi     38800000   1     LI        gr4=0
+   78| 0002DC bl       48000001   1     CALL      _xlfStop,2,@PALI_SHADOW_CONST.rns0.,gr3,gr4,_xlfStop",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   78| 0002E0 ori      60000000   1
+   78| 0002E4 tw       7C8E7008   1     TRAP      9
+    0|                              CL.135:
+   73| 0002E8 std      FBA10168   1     ST8       <a1:d360:l8>(gr1,360)=gr29
+   73| 0002EC ld       E8620000   1     L8        gr3=.$STATIC(gr2,0)
+   73| 0002F0 addi     38000081   1     LI        gr0=129
+   73| 0002F4 addi     389E010E   1     AI        gr4=gr30,270
+   73| 0002F8 std      FBA10178   1     ST8       <a1:d376:l8>(gr1,376)=gr29
+   73| 0002FC std      FBA10180   1     ST8       <a1:d384:l8>(gr1,384)=gr29
+   73| 000300 stw      90010160   1     ST4Z      <a1:d352:l4>(gr1,352)=gr0
+   73| 000304 std      F8810170   1     ST8       <a1:d368:l8>(gr1,368)=gr4
+   73| 000308 addi     39210160   1     AI        gr9=gr1,352
+   73| 00030C addi     38A30080   1     AI        gr5=gr3,128
+   73| 000310 addi     38600006   1     LI        gr3=6
+   73| 000314 addi     38800103   1     LI        gr4=259
+   73| 000318 ori      63A68004   1     OIL       gr6=gr29,0x8004
+   73| 00031C addi     38E00000   1     LI        gr7=0
+   73| 000320 addi     39000000   1     LI        gr8=0
+   73| 000324 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#5",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   73| 000328 ori      60000000   1
+   73| 00032C or       7C7E1B78   1     LR        gr30=gr3
+   73| 000330 addi     389F0010   1     AI        gr4=gr31,16
+   73| 000334 addi     38A00004   1     LI        gr5=4
+   73| 000338 addi     38C00004   1     LI        gr6=4
+   73| 00033C addi     38E00000   1     LI        gr7=0
+   73| 000340 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,nprocs_w,gr4-gr7,_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   73| 000344 ori      60000000   1
+   73| 000348 mulld    7C19D1D2   1     M         gr0=gr25,gr26
+   73| 00034C addi     388100A4   1     AI        gr4=gr1,164
+   73| 000350 mulld    7C00B9D2   1     M         gr0=gr0,gr23
+   73| 000354 or       7FC3F378   1     LR        gr3=gr30
+   73| 000358 stw      900100A4   1     ST4Z      T_10(gr1,164)=gr0
+   73| 00035C addi     38A00004   1     LI        gr5=4
+   73| 000360 addi     38C00004   1     LI        gr6=4
+   73| 000364 addi     38E00000   1     LI        gr7=0
+   73| 000368 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,T_10,gr4-gr7,_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   73| 00036C ori      60000000   1
+   73| 000370 or       7FC3F378   1     LR        gr3=gr30
+   73| 000374 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   73| 000378 ori      60000000   1
+    0| 00037C b        4BFFFF4C   1     B         CL.4,-1
+   79|                              CL.3:
+   83| 000380 stw      92A100A8   1     ST4Z      T_11(gr1,168)=gr21
+   83| 000384 stw      938100AC   1     ST4Z      T_12(gr1,172)=gr28
+   83| 000388 addi     388100AC   1     AI        gr4=gr1,172
+   83| 00038C addi     386100A8   1     AI        gr3=gr1,168
+   83| 000390 addi     38BF0084   1     AI        gr5=gr31,132
+   83| 000394 addi     38DF006C   1     AI        gr6=gr31,108
+   83| 000398 or       7FE7FB78   1     LR        gr7=gr31
+   83| 00039C addi     391F0020   1     AI        gr8=gr31,32
+   83| 0003A0 addi     393F0014   1     AI        gr9=gr31,20
+   83| 0003A4 bl       48000001   1     CALL      mpi_cart_create,7,T_11",gr3,T_12",gr4,ntiles[]",gr5,periodic[]",gr6,reorder",gr7,comm3d",gr8,ierr",gr9,mpi_cart_create",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   83| 0003A8 ori      60000000   1
+   85| 0003AC addi     387F0020   1     AI        gr3=gr31,32
+   85| 0003B0 addi     389F0004   1     AI        gr4=gr31,4
+   85| 0003B4 addi     38BF0014   1     AI        gr5=gr31,20
+   85| 0003B8 bl       48000001   1     CALL      mpi_comm_rank,3,comm3d",gr3,myid",gr4,ierr",gr5,mpi_comm_rank",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   85| 0003BC ori      60000000   1
+   86| 0003C0 addi     389F000C   1     AI        gr4=gr31,12
+   86| 0003C4 addi     387F0020   1     AI        gr3=gr31,32
+   86| 0003C8 addi     38BF0014   1     AI        gr5=gr31,20
+   86| 0003CC bl       48000001   1     CALL      mpi_comm_size,3,comm3d",gr3,nprocs",gr4,ierr",gr5,mpi_comm_size",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   86| 0003D0 ori      60000000   1
+   90| 0003D4 stw      93A100B0   1     ST4Z      T_13(gr1,176)=gr29
+   90| 0003D8 stw      91C100B4   1     ST4Z      T_14(gr1,180)=gr14
+   90| 0003DC addi     38FF0028   1     AI        gr7=gr31,40
+   90| 0003E0 addi     38DF0024   1     AI        gr6=gr31,36
+   90| 0003E4 addi     38A100B4   1     AI        gr5=gr1,180
+   90| 0003E8 addi     388100B0   1     AI        gr4=gr1,176
+   90| 0003EC addi     387F0020   1     AI        gr3=gr31,32
+   90| 0003F0 addi     391F0014   1     AI        gr8=gr31,20
+   90| 0003F4 bl       48000001   1     CALL      mpi_cart_shift,6,comm3d",gr3,T_13",gr4,T_14",gr5,n1m",gr6,n1p",gr7,ierr",gr8,mpi_cart_shift",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   90| 0003F8 ori      60000000   1
+   91| 0003FC stw      91C100B8   1     ST4Z      T_15(gr1,184)=gr14
+   91| 000400 stw      91C100BC   1     ST4Z      T_16(gr1,188)=gr14
+   91| 000404 addi     38FF0030   1     AI        gr7=gr31,48
+   91| 000408 addi     38DF002C   1     AI        gr6=gr31,44
+   91| 00040C addi     38A100BC   1     AI        gr5=gr1,188
+   91| 000410 addi     388100B8   1     AI        gr4=gr1,184
+   91| 000414 addi     387F0020   1     AI        gr3=gr31,32
+   91| 000418 addi     391F0014   1     AI        gr8=gr31,20
+   91| 00041C bl       48000001   1     CALL      mpi_cart_shift,6,comm3d",gr3,T_15",gr4,T_16",gr5,n2m",gr6,n2p",gr7,ierr",gr8,mpi_cart_shift",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   91| 000420 ori      60000000   1
+   92| 000424 stw      91C100C4   1     ST4Z      T_18(gr1,196)=gr14
+   92| 000428 addi     3AE00002   1     LI        gr23=2
+   92| 00042C addi     38FF0038   1     AI        gr7=gr31,56
+   92| 000430 stw      92E100C0   1     ST4Z      T_17(gr1,192)=gr23
+   92| 000434 addi     38DF0034   1     AI        gr6=gr31,52
+   92| 000438 addi     38A100C4   1     AI        gr5=gr1,196
+   92| 00043C addi     388100C0   1     AI        gr4=gr1,192
+   92| 000440 addi     387F0020   1     AI        gr3=gr31,32
+   92| 000444 addi     391F0014   1     AI        gr8=gr31,20
+   92| 000448 bl       48000001   1     CALL      mpi_cart_shift,6,comm3d",gr3,T_17",gr4,T_18",gr5,n3m",gr6,n3p",gr7,ierr",gr8,mpi_cart_shift",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   92| 00044C ori      60000000   1
+   94| 000450 stw      938100C8   1     ST4Z      T_19(gr1,200)=gr28
+   94| 000454 addi     38A100C8   1     AI        gr5=gr1,200
+   94| 000458 addi     387F0020   1     AI        gr3=gr31,32
+   94| 00045C addi     389F0004   1     AI        gr4=gr31,4
+   94| 000460 addi     38DF0078   1     AI        gr6=gr31,120
+   94| 000464 addi     38FF0014   1     AI        gr7=gr31,20
+   94| 000468 bl       48000001   1     CALL      mpi_cart_coords,5,comm3d",gr3,myid",gr4,T_19",gr5,coords[]",gr6,ierr",gr7,mpi_cart_coords",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   94| 00046C ori      60000000   1
+  105| 000470 lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+    0| 000474 ld       EB820000   1     L8        gr28=.&&N&&root(gr2,0)
+  105| 000478 cmpdi    2C200000   1     C8        cr0=gr0,0
+  105| 00047C bc       4082008C   1     BF        CL.5,cr0,0x4/eq,taken=60%(60,40)
+  106| 000480 stw      93BC0220   1     ST4Z      <s113:d544:l4>(gr28,544)=gr29
+  107| 000484 std      FBBC0100   1     ST8       <s113:d256:l8>(gr28,256)=gr29
+  110| 000488 ld       E81E03D0   1     L8        gr0=+CONSTANT_AREA(gr30,976)
+  110| 00048C ld       E87E03D8   1     L8        gr3=+CONSTANT_AREA(gr30,984)
+  111| 000490 ld       EB420000   1     L8        gr26=.$STATIC(gr2,0)
+  109| 000494 addi     38806161   1     LI        gr4=24929
+  108| 000498 std      FBBC0080   1     ST8       <s113:d128:l8>(gr28,128)=gr29
+  109| 00049C sth      B09C0224   1     ST2Z      <s113:d548:l2>(gr28,548)=gr4
+  111| 0004A0 ori      63B98000   1     OIL       gr25=gr29,0x8000
+  110| 0004A4 std      F81C024C   1     ST8       <s113:d588:l8>(gr28,588)=gr0
+  110| 0004A8 std      F87C0254   1     ST8       <s113:d596:l8>(gr28,596)=gr3
+  111| 0004AC stw      93BA0564   1     ST4Z      <s121:d1380:l4>(gr26,1380)=gr29
+  111| 0004B0 addi     38BA00C0   1     AI        gr5=gr26,192
+  111| 0004B4 or       7F26CB78   1     LR        gr6=gr25
+  111| 0004B8 addi     393A0560   1     AI        gr9=gr26,1376
+  111| 0004BC addi     38600001   1     LI        gr3=1
+  111| 0004C0 addi     38800002   1     LI        gr4=2
+  111| 0004C4 addi     38E00000   1     LI        gr7=0
+  111| 0004C8 addi     39000000   1     LI        gr8=0
+  111| 0004CC bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#7",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|rescon,gr9,#def_xlfBeginIO31",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  111| 0004D0 ori      60000000   1
+  111| 0004D4 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  111| 0004D8 ori      60000000   1
+  112| 0004DC addi     38BA0100   1     AI        gr5=gr26,256
+  112| 0004E0 or       7F26CB78   1     LR        gr6=gr25
+  112| 0004E4 addi     393A0560   1     AI        gr9=gr26,1376
+  112| 0004E8 addi     38600002   1     LI        gr3=2
+  112| 0004EC addi     38800102   1     LI        gr4=258
+  112| 0004F0 addi     38E00000   1     LI        gr7=0
+  112| 0004F4 addi     39000000   1     LI        gr8=0
+  112| 0004F8 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#9",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|rescon,gr9,#use_xlfBeginIO41,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  112| 0004FC ori      60000000   1
+  112| 000500 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  112| 000504 ori      60000000   1
+  113|                              CL.5:
+  117| 000508 stw      91C100CC   1     ST4Z      T_20(gr1,204)=gr14
+  117| 00050C stw      936100D0   1     ST4Z      T_21(gr1,208)=gr27
+  117| 000510 stw      93A100D4   1     ST4Z      T_22(gr1,212)=gr29
+  117| 000514 stw      92A100D8   1     ST4Z      T_23(gr1,216)=gr21
+  117| 000518 addi     38E100D8   1     AI        gr7=gr1,216
+  117| 00051C addi     38C100D4   1     AI        gr6=gr1,212
+  117| 000520 addi     38A100D0   1     AI        gr5=gr1,208
+  117| 000524 addi     388100CC   1     AI        gr4=gr1,204
+  117| 000528 addi     387C0220   1     AI        gr3=gr28,544
+  117| 00052C addi     391F0014   1     AI        gr8=gr31,20
+  117| 000530 bl       48000001   1     CALL      mpi_bcast,6,irestart",gr3,T_20",gr4,T_21",gr5,T_22",gr6,T_23",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  117| 000534 ori      60000000   1
+  118| 000538 addi     3B58011A   1     AI        gr26=gr24,282
+  118| 00053C stw      92E100DC   1     ST4Z      T_24(gr1,220)=gr23
+  118| 000540 stw      934100E0   1     ST4Z      T_25(gr1,224)=gr26
+  118| 000544 stw      93A100E4   1     ST4Z      T_26(gr1,228)=gr29
+  118| 000548 stw      92A100E8   1     ST4Z      T_27(gr1,232)=gr21
+  118| 00054C addi     38E100E8   1     AI        gr7=gr1,232
+  118| 000550 addi     38C100E4   1     AI        gr6=gr1,228
+  118| 000554 addi     38A100E0   1     AI        gr5=gr1,224
+  118| 000558 addi     388100DC   1     AI        gr4=gr1,220
+  118| 00055C addi     387C0224   1     AI        gr3=gr28,548
+  118| 000560 addi     391F0014   1     AI        gr8=gr31,20
+  118| 000564 addi     39200002   1     LI        gr9=2
+  118| 000568 bl       48000001   1     CALL      mpi_bcast,7,id",gr3,T_24",gr4,T_25",gr5,T_26",gr6,T_27",gr7,ierr",gr8,gr9,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  118| 00056C ori      60000000   1
+  119| 000570 addi     3B600010   1     LI        gr27=16
+  119| 000574 stw      934100F0   1     ST4Z      T_29(gr1,240)=gr26
+  119| 000578 stw      936100EC   1     ST4Z      T_28(gr1,236)=gr27
+  119| 00057C stw      93A100F4   1     ST4Z      T_30(gr1,244)=gr29
+  119| 000580 stw      92A100F8   1     ST4Z      T_31(gr1,248)=gr21
+  119| 000584 addi     38E100F8   1     AI        gr7=gr1,248
+  119| 000588 addi     38C100F4   1     AI        gr6=gr1,244
+  119| 00058C addi     38A100F0   1     AI        gr5=gr1,240
+  119| 000590 addi     388100EC   1     AI        gr4=gr1,236
+  119| 000594 addi     3B5C024C   1     AI        gr26=gr28,588
+  119| 000598 addi     387C024C   1     AI        gr3=gr28,588
+  119| 00059C addi     391F0014   1     AI        gr8=gr31,20
+  119| 0005A0 addi     39200010   1     LI        gr9=16
+  119| 0005A4 bl       48000001   1     CALL      mpi_bcast,7,resfile",gr3,T_28",gr4,T_29",gr5,T_30",gr6,T_31",gr7,ierr",gr8,gr9,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  119| 0005A8 ori      60000000   1
+  123| 0005AC lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+  123| 0005B0 cmpdi    2C200000   1     C8        cr0=gr0,0
+  123| 0005B4 bc       40820024   1     BF        CL.6,cr0,0x4/eq,taken=60%(60,40)
+  123| 0005B8 ld       E8A20000   1     L8        gr5=.$STATIC(gr2,0)
+  123| 0005BC addi     38600001   1     LI        gr3=1
+  123| 0005C0 addi     38800001   1     LI        gr4=1
+  123| 0005C4 addi     38C00000   1     LI        gr6=0
+  123| 0005C8 addi     38E00000   1     LI        gr7=0
+  123| 0005CC addi     38A50140   1     AI        gr5=gr5,320
+  123| 0005D0 bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,#11",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  123| 0005D4 ori      60000000   1
+  123|                              CL.6:
+  124| 0005D8 lwz      801C0220   1     L4Z       gr0=<s113:d544:l4>(gr28,544)
+  124| 0005DC cmpdi    2C200000   1     C8        cr0=gr0,0
+  124| 0005E0 bc       40820014   1     BF        CL.7,cr0,0x4/eq,taken=50%(0,0)
+  125| 0005E4 bl       48000001   1     CALL      setup,0,setup",fcr",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  125| 0005E8 ori      60000000   1
+  126| 0005EC std      FBBC0118   1     ST8       <s113:d280:l8>(gr28,280)=gr29
+    0| 0005F0 b        48000158   1     B         CL.8,-1
+  127|                              CL.7:
+  128| 0005F4 addi     3800000D   1     LI        gr0=13
+  128| 0005F8 addi     38A10100   1     AI        gr5=gr1,256
+  128| 0005FC stw      93610100   1     ST4Z      T_33(gr1,256)=gr27
+  128| 000600 stw      900100FC   1     ST4Z      T_32(gr1,252)=gr0
+  128| 000604 addi     388100FC   1     AI        gr4=gr1,252
+  128| 000608 or       7F43D378   1     LR        gr3=gr26
+  128| 00060C addi     38C00010   1     LI        gr6=16
+  128| 000610 bl       48000001   1     CALL      gr3=strtoi,4,resfile",gr3,T_32",gr4,T_33",gr5,gr6,strtoi",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  128| 000614 ori      60000000   1
+  129| 000618 ld       E8A20000   1     L8        gr5=.$STATIC(gr2,0)
+  129| 00061C addi     38000081   1     LI        gr0=129
+  129| 000620 std      FB6101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr27
+  129| 000624 addis    3C800080   1     LIU       gr4=128
+  129| 000628 addi     38DE0286   1     AI        gr6=gr30,646
+  129| 00062C std      FBA10178   1     ST8       <a1:d376:l8>(gr1,376)=gr29
+  128| 000630 or       7C771B78   1     LR        gr23=gr3
+  129| 000634 std      FB6101B0   1     ST8       <a1:d432:l8>(gr1,432)=gr27
+  129| 000638 std      FB4101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr26
+  129| 00063C stw      90010160   1     ST4Z      <a1:d352:l4>(gr1,352)=gr0
+  129| 000640 std      FBA10168   1     ST8       <a1:d360:l8>(gr1,360)=gr29
+  129| 000644 std      F8C10170   1     ST8       <a1:d368:l8>(gr1,368)=gr6
+  129| 000648 std      FBA10180   1     ST8       <a1:d384:l8>(gr1,384)=gr29
+  129| 00064C addi     39210160   1     AI        gr9=gr1,352
+  129| 000650 addi     38A50180   1     AI        gr5=gr5,384
+  129| 000654 addi     386101A0   1     AI        gr3=gr1,416
+  129| 000658 addi     38840103   1     AI        gr4=gr4,259
+  129| 00065C ori      63A68004   1     OIL       gr6=gr29,0x8004
+  129| 000660 addi     38E00000   1     LI        gr7=0
+  129| 000664 addi     39000000   1     LI        gr8=0
+  129| 000668 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#12",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO51",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 00066C ori      60000000   1
+  129| 000670 or       7C791B78   1     LR        gr25=gr3
+  129| 000674 addi     389E03E0   1     AI        gr4=gr30,992
+  129| 000678 addi     38A00003   1     LI        gr5=3
+  129| 00067C addi     38C00001   1     LI        gr6=1
+  129| 000680 addi     38E00002   1     LI        gr7=2
+  129| 000684 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 000688 ori      60000000   1
+  129| 00068C or       7F23CB78   1     LR        gr3=gr25
+  129| 000690 addi     389C0224   1     AI        gr4=gr28,548
+  129| 000694 addi     38A00002   1     LI        gr5=2
+  129| 000698 addi     38C00001   1     LI        gr6=1
+  129| 00069C addi     38E00002   1     LI        gr7=2
+  129| 0006A0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 0006A4 ori      60000000   1
+  129| 0006A8 or       7F23CB78   1     LR        gr3=gr25
+  129| 0006AC addi     389F0078   1     AI        gr4=gr31,120
+  129| 0006B0 addi     38A00004   1     LI        gr5=4
+  129| 0006B4 addi     38C00004   1     LI        gr6=4
+  129| 0006B8 addi     38E00000   1     LI        gr7=0
+  129| 0006BC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 0006C0 ori      60000000   1
+  129| 0006C4 or       7F23CB78   1     LR        gr3=gr25
+  129| 0006C8 addi     389F007C   1     AI        gr4=gr31,124
+  129| 0006CC addi     38A00004   1     LI        gr5=4
+  129| 0006D0 addi     38C00004   1     LI        gr6=4
+  129| 0006D4 addi     38E00000   1     LI        gr7=0
+  129| 0006D8 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 0006DC ori      60000000   1
+  129| 0006E0 or       7F23CB78   1     LR        gr3=gr25
+  129| 0006E4 addi     389F0080   1     AI        gr4=gr31,128
+  129| 0006E8 addi     38A00004   1     LI        gr5=4
+  129| 0006EC addi     38C00004   1     LI        gr6=4
+  129| 0006F0 addi     38E00000   1     LI        gr7=0
+  129| 0006F4 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 0006F8 ori      60000000   1
+  129| 0006FC stw      92E10104   1     ST4Z      #14(gr1,260)=gr23
+  129| 000700 or       7F23CB78   1     LR        gr3=gr25
+  129| 000704 addi     38810104   1     AI        gr4=gr1,260
+  129| 000708 addi     38A00004   1     LI        gr5=4
+  129| 00070C addi     38C00004   1     LI        gr6=4
+  129| 000710 addi     38E00000   1     LI        gr7=0
+  129| 000714 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#14,gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 000718 ori      60000000   1
+  129| 00071C or       7F23CB78   1     LR        gr3=gr25
+  129| 000720 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO51",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  129| 000724 ori      60000000   1
+  131| 000728 or       7F43D378   1     LR        gr3=gr26
+  131| 00072C addi     38800010   1     LI        gr4=16
+  131| 000730 bl       48000001   1     CALL      mget,2,resfile",gr3,gr4,mget",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  131| 000734 ori      60000000   1
+  132| 000738 stw      93BC01F8   1     ST4Z      <s113:d504:l4>(gr28,504)=gr29
+  133| 00073C stw      93BC0278   1     ST4Z      <s113:d632:l4>(gr28,632)=gr29
+  134| 000740 bl       48000001   1     CALL      restart,0,restart",fcr",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  134| 000744 ori      60000000   1
+  135|                              CL.8:
+  148| 000748 lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+    0| 00074C ld       EB220000   1     L8        gr25=.&&N&&config(gr2,0)
+  148| 000750 cmpdi    2C200000   1     C8        cr0=gr0,0
+  148| 000754 bc       41820BF0   1     BT        CL.138,cr0,0x4/eq,taken=40%(40,60)
+  183|                              CL.15:
+  188| 000758 addi     3878081F   1     AI        gr3=gr24,2079
+  188| 00075C stw      92A10114   1     ST4Z      T_37(gr1,276)=gr21
+  188| 000760 stw      9061010C   1     ST4Z      T_35(gr1,268)=gr3
+  188| 000764 addi     380000C8   1     LI        gr0=200
+  188| 000768 stw      93A10110   1     ST4Z      T_36(gr1,272)=gr29
+  188| 00076C stw      90010108   1     ST4Z      T_34(gr1,264)=gr0
+  188| 000770 addi     38E10114   1     AI        gr7=gr1,276
+  188| 000774 addi     38C10110   1     AI        gr6=gr1,272
+  188| 000778 addi     38A1010C   1     AI        gr5=gr1,268
+  188| 00077C addi     38810108   1     AI        gr4=gr1,264
+  188| 000780 addi     387F06D0   1     AI        gr3=gr31,1744
+  188| 000784 addi     391F0014   1     AI        gr8=gr31,20
+  188| 000788 bl       48000001   1     CALL      mpi_bcast,6,buf_in[]",gr3,T_34",gr4,T_35",gr5,T_36",gr6,T_37",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  188| 00078C ori      60000000   1
+  190| 000790 lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+  202| 000794 addi     387F0728   1     AI        gr3=gr31,1832
+    0| 000798 addi     38A00017   1     LI        gr5=23
+  202| 00079C addi     38990078   1     AI        gr4=gr25,120
+  190| 0007A0 cmpdi    2C200000   1     C8        cr0=gr0,0
+  190| 0007A4 cmpwi    2E000000   1     C4        cr4=gr0,0
+  190| 0007A8 bc       41820100   1     BT        CL.20,cr0,0x4/eq,taken=20%(20,80)
+  202| 0007AC lfd      C81F0730   1     LFL       fp0=buf_in[](gr31,1840)
+  202| 0007B0 lfd      C83F0738   1     LFL       fp1=buf_in[](gr31,1848)
+  202| 0007B4 lfd      C85F0740   1     LFL       fp2=buf_in[](gr31,1856)
+  202| 0007B8 lfd      C87F0748   1     LFL       fp3=buf_in[](gr31,1864)
+  191| 0007BC lfd      C89F06D0   1     LFL       fp4=<s19:d1744:l8>(gr31,1744)
+  192| 0007C0 lfd      C8BF06D8   1     LFL       fp5=<s19:d1752:l8>(gr31,1752)
+  193| 0007C4 lfd      C8DF06E0   1     LFL       fp6=<s19:d1760:l8>(gr31,1760)
+  194| 0007C8 lfd      C8FF06E8   1     LFL       fp7=<s19:d1768:l8>(gr31,1768)
+  202| 0007CC stfd     D8190080   1     STFL      t_out[](gr25,128)=fp0
+  202| 0007D0 stfd     D8390088   1     STFL      t_out[](gr25,136)=fp1
+  202| 0007D4 stfd     D8590090   1     STFL      t_out[](gr25,144)=fp2
+  202| 0007D8 stfdu    DC640020   1     STFDU     gr4,t_out[](gr4,32)=fp3
+  191| 0007DC stfd     D89C0108   1     STFL      <s113:d264:l8>(gr28,264)=fp4
+  192| 0007E0 stfd     D8BC0088   1     STFL      <s113:d136:l8>(gr28,136)=fp5
+  193| 0007E4 stfd     D8DC0110   1     STFL      <s113:d272:l8>(gr28,272)=fp6
+  194| 0007E8 stfd     D8FC0090   1     STFL      <s113:d144:l8>(gr28,144)=fp7
+  195| 0007EC lfd      C81F06F0   1     LFL       fp0=<s19:d1776:l8>(gr31,1776)
+  196| 0007F0 lfd      C83F06F8   1     LFL       fp1=<s19:d1784:l8>(gr31,1784)
+  197| 0007F4 lfd      C85F0700   1     LFL       fp2=<s19:d1792:l8>(gr31,1792)
+  198| 0007F8 lfd      C87F0708   1     LFL       fp3=<s19:d1800:l8>(gr31,1800)
+  199| 0007FC lfd      C89F0720   1     LFL       fp4=<s19:d1824:l8>(gr31,1824)
+  200| 000800 lfd      C8BF0728   1     LFL       fp5=<s19:d1832:l8>(gr31,1832)
+  202| 000804 lfd      C8DF0750   1     LFL       fp6=buf_in[](gr31,1872)
+  202| 000808 lfd      C8FF0758   1     LFL       fp7=buf_in[](gr31,1880)
+  195| 00080C stfd     D81C0150   1     STFL      <s113:d336:l8>(gr28,336)=fp0
+  196| 000810 stfd     D83C00C8   1     STFL      <s113:d200:l8>(gr28,200)=fp1
+  197| 000814 stfd     D85C0100   1     STFL      <s113:d256:l8>(gr28,256)=fp2
+  198| 000818 stfd     D87C0080   1     STFL      <s113:d128:l8>(gr28,128)=fp3
+  199| 00081C stfd     D89C0140   1     STFL      <s113:d320:l8>(gr28,320)=fp4
+  200| 000820 stfd     D8BC00A0   1     STFL      <s113:d160:l8>(gr28,160)=fp5
+  202| 000824 stfd     D8C40008   1     STFL      t_out[](gr4,8)=fp6
+  202| 000828 lfd      C83F0760   1     LFL       fp1=buf_in[](gr31,1888)
+  202| 00082C stfd     D8E40010   1     STFL      t_out[](gr4,16)=fp7
+  202| 000830 lfd      C81F0770   1     LFL       fp0=buf_in[](gr31,1904)
+  202| 000834 lfd      C85F0768   1     LFL       fp2=buf_in[](gr31,1896)
+  202| 000838 lfd      C87F0778   1     LFL       fp3=buf_in[](gr31,1912)
+    0| 00083C mtspr    7CA903A6   1     LCTR      ctr=gr5
+  202| 000840 lfd      C89F0780   1     LFL       fp4=buf_in[](gr31,1920)
+  202| 000844 lfdu     CCA30060   1     LFDU      fp5,gr3=buf_in[](gr3,96)
+  202| 000848 stfd     D8240018   1     STFL      t_out[](gr4,24)=fp1
+  202| 00084C stfd     D8040028   1     STFL      t_out[](gr4,40)=fp0
+  202| 000850 stfd     D8440020   1     STFL      t_out[](gr4,32)=fp2
+  202| 000854 stfd     D8640030   1     STFL      t_out[](gr4,48)=fp3
+    0| 000858 bc       42400048   1     BCF       ctr=CL.99,taken=0%(0,100)
+    0|                              CL.100:
+  202| 00085C lfd      C8030008   1     LFL       fp0=buf_in[](gr3,8)
+  202| 000860 stfd     D8840038   1     STFL      t_out[](gr4,56)=fp4
+  202| 000864 lfd      C8230010   1     LFL       fp1=buf_in[](gr3,16)
+  202| 000868 stfdu    DCA40040   1     STFDU     gr4,t_out[](gr4,64)=fp5
+  202| 00086C lfd      C8430018   1     LFL       fp2=buf_in[](gr3,24)
+  202| 000870 stfd     D8040008   1     STFL      t_out[](gr4,8)=fp0
+  202| 000874 lfd      C8030020   1     LFL       fp0=buf_in[](gr3,32)
+  202| 000878 stfd     D8240010   1     STFL      t_out[](gr4,16)=fp1
+  202| 00087C lfd      C8230028   1     LFL       fp1=buf_in[](gr3,40)
+  202| 000880 stfd     D8440018   1     STFL      t_out[](gr4,24)=fp2
+  202| 000884 lfd      C8430030   1     LFL       fp2=buf_in[](gr3,48)
+  202| 000888 stfd     D8040020   1     STFL      t_out[](gr4,32)=fp0
+  202| 00088C lfd      C8830038   1     LFL       fp4=buf_in[](gr3,56)
+  202| 000890 stfd     D8240028   1     STFL      t_out[](gr4,40)=fp1
+  202| 000894 lfdu     CCA30040   1     LFDU      fp5,gr3=buf_in[](gr3,64)
+  202| 000898 stfd     D8440030   1     STFL      t_out[](gr4,48)=fp2
+    0| 00089C bc       4200FFC0   1     BCT       ctr=CL.100,taken=100%(100,0)
+    0|                              CL.99:
+  202| 0008A0 stfd     D8840038   1     STFL      t_out[](gr4,56)=fp4
+  202| 0008A4 stfdu    DCA40040   1     STFDU     gr4,t_out[](gr4,64)=fp5
+  204|                              CL.20:
+  209| 0008A8 lwz      801C0220   1     L4Z       gr0=<s113:d544:l4>(gr28,544)
+    0| 0008AC ld       EB020000   1     L8        gr24=.$STATIC(gr2,0)
+    0| 0008B0 addi     3AFE0286   1     AI        gr23=gr30,646
+    0| 0008B4 addi     3ADC026C   1     AI        gr22=gr28,620
+    0| 0008B8 addi     39FE033E   1     AI        gr15=gr30,830
+    0| 0008BC addi     3ABC022C   1     AI        gr21=gr28,556
+  209| 0008C0 cmpdi    2C200000   1     C8        cr0=gr0,0
+  209| 0008C4 cmpwi    2D000000   1     C4        cr2=gr0,0
+    0| 0008C8 addi     3A9C025C   1     AI        gr20=gr28,604
+  209| 0008CC bc       40820460   1     BF        CL.25,cr0,0x4/eq,taken=50%(0,0)
+  212| 0008D0 std      FA7C027C   1     ST8       ifsen[].off6|36#311|40#310_1(gr28,636)=gr19
+  214| 0008D4 std      FA7C0284   1     ST8       ifsen[].off64|4#309|8#308_1(gr28,644)=gr19
+  215| 0008D8 stw      91DC028C   1     ST4Z      <s113:d652:l4>(gr28,652)=gr14
+  216| 0008DC addis    3E600080   1     LIU       gr19=128
+  216| 0008E0 addi     3A200009   1     LI        gr17=9
+  216| 0008E4 addi     3A000081   1     LI        gr16=129
+  216| 0008E8 ori      63B28004   1     OIL       gr18=gr29,0x8004
+  216| 0008EC std      FBA10168   1     ST8       <a1:d360:l8>(gr1,360)=gr29
+  210| 0008F0 addi     39C00000   1     LI        gr14=0
+  216| 0008F4 std      FA2101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr17
+  216| 0008F8 std      FA2101B0   1     ST8       <a1:d432:l8>(gr1,432)=gr17
+  216| 0008FC std      FAC101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr22
+  216| 000900 stw      92010160   1     ST4Z      <a1:d352:l4>(gr1,352)=gr16
+  216| 000904 std      F9E10170   1     ST8       <a1:d368:l8>(gr1,368)=gr15
+  216| 000908 std      FBA10178   1     ST8       <a1:d376:l8>(gr1,376)=gr29
+  216| 00090C std      FBA10180   1     ST8       <a1:d384:l8>(gr1,384)=gr29
+  216| 000910 addi     38B80240   1     AI        gr5=gr24,576
+  216| 000914 addi     386101A0   1     AI        gr3=gr1,416
+  216| 000918 addi     38930103   1     AI        gr4=gr19,259
+  216| 00091C or       7E469378   1     LR        gr6=gr18
+  216| 000920 addi     38E00000   1     LI        gr7=0
+  216| 000924 addi     39000000   1     LI        gr8=0
+  216| 000928 addi     39210160   1     AI        gr9=gr1,352
+  216| 00092C bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#19",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO81",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  216| 000930 ori      60000000   1
+  216| 000934 or       7C6F1B78   1     LR        gr15=gr3
+  216| 000938 addi     389E03EC   1     AI        gr4=gr30,1004
+  216| 00093C addi     38A00003   1     LI        gr5=3
+  216| 000940 addi     38C00001   1     LI        gr6=1
+  216| 000944 addi     38E00002   1     LI        gr7=2
+  216| 000948 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO81",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  216| 00094C ori      60000000   1
+  216| 000950 stw      93A10118   1     ST4Z      #21(gr1,280)=gr29
+  216| 000954 addi     38810118   1     AI        gr4=gr1,280
+  216| 000958 or       7DE37B78   1     LR        gr3=gr15
+  216| 00095C addi     38A00004   1     LI        gr5=4
+  216| 000960 addi     38C00004   1     LI        gr6=4
+  216| 000964 addi     38E00000   1     LI        gr7=0
+  216| 000968 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#21,gr4-gr7,#def_xlfBeginIO81",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  216| 00096C ori      60000000   1
+  216| 000970 or       7DE37B78   1     LR        gr3=gr15
+  216| 000974 addi     389C0224   1     AI        gr4=gr28,548
+  216| 000978 addi     38A00002   1     LI        gr5=2
+  216| 00097C addi     38C00001   1     LI        gr6=1
+  216| 000980 addi     38E00002   1     LI        gr7=2
+  216| 000984 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO81",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  216| 000988 ori      60000000   1
+  216| 00098C or       7DE37B78   1     LR        gr3=gr15
+  216| 000990 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO81",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  216| 000994 ori      60000000   1
+  217| 000998 std      FB4101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr26
+  217| 00099C std      FB6101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr27
+  217| 0009A0 std      FAE10170   1     ST8       <a1:d368:l8>(gr1,368)=gr23
+  217| 0009A4 std      FB6101B0   1     ST8       <a1:d432:l8>(gr1,432)=gr27
+  217| 0009A8 addi     38930103   1     AI        gr4=gr19,259
+  217| 0009AC or       7E469378   1     LR        gr6=gr18
+  217| 0009B0 addi     38B80280   1     AI        gr5=gr24,640
+  217| 0009B4 addi     386101A0   1     AI        gr3=gr1,416
+  217| 0009B8 addi     38E00000   1     LI        gr7=0
+  217| 0009BC addi     39000000   1     LI        gr8=0
+  217| 0009C0 addi     39210160   1     AI        gr9=gr1,352
+  217| 0009C4 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#22",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO51",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 0009C8 ori      60000000   1
+  217| 0009CC or       7C7A1B78   1     LR        gr26=gr3
+  217| 0009D0 addi     389E03E0   1     AI        gr4=gr30,992
+  217| 0009D4 addi     38A00003   1     LI        gr5=3
+  217| 0009D8 addi     38C00001   1     LI        gr6=1
+  217| 0009DC addi     38E00002   1     LI        gr7=2
+  217| 0009E0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 0009E4 ori      60000000   1
+  217| 0009E8 or       7F43D378   1     LR        gr3=gr26
+  217| 0009EC addi     389C0224   1     AI        gr4=gr28,548
+  217| 0009F0 addi     38A00002   1     LI        gr5=2
+  217| 0009F4 addi     38C00001   1     LI        gr6=1
+  217| 0009F8 addi     38E00002   1     LI        gr7=2
+  217| 0009FC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 000A00 ori      60000000   1
+  217| 000A04 or       7F43D378   1     LR        gr3=gr26
+  217| 000A08 addi     389F0078   1     AI        gr4=gr31,120
+  217| 000A0C addi     38A00004   1     LI        gr5=4
+  217| 000A10 addi     38C00004   1     LI        gr6=4
+  217| 000A14 addi     38E00000   1     LI        gr7=0
+  217| 000A18 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 000A1C ori      60000000   1
+  217| 000A20 or       7F43D378   1     LR        gr3=gr26
+  217| 000A24 addi     389F007C   1     AI        gr4=gr31,124
+  217| 000A28 addi     38A00004   1     LI        gr5=4
+  217| 000A2C addi     38C00004   1     LI        gr6=4
+  217| 000A30 addi     38E00000   1     LI        gr7=0
+  217| 000A34 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 000A38 ori      60000000   1
+  217| 000A3C or       7F43D378   1     LR        gr3=gr26
+  217| 000A40 addi     389F0080   1     AI        gr4=gr31,128
+  217| 000A44 addi     38A00004   1     LI        gr5=4
+  217| 000A48 addi     38C00004   1     LI        gr6=4
+  217| 000A4C addi     38E00000   1     LI        gr7=0
+  217| 000A50 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 000A54 ori      60000000   1
+  217| 000A58 stw      93A1011C   1     ST4Z      #24(gr1,284)=gr29
+  217| 000A5C or       7F43D378   1     LR        gr3=gr26
+  217| 000A60 addi     3881011C   1     AI        gr4=gr1,284
+  217| 000A64 addi     38A00004   1     LI        gr5=4
+  217| 000A68 addi     38C00004   1     LI        gr6=4
+  217| 000A6C addi     38E00000   1     LI        gr7=0
+  217| 000A70 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#24,gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 000A74 ori      60000000   1
+  217| 000A78 or       7F43D378   1     LR        gr3=gr26
+  217| 000A7C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO51",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  217| 000A80 ori      60000000   1
+  219| 000A84 std      FAA101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr21
+  219| 000A88 addi     38930103   1     AI        gr4=gr19,259
+  219| 000A8C or       7E469378   1     LR        gr6=gr18
+  219| 000A90 addi     38B802C0   1     AI        gr5=gr24,704
+  219| 000A94 addi     386101A0   1     AI        gr3=gr1,416
+  219| 000A98 addi     38E00000   1     LI        gr7=0
+  219| 000A9C addi     39000000   1     LI        gr8=0
+  219| 000AA0 addi     39210160   1     AI        gr9=gr1,352
+  219| 000AA4 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#25",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO101",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000AA8 ori      60000000   1
+  219| 000AAC or       7C7A1B78   1     LR        gr26=gr3
+  219| 000AB0 addi     389E03F0   1     AI        gr4=gr30,1008
+  219| 000AB4 addi     38A00003   1     LI        gr5=3
+  219| 000AB8 addi     38C00001   1     LI        gr6=1
+  219| 000ABC addi     38E00002   1     LI        gr7=2
+  219| 000AC0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000AC4 ori      60000000   1
+  219| 000AC8 or       7F43D378   1     LR        gr3=gr26
+  219| 000ACC addi     389C0224   1     AI        gr4=gr28,548
+  219| 000AD0 addi     38A00002   1     LI        gr5=2
+  219| 000AD4 addi     38C00001   1     LI        gr6=1
+  219| 000AD8 addi     38E00002   1     LI        gr7=2
+  219| 000ADC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000AE0 ori      60000000   1
+  219| 000AE4 or       7F43D378   1     LR        gr3=gr26
+  219| 000AE8 addi     389F0078   1     AI        gr4=gr31,120
+  219| 000AEC addi     38A00004   1     LI        gr5=4
+  219| 000AF0 addi     38C00004   1     LI        gr6=4
+  219| 000AF4 addi     38E00000   1     LI        gr7=0
+  219| 000AF8 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000AFC ori      60000000   1
+  219| 000B00 or       7F43D378   1     LR        gr3=gr26
+  219| 000B04 addi     389F007C   1     AI        gr4=gr31,124
+  219| 000B08 addi     38A00004   1     LI        gr5=4
+  219| 000B0C addi     38C00004   1     LI        gr6=4
+  219| 000B10 addi     38E00000   1     LI        gr7=0
+  219| 000B14 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000B18 ori      60000000   1
+  219| 000B1C or       7F43D378   1     LR        gr3=gr26
+  219| 000B20 addi     389F0080   1     AI        gr4=gr31,128
+  219| 000B24 addi     38A00004   1     LI        gr5=4
+  219| 000B28 addi     38C00004   1     LI        gr6=4
+  219| 000B2C addi     38E00000   1     LI        gr7=0
+  219| 000B30 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000B34 ori      60000000   1
+  219| 000B38 stw      93A10120   1     ST4Z      #27(gr1,288)=gr29
+  219| 000B3C or       7F43D378   1     LR        gr3=gr26
+  219| 000B40 addi     38810120   1     AI        gr4=gr1,288
+  219| 000B44 addi     38A00004   1     LI        gr5=4
+  219| 000B48 addi     38C00004   1     LI        gr6=4
+  219| 000B4C addi     38E00000   1     LI        gr7=0
+  219| 000B50 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#27,gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000B54 ori      60000000   1
+  219| 000B58 or       7F43D378   1     LR        gr3=gr26
+  219| 000B5C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO101",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 000B60 ori      60000000   1
+  221| 000B64 addi     381C023C   1     AI        gr0=gr28,572
+  221| 000B68 addi     38930103   1     AI        gr4=gr19,259
+  221| 000B6C std      F80101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr0
+  221| 000B70 or       7E469378   1     LR        gr6=gr18
+  221| 000B74 addi     38B80300   1     AI        gr5=gr24,768
+  221| 000B78 addi     386101A0   1     AI        gr3=gr1,416
+  221| 000B7C addi     38E00000   1     LI        gr7=0
+  221| 000B80 addi     39000000   1     LI        gr8=0
+  221| 000B84 addi     39210160   1     AI        gr9=gr1,352
+  221| 000B88 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#28",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO111",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000B8C ori      60000000   1
+  221| 000B90 or       7C7A1B78   1     LR        gr26=gr3
+  221| 000B94 addi     389E03F4   1     AI        gr4=gr30,1012
+  221| 000B98 addi     38A00003   1     LI        gr5=3
+  221| 000B9C addi     38C00001   1     LI        gr6=1
+  221| 000BA0 addi     38E00002   1     LI        gr7=2
+  221| 000BA4 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO111",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000BA8 ori      60000000   1
+  221| 000BAC or       7F43D378   1     LR        gr3=gr26
+  221| 000BB0 addi     389C0224   1     AI        gr4=gr28,548
+  221| 000BB4 addi     38A00002   1     LI        gr5=2
+  221| 000BB8 addi     38C00001   1     LI        gr6=1
+  221| 000BBC addi     38E00002   1     LI        gr7=2
+  221| 000BC0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO111",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000BC4 ori      60000000   1
+  221| 000BC8 or       7F43D378   1     LR        gr3=gr26
+  221| 000BCC addi     389F0078   1     AI        gr4=gr31,120
+  221| 000BD0 addi     38A00004   1     LI        gr5=4
+  221| 000BD4 addi     38C00004   1     LI        gr6=4
+  221| 000BD8 addi     38E00000   1     LI        gr7=0
+  221| 000BDC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO111",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000BE0 ori      60000000   1
+  221| 000BE4 or       7F43D378   1     LR        gr3=gr26
+  221| 000BE8 addi     389F007C   1     AI        gr4=gr31,124
+  221| 000BEC addi     38A00004   1     LI        gr5=4
+  221| 000BF0 addi     38C00004   1     LI        gr6=4
+  221| 000BF4 addi     38E00000   1     LI        gr7=0
+  221| 000BF8 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO111",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000BFC ori      60000000   1
+  221| 000C00 or       7F43D378   1     LR        gr3=gr26
+  221| 000C04 addi     389F0080   1     AI        gr4=gr31,128
+  221| 000C08 addi     38A00004   1     LI        gr5=4
+  221| 000C0C addi     38C00004   1     LI        gr6=4
+  221| 000C10 addi     38E00000   1     LI        gr7=0
+  221| 000C14 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO111",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000C18 ori      60000000   1
+  221| 000C1C or       7F43D378   1     LR        gr3=gr26
+  221| 000C20 stw      93A10124   1     ST4Z      #30(gr1,292)=gr29
+  221| 000C24 addi     38810124   1     AI        gr4=gr1,292
+  221| 000C28 addi     38A00004   1     LI        gr5=4
+  221| 000C2C addi     38C00004   1     LI        gr6=4
+  221| 000C30 addi     38E00000   1     LI        gr7=0
+  221| 000C34 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#30,gr4-gr7,#def_xlfBeginIO111",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000C38 ori      60000000   1
+  221| 000C3C or       7F43D378   1     LR        gr3=gr26
+  221| 000C40 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO111",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  221| 000C44 ori      60000000   1
+  223| 000C48 std      FA8101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr20
+  223| 000C4C addi     38930103   1     AI        gr4=gr19,259
+  223| 000C50 or       7E469378   1     LR        gr6=gr18
+  223| 000C54 addi     38B80340   1     AI        gr5=gr24,832
+  223| 000C58 addi     386101A0   1     AI        gr3=gr1,416
+  223| 000C5C addi     38E00000   1     LI        gr7=0
+  223| 000C60 addi     39000000   1     LI        gr8=0
+  223| 000C64 addi     39210160   1     AI        gr9=gr1,352
+  223| 000C68 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#31",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO121",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000C6C ori      60000000   1
+  223| 000C70 or       7C7A1B78   1     LR        gr26=gr3
+  223| 000C74 addi     389E03F8   1     AI        gr4=gr30,1016
+  223| 000C78 addi     38A00003   1     LI        gr5=3
+  223| 000C7C addi     38C00001   1     LI        gr6=1
+  223| 000C80 addi     38E00002   1     LI        gr7=2
+  223| 000C84 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000C88 ori      60000000   1
+  223| 000C8C or       7F43D378   1     LR        gr3=gr26
+  223| 000C90 addi     389C0224   1     AI        gr4=gr28,548
+  223| 000C94 addi     38A00002   1     LI        gr5=2
+  223| 000C98 addi     38C00001   1     LI        gr6=1
+  223| 000C9C addi     38E00002   1     LI        gr7=2
+  223| 000CA0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000CA4 ori      60000000   1
+  223| 000CA8 or       7F43D378   1     LR        gr3=gr26
+  223| 000CAC addi     389F0078   1     AI        gr4=gr31,120
+  223| 000CB0 addi     38A00004   1     LI        gr5=4
+  223| 000CB4 addi     38C00004   1     LI        gr6=4
+  223| 000CB8 addi     38E00000   1     LI        gr7=0
+  223| 000CBC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000CC0 ori      60000000   1
+  223| 000CC4 or       7F43D378   1     LR        gr3=gr26
+  223| 000CC8 addi     389F007C   1     AI        gr4=gr31,124
+  223| 000CCC addi     38A00004   1     LI        gr5=4
+  223| 000CD0 addi     38C00004   1     LI        gr6=4
+  223| 000CD4 addi     38E00000   1     LI        gr7=0
+  223| 000CD8 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000CDC ori      60000000   1
+  223| 000CE0 addi     389F0080   1     AI        gr4=gr31,128
+  223| 000CE4 or       7F43D378   1     LR        gr3=gr26
+  223| 000CE8 addi     38A00004   1     LI        gr5=4
+  223| 000CEC addi     38C00004   1     LI        gr6=4
+  223| 000CF0 addi     38E00000   1     LI        gr7=0
+  223| 000CF4 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000CF8 ori      60000000   1
+  223| 000CFC stw      93A10128   1     ST4Z      #33(gr1,296)=gr29
+  223| 000D00 or       7F43D378   1     LR        gr3=gr26
+  223| 000D04 addi     38810128   1     AI        gr4=gr1,296
+  223| 000D08 addi     38A00004   1     LI        gr5=4
+  223| 000D0C addi     38C00004   1     LI        gr6=4
+  223| 000D10 addi     38E00000   1     LI        gr7=0
+  223| 000D14 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#33,gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000D18 ori      60000000   1
+  223| 000D1C or       7F43D378   1     LR        gr3=gr26
+  223| 000D20 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO121",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  223| 000D24 ori      60000000   1
+    0| 000D28 b        4800042C   1     B         CL.26,-1
+  225|                              CL.25:
+  227| 000D2C std      FBBC027C   1     ST8       ifsen[].off6|36#311|40#310_1(gr28,636)=gr29
+  231| 000D30 addi     38000004   1     LI        gr0=4
+  231| 000D34 addi     38600007   1     LI        gr3=7
+  229| 000D38 std      FBBC0284   1     ST8       ifsen[].off64|4#309|8#308_1(gr28,644)=gr29
+  230| 000D3C stw      93BC028C   1     ST4Z      <s113:d652:l4>(gr28,652)=gr29
+  231| 000D40 stw      9001012C   1     ST4Z      T_38(gr1,300)=gr0
+  231| 000D44 stw      90610130   1     ST4Z      T_39(gr1,304)=gr3
+  231| 000D48 addi     38A10130   1     AI        gr5=gr1,304
+  231| 000D4C addi     3881012C   1     AI        gr4=gr1,300
+  231| 000D50 or       7EC3B378   1     LR        gr3=gr22
+  231| 000D54 addi     38C00009   1     LI        gr6=9
+  231| 000D58 bl       48000001   1     CALL      gr3=strtoi,4,tslfile",gr3,T_38",gr4,T_39",gr5,gr6,strtoi",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  231| 000D5C ori      60000000   1
+  232| 000D60 addi     3A200009   1     LI        gr17=9
+  232| 000D64 addi     3A000081   1     LI        gr16=129
+  232| 000D68 addis    3E600080   1     LIU       gr19=128
+  232| 000D6C ori      63B28004   1     OIL       gr18=gr29,0x8004
+  231| 000D70 or       7C6E1B78   1     LR        gr14=gr3
+  232| 000D74 std      FA2101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr17
+  232| 000D78 std      FA2101B0   1     ST8       <a1:d432:l8>(gr1,432)=gr17
+  232| 000D7C std      FAC101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr22
+  232| 000D80 stw      92010160   1     ST4Z      <a1:d352:l4>(gr1,352)=gr16
+  232| 000D84 std      FBA10168   1     ST8       <a1:d360:l8>(gr1,360)=gr29
+  232| 000D88 std      F9E10170   1     ST8       <a1:d368:l8>(gr1,368)=gr15
+  232| 000D8C std      FBA10178   1     ST8       <a1:d376:l8>(gr1,376)=gr29
+  232| 000D90 std      FBA10180   1     ST8       <a1:d384:l8>(gr1,384)=gr29
+  232| 000D94 addi     38B80380   1     AI        gr5=gr24,896
+  232| 000D98 addi     386101A0   1     AI        gr3=gr1,416
+  232| 000D9C addi     38930103   1     AI        gr4=gr19,259
+  232| 000DA0 or       7E469378   1     LR        gr6=gr18
+  232| 000DA4 addi     38E00000   1     LI        gr7=0
+  232| 000DA8 addi     39000000   1     LI        gr8=0
+  232| 000DAC addi     39210160   1     AI        gr9=gr1,352
+  232| 000DB0 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#34",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO81",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  232| 000DB4 ori      60000000   1
+  232| 000DB8 or       7C6F1B78   1     LR        gr15=gr3
+  232| 000DBC addi     389E03EC   1     AI        gr4=gr30,1004
+  232| 000DC0 addi     38A00003   1     LI        gr5=3
+  232| 000DC4 addi     38C00001   1     LI        gr6=1
+  232| 000DC8 addi     38E00002   1     LI        gr7=2
+  232| 000DCC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO81",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  232| 000DD0 ori      60000000   1
+  232| 000DD4 addi     380E0001   1     AI        gr0=gr14,1
+  232| 000DD8 or       7DE37B78   1     LR        gr3=gr15
+  232| 000DDC stw      90010134   1     ST4Z      #36(gr1,308)=gr0
+  232| 000DE0 addi     38810134   1     AI        gr4=gr1,308
+  232| 000DE4 addi     38A00004   1     LI        gr5=4
+  232| 000DE8 addi     38C00004   1     LI        gr6=4
+  232| 000DEC addi     38E00000   1     LI        gr7=0
+  232| 000DF0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#36,gr4-gr7,#def_xlfBeginIO81",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  232| 000DF4 ori      60000000   1
+  232| 000DF8 or       7DE37B78   1     LR        gr3=gr15
+  232| 000DFC addi     389C0224   1     AI        gr4=gr28,548
+  232| 000E00 addi     38A00002   1     LI        gr5=2
+  232| 000E04 addi     38C00001   1     LI        gr6=1
+  232| 000E08 addi     38E00002   1     LI        gr7=2
+  232| 000E0C bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO81",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  232| 000E10 ori      60000000   1
+  232| 000E14 or       7DE37B78   1     LR        gr3=gr15
+  232| 000E18 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO81",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  232| 000E1C ori      60000000   1
+  233| 000E20 addi     39E0000D   1     LI        gr15=13
+  233| 000E24 stw      9361013C   1     ST4Z      T_41(gr1,316)=gr27
+  233| 000E28 or       7F43D378   1     LR        gr3=gr26
+  233| 000E2C addi     38A1013C   1     AI        gr5=gr1,316
+  233| 000E30 stw      91E10138   1     ST4Z      T_40(gr1,312)=gr15
+  233| 000E34 addi     38810138   1     AI        gr4=gr1,312
+  233| 000E38 addi     38C00010   1     LI        gr6=16
+  233| 000E3C bl       48000001   1     CALL      gr3=strtoi,4,resfile",gr3,T_40",gr4,T_41",gr5,gr6,strtoi",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  233| 000E40 ori      60000000   1
+  234| 000E44 std      FB4101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr26
+  234| 000E48 std      FB6101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr27
+  234| 000E4C std      FAE10170   1     ST8       <a1:d368:l8>(gr1,368)=gr23
+  234| 000E50 std      FB6101B0   1     ST8       <a1:d432:l8>(gr1,432)=gr27
+  233| 000E54 or       7C7A1B78   1     LR        gr26=gr3
+  234| 000E58 addi     38930103   1     AI        gr4=gr19,259
+  234| 000E5C or       7E469378   1     LR        gr6=gr18
+  234| 000E60 addi     38B803C0   1     AI        gr5=gr24,960
+  234| 000E64 addi     386101A0   1     AI        gr3=gr1,416
+  234| 000E68 addi     38E00000   1     LI        gr7=0
+  234| 000E6C addi     39000000   1     LI        gr8=0
+  234| 000E70 addi     39210160   1     AI        gr9=gr1,352
+  234| 000E74 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#37",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO51",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000E78 ori      60000000   1
+  234| 000E7C or       7C771B78   1     LR        gr23=gr3
+  234| 000E80 addi     389E03E0   1     AI        gr4=gr30,992
+  234| 000E84 addi     38A00003   1     LI        gr5=3
+  234| 000E88 addi     38C00001   1     LI        gr6=1
+  234| 000E8C addi     38E00002   1     LI        gr7=2
+  234| 000E90 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000E94 ori      60000000   1
+  234| 000E98 or       7EE3BB78   1     LR        gr3=gr23
+  234| 000E9C addi     389C0224   1     AI        gr4=gr28,548
+  234| 000EA0 addi     38A00002   1     LI        gr5=2
+  234| 000EA4 addi     38C00001   1     LI        gr6=1
+  234| 000EA8 addi     38E00002   1     LI        gr7=2
+  234| 000EAC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000EB0 ori      60000000   1
+  234| 000EB4 or       7EE3BB78   1     LR        gr3=gr23
+  234| 000EB8 addi     389F0078   1     AI        gr4=gr31,120
+  234| 000EBC addi     38A00004   1     LI        gr5=4
+  234| 000EC0 addi     38C00004   1     LI        gr6=4
+  234| 000EC4 addi     38E00000   1     LI        gr7=0
+  234| 000EC8 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000ECC ori      60000000   1
+  234| 000ED0 or       7EE3BB78   1     LR        gr3=gr23
+  234| 000ED4 addi     389F007C   1     AI        gr4=gr31,124
+  234| 000ED8 addi     38A00004   1     LI        gr5=4
+  234| 000EDC addi     38C00004   1     LI        gr6=4
+  234| 000EE0 addi     38E00000   1     LI        gr7=0
+  234| 000EE4 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000EE8 ori      60000000   1
+  234| 000EEC or       7EE3BB78   1     LR        gr3=gr23
+  234| 000EF0 addi     389F0080   1     AI        gr4=gr31,128
+  234| 000EF4 addi     38A00004   1     LI        gr5=4
+  234| 000EF8 addi     38C00004   1     LI        gr6=4
+  234| 000EFC addi     38E00000   1     LI        gr7=0
+  234| 000F00 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000F04 ori      60000000   1
+  234| 000F08 addi     381A0001   1     AI        gr0=gr26,1
+  234| 000F0C or       7EE3BB78   1     LR        gr3=gr23
+  234| 000F10 stw      90010140   1     ST4Z      #39(gr1,320)=gr0
+  234| 000F14 addi     38810140   1     AI        gr4=gr1,320
+  234| 000F18 addi     38A00004   1     LI        gr5=4
+  234| 000F1C addi     38C00004   1     LI        gr6=4
+  234| 000F20 addi     38E00000   1     LI        gr7=0
+  234| 000F24 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#39,gr4-gr7,#def_xlfBeginIO51",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000F28 ori      60000000   1
+  234| 000F2C or       7EE3BB78   1     LR        gr3=gr23
+  234| 000F30 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO51",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  234| 000F34 ori      60000000   1
+  236| 000F38 stw      91E10144   1     ST4Z      T_42(gr1,324)=gr15
+  236| 000F3C stw      93610148   1     ST4Z      T_43(gr1,328)=gr27
+  236| 000F40 or       7EA3AB78   1     LR        gr3=gr21
+  236| 000F44 addi     38A10148   1     AI        gr5=gr1,328
+  236| 000F48 addi     38810144   1     AI        gr4=gr1,324
+  236| 000F4C addi     38C00010   1     LI        gr6=16
+  236| 000F50 bl       48000001   1     CALL      gr3=strtoi,4,hdffile",gr3,T_42",gr4,T_43",gr5,gr6,strtoi",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  236| 000F54 ori      60000000   1
+  237| 000F58 std      FAA101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr21
+  236| 000F5C or       7C7A1B78   1     LR        gr26=gr3
+  237| 000F60 addi     38930103   1     AI        gr4=gr19,259
+  237| 000F64 or       7E469378   1     LR        gr6=gr18
+  237| 000F68 addi     38B80400   1     AI        gr5=gr24,1024
+  237| 000F6C addi     386101A0   1     AI        gr3=gr1,416
+  237| 000F70 addi     38E00000   1     LI        gr7=0
+  237| 000F74 addi     39000000   1     LI        gr8=0
+  237| 000F78 addi     39210160   1     AI        gr9=gr1,352
+  237| 000F7C bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#40",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO101",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 000F80 ori      60000000   1
+  237| 000F84 or       7C771B78   1     LR        gr23=gr3
+  237| 000F88 addi     389E03F0   1     AI        gr4=gr30,1008
+  237| 000F8C addi     38A00003   1     LI        gr5=3
+  237| 000F90 addi     38C00001   1     LI        gr6=1
+  237| 000F94 addi     38E00002   1     LI        gr7=2
+  237| 000F98 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 000F9C ori      60000000   1
+  237| 000FA0 or       7EE3BB78   1     LR        gr3=gr23
+  237| 000FA4 addi     389C0224   1     AI        gr4=gr28,548
+  237| 000FA8 addi     38A00002   1     LI        gr5=2
+  237| 000FAC addi     38C00001   1     LI        gr6=1
+  237| 000FB0 addi     38E00002   1     LI        gr7=2
+  237| 000FB4 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 000FB8 ori      60000000   1
+  237| 000FBC or       7EE3BB78   1     LR        gr3=gr23
+  237| 000FC0 addi     389F0078   1     AI        gr4=gr31,120
+  237| 000FC4 addi     38A00004   1     LI        gr5=4
+  237| 000FC8 addi     38C00004   1     LI        gr6=4
+  237| 000FCC addi     38E00000   1     LI        gr7=0
+  237| 000FD0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 000FD4 ori      60000000   1
+  237| 000FD8 or       7EE3BB78   1     LR        gr3=gr23
+  237| 000FDC addi     389F007C   1     AI        gr4=gr31,124
+  237| 000FE0 addi     38A00004   1     LI        gr5=4
+  237| 000FE4 addi     38C00004   1     LI        gr6=4
+  237| 000FE8 addi     38E00000   1     LI        gr7=0
+  237| 000FEC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 000FF0 ori      60000000   1
+  237| 000FF4 or       7EE3BB78   1     LR        gr3=gr23
+  237| 000FF8 addi     389F0080   1     AI        gr4=gr31,128
+  237| 000FFC addi     38A00004   1     LI        gr5=4
+  237| 001000 addi     38C00004   1     LI        gr6=4
+  237| 001004 addi     38E00000   1     LI        gr7=0
+  237| 001008 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 00100C ori      60000000   1
+  237| 001010 addi     381A0001   1     AI        gr0=gr26,1
+  237| 001014 or       7EE3BB78   1     LR        gr3=gr23
+  237| 001018 stw      9001014C   1     ST4Z      #42(gr1,332)=gr0
+  237| 00101C addi     3881014C   1     AI        gr4=gr1,332
+  237| 001020 addi     38A00004   1     LI        gr5=4
+  237| 001024 addi     38C00004   1     LI        gr6=4
+  237| 001028 addi     38E00000   1     LI        gr7=0
+  237| 00102C bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#42,gr4-gr7,#def_xlfBeginIO101",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 001030 ori      60000000   1
+  237| 001034 or       7EE3BB78   1     LR        gr3=gr23
+  237| 001038 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO101",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  237| 00103C ori      60000000   1
+  239| 001040 stw      91E10150   1     ST4Z      T_44(gr1,336)=gr15
+  239| 001044 stw      93610154   1     ST4Z      T_45(gr1,340)=gr27
+  239| 001048 or       7E83A378   1     LR        gr3=gr20
+  239| 00104C addi     38A10154   1     AI        gr5=gr1,340
+  239| 001050 addi     38810150   1     AI        gr4=gr1,336
+  239| 001054 addi     38C00010   1     LI        gr6=16
+  239| 001058 bl       48000001   1     CALL      gr3=strtoi,4,usrfile",gr3,T_44",gr4,T_45",gr5,gr6,strtoi",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  239| 00105C ori      60000000   1
+  240| 001060 std      FA8101A0   1     ST8       <a1:d416:l8>(gr1,416)=gr20
+  240| 001064 addi     38930103   1     AI        gr4=gr19,259
+  240| 001068 or       7E469378   1     LR        gr6=gr18
+  239| 00106C addi     39C30001   1     AI        gr14=gr3,1
+  240| 001070 addi     38B80440   1     AI        gr5=gr24,1088
+  240| 001074 addi     386101A0   1     AI        gr3=gr1,416
+  240| 001078 addi     38E00000   1     LI        gr7=0
+  240| 00107C addi     39000000   1     LI        gr8=0
+  240| 001080 addi     39210160   1     AI        gr9=gr1,352
+  240| 001084 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,|int_file,gr3,gr4,#43",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,#def_xlfBeginIO121",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 001088 ori      60000000   1
+  240| 00108C or       7C7A1B78   1     LR        gr26=gr3
+  240| 001090 addi     389E03F8   1     AI        gr4=gr30,1016
+  240| 001094 addi     38A00003   1     LI        gr5=3
+  240| 001098 addi     38C00001   1     LI        gr6=1
+  240| 00109C addi     38E00002   1     LI        gr7=2
+  240| 0010A0 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 0010A4 ori      60000000   1
+  240| 0010A8 or       7F43D378   1     LR        gr3=gr26
+  240| 0010AC addi     389C0224   1     AI        gr4=gr28,548
+  240| 0010B0 addi     38A00002   1     LI        gr5=2
+  240| 0010B4 addi     38C00001   1     LI        gr6=1
+  240| 0010B8 addi     38E00002   1     LI        gr7=2
+  240| 0010BC bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,id,gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 0010C0 ori      60000000   1
+  240| 0010C4 or       7F43D378   1     LR        gr3=gr26
+  240| 0010C8 addi     389F0078   1     AI        gr4=gr31,120
+  240| 0010CC addi     38A00004   1     LI        gr5=4
+  240| 0010D0 addi     38C00004   1     LI        gr6=4
+  240| 0010D4 addi     38E00000   1     LI        gr7=0
+  240| 0010D8 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 0010DC ori      60000000   1
+  240| 0010E0 or       7F43D378   1     LR        gr3=gr26
+  240| 0010E4 addi     389F007C   1     AI        gr4=gr31,124
+  240| 0010E8 addi     38A00004   1     LI        gr5=4
+  240| 0010EC addi     38C00004   1     LI        gr6=4
+  240| 0010F0 addi     38E00000   1     LI        gr7=0
+  240| 0010F4 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 0010F8 ori      60000000   1
+  240| 0010FC or       7F43D378   1     LR        gr3=gr26
+  240| 001100 addi     389F0080   1     AI        gr4=gr31,128
+  240| 001104 addi     38A00004   1     LI        gr5=4
+  240| 001108 addi     38C00004   1     LI        gr6=4
+  240| 00110C addi     38E00000   1     LI        gr7=0
+  240| 001110 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,coords[],gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 001114 ori      60000000   1
+  240| 001118 stw      91C10158   1     ST4Z      #45(gr1,344)=gr14
+  240| 00111C or       7F43D378   1     LR        gr3=gr26
+  240| 001120 addi     38810158   1     AI        gr4=gr1,344
+  240| 001124 addi     38A00004   1     LI        gr5=4
+  240| 001128 addi     38C00004   1     LI        gr6=4
+  240| 00112C addi     38E00000   1     LI        gr7=0
+  240| 001130 bl       48000001   1     CALL      _xlfWriteFmt,5,gr3,#45,gr4-gr7,#def_xlfBeginIO121",_xlfWriteFmt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 001134 ori      60000000   1
+  240| 001138 or       7F43D378   1     LR        gr3=gr26
+  240| 00113C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,#def_xlfBeginIO121",_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  240| 001140 ori      60000000   1
+    0| 001144 lwz      801F0008   1     L4Z       gr0=<s19:d8:l4>(gr31,8)
+    0| 001148 lwz      807C0220   1     L4Z       gr3=<s113:d544:l4>(gr28,544)
+    0| 00114C cmpwi    2E000000   1     C4        cr4=gr0,0
+    0| 001150 cmpwi    2D030000   1     C4        cr2=gr3,0
+  242|                              CL.26:
+  243| 001154 lwz      80190068   1     L4Z       gr0=<s184:d104:l4>(gr25,104)
+  243| 001158 andi.    70000001   1     RN4_R     gr0,cr0=gr0,0,0x1
+  243| 00115C bc       41820078   1     BT        CL.27,cr0,0x4/eq,taken=50%(0,0)
+  244| 001160 bc       40920074   1     BF        CL.27,cr4,0x4/eq,taken=60%(60,40)
+  245| 001164 stw      920101C0   1     ST4Z      <a1:d448:l4>(gr1,448)=gr16
+  245| 001168 stw      936101C8   1     ST4Z      <a1:d456:l4>(gr1,456)=gr27
+  245| 00116C std      FAC101D0   1     ST8       <a1:d464:l8>(gr1,464)=gr22
+  245| 001170 std      FA2101D8   1     ST8       <a1:d472:l8>(gr1,472)=gr17
+  245| 001174 addi     386000F5   1     LI        gr3=245
+  245| 001178 addi     38BE03B0   1     AI        gr5=gr30,944
+  245| 00117C stw      90610200   1     ST4Z      <a1:d512:l4>(gr1,512)=gr3
+  245| 001180 std      F8A10218   1     ST8       <a1:d536:l8>(gr1,536)=gr5
+  245| 001184 addi     3860000A   1     LI        gr3=10
+  245| 001188 std      FBA101E8   1     ST8       <a1:d488:l8>(gr1,488)=gr29
+  245| 00118C std      F8610220   1     ST8       <a1:d544:l8>(gr1,544)=gr3
+  245| 001190 addi     38000033   1     LI        gr0=51
+  245| 001194 addi     38800076   1     LI        gr4=118
+  245| 001198 stw      900101F0   1     ST4Z      <a1:d496:l4>(gr1,496)=gr0
+  245| 00119C addi     38000078   1     LI        gr0=120
+  245| 0011A0 stw      908101F8   1     ST4Z      <a1:d504:l4>(gr1,504)=gr4
+  245| 0011A4 addi     38800004   1     LI        gr4=4
+  245| 0011A8 stw      90010210   1     ST4Z      <a1:d528:l4>(gr1,528)=gr0
+  245| 0011AC addi     38000030   1     LI        gr0=48
+  245| 0011B0 stw      908101C4   1     ST4Z      <a1:d452:l4>(gr1,452)=gr4
+  245| 0011B4 stw      900101E0   1     ST4Z      <a1:d480:l4>(gr1,480)=gr0
+  245| 0011B8 addi     38A101C0   1     AI        gr5=gr1,448
+  245| 0011BC addi     3860001F   1     LI        gr3=31
+  245| 0011C0 addi     38800000   1     LI        gr4=0
+  245| 0011C4 addis    3CC01000   1     LIU       gr6=4096
+  245| 0011C8 addi     38E00000   1     LI        gr7=0
+  245| 0011CC bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,|speclist",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,#def_xlfBeginIO81,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  245| 0011D0 ori      60000000   1
+  247|                              CL.27:
+  249| 0011D4 lwz      8019006C   1     L4Z       gr0=<s184:d108:l4>(gr25,108)
+  249| 0011D8 andi.    70000001   1     RN4_R     gr0,cr0=gr0,0,0x1
+  249| 0011DC bc       41820078   1     BT        CL.29,cr0,0x4/eq,taken=60%(60,40)
+  250| 0011E0 stw      920101C0   1     ST4Z      <a1:d448:l4>(gr1,448)=gr16
+  250| 0011E4 stw      936101C8   1     ST4Z      <a1:d456:l4>(gr1,456)=gr27
+  250| 0011E8 addi     388000FA   1     LI        gr4=250
+  250| 0011EC std      FB6101D8   1     ST8       <a1:d472:l8>(gr1,472)=gr27
+  250| 0011F0 stw      90810200   1     ST4Z      <a1:d512:l4>(gr1,512)=gr4
+  250| 0011F4 addi     3880000A   1     LI        gr4=10
+  250| 0011F8 std      FBA101E8   1     ST8       <a1:d488:l8>(gr1,488)=gr29
+  250| 0011FC std      F8810220   1     ST8       <a1:d544:l8>(gr1,544)=gr4
+  250| 001200 addi     38000033   1     LI        gr0=51
+  250| 001204 addi     38600076   1     LI        gr3=118
+  250| 001208 stw      900101F0   1     ST4Z      <a1:d496:l4>(gr1,496)=gr0
+  250| 00120C stw      906101F8   1     ST4Z      <a1:d504:l4>(gr1,504)=gr3
+  250| 001210 addi     38000078   1     LI        gr0=120
+  250| 001214 addi     387E03B0   1     AI        gr3=gr30,944
+  250| 001218 stw      90010210   1     ST4Z      <a1:d528:l4>(gr1,528)=gr0
+  250| 00121C addi     38000004   1     LI        gr0=4
+  250| 001220 std      F8610218   1     ST8       <a1:d536:l8>(gr1,536)=gr3
+  250| 001224 addi     387C023C   1     AI        gr3=gr28,572
+  250| 001228 addi     38800030   1     LI        gr4=48
+  250| 00122C std      F86101D0   1     ST8       <a1:d464:l8>(gr1,464)=gr3
+  250| 001230 stw      908101E0   1     ST4Z      <a1:d480:l4>(gr1,480)=gr4
+  250| 001234 stw      900101C4   1     ST4Z      <a1:d452:l4>(gr1,452)=gr0
+  250| 001238 addi     38A101C0   1     AI        gr5=gr1,448
+  250| 00123C addi     38600003   1     LI        gr3=3
+  250| 001240 addi     38800000   1     LI        gr4=0
+  250| 001244 addis    3CC01000   1     LIU       gr6=4096
+  250| 001248 addi     38E00000   1     LI        gr7=0
+  250| 00124C bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,|speclist",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,#def_xlfBeginIO111,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  250| 001250 ori      60000000   1
+  251|                              CL.29:
+  252| 001254 addi     380E0001   1     AI        gr0=gr14,1
+  252| 001258 cmpwi    2C0000BE   1     C4        cr0=gr0,190
+  252| 00125C bc       41810038   1     BT        CL.30,cr0,0x2/gt,taken=50%(0,0)
+  256| 001260 extsw    7C0007B4   1     EXTS4     gr0=gr0
+  256| 001264 addi     38790078   1     AI        gr3=gr25,120
+  256| 001268 rldicr   78041F24   1     SLL8      gr4=gr0,3
+  256| 00126C lfs      C03E03E8   1     LFS       fp1=+CONSTANT_AREA(gr30,1000)
+  256| 001270 lfdx     7C0324AE   1     LFL       fp0=t_out[](gr3,gr4,0)
+  256| 001274 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  256| 001278 bc       4080001C   1     BF        CL.30,cr0,0x20/flt,taken=50%(0,0)
+  257| 00127C lfd      C83C00C8   1     LFL       fp1=<s113:d200:l8>(gr28,200)
+  258| 001280 lfd      C85C0088   1     LFL       fp2=<s113:d136:l8>(gr28,136)
+  257| 001284 fsub     FC200828   1     SFL       fp1=fp0,fp1,fcr
+  258| 001288 fsub     FC001028   2     SFL       fp0=fp0,fp2,fcr
+  257| 00128C stfd     D83C0150   1     STFL      <s113:d336:l8>(gr28,336)=fp1
+  258| 001290 stfd     D81C0108   1     STFL      <s113:d264:l8>(gr28,264)=fp0
+  260|                              CL.30:
+  265| 001294 bc       40920020   1     BF        CL.32,cr4,0x4/eq,taken=60%(60,40)
+  265| 001298 addi     38B80480   1     AI        gr5=gr24,1152
+  265| 00129C addi     38600001   1     LI        gr3=1
+  265| 0012A0 addi     38800001   1     LI        gr4=1
+  265| 0012A4 addi     38C00000   1     LI        gr6=0
+  265| 0012A8 addi     38E00000   1     LI        gr7=0
+  265| 0012AC bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,#46",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  265| 0012B0 ori      60000000   1
+  265|                              CL.32:
+  269| 0012B4 bc       418A006C   1     BT        CL.142,cr2,0x4/eq,taken=40%(40,60)
+  275| 0012B8 stw      93BC01E8   1     ST4Z      <s113:d488:l4>(gr28,488)=gr29
+  279|                              CL.44:
+  279| 0012BC ld       E8010650   1     L8        gr0=#stack(gr1,1616)
+  279| 0012C0 lwa      E981064A   1     L4A       gr12=#stack(gr1,1608)
+  279| 0012C4 addi     38210640   1     AI        gr1=gr1,1600
+  279| 0012C8 ld       E9C1FF70   1     L8        gr14=#stack(gr1,-144)
+  279| 0012CC ld       E9E1FF78   1     L8        gr15=#stack(gr1,-136)
+  279| 0012D0 mtspr    7C0803A6   1     LLR       lr=gr0
+  279| 0012D4 mtcrf    7D820120   1     MTCRF     cr2=gr12
+  279| 0012D8 mtcrf    7D808120   1     MTCRF     cr4=gr12
+  279| 0012DC ld       EA01FF80   1     L8        gr16=#stack(gr1,-128)
+  279| 0012E0 ld       EA21FF88   1     L8        gr17=#stack(gr1,-120)
+  279| 0012E4 ld       EA41FF90   1     L8        gr18=#stack(gr1,-112)
+  279| 0012E8 ld       EA61FF98   1     L8        gr19=#stack(gr1,-104)
+  279| 0012EC ld       EA81FFA0   1     L8        gr20=#stack(gr1,-96)
+  279| 0012F0 ld       EAA1FFA8   1     L8        gr21=#stack(gr1,-88)
+  279| 0012F4 ld       EAC1FFB0   1     L8        gr22=#stack(gr1,-80)
+  279| 0012F8 ld       EAE1FFB8   1     L8        gr23=#stack(gr1,-72)
+  279| 0012FC ld       EB01FFC0   1     L8        gr24=#stack(gr1,-64)
+  279| 001300 ld       EB21FFC8   1     L8        gr25=#stack(gr1,-56)
+  279| 001304 ld       EB41FFD0   1     L8        gr26=#stack(gr1,-48)
+  279| 001308 ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+  279| 00130C ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  279| 001310 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  279| 001314 ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  279| 001318 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  279| 00131C bclr     4E800020   1     BA        lr
+    0|                              CL.142:
+  272| 001320 addi     38FC028C   1     AI        gr7=gr28,652
+  272| 001324 addi     38DC0288   1     AI        gr6=gr28,648
+  272| 001328 addi     38BC0284   1     AI        gr5=gr28,644
+  272| 00132C addi     389C0280   1     AI        gr4=gr28,640
+  272| 001330 addi     387C027C   1     AI        gr3=gr28,636
+  272| 001334 bl       48000001   1     CALL      dataio,5,ifsen[]",gr3,ifsen[]",gr4,ifsen[]",gr5,ifsen[]",gr6,ifsen[]",gr7,dataio",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  272| 001338 ori      60000000   1
+  273| 00133C stw      93BC01E8   1     ST4Z      <s113:d488:l4>(gr28,488)=gr29
+  274| 001340 b        4BFFFF7C   1     B         CL.44,-1
+    0|                              CL.138:
+  149| 001344 addi     38000081   1     LI        gr0=129
+  149| 001348 stw      936101C8   1     ST4Z      <a1:d456:l4>(gr1,456)=gr27
+  149| 00134C stw      900101C0   1     ST4Z      <a1:d448:l4>(gr1,448)=gr0
+  149| 001350 std      FBA101E8   1     ST8       <a1:d488:l8>(gr1,488)=gr29
+  149| 001354 addi     387E03BC   1     AI        gr3=gr30,956
+  149| 001358 addi     38000007   1     LI        gr0=7
+  149| 00135C std      F86101D0   1     ST8       <a1:d464:l8>(gr1,464)=gr3
+  149| 001360 std      F80101D8   1     ST8       <a1:d472:l8>(gr1,472)=gr0
+  149| 001364 addi     38600030   1     LI        gr3=48
+  149| 001368 addi     38000022   1     LI        gr0=34
+  149| 00136C stw      906101E0   1     ST4Z      <a1:d480:l4>(gr1,480)=gr3
+  149| 001370 stw      900101F0   1     ST4Z      <a1:d496:l4>(gr1,496)=gr0
+  149| 001374 addi     38600076   1     LI        gr3=118
+  149| 001378 addi     38000095   1     LI        gr0=149
+  149| 00137C stw      906101F8   1     ST4Z      <a1:d504:l4>(gr1,504)=gr3
+  149| 001380 stw      90010200   1     ST4Z      <a1:d512:l4>(gr1,512)=gr0
+  149| 001384 addi     38600078   1     LI        gr3=120
+  149| 001388 addi     381E03B0   1     AI        gr0=gr30,944
+  149| 00138C stw      90610210   1     ST4Z      <a1:d528:l4>(gr1,528)=gr3
+  149| 001390 std      F8010218   1     ST8       <a1:d536:l8>(gr1,536)=gr0
+  149| 001394 addi     3860000A   1     LI        gr3=10
+  149| 001398 addi     38000004   1     LI        gr0=4
+  149| 00139C std      F8610220   1     ST8       <a1:d544:l8>(gr1,544)=gr3
+  149| 0013A0 stw      900101C4   1     ST4Z      <a1:d452:l4>(gr1,452)=gr0
+  149| 0013A4 addi     38E100A0   1     AI        gr7=gr1,160
+  149| 0013A8 addi     38A101C0   1     AI        gr5=gr1,448
+  149| 0013AC addi     38600001   1     LI        gr3=1
+  149| 0013B0 addi     38800000   1     LI        gr4=0
+  149| 0013B4 addis    3CC01000   1     LIU       gr6=4096
+  149| 0013B8 bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,|speclist",gr5,gr6,iost",gr7,#use_xlfIOCmd21,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  149| 0013BC ori      60000000   1
+  150| 0013C0 lwz      801C0220   1     L4Z       gr0=<s113:d544:l4>(gr28,544)
+  150| 0013C4 cmpdi    2C200000   1     C8        cr0=gr0,0
+  150| 0013C8 bc       40820330   1     BF        CL.10,cr0,0x4/eq,taken=50%(0,0)
+  151| 0013CC std      FBBC0108   1     ST8       <s113:d264:l8>(gr28,264)=gr29
+  152| 0013D0 std      FBBC0088   1     ST8       <s113:d136:l8>(gr28,136)=gr29
+  153| 0013D4 std      FBBC0140   1     ST8       <s113:d320:l8>(gr28,320)=gr29
+  154| 0013D8 std      FBBC00A0   1     ST8       <s113:d160:l8>(gr28,160)=gr29
+  155| 0013DC std      FBBC0110   1     ST8       <s113:d272:l8>(gr28,272)=gr29
+  156| 0013E0 std      FBBC0090   1     ST8       <s113:d144:l8>(gr28,144)=gr29
+  157| 0013E4 std      FBBC0150   1     ST8       <s113:d336:l8>(gr28,336)=gr29
+  158| 0013E8 lfs      C01E03E4   1     LFS       fp0=+CONSTANT_AREA(gr30,996)
+    0| 0013EC lfs      C03E03E8   1     LFS       fp1=+CONSTANT_AREA(gr30,1000)
+  160| 0013F0 addi     38790078   1     AI        gr3=gr25,120
+  158| 0013F4 stfd     D81C00C8   1     STFL      <s113:d200:l8>(gr28,200)=fp0
+  160| 0013F8 stfd     D8390080   1     STFL      t_out[](gr25,128)=fp1
+  160| 0013FC stfd     D8390088   1     STFL      t_out[](gr25,136)=fp1
+  160| 001400 stfd     D8390090   1     STFL      t_out[](gr25,144)=fp1
+  160| 001404 stfd     D8390098   1     STFL      t_out[](gr25,152)=fp1
+  160| 001408 stfd     D83900A0   1     STFL      t_out[](gr25,160)=fp1
+  160| 00140C stfd     D83900A8   1     STFL      t_out[](gr25,168)=fp1
+  160| 001410 stfd     D83900B0   1     STFL      t_out[](gr25,176)=fp1
+  160| 001414 stfd     D83900B8   1     STFL      t_out[](gr25,184)=fp1
+  160| 001418 stfd     D83900C0   1     STFL      t_out[](gr25,192)=fp1
+  160| 00141C stfd     D83900C8   1     STFL      t_out[](gr25,200)=fp1
+  160| 001420 stfd     D83900D0   1     STFL      t_out[](gr25,208)=fp1
+  160| 001424 stfd     D83900D8   1     STFL      t_out[](gr25,216)=fp1
+  160| 001428 stfd     D83900E0   1     STFL      t_out[](gr25,224)=fp1
+  160| 00142C stfd     D83900E8   1     STFL      t_out[](gr25,232)=fp1
+  160| 001430 stfd     D83900F0   1     STFL      t_out[](gr25,240)=fp1
+  160| 001434 stfd     D83900F8   1     STFL      t_out[](gr25,248)=fp1
+  160| 001438 stfd     D8390100   1     STFL      t_out[](gr25,256)=fp1
+  160| 00143C stfd     D8390108   1     STFL      t_out[](gr25,264)=fp1
+  160| 001440 stfd     D8390110   1     STFL      t_out[](gr25,272)=fp1
+  160| 001444 stfd     D8390118   1     STFL      t_out[](gr25,280)=fp1
+  160| 001448 stfd     D8390120   1     STFL      t_out[](gr25,288)=fp1
+  160| 00144C stfd     D8390128   1     STFL      t_out[](gr25,296)=fp1
+  160| 001450 stfd     D8390130   1     STFL      t_out[](gr25,304)=fp1
+  160| 001454 stfd     D8390138   1     STFL      t_out[](gr25,312)=fp1
+  160| 001458 stfd     D8390140   1     STFL      t_out[](gr25,320)=fp1
+  160| 00145C stfd     D8390148   1     STFL      t_out[](gr25,328)=fp1
+  160| 001460 stfd     D8390150   1     STFL      t_out[](gr25,336)=fp1
+  160| 001464 stfd     D8390158   1     STFL      t_out[](gr25,344)=fp1
+  160| 001468 stfd     D8390160   1     STFL      t_out[](gr25,352)=fp1
+  160| 00146C stfd     D8390168   1     STFL      t_out[](gr25,360)=fp1
+  160| 001470 stfd     D8390170   1     STFL      t_out[](gr25,368)=fp1
+  160| 001474 stfd     D8390178   1     STFL      t_out[](gr25,376)=fp1
+  160| 001478 stfd     D8390180   1     STFL      t_out[](gr25,384)=fp1
+  160| 00147C stfd     D8390188   1     STFL      t_out[](gr25,392)=fp1
+  160| 001480 stfd     D8390190   1     STFL      t_out[](gr25,400)=fp1
+  160| 001484 stfd     D8390198   1     STFL      t_out[](gr25,408)=fp1
+  160| 001488 stfd     D83901A0   1     STFL      t_out[](gr25,416)=fp1
+  160| 00148C stfd     D83901A8   1     STFL      t_out[](gr25,424)=fp1
+  160| 001490 stfd     D83901B0   1     STFL      t_out[](gr25,432)=fp1
+  160| 001494 stfd     D83901B8   1     STFL      t_out[](gr25,440)=fp1
+  160| 001498 stfd     D83901C0   1     STFL      t_out[](gr25,448)=fp1
+  160| 00149C stfd     D83901C8   1     STFL      t_out[](gr25,456)=fp1
+  160| 0014A0 stfd     D83901D0   1     STFL      t_out[](gr25,464)=fp1
+  160| 0014A4 stfd     D83901D8   1     STFL      t_out[](gr25,472)=fp1
+  160| 0014A8 stfd     D83901E0   1     STFL      t_out[](gr25,480)=fp1
+  160| 0014AC stfd     D83901E8   1     STFL      t_out[](gr25,488)=fp1
+  160| 0014B0 stfd     D83901F0   1     STFL      t_out[](gr25,496)=fp1
+  160| 0014B4 stfd     D83901F8   1     STFL      t_out[](gr25,504)=fp1
+  160| 0014B8 stfd     D8390200   1     STFL      t_out[](gr25,512)=fp1
+  160| 0014BC stfd     D8390208   1     STFL      t_out[](gr25,520)=fp1
+  160| 0014C0 stfd     D8390210   1     STFL      t_out[](gr25,528)=fp1
+  160| 0014C4 stfd     D8390218   1     STFL      t_out[](gr25,536)=fp1
+  160| 0014C8 stfd     D8390220   1     STFL      t_out[](gr25,544)=fp1
+  160| 0014CC stfd     D8390228   1     STFL      t_out[](gr25,552)=fp1
+  160| 0014D0 stfd     D8390230   1     STFL      t_out[](gr25,560)=fp1
+  160| 0014D4 stfd     D8390238   1     STFL      t_out[](gr25,568)=fp1
+  160| 0014D8 stfd     D8390240   1     STFL      t_out[](gr25,576)=fp1
+  160| 0014DC stfd     D8390248   1     STFL      t_out[](gr25,584)=fp1
+  160| 0014E0 stfd     D8390250   1     STFL      t_out[](gr25,592)=fp1
+  160| 0014E4 stfd     D8390258   1     STFL      t_out[](gr25,600)=fp1
+  160| 0014E8 stfd     D8390260   1     STFL      t_out[](gr25,608)=fp1
+  160| 0014EC stfd     D8390268   1     STFL      t_out[](gr25,616)=fp1
+  160| 0014F0 stfd     D8390270   1     STFL      t_out[](gr25,624)=fp1
+  160| 0014F4 stfd     D8390278   1     STFL      t_out[](gr25,632)=fp1
+  160| 0014F8 stfd     D8390280   1     STFL      t_out[](gr25,640)=fp1
+  160| 0014FC stfd     D8390288   1     STFL      t_out[](gr25,648)=fp1
+  160| 001500 stfd     D8390290   1     STFL      t_out[](gr25,656)=fp1
+  160| 001504 stfd     D8390298   1     STFL      t_out[](gr25,664)=fp1
+  160| 001508 stfd     D83902A0   1     STFL      t_out[](gr25,672)=fp1
+  160| 00150C stfd     D83902A8   1     STFL      t_out[](gr25,680)=fp1
+  160| 001510 stfd     D83902B0   1     STFL      t_out[](gr25,688)=fp1
+  160| 001514 stfd     D83902B8   1     STFL      t_out[](gr25,696)=fp1
+  160| 001518 stfd     D83902C0   1     STFL      t_out[](gr25,704)=fp1
+  160| 00151C stfd     D83902C8   1     STFL      t_out[](gr25,712)=fp1
+  160| 001520 stfd     D83902D0   1     STFL      t_out[](gr25,720)=fp1
+  160| 001524 stfd     D83902D8   1     STFL      t_out[](gr25,728)=fp1
+  160| 001528 stfd     D83902E0   1     STFL      t_out[](gr25,736)=fp1
+  160| 00152C stfd     D83902E8   1     STFL      t_out[](gr25,744)=fp1
+  160| 001530 stfd     D83902F0   1     STFL      t_out[](gr25,752)=fp1
+  160| 001534 stfd     D83902F8   1     STFL      t_out[](gr25,760)=fp1
+  160| 001538 stfd     D8390300   1     STFL      t_out[](gr25,768)=fp1
+  160| 00153C stfd     D8390308   1     STFL      t_out[](gr25,776)=fp1
+  160| 001540 stfd     D8390310   1     STFL      t_out[](gr25,784)=fp1
+  160| 001544 stfd     D8390318   1     STFL      t_out[](gr25,792)=fp1
+  160| 001548 stfd     D8390320   1     STFL      t_out[](gr25,800)=fp1
+  160| 00154C stfd     D8390328   1     STFL      t_out[](gr25,808)=fp1
+  160| 001550 stfd     D8390330   1     STFL      t_out[](gr25,816)=fp1
+  160| 001554 stfd     D8390338   1     STFL      t_out[](gr25,824)=fp1
+  160| 001558 stfd     D8390340   1     STFL      t_out[](gr25,832)=fp1
+  160| 00155C stfd     D8390348   1     STFL      t_out[](gr25,840)=fp1
+  160| 001560 stfd     D8390350   1     STFL      t_out[](gr25,848)=fp1
+  160| 001564 stfd     D8390358   1     STFL      t_out[](gr25,856)=fp1
+  160| 001568 stfd     D8390360   1     STFL      t_out[](gr25,864)=fp1
+  160| 00156C stfd     D8390368   1     STFL      t_out[](gr25,872)=fp1
+  160| 001570 stfd     D8390370   1     STFL      t_out[](gr25,880)=fp1
+  160| 001574 stfd     D8390378   1     STFL      t_out[](gr25,888)=fp1
+  160| 001578 stfd     D8390380   1     STFL      t_out[](gr25,896)=fp1
+  160| 00157C stfd     D8390388   1     STFL      t_out[](gr25,904)=fp1
+  160| 001580 stfd     D8390390   1     STFL      t_out[](gr25,912)=fp1
+  160| 001584 stfd     D8390398   1     STFL      t_out[](gr25,920)=fp1
+  160| 001588 stfd     D83903A0   1     STFL      t_out[](gr25,928)=fp1
+  160| 00158C stfd     D83903A8   1     STFL      t_out[](gr25,936)=fp1
+  160| 001590 stfd     D83903B0   1     STFL      t_out[](gr25,944)=fp1
+  160| 001594 stfd     D83903B8   1     STFL      t_out[](gr25,952)=fp1
+  160| 001598 stfd     D83903C0   1     STFL      t_out[](gr25,960)=fp1
+  160| 00159C stfd     D83903C8   1     STFL      t_out[](gr25,968)=fp1
+  160| 0015A0 stfd     D83903D0   1     STFL      t_out[](gr25,976)=fp1
+  160| 0015A4 stfd     D83903D8   1     STFL      t_out[](gr25,984)=fp1
+  160| 0015A8 stfd     D83903E0   1     STFL      t_out[](gr25,992)=fp1
+  160| 0015AC stfd     D83903E8   1     STFL      t_out[](gr25,1000)=fp1
+  160| 0015B0 stfd     D83903F0   1     STFL      t_out[](gr25,1008)=fp1
+  160| 0015B4 stfd     D83903F8   1     STFL      t_out[](gr25,1016)=fp1
+  160| 0015B8 stfd     D8390400   1     STFL      t_out[](gr25,1024)=fp1
+  160| 0015BC stfd     D8390408   1     STFL      t_out[](gr25,1032)=fp1
+  160| 0015C0 stfd     D8390410   1     STFL      t_out[](gr25,1040)=fp1
+  160| 0015C4 stfd     D8390418   1     STFL      t_out[](gr25,1048)=fp1
+  160| 0015C8 stfd     D8390420   1     STFL      t_out[](gr25,1056)=fp1
+  160| 0015CC stfd     D8390428   1     STFL      t_out[](gr25,1064)=fp1
+  160| 0015D0 stfd     D8390430   1     STFL      t_out[](gr25,1072)=fp1
+  160| 0015D4 stfd     D8390438   1     STFL      t_out[](gr25,1080)=fp1
+  160| 0015D8 stfd     D8390440   1     STFL      t_out[](gr25,1088)=fp1
+  160| 0015DC stfd     D8390448   1     STFL      t_out[](gr25,1096)=fp1
+  160| 0015E0 stfd     D8390450   1     STFL      t_out[](gr25,1104)=fp1
+  160| 0015E4 stfd     D8390458   1     STFL      t_out[](gr25,1112)=fp1
+  160| 0015E8 stfd     D8390460   1     STFL      t_out[](gr25,1120)=fp1
+  160| 0015EC stfd     D8390468   1     STFL      t_out[](gr25,1128)=fp1
+  160| 0015F0 stfd     D8390470   1     STFL      t_out[](gr25,1136)=fp1
+  160| 0015F4 stfd     D8390478   1     STFL      t_out[](gr25,1144)=fp1
+  160| 0015F8 stfd     D8390480   1     STFL      t_out[](gr25,1152)=fp1
+  160| 0015FC stfd     D8390488   1     STFL      t_out[](gr25,1160)=fp1
+  160| 001600 stfd     D8390490   1     STFL      t_out[](gr25,1168)=fp1
+  160| 001604 stfd     D8390498   1     STFL      t_out[](gr25,1176)=fp1
+  160| 001608 stfd     D83904A0   1     STFL      t_out[](gr25,1184)=fp1
+  160| 00160C stfd     D83904A8   1     STFL      t_out[](gr25,1192)=fp1
+  160| 001610 stfd     D83904B0   1     STFL      t_out[](gr25,1200)=fp1
+  160| 001614 stfd     D83904B8   1     STFL      t_out[](gr25,1208)=fp1
+  160| 001618 stfd     D83904C0   1     STFL      t_out[](gr25,1216)=fp1
+  160| 00161C stfd     D83904C8   1     STFL      t_out[](gr25,1224)=fp1
+  160| 001620 stfd     D83904D0   1     STFL      t_out[](gr25,1232)=fp1
+  160| 001624 stfd     D83904D8   1     STFL      t_out[](gr25,1240)=fp1
+  160| 001628 stfd     D83904E0   1     STFL      t_out[](gr25,1248)=fp1
+  160| 00162C stfd     D83904E8   1     STFL      t_out[](gr25,1256)=fp1
+  160| 001630 stfd     D83904F0   1     STFL      t_out[](gr25,1264)=fp1
+  160| 001634 stfd     D83904F8   1     STFL      t_out[](gr25,1272)=fp1
+  160| 001638 stfd     D8390500   1     STFL      t_out[](gr25,1280)=fp1
+  160| 00163C stfd     D8390508   1     STFL      t_out[](gr25,1288)=fp1
+  160| 001640 stfd     D8390510   1     STFL      t_out[](gr25,1296)=fp1
+  160| 001644 stfd     D8390518   1     STFL      t_out[](gr25,1304)=fp1
+  160| 001648 stfd     D8390520   1     STFL      t_out[](gr25,1312)=fp1
+  160| 00164C stfd     D8390528   1     STFL      t_out[](gr25,1320)=fp1
+  160| 001650 stfd     D8390530   1     STFL      t_out[](gr25,1328)=fp1
+  160| 001654 stfd     D8390538   1     STFL      t_out[](gr25,1336)=fp1
+  160| 001658 stfd     D8390540   1     STFL      t_out[](gr25,1344)=fp1
+  160| 00165C stfd     D8390548   1     STFL      t_out[](gr25,1352)=fp1
+  160| 001660 stfd     D8390550   1     STFL      t_out[](gr25,1360)=fp1
+  160| 001664 stfd     D8390558   1     STFL      t_out[](gr25,1368)=fp1
+  160| 001668 stfd     D8390560   1     STFL      t_out[](gr25,1376)=fp1
+  160| 00166C stfd     D8390568   1     STFL      t_out[](gr25,1384)=fp1
+  160| 001670 stfd     D8390570   1     STFL      t_out[](gr25,1392)=fp1
+  160| 001674 stfd     D8390578   1     STFL      t_out[](gr25,1400)=fp1
+  160| 001678 stfd     D8390580   1     STFL      t_out[](gr25,1408)=fp1
+  160| 00167C stfd     D8390588   1     STFL      t_out[](gr25,1416)=fp1
+  160| 001680 stfd     D8390590   1     STFL      t_out[](gr25,1424)=fp1
+  160| 001684 stfd     D8390598   1     STFL      t_out[](gr25,1432)=fp1
+  160| 001688 stfd     D83905A0   1     STFL      t_out[](gr25,1440)=fp1
+  160| 00168C stfd     D83905A8   1     STFL      t_out[](gr25,1448)=fp1
+  160| 001690 stfd     D83905B0   1     STFL      t_out[](gr25,1456)=fp1
+  160| 001694 stfd     D83905B8   1     STFL      t_out[](gr25,1464)=fp1
+  160| 001698 stfd     D83905C0   1     STFL      t_out[](gr25,1472)=fp1
+  160| 00169C stfd     D83905C8   1     STFL      t_out[](gr25,1480)=fp1
+  160| 0016A0 stfd     D83905D0   1     STFL      t_out[](gr25,1488)=fp1
+  160| 0016A4 stfd     D83905D8   1     STFL      t_out[](gr25,1496)=fp1
+  160| 0016A8 stfd     D83905E0   1     STFL      t_out[](gr25,1504)=fp1
+  160| 0016AC stfd     D83905E8   1     STFL      t_out[](gr25,1512)=fp1
+  160| 0016B0 stfd     D83905F0   1     STFL      t_out[](gr25,1520)=fp1
+  160| 0016B4 stfd     D83905F8   1     STFL      t_out[](gr25,1528)=fp1
+  160| 0016B8 stfd     D8390600   1     STFL      t_out[](gr25,1536)=fp1
+  160| 0016BC stfd     D8390608   1     STFL      t_out[](gr25,1544)=fp1
+  160| 0016C0 stfd     D8390610   1     STFL      t_out[](gr25,1552)=fp1
+  160| 0016C4 stfd     D8390618   1     STFL      t_out[](gr25,1560)=fp1
+  160| 0016C8 stfd     D8390620   1     STFL      t_out[](gr25,1568)=fp1
+  160| 0016CC stfd     D8390628   1     STFL      t_out[](gr25,1576)=fp1
+  160| 0016D0 stfd     D8390630   1     STFL      t_out[](gr25,1584)=fp1
+  160| 0016D4 stfd     D8390638   1     STFL      t_out[](gr25,1592)=fp1
+  160| 0016D8 stfd     D8390640   1     STFL      t_out[](gr25,1600)=fp1
+  160| 0016DC stfd     D8390648   1     STFL      t_out[](gr25,1608)=fp1
+  160| 0016E0 stfd     D8390650   1     STFL      t_out[](gr25,1616)=fp1
+  160| 0016E4 stfd     D8390658   1     STFL      t_out[](gr25,1624)=fp1
+  160| 0016E8 stfd     D8390660   1     STFL      t_out[](gr25,1632)=fp1
+  160| 0016EC stfd     D8390668   1     STFL      t_out[](gr25,1640)=fp1
+  160| 0016F0 stfd     D8390670   1     STFL      t_out[](gr25,1648)=fp1
+  160| 0016F4 stfdu    DC230600   1     STFDU     gr3,t_out[](gr3,1536)=fp1
+  162|                              CL.10:
+  163| 0016F8 ld       EAE20000   1     L8        gr23=.$STATIC(gr2,0)
+  163| 0016FC ori      63B68000   1     OIL       gr22=gr29,0x8000
+  163| 001700 addi     38600001   1     LI        gr3=1
+  163| 001704 addi     38800002   1     LI        gr4=2
+  163| 001708 or       7EC6B378   1     LR        gr6=gr22
+  163| 00170C addi     38E00000   1     LI        gr7=0
+  163| 001710 stw      93B706A4   1     ST4Z      <s188:d1700:l4>(gr23,1700)=gr29
+  163| 001714 addi     38B701C0   1     AI        gr5=gr23,448
+  163| 001718 addi     39000000   1     LI        gr8=0
+  163| 00171C addi     393706A0   1     AI        gr9=gr23,1696
+  163| 001720 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#15",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|iocon,gr9,#def_xlfBeginIO61",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  163| 001724 ori      60000000   1
+  163| 001728 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  163| 00172C ori      60000000   1
+  164| 001730 addi     38B70200   1     AI        gr5=gr23,512
+  164| 001734 addi     38600002   1     LI        gr3=2
+  164| 001738 addi     38800102   1     LI        gr4=258
+  164| 00173C or       7EC6B378   1     LR        gr6=gr22
+  164| 001740 addi     38E00000   1     LI        gr7=0
+  164| 001744 addi     39000000   1     LI        gr8=0
+  164| 001748 addi     393706A0   1     AI        gr9=gr23,1696
+  164| 00174C bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#17",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|iocon,gr9,#use_xlfBeginIO71,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  164| 001750 ori      60000000   1
+  164| 001754 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  164| 001758 ori      60000000   1
+  176| 00175C std      FBBF0710   1     ST8       <s19:d1808:l8>(gr31,1808)=gr29
+  177| 001760 std      FBBF0718   1     ST8       <s19:d1816:l8>(gr31,1816)=gr29
+  168| 001764 lfd      C81C0108   1     LFL       fp0=<s113:d264:l8>(gr28,264)
+  169| 001768 lfd      C83C0088   1     LFL       fp1=<s113:d136:l8>(gr28,136)
+  170| 00176C lfd      C85C0110   1     LFL       fp2=<s113:d272:l8>(gr28,272)
+  171| 001770 lfd      C87C0090   1     LFL       fp3=<s113:d144:l8>(gr28,144)
+  172| 001774 lfd      C89C0150   1     LFL       fp4=<s113:d336:l8>(gr28,336)
+  173| 001778 lfd      C8BC00C8   1     LFL       fp5=<s113:d200:l8>(gr28,200)
+  174| 00177C lfd      C8DC0100   1     LFL       fp6=<s113:d256:l8>(gr28,256)
+  175| 001780 lfd      C8FC0080   1     LFL       fp7=<s113:d128:l8>(gr28,128)
+  168| 001784 stfd     D81F06D0   1     STFL      <s19:d1744:l8>(gr31,1744)=fp0
+  169| 001788 stfd     D83F06D8   1     STFL      <s19:d1752:l8>(gr31,1752)=fp1
+  170| 00178C stfd     D85F06E0   1     STFL      <s19:d1760:l8>(gr31,1760)=fp2
+  171| 001790 stfd     D87F06E8   1     STFL      <s19:d1768:l8>(gr31,1768)=fp3
+  172| 001794 stfd     D89F06F0   1     STFL      <s19:d1776:l8>(gr31,1776)=fp4
+  173| 001798 stfd     D8BF06F8   1     STFL      <s19:d1784:l8>(gr31,1784)=fp5
+  174| 00179C stfd     D8DF0700   1     STFL      <s19:d1792:l8>(gr31,1792)=fp6
+  175| 0017A0 stfd     D8FF0708   1     STFL      <s19:d1800:l8>(gr31,1800)=fp7
+  178| 0017A4 lfd      C81C0140   1     LFL       fp0=<s113:d320:l8>(gr28,320)
+  179| 0017A8 lfd      C83C00A0   1     LFL       fp1=<s113:d160:l8>(gr28,160)
+  181| 0017AC lfd      C8590080   1     LFL       fp2=t_out[](gr25,128)
+  181| 0017B0 lfd      C8790088   1     LFL       fp3=t_out[](gr25,136)
+  181| 0017B4 lfd      C8990090   1     LFL       fp4=t_out[](gr25,144)
+  181| 0017B8 lfd      C8B90098   1     LFL       fp5=t_out[](gr25,152)
+  181| 0017BC lfd      C8D900A0   1     LFL       fp6=t_out[](gr25,160)
+  181| 0017C0 addi     389F0728   1     AI        gr4=gr31,1832
+  178| 0017C4 stfd     D81F0720   1     STFL      <s19:d1824:l8>(gr31,1824)=fp0
+  179| 0017C8 stfd     D83F0728   1     STFL      <s19:d1832:l8>(gr31,1832)=fp1
+  181| 0017CC stfd     D85F0730   1     STFL      buf_in[](gr31,1840)=fp2
+  181| 0017D0 stfd     D87F0738   1     STFL      buf_in[](gr31,1848)=fp3
+  181| 0017D4 stfd     D89F0740   1     STFL      buf_in[](gr31,1856)=fp4
+  181| 0017D8 stfdu    DCA40020   1     STFDU     gr4,buf_in[](gr4,32)=fp5
+  181| 0017DC stfd     D8C40008   1     STFL      buf_in[](gr4,8)=fp6
+  181| 0017E0 lfd      C81900A8   1     LFL       fp0=t_out[](gr25,168)
+  181| 0017E4 lfd      C83900B0   1     LFL       fp1=t_out[](gr25,176)
+  181| 0017E8 lfd      C85900B8   1     LFL       fp2=t_out[](gr25,184)
+  181| 0017EC lfd      C87900C0   1     LFL       fp3=t_out[](gr25,192)
+  181| 0017F0 lfd      C89900C8   1     LFL       fp4=t_out[](gr25,200)
+  181| 0017F4 addi     38790078   1     AI        gr3=gr25,120
+    0| 0017F8 addi     38000016   1     LI        gr0=22
+  181| 0017FC stfd     D8040010   1     STFL      buf_in[](gr4,16)=fp0
+  181| 001800 stfd     D8240018   1     STFL      buf_in[](gr4,24)=fp1
+  181| 001804 stfd     D8440020   1     STFL      buf_in[](gr4,32)=fp2
+  181| 001808 stfd     D8640028   1     STFL      buf_in[](gr4,40)=fp3
+    0| 00180C mtspr    7C0903A6   1     LCTR      ctr=gr0
+  181| 001810 stfd     D8840030   1     STFL      buf_in[](gr4,48)=fp4
+  181| 001814 lfd      C81900D0   1     LFL       fp0=t_out[](gr25,208)
+  181| 001818 lfdu     CC230060   1     LFDU      fp1,gr3=t_out[](gr3,96)
+    0|                              CL.98:
+  181| 00181C lfd      C8430008   1     LFL       fp2=t_out[](gr3,8)
+  181| 001820 stfd     D8040038   1     STFL      buf_in[](gr4,56)=fp0
+  181| 001824 lfd      C8030010   1     LFL       fp0=t_out[](gr3,16)
+  181| 001828 stfdu    DC240040   1     STFDU     gr4,buf_in[](gr4,64)=fp1
+  181| 00182C lfd      C8230018   1     LFL       fp1=t_out[](gr3,24)
+  181| 001830 stfd     D8440008   1     STFL      buf_in[](gr4,8)=fp2
+  181| 001834 lfd      C8430020   1     LFL       fp2=t_out[](gr3,32)
+  181| 001838 stfd     D8040010   1     STFL      buf_in[](gr4,16)=fp0
+  181| 00183C lfd      C8630028   1     LFL       fp3=t_out[](gr3,40)
+  181| 001840 stfd     D8240018   1     STFL      buf_in[](gr4,24)=fp1
+  181| 001844 lfd      C8830030   1     LFL       fp4=t_out[](gr3,48)
+  181| 001848 stfd     D8440020   1     STFL      buf_in[](gr4,32)=fp2
+  181| 00184C lfd      C8030038   1     LFL       fp0=t_out[](gr3,56)
+  181| 001850 stfd     D8640028   1     STFL      buf_in[](gr4,40)=fp3
+  181| 001854 lfdu     CC230040   1     LFDU      fp1,gr3=t_out[](gr3,64)
+  181| 001858 stfd     D8840030   1     STFL      buf_in[](gr4,48)=fp4
+    0| 00185C bc       4200FFC0   1     BCT       ctr=CL.98,taken=100%(100,0)
+  181| 001860 stfd     D8040038   1     STFL      buf_in[](gr4,56)=fp0
+  181| 001864 stfdu    DC240040   1     STFDU     gr4,buf_in[](gr4,64)=fp1
+    0| 001868 b        4BFFEEF0   1     B         CL.15,-1
+     |               Tag Table
+     | 00186C        00000000 00012203 80120000 0000186C
+     |               Instruction count         1563
+     |               Straight-line exec time   1564
+     |               Constant Area
+     | 000000        6D706974 6F704942 00000000 00000001 00000000 00000004
+     | 000018        FFFFFFFF FFFFFFFC 00000000 00000001 00000000 00000003
+     | 000030        00000000 00000004 6E74696C 65734942 00000000 00000001
+     | 000048        00000000 00000004 FFFFFFFF FFFFFFFC 00000000 00000001
+     | 000060        00000000 00000003 00000000 00000004 70657269 6F646963
+     | 000078        72657363 6F6E6972 65737461 72747464 756D7049 64746475
+     | 000090        6D706964 72657366 696C6549 696F636F 6E497468 64666474
+     | 0000A8        68646649 74686973 74496474 68697374 74757372 64747573
+     | 0000C0        7249424D 00000000 00000001 00000000 00000008 FFFFFFFF
+     | 0000D8        FFFFFFF8 00000000 00000001 00000000 000000C0 00000000
+     | 0000F0        00000008 745F6F75 74497474 736C6474 74736C49 6D737461
+     | 000108        72742E66 39300000 00008001 00000000 00000000 002F0000
+     | 000120        00000000 00010000 00000000 00060000 00000000 00000000
+     | 000138        00008002 00000000 00008007 00000000 0000802F 00110000
+     | 000150        00000000 001E0000 00000000 00074D53 54415254 3A205468
+     | 000168        65206E75 6D626572 206F6620 74687265 61647320 00000000
+     | 000180        00000014 00010000 00000000 00030000 0000802F 00110000
+     | 000198        00000000 000F0000 00000000 00052064 6F657320 6E6F7420
+     | 0001B0        6D617463 68000000 00008007 00000000 0000802F 00110000
+     | 0001C8        00000000 00240000 00000000 00084D53 54415254 3A207468
+     | 0001E0        65206E75 6D626572 20696E70 75742076 6961206E 74696C65
+     | 0001F8        73200000 00000000 00000014 00010000 00000000 00030000
+     | 000210        0000802F 00110000 00000000 00030000 00000000 00042069
+     | 000228        6E000000 00000000 00008007 00000000 0000802F 00110000
+     | 000240        00000000 002F0000 00000000 00094D53 54415254 3A20696E
+     | 000258        70757420 66696C65 207A6D70 5F696E70 3B206162 6F727469
+     | 000270        6E672074 68652072 756E2E2E 2E000000 00008005 00000000
+     | 000288        00008001 00000000 00000000 00170000 00000000 00010000
+     | 0002A0        00000000 00060000 00000000 00000000 00008002 00000000
+     | 0002B8        0000002D 00010000 00000000 00030000 0000002D 00010000
+     | 0002D0        00000000 00020000 00008004 00010000 00000000 00030000
+     | 0002E8        00000015 00110000 00000000 00020000 00000000 00020000
+     | 000300        0000802F 00110000 00000000 00010000 00000000 00042E00
+     | 000318        00000000 00050000 00000015 00110000 00000000 00040000
+     | 000330        00000000 00040000 00008005 00000000 00008001 00000000
+     | 000348        00000000 000E0000 00000000 00010000 00000000 00060000
+     | 000360        00000000 00000000 00008002 00000000 0000002D 00010000
+     | 000378        00000000 00030000 00000015 00110000 00000000 00040000
+     | 000390        00000000 00040000 0000002D 00010000 00000000 00020000
+     | 0003A8        00008005 00000000 6D737461 72742E66 39300000 7A6D705F
+     | 0003C0        696E7049 424D2049 00000001 00000001 72657361 61303030
+     | 0003D8        3030302E 30303030 72657349 4BF099C0 00000000 74736C49
+     | 0003F0        68646649 68737449 75737249 424D2049 72657361 61303030
+     | 000408        3030302E 30303030
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    mstart.f90                  07/08/15   15:48:20
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    2           0         0           2          0            0
+ 
+ 
+    Source records read.......................................     279
+1501-510  Compilation successful for file mstart.f90.
+1501-543  Object file created.

@@ -1,0 +1,274 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- ran1.f90 07/08/15 15:48:57
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** ran1   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+     1|         SUBROUTINE ran1 (idum, x)
+    13|           IF (.NOT.idum <= 0) THEN
+                    IF (.NOT.(iy < 0)) GOTO lab_2
+                  ENDIF
+    14|           T_2 =  1.00000000E+00
+                  T_3 = -1.00000000E+00
+                  $$RET0 = _xlrnrst(T_2,T_3)
+                  am = real(($$RET0 *  4.65661287E-10))
+    15|           iy = (abs(idum)  .XOR.  888889999  .OR.  1)
+    16|           ix = abs(idum)  .XOR.  777755555
+    17|           idum = abs(idum) + 1
+    18|           lab_2
+    22|           ix = (LSHIFT((RSHIFT((LSHIFT(ix, 13)  .XOR.  ix), 17)  .XOR.  &
+                &   (LSHIFT(ix, 13)  .XOR.  ix)), 5)  .XOR.  LSHIFT(ix, 13))  &
+                &   .XOR.  (RSHIFT((LSHIFT(ix, 13)  .XOR.  ix), 17)  .XOR.  ix)
+    24|           iy = iy * 16807 - (iy / 127773) * 2147483647
+    25|           IF ((iy < 0)) THEN
+                    iy = iy + 2147483647
+                  ENDIF
+    26|           x = am * real(((iy  .XOR.  ix)  .AND.  2147483647  .OR.  1))
+    27|           RETURN
+                END SUBROUTINE ran1
+
+
+     1|         SUBROUTINE ran1 (idum, x)
+    13|           $$ICM.iy0 = iy
+    22|           $$ICM.ix1 = ix
+    13|           IF (.NOT.idum <= 0) THEN
+                    IF (.NOT.($$ICM.iy0 < 0)) GOTO lab_2
+                  ENDIF
+    14|           T_2 =  1.00000000E+00
+                  T_3 = -1.00000000E+00
+                  $$RET0 = _xlrnrst(T_2,T_3)
+                  am = real(($$RET0 *  4.65661287E-10))
+    15|           $$ICM.iy0 = abs(idum)  .XOR.  888889999  .OR.  1
+    16|           $$ICM.ix1 = abs(idum)  .XOR.  777755555
+    17|           idum = abs(idum) + 1
+    18|           lab_2
+    22|           $$ICM.ix1 = (LSHIFT((RSHIFT((LSHIFT($$ICM.ix1, 13)  .XOR.  &
+                &   $$ICM.ix1), 17)  .XOR.  (LSHIFT($$ICM.ix1, 13)  .XOR.  &
+                &   $$ICM.ix1)), 5)  .XOR.  LSHIFT($$ICM.ix1, 13))  .XOR.  (&
+                &   RSHIFT((LSHIFT($$ICM.ix1, 13)  .XOR.  $$ICM.ix1), 17)  .XOR.  &
+                &   $$ICM.ix1)
+    24|           $$ICM.iy0 = $$ICM.iy0 * 16807 - ($$ICM.iy0 / 127773) * &
+                &   2147483647
+    25|           IF (($$ICM.iy0 < 0)) THEN
+                    $$ICM.iy0 = $$ICM.iy0 + 2147483647
+                  ENDIF
+    26|           x = am * real((($$ICM.iy0  .XOR.  $$ICM.ix1)  .AND.  &
+                &   2147483647  .OR.  1))
+    27|           iy = $$ICM.iy0
+                  ix = $$ICM.ix1
+                  RETURN
+                END SUBROUTINE ran1
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- -sss ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     ran1
+    1|                                  PROC      .idum,.x,gr3,gr4
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 std      FB41FFD0   1     ST8       #stack(gr1,-48)=gr26
+    0| 000018 std      FB21FFC8   1     ST8       #stack(gr1,-56)=gr25
+    0| 00001C mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000020 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000024 stdu     F821FF01   1     ST8U      gr1,#stack(gr1,-256)=gr1
+   13| 000028 ld       EBE20000   1     L8        gr31=.$STATIC(gr2,0)
+   13| 00002C lwz      83830000   1     L4Z       gr28=idum(gr3,0)
+    0| 000030 or       7C7E1B78   1     LR        gr30=gr3
+    0| 000034 or       7C9D2378   1     LR        gr29=gr4
+    0| 000038 ld       EB620000   1     L8        gr27=.$STATIC_BSS(gr2,0)
+   14| 00003C ld       EB420000   1     L8        gr26=.+CONSTANT_AREA(gr2,0)
+   13| 000040 lwz      801F0000   1     L4Z       gr0=iy(gr31,0)
+   13| 000044 cmpwi    2C1C0000   1     C4        cr0=gr28,0
+   22| 000048 lwz      80BF0004   1     L4Z       gr5=ix(gr31,4)
+   14| 00004C addi     38810084   1     AI        gr4=gr1,132
+   13| 000050 extsw    7F9907B4   1     EXTS4     gr25=gr28
+   13| 000054 bc       40810074   1     BF        CL.1,cr0,0x2/gt,taken=40%(40,60)
+   13| 000058 cmpwi    2C000000   1     C4        cr0=gr0,0
+   24| 00005C addis    3C60834E   1     LIU       gr3=33614
+   13| 000060 extsw    7C0607B4   1     EXTS4     gr6=gr0
+   13| 000064 bc       41800064   1     BT        CL.1,cr0,0x1/lt,taken=40%(40,60)
+   24| 000068 addi     38830B5F   1     AI        gr4=gr3,2911
+   22| 00006C rlwinm   54A36824   1     SLL4      gr3=gr5,13
+   24| 000070 mulhw    7CE43096   0     MULHW     gr7=gr4,gr6
+   24| 000074 rlwinm   54C40FFE   2     SRL4      gr4=gr6,31
+   24| 000078 add      7CE63A14   1     A         gr7=gr6,gr7
+   22| 00007C extsw    7CA607B4   1     EXTS4     gr6=gr5
+   24| 000080 srawi    7CE78670   1     SRA4      gr7=gr7,16,ca"
+   22| 000084 xor      7CA51A78   1     X         gr5=gr5,gr3
+   24| 000088 add      7C843A14   1     A         gr4=gr4,gr7
+   24| 00008C mulli    1C0041A7   0     M         gr0=gr0,16807
+   22| 000090 xor      7C673278   2     X         gr7=gr3,gr6
+   22| 000094 rlwinm   54A57C7E   1     SRL4      gr5=gr5,17
+   24| 000098 rldicr   7888F824   1     SLL8      gr8=gr4,31
+   22| 00009C xor      7CE72A78   1     X         gr7=gr7,gr5
+   24| 0000A0 subf     7C844050   1     S         gr4=gr8,gr4
+   22| 0000A4 rlwinm   54E72834   1     SLL4      gr7=gr7,5
+   24| 0000A8 subf     7C840050   1     S         gr4=gr0,gr4
+   22| 0000AC xor      7C603A78   1     X         gr0=gr3,gr7
+   22| 0000B0 xor      7CA33278   1     X         gr3=gr5,gr6
+   25| 0000B4 cmpwi    2C040000   1     C4        cr0=gr4,0
+   22| 0000B8 xor      7C001A78   1     X         gr0=gr0,gr3
+    0| 0000BC lfd      C83B0000   1     LFL       fp1=am(gr27,0)
+   25| 0000C0 bc       41800118   1     BT        CL.19,cr0,0x1/lt,taken=40%(40,60)
+   25| 0000C4 b        480000C0   1     B         CL.20,-1
+   13|                              CL.1:
+   14| 0000C8 lfs      C01A0000   1     LFS       fp0=+CONSTANT_AREA(gr26,0)
+   14| 0000CC lfs      C03A0004   1     LFS       fp1=+CONSTANT_AREA(gr26,4)
+   14| 0000D0 addi     38610080   1     AI        gr3=gr1,128
+   14| 0000D4 stfs     D0010080   1     STFS      T_2(gr1,128)=fp0
+   14| 0000D8 stfs     D0210084   1     STFS      T_3(gr1,132)=fp1
+   14| 0000DC bl       48000001   1     CALLN     fp1=_xlrnrst,2,T_2",gr3,T_3",gr4,_xlrnrst,#MX_TEMP1",_xlrnrst",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   14| 0000E0 ori      60000000   1
+   15| 0000E4 srawi    7F83FE70   1     SRA4      gr3=gr28,31,ca"
+   24| 0000E8 addis    3C80834E   1     LIU       gr4=33614
+   15| 0000EC xor      7C65CA78   1     X         gr5=gr3,gr25
+   24| 0000F0 addi     38040B5F   1     AI        gr0=gr4,2911
+   15| 0000F4 subf     7C632850   1     S         gr3=gr5,gr3
+   14| 0000F8 lfs      C01A0008   1     LFS       fp0=+CONSTANT_AREA(gr26,8)
+   15| 0000FC xoris    6C6434FB   1     XIU       gr4=gr3,0x34FB
+   16| 000100 xoris    6C652E5B   1     XIU       gr5=gr3,0x2E5B
+   15| 000104 xori     6884628F   1     XIL       gr4=gr4,0x628F
+   16| 000108 xori     68A89BA3   1     XIL       gr8=gr5,0x9BA3
+   15| 00010C ori      60870001   1     OIL       gr7=gr4,0x1
+    0| 000110 extsw    7CE507B4   1     EXTS4     gr5=gr7
+   14| 000114 fmuls    EC210032   1     MFS       fp1=fp1,fp0,fcr
+   24| 000118 mulhw    7C802896   0     MULHW     gr4=gr0,gr5
+   22| 00011C rlwinm   55006824   2     SLL4      gr0=gr8,13
+   24| 000120 add      7C842A14   1     A         gr4=gr4,gr5
+   22| 000124 xor      7C094278   1     X         gr9=gr0,gr8
+   24| 000128 srawi    7C868670   1     SRA4      gr6=gr4,16,ca"
+   22| 00012C extsw    7D0407B4   1     EXTS4     gr4=gr8
+   22| 000130 rlwinm   55297C7E   1     SRL4      gr9=gr9,17
+   22| 000134 xor      7C082278   1     X         gr8=gr0,gr4
+   17| 000138 addi     38630001   1     AI        gr3=gr3,1
+   22| 00013C xor      7D084A78   1     X         gr8=gr8,gr9
+   14| 000140 stfd     D83B0000   1     STFL      am(gr27,0)=fp1
+   24| 000144 rlwinm   54A50FFE   1     SRL4      gr5=gr5,31
+   22| 000148 rlwinm   55082834   1     SLL4      gr8=gr8,5
+   24| 00014C add      7CA53214   1     A         gr5=gr5,gr6
+   15| 000150 rldicl   78E60020   1     RN8       gr6=gr7,0,0xFFFFFFFF
+   17| 000154 stw      907E0000   1     ST4Z      idum(gr30,0)=gr3
+   25| 000158 mulli    1CE741A7   0     M         gr7=gr7,16807
+   24| 00015C rldicr   78AAF824   2     SLL8      gr10=gr5,31
+   24| 000160 mulli    1CC641A7   0     M         gr6=gr6,16807
+   24| 000164 subf     7CA55050   2     S         gr5=gr10,gr5
+   22| 000168 xor      7C004278   1     X         gr0=gr0,gr8
+   25| 00016C subf     7CE53850   1     S         gr7=gr7,gr5
+   22| 000170 xor      7C884A78   1     X         gr8=gr4,gr9
+   25| 000174 cmpwi    2C070000   1     C4        cr0=gr7,0
+   24| 000178 subf     7C853050   1     S         gr4=gr6,gr5
+   22| 00017C xor      7C004278   1     X         gr0=gr0,gr8
+   25| 000180 bc       41800058   1     BT        CL.19,cr0,0x1/lt,taken=30%(30,70)
+    0|                              CL.20:
+   27| 000184 stw      901F0004   1     ST4Z      ix(gr31,4)=gr0
+   26| 000188 xor      7C032278   1     X         gr3=gr0,gr4
+   27| 00018C stw      909F0000   1     ST4Z      iy(gr31,0)=gr4
+   26| 000190 rlwinm   5460007E   1     RN4       gr0=gr3,0,0x7FFFFFFF
+   26| 000194 ori      60000001   1     OIL       gr0=gr0,0x1
+   26| 000198 std      F8010098   1     ST8       #MX_CONVF1_1(gr1,152)=gr0
+   26| 00019C lfd      C8010098   1     LFL       fp0=#MX_CONVF1_1(gr1,152)
+   26| 0001A0 fcfid    FC00069C   1     FCFID     fp0=fp0,fcr
+   26| 0001A4 fmul     FC010032   2     MFL       fp0=fp1,fp0,fcr
+   26| 0001A8 stfd     D81D0000   1     STFL      x(gr29,0)=fp0
+   27|                              CL.16:
+   27| 0001AC ld       E9810110   1     L8        gr12=#stack(gr1,272)
+   27| 0001B0 addi     38210100   1     AI        gr1=gr1,256
+   27| 0001B4 ld       EB21FFC8   1     L8        gr25=#stack(gr1,-56)
+   27| 0001B8 ld       EB41FFD0   1     L8        gr26=#stack(gr1,-48)
+   27| 0001BC ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+   27| 0001C0 mtspr    7D8803A6   1     LLR       lr=gr12
+   27| 0001C4 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+   27| 0001C8 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+   27| 0001CC ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+   27| 0001D0 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+   27| 0001D4 bclr     4E800020   1     BA        lr
+    0|                              CL.19:
+   25| 0001D8 addis    3C607FFF   1     LIU       gr3=32767
+   27| 0001DC stw      901F0004   1     ST4Z      ix(gr31,4)=gr0
+   25| 0001E0 ori      6063FFFF   1     OIL       gr3=gr3,0xFFFF
+   25| 0001E4 add      7C632214   1     A         gr3=gr3,gr4
+   26| 0001E8 xor      7C001A78   1     X         gr0=gr0,gr3
+   27| 0001EC stw      907F0000   1     ST4Z      iy(gr31,0)=gr3
+   26| 0001F0 rlwinm   5400007E   1     RN4       gr0=gr0,0,0x7FFFFFFF
+   26| 0001F4 ori      60000001   1     OIL       gr0=gr0,0x1
+   26| 0001F8 std      F8010088   1     ST8       #MX_CONVF1_0(gr1,136)=gr0
+   26| 0001FC lfd      C8010088   1     LFL       fp0=#MX_CONVF1_0(gr1,136)
+   26| 000200 fcfid    FC00069C   1     FCFID     fp0=fp0,fcr
+   26| 000204 fmul     FC010032   2     MFL       fp0=fp1,fp0,fcr
+   26| 000208 stfd     D81D0000   1     STFL      x(gr29,0)=fp0
+    0| 00020C b        4BFFFFA0   1     B         CL.16,-1
+     |               Tag Table
+     | 000210        00000000 00012201 80070000 00000210
+     |               Instruction count          132
+     |               Straight-line exec time    134
+     |               Constant Area
+     | 000000        3F800000 BF800000 30000000
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    ran1.f90                    07/08/15   15:48:57
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................      27
+1501-510  Compilation successful for file ran1.f90.
+1501-543  Object file created.

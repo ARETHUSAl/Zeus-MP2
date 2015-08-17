@@ -89,8 +89,8 @@ subroutine h5splice
       real(rl4), dimension(:    ), allocatable :: data
       real(rl4), dimension(:,:,:), allocatable :: dcmb
 !
-      integer, parameter :: max_pe = 256
-      integer, parameter :: max_fc = 257
+      integer, parameter :: max_pe = 512
+      !integer, parameter :: max_fc = 513
 !
 !-----------------------------------------------------------------------
 !     file names and misc.

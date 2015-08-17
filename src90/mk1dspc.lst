@@ -1,0 +1,966 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- mk1dspc.f90 07/08/15 15:48:53
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** mk1dspc   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-534 (I) Loop (loop index 1) at mk1dspc.f90 <line 77> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 2) at mk1dspc.f90 <line 83> was not SIMD vectorized because the loop is not the innermost loop.
+1586-540 (I) Loop (loop index 3) at mk1dspc.f90 <line 89> was not SIMD vectorized because it contains memory references ((double *)((char *)d-pwspc%addr  + d-pwspc%rvo))->pwspc[].rns1.[(long long) ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 1)] = ((double *)((char *)d-pwspc%addr  + d-pwspc%rvo))->pwspc[].rns1.[(long long) ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 1)] + abs(((complex double *)((char *)d-fftdata%addr  + d-fftdata%rvo))->fftdata[].rns2.[$$CIV2 + 1ll][$$CIV1 + 1ll][$$CIV0 + 1ll]) * abs(((complex double *)((char *)d-fftdata%addr  + d-fftdata%rvo))->fftdata[].rns2.[$$CIV2 + 1ll][$$CIV1 + 1ll][$$CIV0 + 1ll]); with non-vectorizable strides.
+1586-536 (I) Loop (loop index 3) at mk1dspc.f90 <line 97> was not SIMD vectorized because it contains memory references ((char *)d-pwspc%addr  + d-pwspc%rvo + (8ll)*((long long) ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 1))) with non-vectorizable alignment.
+1586-537 (I) Loop (loop index 3) at mk1dspc.f90 <line 97> was not SIMD vectorized because it contains operation in ((double *)((char *)d-pwspc%addr  + d-pwspc%rvo))->pwspc[].rns1.[(long long) ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 1)] + abs(((complex double *)((char *)d-fftdata%addr  + d-fftdata%rvo))->fftdata[].rns2.[$$CIV2 + 1ll][$$CIV1 + 1ll][$$CIV0 + 1ll]) * abs(((complex double *)((char *)d-fftdata%addr  + d-fftdata%rvo))->fftdata[].rns2.[$$CIV2 + 1ll][$$CIV1 + 1ll][$$CIV0 + 1ll]) which is not suitable for SIMD vectorization.
+1586-540 (I) Loop (loop index 3) at mk1dspc.f90 <line 97> was not SIMD vectorized because it contains memory references ((char *)d-pwspc%addr  + d-pwspc%rvo + (8ll)*((long long) ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 1))) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 3) at mk1dspc.f90 <line 97> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 3) at mk1dspc.f90 <line 97> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-pwspc%addr  + d-pwspc%rvo + (8ll)*((long long) ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 1))).
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"1">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+     7|         SUBROUTINE mk1dspc ()
+    54|           inn[].off0 = in
+    55|           inn[].off4 = jn
+    56|           inn[].off8 = kn
+    57|           $$FSM0 = n
+    58|           n = ijkn
+    59|           nbins = ijkn
+    65|           T_2 = 3
+                  T_3 = -1
+                  T_4 = 8
+                  CALL fftwnd_f77_create_plan(plan,T_2,inn,T_3,T_4)
+    67|           T_5 = 0
+                  CALL fftwnd_f77_one(plan,d-fftdata%addr,T_5)
+    68|           CALL fftwnd_f77_destroy_plan(plan)
+    77|           IF ((int(n) > 0)) THEN
+                    $$CIV2 = 0
+       Id=1         DO $$CIV2 = $$CIV2, int(int(n))-1
+    83|               IF ((int(n) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int(int(n))-1
+    89|                   IF ((int(n) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int(int(n))-1
+    97|                       d-pwspc%addr%pwspc(int((int(((real(_sqrtfs((real((&
+                &               int(%VAL($$CIV0)) + 1 > %VAL(n) / 2 ? (1 + (int(&
+                &               %VAL($$CIV0)) - %VAL(n))) * (1 + (int(%VAL($$CIV0)&
+                &               ) - %VAL(n))) : int(%VAL($$CIV0)) * int(%VAL(&
+                &               $$CIV0)))) + real((int(%VAL($$CIV1)) + 1 > %VAL(n)&
+                &                / 2 ? (int(%VAL($$CIV1)) - %VAL(n)) * (int(%VAL(&
+                &               $$CIV1)) - %VAL(n)) : int(%VAL($$CIV1)) * int(&
+                &               %VAL($$CIV1))))) + real((int(%VAL($$CIV2)) + 1 > &
+                &               %VAL(n) / 2 ? (int(%VAL($$CIV2)) - %VAL(n)) * (&
+                &               int(%VAL($$CIV2)) - %VAL(n)) : int(%VAL($$CIV2)) &
+                &               * int(%VAL($$CIV2)))))) / real((_sqrtfs( &
+                &               3.00000000E+00) * real(($$FSM0 / 2))))) * real(&
+                &               real(nbins)))) + 1))) = d-pwspc%addr%pwspc(int((&
+                &               int(((real(_sqrtfs((real((int(%VAL($$CIV0)) + 1 > &
+                &               %VAL(n) / 2 ? (1 + (int(%VAL($$CIV0)) - %VAL(n))) &
+                &               * (1 + (int(%VAL($$CIV0)) - %VAL(n))) : int(%VAL(&
+                &               $$CIV0)) * int(%VAL($$CIV0)))) + real((int(%VAL(&
+                &               $$CIV1)) + 1 > %VAL(n) / 2 ? (int(%VAL($$CIV1)) - &
+                &               %VAL(n)) * (int(%VAL($$CIV1)) - %VAL(n)) : int(&
+                &               %VAL($$CIV1)) * int(%VAL($$CIV1))))) + real((int(&
+                &               %VAL($$CIV2)) + 1 > %VAL(n) / 2 ? (int(%VAL(&
+                &               $$CIV2)) - %VAL(n)) * (int(%VAL($$CIV2)) - %VAL(n)&
+                &               ) : int(%VAL($$CIV2)) * int(%VAL($$CIV2)))))) / &
+                &               real((_sqrtfs( 3.00000000E+00) * real(($$FSM0 / 2)&
+                &               )))) * real(real(nbins)))) + 1))) + abs(&
+                &               d-fftdata%addr%fftdata($$CIV0 + 1,$$CIV1 + 1,&
+                &               $$CIV2 + 1)) * abs(d-fftdata%addr%fftdata($$CIV0 &
+                &               + 1,$$CIV1 + 1,$$CIV2 + 1))
+    98|                     ENDDO
+                          ENDIF
+    99|                 ENDDO
+                      ENDIF
+   100|             ENDDO
+                  ENDIF
+   102|           RETURN
+                END SUBROUTINE mk1dspc
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            77             1    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            83             2    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-pwspc%addr  + 
+                                          d-pwspc%rvo + (8ll)*((long long) ((int) (((double) 
+                                          _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + 
+                                          ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : 
+                                          (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 
+                                          + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) 
+                                          : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) 
+                                          $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) 
+                                          $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / 
+                                          (double) (_sqrtfs@19( 3.00000000E+00) * (float) 
+                                          ($$FSM0 / 2))) * (double) ((float) nbins)) + 1)))  
+                                          with non-vectorizable alignment.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          operation in ((double *)((char *)d-pwspc%addr  + 
+                                          d-pwspc%rvo))->pwspc[].rns1.[(long long) ((int) 
+                                          (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n 
+                                          / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - 
+                                          n)) : (int) $$CIV0 * (int) $$CIV0) + (float) ((int) 
+                                          $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) 
+                                          $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + (float) 
+                                          ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * 
+                                          ((int) $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / 
+                                          (double) (_sqrtfs@19( 3.00000000E+00) * (float) 
+                                          ($$FSM0 / 2))) * (double) ((float) nbins)) + 1)] + 
+                                          abs(((complex double *)((char *)d-fftdata%addr  + 
+                                          d-fftdata%rvo))->fftdata[].rns2.[$$CIV2 + 1ll][$$CIV1 
+                                          + 1ll][$$CIV0 + 1ll]) * abs(((complex double *)((char 
+                                          *)d-fftdata%addr  + 
+                                          d-fftdata%rvo))->fftdata[].rns2.[$$CIV2 + 1ll][$$CIV1 
+                                          + 1ll][$$CIV0 + 1ll]) which is not  suitable for SIMD 
+                                          vectorization.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-pwspc%addr  + 
+                                          d-pwspc%rvo + (8ll)*((long long) ((int) (((double) 
+                                          _sqrtfs@19(((float) ((int) $$CIV0 + 1 > n / 2 ? (1 + 
+                                          ((int) $$CIV0 - n)) * (1 + ((int) $$CIV0 - n)) : 
+                                          (int) $$CIV0 * (int) $$CIV0) + (float) ((int) $$CIV1 
+                                          + 1 > n / 2 ? ((int) $$CIV1 - n) * ((int) $$CIV1 - n) 
+                                          : (int) $$CIV1 * (int) $$CIV1)) + (float) ((int) 
+                                          $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - n) * ((int) 
+                                          $$CIV2 - n) : (int) $$CIV2 * (int) $$CIV2)) / 
+                                          (double) (_sqrtfs@19( 3.00000000E+00) * (float) 
+                                          ($$FSM0 / 2))) * (double) ((float) nbins)) + 1))) 
+                                          with  non-vectorizable strides.
+         0            97                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-pwspc%addr  + d-pwspc%rvo + (8ll)*((long long) 
+                                          ((int) (((double) _sqrtfs@19(((float) ((int) $$CIV0 + 
+                                          1 > n / 2 ? (1 + ((int) $$CIV0 - n)) * (1 + ((int) 
+                                          $$CIV0 - n)) : (int) $$CIV0 * (int) $$CIV0) + (float) 
+                                          ((int) $$CIV1 + 1 > n / 2 ? ((int) $$CIV1 - n) * 
+                                          ((int) $$CIV1 - n) : (int) $$CIV1 * (int) $$CIV1)) + 
+                                          (float) ((int) $$CIV2 + 1 > n / 2 ? ((int) $$CIV2 - 
+                                          n) * ((int) $$CIV2 - n) : (int) $$CIV2 * (int) 
+                                          $$CIV2)) / (double) (_sqrtfs@19( 3.00000000E+00) * 
+                                          (float) ($$FSM0 / 2))) * (double) ((float) nbins)) + 
+                                          1))).
+
+
+     7|         SUBROUTINE mk1dspc ()
+    54|           inn[].off0 = in
+    55|           inn[].off4 = jn
+    56|           inn[].off8 = kn
+    57|           $$FSM0 = n
+    58|           n = ijkn
+    59|           nbins = ijkn
+    65|           T_2 = 3
+                  T_3 = -1
+                  T_4 = 8
+                  CALL fftwnd_f77_create_plan(plan,T_2,inn,T_3,T_4)
+    67|           T_5 = 0
+                  CALL fftwnd_f77_one(plan,d-fftdata%addr,T_5)
+    68|           CALL fftwnd_f77_destroy_plan(plan)
+    77|           IF ((int(n) > 0)) THEN
+                    $$csx0 = _sqrtfs( 3.00000000E+00) * real(($$FSM0 / 2))
+                    $$CIV2 = 0
+       Id=1         DO $$CIV2 = $$CIV2, int(int(n))-1
+    83|               IF ((int(n) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int(int(n))-1
+    89|                   IF ((int(n) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int(int(n))-1
+    97|                       $$csx1 = int((int(((real(_sqrtfs((real((int(%VAL(&
+                &               $$CIV0)) + 1 > %VAL(n) / 2 ? (1 + (int(%VAL(&
+                &               $$CIV0)) - %VAL(n))) * (1 + (int(%VAL($$CIV0)) - &
+                &               %VAL(n))) : int(%VAL($$CIV0)) * int(%VAL($$CIV0)))&
+                &               ) + real((int(%VAL($$CIV1)) + 1 > %VAL(n) / 2 ? (&
+                &               int(%VAL($$CIV1)) - %VAL(n)) * (int(%VAL($$CIV1)) &
+                &               - %VAL(n)) : int(%VAL($$CIV1)) * int(%VAL($$CIV1))&
+                &               ))) + real((int(%VAL($$CIV2)) + 1 > %VAL(n) / 2 ? &
+                &               (int(%VAL($$CIV2)) - %VAL(n)) * (int(%VAL($$CIV2))&
+                &                - %VAL(n)) : int(%VAL($$CIV2)) * int(%VAL($$CIV2)&
+                &               ))))) / real($$csx0)) * real(real(nbins)))) + 1))
+                              d-pwspc%addr%pwspc($$csx1) = d-pwspc%addr%pwspc(&
+                &               $$csx1) + abs(d-fftdata%addr%fftdata($$CIV0 + 1,&
+                &               $$CIV1 + 1,$$CIV2 + 1)) * abs(&
+                &               d-fftdata%addr%fftdata($$CIV0 + 1,$$CIV1 + 1,&
+                &               $$CIV2 + 1))
+    98|                     ENDDO
+                          ENDIF
+    99|                 ENDDO
+                      ENDIF
+   100|             ENDDO
+                  ENDIF
+   102|           RETURN
+                END SUBROUTINE mk1dspc
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ssss sss-
+ FPR's set/used:   ssss ssss ssss ssss  ssss ssss ssss ssss
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     mk1dspc
+    7|                                  PROC      
+    0| 000000 rldicl   782C06E0   1     RN8       gr12=gr1,0,0x1F
+    0| 000004 stfd     DBE1FFF8   1     STFL      #stack(gr1,-8)=qr31
+    0| 000008 stfd     DBC1FFF0   1     STFL      #stack(gr1,-16)=qr30
+    0| 00000C stfd     DBA1FFE8   1     STFL      #stack(gr1,-24)=qr29
+    0| 000010 stfd     DB81FFE0   1     STFL      #stack(gr1,-32)=qr28
+    0| 000014 stfd     DB61FFD8   1     STFL      #stack(gr1,-40)=qr27
+    0| 000018 stfd     DB41FFD0   1     STFL      #stack(gr1,-48)=qr26
+    0| 00001C stfd     DB21FFC8   1     STFL      #stack(gr1,-56)=qr25
+    0| 000020 stfd     DB01FFC0   1     STFL      #stack(gr1,-64)=qr24
+    0| 000024 stfd     DAE1FFB8   1     STFL      #stack(gr1,-72)=qr23
+    0| 000028 stfd     DAC1FFB0   1     STFL      #stack(gr1,-80)=qr22
+    0| 00002C stfd     DAA1FFA8   1     STFL      #stack(gr1,-88)=qr21
+    0| 000030 stfd     DA81FFA0   1     STFL      #stack(gr1,-96)=qr20
+    0| 000034 stfd     DA61FF98   1     STFL      #stack(gr1,-104)=qr19
+    0| 000038 stfd     DA41FF90   1     STFL      #stack(gr1,-112)=qr18
+    0| 00003C stfd     DA21FF88   1     STFL      #stack(gr1,-120)=qr17
+    0| 000040 stfd     DA01FF80   1     STFL      #stack(gr1,-128)=qr16
+    0| 000044 stfd     D9E1FF78   1     STFL      #stack(gr1,-136)=qr15
+    0| 000048 stfd     D9C1FF70   1     STFL      #stack(gr1,-144)=qr14
+    0| 00004C std      FBE1FF68   1     ST8       #stack(gr1,-152)=gr31
+    0| 000050 std      FBC1FF60   1     ST8       #stack(gr1,-160)=gr30
+    0| 000054 std      FBA1FF58   1     ST8       #stack(gr1,-168)=gr29
+    0| 000058 std      FB81FF50   1     ST8       #stack(gr1,-176)=gr28
+    0| 00005C std      FB61FF48   1     ST8       #stack(gr1,-184)=gr27
+    0| 000060 std      FB41FF40   1     ST8       #stack(gr1,-192)=gr26
+    0| 000064 std      FB21FF38   1     ST8       #stack(gr1,-200)=gr25
+    0| 000068 subfic   218CFE00   1     SFI8      gr12=-512,gr12,ca"
+    0| 00006C std      FB01FF30   1     ST8       #stack(gr1,-208)=gr24
+    0| 000070 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000074 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000078 std      FBE1FF68   1     ST8       #stack(gr1,-152)=gr31
+    0| 00007C or       7C3F0B78   1     LR        gr31=gr1
+    0| 000080 stdux    7C21616A   1     ST8U      gr1,#stack(gr1,gr12)=gr1
+   54| 000084 ld       E8620000   1     L8        gr3=.&&N&&param(gr2,0)
+   65| 000088 addi     38A00003   1     LI        gr5=3
+   65| 00008C addi     3800FFFF   1     LI        gr0=-1
+   65| 000090 stw      90A10080   1     ST4Z      T_2(gr1,128)=gr5
+   65| 000094 stw      90010084   1     ST4Z      T_3(gr1,132)=gr0
+   65| 000098 addi     38800008   1     LI        gr4=8
+   54| 00009C lwz      80A30000   1     L4Z       gr5=<s29:d0:l4>(gr3,0)
+   55| 0000A0 lwz      80C30004   1     L4Z       gr6=<s29:d4:l4>(gr3,4)
+   56| 0000A4 lwz      80030008   1     L4Z       gr0=<s29:d8:l4>(gr3,8)
+   57| 0000A8 or       7FDCF378   1     LR        gr28=gr30
+   58| 0000AC lwa      EBC3000E   1     L4A       gr30=<s29:d12:l4>(gr3,12)
+   65| 0000B0 stw      90810088   1     ST4Z      T_4(gr1,136)=gr4
+   54| 0000B4 stw      90A100A0   1     ST4Z      <a1:d160:l4>(gr1,160)=gr5
+   55| 0000B8 stw      90C100A4   1     ST4Z      <a1:d164:l4>(gr1,164)=gr6
+   65| 0000BC addi     38E10088   1     AI        gr7=gr1,136
+   56| 0000C0 stw      900100A8   1     ST4Z      <a1:d168:l4>(gr1,168)=gr0
+   65| 0000C4 addi     38C10084   1     AI        gr6=gr1,132
+   65| 0000C8 addi     38A100A0   1     AI        gr5=gr1,160
+   65| 0000CC addi     38810080   1     AI        gr4=gr1,128
+   65| 0000D0 addi     3861008C   1     AI        gr3=gr1,140
+   65| 0000D4 bl       48000001   1     CALL      fftwnd_f77_create_plan,5,plan",gr3,T_2",gr4,inn[]",gr5,T_3",gr6,T_4",gr7,#ProcAlias",fftwnd_f77_create_plan",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",qr0"-qr31",mq",lr",xer",fsr",ca",ctr",qr0"-qr31"
+   65| 0000D8 ori      60000000   1
+   67| 0000DC ld       EBA20000   1     L8        gr29=.&&N&fftpars(gr2,0)
+   67| 0000E0 addi     38000000   1     LI        gr0=0
+   67| 0000E4 addi     38A10090   1     AI        gr5=gr1,144
+   67| 0000E8 stw      90010090   1     ST4Z      T_5(gr1,144)=gr0
+   67| 0000EC addi     3861008C   1     AI        gr3=gr1,140
+   67| 0000F0 ld       E89D0000   1     L8        gr4=<s10:d0:l8>(gr29,0)
+   67| 0000F4 bl       48000001   1     CALL      fftwnd_f77_one,3,plan",gr3,fftdata[].rns0.",gr4,T_5",gr5,fftwnd_f77_one",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",qr0"-qr31",mq",lr",xer",fsr",ca",ctr",qr0"-qr31"
+   67| 0000F8 ori      60000000   1
+   68| 0000FC addi     3861008C   1     AI        gr3=gr1,140
+   68| 000100 bl       48000001   1     CALL      fftwnd_f77_destroy_plan,1,plan",gr3,fftwnd_f77_destroy_plan",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",qr0"-qr31",mq",lr",xer",fsr",ca",ctr",qr0"-qr31"
+   68| 000104 ori      60000000   1
+   77| 000108 cmpwi    2C1E0000   1     C4        cr0=gr30,0
+    0| 00010C or       7FC0F378   1     LR        gr0=gr30
+   77| 000110 bc       40810850   1     BF        CL.153,cr0,0x2/gt,taken=20%(20,80)
+    0| 000114 qvgpci   1002090A   1     QVGPCI    qr0=260
+   54| 000118 srawi    7F830E70   1     SRA4CA    gr3,ca=gr28,1
+   77| 00011C ld       E8C20000   1     L8        gr6=.+CONSTANT_AREA(gr2,0)
+   54| 000120 addze    7C830194   1     ADDE      gr4,ca=gr3,0,ca
+   97| 000124 ld       E87D0000   1     L8        gr3=<s10:d0:l8>(gr29,0)
+   77| 000128 extsw    7C8507B4   1     EXTS4     gr5=gr4
+   97| 00012C ld       E89D0018   1     L8        gr4=<s10:d24:l8>(gr29,24)
+   77| 000130 std      F8A100B0   1     ST8       #MX_CONVF1_0(gr1,176)=gr5
+   77| 000134 lfs      C1060000   1     LFS       qr8=+CONSTANT_AREA(gr6,0)
+    0| 000138 lfs      C0260014   1     LFS       qr1=+CONSTANT_AREA(gr6,20)
+   97| 00013C ld       E93D0030   1     L8        gr9=<s10:d48:l8>(gr29,48)
+   97| 000140 ld       E8BD01A0   1     L8        gr5=<s10:d416:l8>(gr29,416)
+   97| 000144 ld       E97D01B8   1     L8        gr11=<s10:d440:l8>(gr29,440)
+   97| 000148 ld       E95D0048   1     L8        gr10=<s10:d72:l8>(gr29,72)
+    0| 00014C add      7C632214   1     A         gr3=gr3,gr4
+    0| 000150 srawi    7FC70E70   1     SRA4CA    gr7,ca=gr30,1
+   77| 000154 lfd      C84100B0   1     LFL       qr2=#MX_CONVF1_0(gr1,176)
+    0| 000158 add      7D034A14   1     A         gr8=gr3,gr9
+   77| 00015C addi     38600000   1     LI        gr3=0
+   97| 000160 ld       E89D0060   1     L8        gr4=<s10:d96:l8>(gr29,96)
+   97| 000164 add      7CA55A14   1     A         gr5=gr5,gr11
+    0| 000168 add      7D685214   1     A         gr11=gr8,gr10
+    0| 00016C addze    7D870194   1     ADDE      gr12,ca=gr7,0,ca
+   77| 000170 fcfid    FCE0169C   1     FCFID     qr7=qr2,fcr
+    0| 000174 lfs      C0460004   1     LFS       qr2=+CONSTANT_AREA(gr6,4)
+    0| 000178 lfs      C0660008   1     LFS       qr3=+CONSTANT_AREA(gr6,8)
+    0| 00017C lfs      C086000C   1     LFS       qr4=+CONSTANT_AREA(gr6,12)
+    0| 000180 lfs      C0A60010   1     LFS       qr5=+CONSTANT_AREA(gr6,16)
+    0| 000184 lfs      C0C60018   1     LFS       qr6=+CONSTANT_AREA(gr6,24)
+   77| 000188 frsp     FCE03818   1     CVLS      qr7=qr7,fcr
+   77| 00018C fmuls    ECE70232   1     MFS       qr7=qr7,qr8,fcr
+    0| 000190 qvfre    11003830   1     QVFRE     qr8=qr7
+    0| 000194 fmsub    FD270A38   1     FMS       qr9=qr1,qr7,qr8,fcr
+    0| 000198 fnmsub   FD08427C   2     FNMS      qr8=qr8,qr8,qr9,fcr
+    0| 00019C fmsub    FD270A38   2     FMS       qr9=qr1,qr7,qr8,fcr
+    0| 0001A0 fnmsub   FD08427C   2     FNMS      qr8=qr8,qr8,qr9,fcr
+   77|                              CL.20:
+    0| 0001A4 extsw    7C6607B4   1     EXTS4     gr6=gr3
+    0| 0001A8 addi     38630001   1     AI        gr3=gr3,1
+    0| 0001AC subf     7CE03050   1     S         gr7=gr6,gr0
+    0| 0001B0 cmpw     7C036000   1     C4        cr0=gr3,gr12
+    0| 0001B4 mulld    7D0739D2   1     M         gr8=gr7,gr7
+    0| 0001B8 mulld    7CC631D2   1     M         gr6=gr6,gr6
+   83| 0001BC addi     38E00000   1     LI        gr7=0
+    0| 0001C0 or       7D7D5B78   1     LR        gr29=gr11
+    0| 0001C4 bc       40810008   1     BF        CL.86,cr0,0x2/gt,taken=50%(0,0)
+    0| 0001C8 or       7D064378   1     LR        gr6=gr8
+    0|                              CL.86:
+    0| 0001CC extsw    7CDC07B4   1     EXTS4     gr28=gr6
+   83|                              CL.22:
+   94| 0001D0 extsw    7CE807B4   1     EXTS4     gr8=gr7
+    0| 0001D4 addi     3B670001   1     AI        gr27=gr7,1
+   94| 0001D8 subf     7CC04050   1     S         gr6=gr8,gr0
+   94| 0001DC cmpw     7C1B6000   1     C4        cr0=gr27,gr12
+   94| 0001E0 mulld    7CC631D2   1     M         gr6=gr6,gr6
+   94| 0001E4 mulld    7D0841D2   1     M         gr8=gr8,gr8
+   94| 0001E8 bc       40810008   1     BF        CL.87,cr0,0x2/gt,taken=50%(0,0)
+   94| 0001EC or       7CC83378   1     LR        gr8=gr6
+   94|                              CL.87:
+    0| 0001F0 std      FBC100E0   1     ST8       #MX_CONVF1_3(gr1,224)=gr30
+   97| 0001F4 or       7FA6EB78   1     LR        gr6=gr29
+    0| 0001F8 extsw    7D0807B4   1     EXTS4     gr8=gr8
+    0| 0001FC std      FB8100D0   1     ST8       #MX_CONVF1_2(gr1,208)=gr28
+    0| 000200 std      F90100C0   1     ST8       #MX_CONVF1_1(gr1,192)=gr8
+   97| 000204 lfdux    7D2624EE   1     LFDU      qr9,gr6=fftdata[].rns0.(gr6,gr4,0)
+    0| 000208 mtspr    7C0903A6   1     LCTR      ctr=gr0
+   94| 00020C addi     3B000000   1     LI        gr24=0
+   94| 000210 addi     38E00001   1     LI        gr7=1
+    0| 000214 lfd      C96100E0   1     LFL       qr11=#MX_CONVF1_3(gr1,224)
+   94| 000218 subf     7D00C050   1     S         gr8=gr24,gr0
+   94| 00021C cmpw     7C076000   1     C4        cr0=gr7,gr12
+   97| 000220 lfd      C9A60008   1     LFL       qr13=fftdata[].rns0.(gr6,8)
+    0| 000224 lfd      C94100D0   1     LFL       qr10=#MX_CONVF1_2(gr1,208)
+    0| 000228 lfd      C98100C0   1     LFL       qr12=#MX_CONVF1_1(gr1,192)
+   94| 00022C addi     3B480001   1     AI        gr26=gr8,1
+    0| 000230 fcfid    FDC05E9C   1     FCFID     qr14=qr11,fcr
+   97| 000234 qvfperm  1129680C   1     QVFPERM   qr9=qr9,qr13,qr0
+    0| 000238 fcfid    FD40569C   1     FCFID     qr10=qr10,fcr
+    0| 00023C fcfid    FDA0669C   2     FCFID     qr13=qr12,fcr
+   97| 000240 qvfabs   11204A10   1     QVFABS    qr9=qr9
+    0| 000244 frsp     FDC07018   1     CVLS      qr14=qr14,fcr
+   97| 000248 qvaligni 11694A0A   1     QVALIGNI  qr11=qr9,qr9,1
+   97| 00024C qvfmr    11804890   1     LRQV      qr12=qr9
+    0| 000250 frsp     FD405018   1     CVLS      qr10=qr10,fcr
+    0| 000254 frsp     FDA06818   2     CVLS      qr13=qr13,fcr
+   97| 000258 qvfre    11E05830   1     QVFRE     qr15=qr11
+   97| 00025C qvfmr    12004890   1     LRQV      qr16=qr9
+   97| 000260 fadd     FE89582A   1     AFL       qr20=qr9,qr11,fcr
+   97| 000264 fcmpu    FF895800   2     CFL       cr7=qr9,qr11
+   97| 000268 qvfre    12204830   1     QVFRE     qr17=qr9
+    0| 00026C bc       424004F4   1     BCF       ctr=CL.132,taken=0%(0,100)
+   97| 000270 lfdux    7E4624EE   1     LFDU      qr18,gr6=fftdata[].rns0.(gr6,gr4,0)
+   97| 000274 lfd      CA660008   1     LFL       qr19=fftdata[].rns0.(gr6,8)
+   97| 000278 qvfperm  1252980C   1     QVFPERM   qr18=qr18,qr19,qr0
+    0| 00027C bc       42400350   1     BCF       ctr=CL.128,taken=0%(0,100)
+   97| 000280 lfdux    7E6624EE   1     LFDU      qr19,gr6=fftdata[].rns0.(gr6,gr4,0)
+    0| 000284 bc       424001AC   1     BCF       ctr=CL.124,taken=0%(0,100)
+    0| 000288 ori      60210000   1     XNOP      
+   89|                              CL.24:
+   94| 00028C mulld    7F5AD1D2   1     M         gr26=gr26,gr26
+   97| 000290 fcmpu    FC946000   1     CFL       cr1=qr20,qr12
+   97| 000294 fcmpu    FF145800   2     CFL       cr6=qr20,qr11
+   94| 000298 mulld    7F38C1D2   1     M         gr25=gr24,gr24
+   94| 00029C extsw    7CF807B4   1     EXTS4     gr24=gr7
+   97| 0002A0 lfd      CA860008   1     LFL       qr20=fftdata[].rns0.(gr6,8)
+   94| 0002A4 addi     38E70001   1     AI        gr7=gr7,1
+   94| 0002A8 subf     7D00C050   1     S         gr8=gr24,gr0
+   94| 0002AC bc       40810008   1     BF        CL.88,cr0,0x2/gt,taken=50%(0,0)
+   94| 0002B0 or       7F59D378   1     LR        gr25=gr26
+   94|                              CL.88:
+    0| 0002B4 extsw    7F3A07B4   1     EXTS4     gr26=gr25
+   94| 0002B8 cmpw     7C076000   1     C4        cr0=gr7,gr12
+   95| 0002BC std      FB4100F0   1     ST8       #MX_CONVF1_4(gr1,240)=gr26
+   94| 0002C0 addi     3B480001   1     AI        gr26=gr8,1
+   95| 0002C4 lfd      CAA100F0   1     LFL       qr21=#MX_CONVF1_4(gr1,240)
+   95| 0002C8 fcfid    FEA0AE9C   1     FCFID     qr21=qr21,fcr
+   95| 0002CC frsp     FEA0A818   2     CVLS      qr21=qr21,fcr
+   95| 0002D0 fadds    EEB5682A   1     AFS       qr21=qr21,qr13,fcr
+   95| 0002D4 fadds    EEB5502A   1     AFS       qr21=qr21,qr10,fcr
+   95| 0002D8 frsqrte  FEC0A834   1     FRSQRE    qr22=qr21
+   95| 0002DC fnabs    FEE0A910   2     NABSFL    qr23=qr21
+   95| 0002E0 fmul     FF1505B2   2     MFL       qr24=qr21,qr22,fcr
+   95| 0002E4 fmadd    FF56163A   2     FMA       qr26=qr2,qr22,qr24,fcr
+   95| 0002E8 fmadd    FF3A20FA   2     FMA       qr25=qr4,qr26,qr3,fcr
+   95| 0002EC fmadd    FF3A2E7A   2     FMA       qr25=qr5,qr26,qr25,fcr
+   95| 0002F0 fmul     FF3A0672   2     MFL       qr25=qr26,qr25,fcr
+   95| 0002F4 fmul     FF180672   2     MFL       qr24=qr24,qr25,fcr
+   95| 0002F8 fmadd    FED5C5BA   2     FMA       qr22=qr24,qr21,qr22,fcr
+   95| 0002FC fsel     FEB7B56E   2     FSEL      qr21=qr23,qr22,qr21
+   95| 000300 frsp     FEA0A818   2     CVLS      qr21=qr21,fcr
+   95| 000304 fmul     FED50232   2     MFL       qr22=qr21,qr8,fcr
+   95| 000308 fmsub    FEA7ADB8   2     FMS       qr21=qr21,qr7,qr22,fcr
+   95| 00030C fnmsub   FEA8B57C   2     FNMS      qr21=qr22,qr8,qr21,fcr
+   95| 000310 fmul     FEB503B2   2     MFL       qr21=qr21,qr14,fcr
+   97| 000314 fctiwz   FEA0A81E   2     FCTIWZ    qr21=qr21
+   97| 000318 stfd     DAA10100   1     STFL      #MX_CONVF1_5(gr1,256)=qr21
+   97| 00031C lwa      E9010106   1     L4A       gr8=#MX_CONVF1_5(gr1,260)
+   97| 000320 addi     39080001   1     AI        gr8=gr8,1
+   97| 000324 extsw    7D0807B4   1     EXTS4     gr8=gr8
+   97| 000328 rldicr   79081F24   1     SLL8      gr8=gr8,3
+   97| 00032C lfdx     7EA544AE   1     LFL       qr21=pwspc(gr5,gr8,0)
+   97| 000330 bc       419D006C   1     BT        CL.81,cr7,0x40/fgt,taken=50%(0,0)
+   97| 000334 qvfmr    11805890   1     LRQV      qr12=qr11
+   97| 000338 bc       419A00C4   1     BT        CL.82,cr6,0x80/feq,taken=40%(40,60)
+   97| 00033C fmsub    FD2B0BF8   1     FMS       qr9=qr1,qr11,qr15,fcr
+   97| 000340 fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 000344 fmsub    FD8B0A78   2     FMS       qr12=qr1,qr11,qr9,fcr
+   97| 000348 fnmsub   FD294B3C   2     FNMS      qr9=qr9,qr9,qr12,fcr
+   97| 00034C fmul     FD900272   2     MFL       qr12=qr16,qr9,fcr
+   97| 000350 fmsub    FDEB8338   2     FMS       qr15=qr16,qr11,qr12,fcr
+   97| 000354 fnmsub   FD2963FC   2     FNMS      qr9=qr12,qr9,qr15,fcr
+   97| 000358 fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 00035C frsqrte  FD804834   2     FRSQRE    qr12=qr9
+   97| 000360 fnabs    FDE04910   2     NABSFL    qr15=qr9
+   97| 000364 fmul     FE090332   2     MFL       qr16=qr9,qr12,fcr
+   97| 000368 fmadd    FECC143A   2     FMA       qr22=qr2,qr12,qr16,fcr
+   97| 00036C fmadd    FE3620FA   2     FMA       qr17=qr4,qr22,qr3,fcr
+   97| 000370 fmadd    FE362C7A   2     FMA       qr17=qr5,qr22,qr17,fcr
+   97| 000374 fmul     FE360472   2     MFL       qr17=qr22,qr17,fcr
+   97| 000378 fmul     FE100472   2     MFL       qr16=qr16,qr17,fcr
+   97| 00037C fmadd    FE2C647A   2     FMA       qr17=qr12,qr12,qr17,fcr
+   97| 000380 fmadd    FD89833A   2     FMA       qr12=qr16,qr9,qr12,fcr
+   97| 000384 fmul     FE1101B2   2     MFL       qr16=qr17,qr6,fcr
+   97| 000388 fmsub    FE2C4B38   2     FMS       qr17=qr9,qr12,qr12,fcr
+   97| 00038C fnmsub   FD91643C   2     FNMS      qr12=qr12,qr17,qr16,fcr
+   97| 000390 fsel     FD2F626E   2     FSEL      qr9=qr15,qr12,qr9
+   97| 000394 fmul     FD8B0272   2     MFL       qr12=qr11,qr9,fcr
+    0| 000398 b        48000064   1     B         CL.82,-1
+   97|                              CL.81:
+   97| 00039C bc       41860060   1     BT        CL.82,cr1,0x80/feq,taken=40%(40,60)
+   97| 0003A0 fmsub    FDE90C78   1     FMS       qr15=qr1,qr9,qr17,fcr
+   97| 0003A4 fnmsub   FDF18BFC   2     FNMS      qr15=qr17,qr17,qr15,fcr
+   97| 0003A8 fmsub    FD290BF8   2     FMS       qr9=qr1,qr9,qr15,fcr
+   97| 0003AC fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 0003B0 fmul     FDEB0272   2     MFL       qr15=qr11,qr9,fcr
+   97| 0003B4 fmsub    FD6C5BF8   2     FMS       qr11=qr11,qr12,qr15,fcr
+   97| 0003B8 fnmsub   FD297AFC   2     FNMS      qr9=qr15,qr9,qr11,fcr
+   97| 0003BC fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 0003C0 frsqrte  FD604834   2     FRSQRE    qr11=qr9
+   97| 0003C4 fnabs    FDE04910   2     NABSFL    qr15=qr9
+   97| 0003C8 fmul     FE0902F2   2     MFL       qr16=qr9,qr11,fcr
+   97| 0003CC fmadd    FECB143A   2     FMA       qr22=qr2,qr11,qr16,fcr
+   97| 0003D0 fmadd    FE3620FA   2     FMA       qr17=qr4,qr22,qr3,fcr
+   97| 0003D4 fmadd    FE362C7A   2     FMA       qr17=qr5,qr22,qr17,fcr
+   97| 0003D8 fmul     FE360472   2     MFL       qr17=qr22,qr17,fcr
+   97| 0003DC fmul     FE100472   2     MFL       qr16=qr16,qr17,fcr
+   97| 0003E0 fmadd    FE2B5C7A   2     FMA       qr17=qr11,qr11,qr17,fcr
+   97| 0003E4 fmadd    FD6982FA   2     FMA       qr11=qr16,qr9,qr11,fcr
+   97| 0003E8 fmul     FE1101B2   2     MFL       qr16=qr17,qr6,fcr
+   97| 0003EC fmsub    FE2B4AF8   2     FMS       qr17=qr9,qr11,qr11,fcr
+   97| 0003F0 fnmsub   FD715C3C   2     FNMS      qr11=qr11,qr17,qr16,fcr
+   97| 0003F4 fsel     FD2F5A6E   2     FSEL      qr9=qr15,qr11,qr9
+   97| 0003F8 fmul     FD8C0272   2     MFL       qr12=qr12,qr9,fcr
+   97|                              CL.82:
+   97| 0003FC fmadd    FE0CAB3A   1     FMA       qr16=qr21,qr12,qr12,fcr
+   97| 000400 qvfabs   11209210   1     QVFABS    qr9=qr18
+   97| 000404 qvfperm  1253A00C   1     QVFPERM   qr18=qr19,qr20,qr0
+   97| 000408 lfdux    7E6624EE   1     LFDU      qr19,gr6=fftdata[].rns0.(gr6,gr4,0)
+   97| 00040C qvaligni 11694A0A   1     QVALIGNI  qr11=qr9,qr9,1
+   97| 000410 qvfmr    11804890   1     LRQV      qr12=qr9
+   97| 000414 qvfre    11E05830   1     QVFRE     qr15=qr11
+   97| 000418 stfdx    7E0545AE   1     STFL      pwspc(gr5,gr8,0)=qr16
+   97| 00041C qvfmr    12004890   1     LRQV      qr16=qr9
+   97| 000420 fadd     FE89582A   1     AFL       qr20=qr9,qr11,fcr
+   97| 000424 fcmpu    FF895800   2     CFL       cr7=qr9,qr11
+   97| 000428 qvfre    12204830   1     QVFRE     qr17=qr9
+    0| 00042C bc       4200FE60   1     BCT       ctr=CL.24,taken=100%(100,0)
+    0|                              CL.124:
+   94| 000430 mulld    7D1AD1D2   1     M         gr8=gr26,gr26
+   94| 000434 mulld    7F58C1D2   1     M         gr26=gr24,gr24
+   94| 000438 bc       40810008   1     BF        CL.121,cr0,0x2/gt,taken=50%(0,0)
+   94| 00043C or       7D1A4378   1     LR        gr26=gr8
+   94|                              CL.121:
+    0| 000440 extsw    7F4807B4   1     EXTS4     gr8=gr26
+   97| 000444 fcmpu    FC945800   1     CFL       cr1=qr20,qr11
+   95| 000448 std      F90100F0   1     ST8       #MX_CONVF1_4(gr1,240)=gr8
+   97| 00044C fcmpu    FF146000   1     CFL       cr6=qr20,qr12
+   97| 000450 lfd      CA860008   1     LFL       qr20=fftdata[].rns0.(gr6,8)
+   94| 000454 extsw    7CF807B4   1     EXTS4     gr24=gr7
+   94| 000458 addi     38E70001   1     AI        gr7=gr7,1
+   94| 00045C subf     7D00C050   1     S         gr8=gr24,gr0
+   94| 000460 cmpw     7C076000   1     C4        cr0=gr7,gr12
+   94| 000464 addi     3B480001   1     AI        gr26=gr8,1
+   95| 000468 lfd      CAA100F0   1     LFL       qr21=#MX_CONVF1_4(gr1,240)
+   95| 00046C fcfid    FEA0AE9C   1     FCFID     qr21=qr21,fcr
+   95| 000470 frsp     FEA0A818   2     CVLS      qr21=qr21,fcr
+   95| 000474 fadds    EEB5682A   1     AFS       qr21=qr21,qr13,fcr
+   95| 000478 fadds    EEB5502A   1     AFS       qr21=qr21,qr10,fcr
+   95| 00047C frsqrte  FEC0A834   1     FRSQRE    qr22=qr21
+   95| 000480 fnabs    FEE0A910   2     NABSFL    qr23=qr21
+   95| 000484 fmul     FF1505B2   2     MFL       qr24=qr21,qr22,fcr
+   95| 000488 fmadd    FF56163A   2     FMA       qr26=qr2,qr22,qr24,fcr
+   95| 00048C fmadd    FF3A20FA   2     FMA       qr25=qr4,qr26,qr3,fcr
+   95| 000490 fmadd    FF3A2E7A   2     FMA       qr25=qr5,qr26,qr25,fcr
+   95| 000494 fmul     FF3A0672   2     MFL       qr25=qr26,qr25,fcr
+   95| 000498 fmul     FF180672   2     MFL       qr24=qr24,qr25,fcr
+   95| 00049C fmadd    FED5C5BA   2     FMA       qr22=qr24,qr21,qr22,fcr
+   95| 0004A0 fsel     FEB7B56E   2     FSEL      qr21=qr23,qr22,qr21
+   95| 0004A4 frsp     FEA0A818   2     CVLS      qr21=qr21,fcr
+   95| 0004A8 fmul     FED50232   2     MFL       qr22=qr21,qr8,fcr
+   95| 0004AC fmsub    FEA7ADB8   2     FMS       qr21=qr21,qr7,qr22,fcr
+   95| 0004B0 fnmsub   FEA8B57C   2     FNMS      qr21=qr22,qr8,qr21,fcr
+   95| 0004B4 fmul     FEB503B2   2     MFL       qr21=qr21,qr14,fcr
+   97| 0004B8 fctiwz   FEA0A81E   2     FCTIWZ    qr21=qr21
+   97| 0004BC stfd     DAA10100   1     STFL      #MX_CONVF1_5(gr1,256)=qr21
+   97| 0004C0 lwa      E8C10106   1     L4A       gr6=#MX_CONVF1_5(gr1,260)
+   97| 0004C4 addi     38C60001   1     AI        gr6=gr6,1
+   97| 0004C8 extsw    7CC607B4   1     EXTS4     gr6=gr6
+   97| 0004CC rldicr   78C61F24   1     SLL8      gr6=gr6,3
+   97| 0004D0 lfdx     7EA534AE   1     LFL       qr21=pwspc(gr5,gr6,0)
+   97| 0004D4 bc       419D006C   1     BT        CL.122,cr7,0x40/fgt,taken=50%(0,0)
+   97| 0004D8 qvfmr    11805890   1     LRQV      qr12=qr11
+   97| 0004DC bc       418600C4   1     BT        CL.123,cr1,0x80/feq,taken=40%(40,60)
+   97| 0004E0 fmsub    FD2B0BF8   1     FMS       qr9=qr1,qr11,qr15,fcr
+   97| 0004E4 fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 0004E8 fmsub    FD8B0A78   2     FMS       qr12=qr1,qr11,qr9,fcr
+   97| 0004EC fnmsub   FD294B3C   2     FNMS      qr9=qr9,qr9,qr12,fcr
+   97| 0004F0 fmul     FD900272   2     MFL       qr12=qr16,qr9,fcr
+   97| 0004F4 fmsub    FDEB8338   2     FMS       qr15=qr16,qr11,qr12,fcr
+   97| 0004F8 fnmsub   FD2963FC   2     FNMS      qr9=qr12,qr9,qr15,fcr
+   97| 0004FC fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 000500 frsqrte  FD804834   2     FRSQRE    qr12=qr9
+   97| 000504 fnabs    FDE04910   2     NABSFL    qr15=qr9
+   97| 000508 fmul     FE090332   2     MFL       qr16=qr9,qr12,fcr
+   97| 00050C fmadd    FECC143A   2     FMA       qr22=qr2,qr12,qr16,fcr
+   97| 000510 fmadd    FE3620FA   2     FMA       qr17=qr4,qr22,qr3,fcr
+   97| 000514 fmadd    FE362C7A   2     FMA       qr17=qr5,qr22,qr17,fcr
+   97| 000518 fmul     FE360472   2     MFL       qr17=qr22,qr17,fcr
+   97| 00051C fmul     FE100472   2     MFL       qr16=qr16,qr17,fcr
+   97| 000520 fmadd    FE2C647A   2     FMA       qr17=qr12,qr12,qr17,fcr
+   97| 000524 fmadd    FD89833A   2     FMA       qr12=qr16,qr9,qr12,fcr
+   97| 000528 fmul     FE1101B2   2     MFL       qr16=qr17,qr6,fcr
+   97| 00052C fmsub    FE2C4B38   2     FMS       qr17=qr9,qr12,qr12,fcr
+   97| 000530 fnmsub   FD91643C   2     FNMS      qr12=qr12,qr17,qr16,fcr
+   97| 000534 fsel     FD2F626E   2     FSEL      qr9=qr15,qr12,qr9
+   97| 000538 fmul     FD8B0272   2     MFL       qr12=qr11,qr9,fcr
+    0| 00053C b        48000064   1     B         CL.123,-1
+   97|                              CL.122:
+   97| 000540 bc       419A0060   1     BT        CL.123,cr6,0x80/feq,taken=40%(40,60)
+   97| 000544 fmsub    FDE90C78   1     FMS       qr15=qr1,qr9,qr17,fcr
+   97| 000548 fnmsub   FDF18BFC   2     FNMS      qr15=qr17,qr17,qr15,fcr
+   97| 00054C fmsub    FD290BF8   2     FMS       qr9=qr1,qr9,qr15,fcr
+   97| 000550 fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 000554 fmul     FDEB0272   2     MFL       qr15=qr11,qr9,fcr
+   97| 000558 fmsub    FD6C5BF8   2     FMS       qr11=qr11,qr12,qr15,fcr
+   97| 00055C fnmsub   FD297AFC   2     FNMS      qr9=qr15,qr9,qr11,fcr
+   97| 000560 fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 000564 frsqrte  FD604834   2     FRSQRE    qr11=qr9
+   97| 000568 fnabs    FDE04910   2     NABSFL    qr15=qr9
+   97| 00056C fmul     FE0902F2   2     MFL       qr16=qr9,qr11,fcr
+   97| 000570 fmadd    FECB143A   2     FMA       qr22=qr2,qr11,qr16,fcr
+   97| 000574 fmadd    FE3620FA   2     FMA       qr17=qr4,qr22,qr3,fcr
+   97| 000578 fmadd    FE362C7A   2     FMA       qr17=qr5,qr22,qr17,fcr
+   97| 00057C fmul     FE360472   2     MFL       qr17=qr22,qr17,fcr
+   97| 000580 fmul     FE100472   2     MFL       qr16=qr16,qr17,fcr
+   97| 000584 fmadd    FE2B5C7A   2     FMA       qr17=qr11,qr11,qr17,fcr
+   97| 000588 fmadd    FD6982FA   2     FMA       qr11=qr16,qr9,qr11,fcr
+   97| 00058C fmul     FE1101B2   2     MFL       qr16=qr17,qr6,fcr
+   97| 000590 fmsub    FE2B4AF8   2     FMS       qr17=qr9,qr11,qr11,fcr
+   97| 000594 fnmsub   FD715C3C   2     FNMS      qr11=qr11,qr17,qr16,fcr
+   97| 000598 fsel     FD2F5A6E   2     FSEL      qr9=qr15,qr11,qr9
+   97| 00059C fmul     FD8C0272   2     MFL       qr12=qr12,qr9,fcr
+   97|                              CL.123:
+   97| 0005A0 fmadd    FE2CAB3A   1     FMA       qr17=qr21,qr12,qr12,fcr
+   97| 0005A4 qvfabs   11209210   1     QVFABS    qr9=qr18
+   97| 0005A8 qvfperm  1253A00C   1     QVFPERM   qr18=qr19,qr20,qr0
+   97| 0005AC qvaligni 11694A0A   1     QVALIGNI  qr11=qr9,qr9,1
+   97| 0005B0 qvfmr    11804890   1     LRQV      qr12=qr9
+   97| 0005B4 qvfre    11E05830   1     QVFRE     qr15=qr11
+   97| 0005B8 qvfmr    12004890   1     LRQV      qr16=qr9
+   97| 0005BC stfdx    7E2535AE   1     STFL      pwspc(gr5,gr6,0)=qr17
+   97| 0005C0 fadd     FE89582A   1     AFL       qr20=qr9,qr11,fcr
+   97| 0005C4 fcmpu    FF895800   2     CFL       cr7=qr9,qr11
+   97| 0005C8 qvfre    12204830   1     QVFRE     qr17=qr9
+    0|                              CL.128:
+   94| 0005CC mulld    7CDAD1D2   1     M         gr6=gr26,gr26
+   94| 0005D0 mulld    7D18C1D2   1     M         gr8=gr24,gr24
+   94| 0005D4 bc       40810008   1     BF        CL.125,cr0,0x2/gt,taken=50%(0,0)
+   94| 0005D8 or       7CC83378   1     LR        gr8=gr6
+   94|                              CL.125:
+    0| 0005DC extsw    7D0607B4   1     EXTS4     gr6=gr8
+   97| 0005E0 fcmpu    FC945800   1     CFL       cr1=qr20,qr11
+   95| 0005E4 std      F8C100F0   1     ST8       #MX_CONVF1_4(gr1,240)=gr6
+   97| 0005E8 fcmpu    FF146000   1     CFL       cr6=qr20,qr12
+   94| 0005EC extsw    7CF807B4   2     EXTS4     gr24=gr7
+   94| 0005F0 addi     38E70001   1     AI        gr7=gr7,1
+   94| 0005F4 subf     7CC0C050   1     S         gr6=gr24,gr0
+   94| 0005F8 cmpw     7C076000   1     C4        cr0=gr7,gr12
+   94| 0005FC addi     3B460001   1     AI        gr26=gr6,1
+   95| 000600 lfd      CA6100F0   1     LFL       qr19=#MX_CONVF1_4(gr1,240)
+   95| 000604 fcfid    FE609E9C   1     FCFID     qr19=qr19,fcr
+   95| 000608 frsp     FE609818   2     CVLS      qr19=qr19,fcr
+   95| 00060C fadds    EE73682A   1     AFS       qr19=qr19,qr13,fcr
+   95| 000610 fadds    EE73502A   1     AFS       qr19=qr19,qr10,fcr
+   95| 000614 frsqrte  FE809834   1     FRSQRE    qr20=qr19
+   95| 000618 fnabs    FEA09910   2     NABSFL    qr21=qr19
+   95| 00061C fmul     FED30532   2     MFL       qr22=qr19,qr20,fcr
+   95| 000620 fmadd    FF1415BA   2     FMA       qr24=qr2,qr20,qr22,fcr
+   95| 000624 fmadd    FEF820FA   2     FMA       qr23=qr4,qr24,qr3,fcr
+   95| 000628 fmadd    FEF82DFA   2     FMA       qr23=qr5,qr24,qr23,fcr
+   95| 00062C fmul     FEF805F2   2     MFL       qr23=qr24,qr23,fcr
+   95| 000630 fmul     FED605F2   2     MFL       qr22=qr22,qr23,fcr
+   95| 000634 fmadd    FE93B53A   2     FMA       qr20=qr22,qr19,qr20,fcr
+   95| 000638 fsel     FE75A4EE   2     FSEL      qr19=qr21,qr20,qr19
+   95| 00063C frsp     FE609818   2     CVLS      qr19=qr19,fcr
+   95| 000640 fmul     FE930232   2     MFL       qr20=qr19,qr8,fcr
+   95| 000644 fmsub    FE679D38   2     FMS       qr19=qr19,qr7,qr20,fcr
+   95| 000648 fnmsub   FE68A4FC   2     FNMS      qr19=qr20,qr8,qr19,fcr
+   95| 00064C fmul     FE7303B2   2     MFL       qr19=qr19,qr14,fcr
+   97| 000650 fctiwz   FE60981E   2     FCTIWZ    qr19=qr19
+   97| 000654 stfd     DA610100   1     STFL      #MX_CONVF1_5(gr1,256)=qr19
+   97| 000658 lwa      E8C10106   1     L4A       gr6=#MX_CONVF1_5(gr1,260)
+   97| 00065C addi     38C60001   1     AI        gr6=gr6,1
+   97| 000660 extsw    7CC607B4   1     EXTS4     gr6=gr6
+   97| 000664 rldicr   78C61F24   1     SLL8      gr6=gr6,3
+   97| 000668 lfdx     7E6534AE   1     LFL       qr19=pwspc(gr5,gr6,0)
+   97| 00066C bc       419D006C   1     BT        CL.126,cr7,0x40/fgt,taken=50%(0,0)
+   97| 000670 qvfmr    11805890   1     LRQV      qr12=qr11
+   97| 000674 bc       418600C4   1     BT        CL.127,cr1,0x80/feq,taken=40%(40,60)
+   97| 000678 fmsub    FD2B0BF8   1     FMS       qr9=qr1,qr11,qr15,fcr
+   97| 00067C fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 000680 fmsub    FD8B0A78   2     FMS       qr12=qr1,qr11,qr9,fcr
+   97| 000684 fnmsub   FD294B3C   2     FNMS      qr9=qr9,qr9,qr12,fcr
+   97| 000688 fmul     FD900272   2     MFL       qr12=qr16,qr9,fcr
+   97| 00068C fmsub    FDEB8338   2     FMS       qr15=qr16,qr11,qr12,fcr
+   97| 000690 fnmsub   FD2963FC   2     FNMS      qr9=qr12,qr9,qr15,fcr
+   97| 000694 fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 000698 frsqrte  FD804834   2     FRSQRE    qr12=qr9
+   97| 00069C fnabs    FDE04910   2     NABSFL    qr15=qr9
+   97| 0006A0 fmul     FE090332   2     MFL       qr16=qr9,qr12,fcr
+   97| 0006A4 fmadd    FE8C143A   2     FMA       qr20=qr2,qr12,qr16,fcr
+   97| 0006A8 fmadd    FE3420FA   2     FMA       qr17=qr4,qr20,qr3,fcr
+   97| 0006AC fmadd    FE342C7A   2     FMA       qr17=qr5,qr20,qr17,fcr
+   97| 0006B0 fmul     FE340472   2     MFL       qr17=qr20,qr17,fcr
+   97| 0006B4 fmul     FE100472   2     MFL       qr16=qr16,qr17,fcr
+   97| 0006B8 fmadd    FE2C647A   2     FMA       qr17=qr12,qr12,qr17,fcr
+   97| 0006BC fmadd    FD89833A   2     FMA       qr12=qr16,qr9,qr12,fcr
+   97| 0006C0 fmul     FE1101B2   2     MFL       qr16=qr17,qr6,fcr
+   97| 0006C4 fmsub    FE2C4B38   2     FMS       qr17=qr9,qr12,qr12,fcr
+   97| 0006C8 fnmsub   FD91643C   2     FNMS      qr12=qr12,qr17,qr16,fcr
+   97| 0006CC fsel     FD2F626E   2     FSEL      qr9=qr15,qr12,qr9
+   97| 0006D0 fmul     FD8B0272   2     MFL       qr12=qr11,qr9,fcr
+    0| 0006D4 b        48000064   1     B         CL.127,-1
+   97|                              CL.126:
+   97| 0006D8 bc       419A0060   1     BT        CL.127,cr6,0x80/feq,taken=40%(40,60)
+   97| 0006DC fmsub    FDE90C78   1     FMS       qr15=qr1,qr9,qr17,fcr
+   97| 0006E0 fnmsub   FDF18BFC   2     FNMS      qr15=qr17,qr17,qr15,fcr
+   97| 0006E4 fmsub    FD290BF8   2     FMS       qr9=qr1,qr9,qr15,fcr
+   97| 0006E8 fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 0006EC fmul     FDEB0272   2     MFL       qr15=qr11,qr9,fcr
+   97| 0006F0 fmsub    FD6C5BF8   2     FMS       qr11=qr11,qr12,qr15,fcr
+   97| 0006F4 fnmsub   FD297AFC   2     FNMS      qr9=qr15,qr9,qr11,fcr
+   97| 0006F8 fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 0006FC frsqrte  FD604834   2     FRSQRE    qr11=qr9
+   97| 000700 fnabs    FDE04910   2     NABSFL    qr15=qr9
+   97| 000704 fmul     FE0902F2   2     MFL       qr16=qr9,qr11,fcr
+   97| 000708 fmadd    FE8B143A   2     FMA       qr20=qr2,qr11,qr16,fcr
+   97| 00070C fmadd    FE3420FA   2     FMA       qr17=qr4,qr20,qr3,fcr
+   97| 000710 fmadd    FE342C7A   2     FMA       qr17=qr5,qr20,qr17,fcr
+   97| 000714 fmul     FE340472   2     MFL       qr17=qr20,qr17,fcr
+   97| 000718 fmul     FE100472   2     MFL       qr16=qr16,qr17,fcr
+   97| 00071C fmadd    FE2B5C7A   2     FMA       qr17=qr11,qr11,qr17,fcr
+   97| 000720 fmadd    FD6982FA   2     FMA       qr11=qr16,qr9,qr11,fcr
+   97| 000724 fmul     FE1101B2   2     MFL       qr16=qr17,qr6,fcr
+   97| 000728 fmsub    FE2B4AF8   2     FMS       qr17=qr9,qr11,qr11,fcr
+   97| 00072C fnmsub   FD715C3C   2     FNMS      qr11=qr11,qr17,qr16,fcr
+   97| 000730 fsel     FD2F5A6E   2     FSEL      qr9=qr15,qr11,qr9
+   97| 000734 fmul     FD8C0272   2     MFL       qr12=qr12,qr9,fcr
+   97|                              CL.127:
+   97| 000738 fmadd    FE2C9B3A   1     FMA       qr17=qr19,qr12,qr12,fcr
+   97| 00073C qvfabs   11209210   1     QVFABS    qr9=qr18
+   97| 000740 qvaligni 11694A0A   1     QVALIGNI  qr11=qr9,qr9,1
+   97| 000744 qvfmr    11804890   1     LRQV      qr12=qr9
+   97| 000748 qvfre    11E05830   1     QVFRE     qr15=qr11
+   97| 00074C qvfmr    12004890   1     LRQV      qr16=qr9
+   97| 000750 stfdx    7E2535AE   1     STFL      pwspc(gr5,gr6,0)=qr17
+   97| 000754 fadd     FE89582A   1     AFL       qr20=qr9,qr11,fcr
+   97| 000758 fcmpu    FF895800   2     CFL       cr7=qr9,qr11
+   97| 00075C qvfre    12204830   1     QVFRE     qr17=qr9
+    0|                              CL.132:
+   94| 000760 mulld    7CDAD1D2   1     M         gr6=gr26,gr26
+   94| 000764 mulld    7CF8C1D2   1     M         gr7=gr24,gr24
+   94| 000768 bc       40810008   1     BF        CL.129,cr0,0x2/gt,taken=50%(0,0)
+   94| 00076C or       7CC73378   1     LR        gr7=gr6
+   94|                              CL.129:
+    0| 000770 extsw    7CE607B4   1     EXTS4     gr6=gr7
+   97| 000774 fcmpu    FC145800   1     CFL       cr0=qr20,qr11
+   95| 000778 std      F8C100F0   1     ST8       #MX_CONVF1_4(gr1,240)=gr6
+   97| 00077C fcmpu    FC946000   1     CFL       cr1=qr20,qr12
+   95| 000780 lfd      CA4100F0   2     LFL       qr18=#MX_CONVF1_4(gr1,240)
+   95| 000784 fcfid    FE40969C   1     FCFID     qr18=qr18,fcr
+   95| 000788 frsp     FE409018   2     CVLS      qr18=qr18,fcr
+   95| 00078C fadds    EDB2682A   1     AFS       qr13=qr18,qr13,fcr
+   95| 000790 fadds    ED4D502A   1     AFS       qr10=qr13,qr10,fcr
+   95| 000794 frsqrte  FDA05034   1     FRSQRE    qr13=qr10
+   95| 000798 fnabs    FE405110   2     NABSFL    qr18=qr10
+   95| 00079C fmul     FE6A0372   2     MFL       qr19=qr10,qr13,fcr
+   95| 0007A0 fmadd    FEAD14FA   2     FMA       qr21=qr2,qr13,qr19,fcr
+   95| 0007A4 fmadd    FE9520FA   2     FMA       qr20=qr4,qr21,qr3,fcr
+   95| 0007A8 fmadd    FE952D3A   2     FMA       qr20=qr5,qr21,qr20,fcr
+   95| 0007AC fmul     FE950532   2     MFL       qr20=qr21,qr20,fcr
+   95| 0007B0 fmul     FE730532   2     MFL       qr19=qr19,qr20,fcr
+   95| 0007B4 fmadd    FDAA9B7A   2     FMA       qr13=qr19,qr10,qr13,fcr
+   95| 0007B8 fsel     FD526AAE   2     FSEL      qr10=qr18,qr13,qr10
+   95| 0007BC frsp     FD405018   2     CVLS      qr10=qr10,fcr
+   95| 0007C0 fmul     FDAA0232   2     MFL       qr13=qr10,qr8,fcr
+   95| 0007C4 fmsub    FD475378   2     FMS       qr10=qr10,qr7,qr13,fcr
+   95| 0007C8 fnmsub   FD486ABC   2     FNMS      qr10=qr13,qr8,qr10,fcr
+   95| 0007CC fmul     FD4A03B2   2     MFL       qr10=qr10,qr14,fcr
+   97| 0007D0 fctiwz   FD40501E   2     FCTIWZ    qr10=qr10
+   97| 0007D4 stfd     D9410100   1     STFL      #MX_CONVF1_5(gr1,256)=qr10
+   97| 0007D8 lwa      E8C10106   1     L4A       gr6=#MX_CONVF1_5(gr1,260)
+   97| 0007DC addi     38C60001   1     AI        gr6=gr6,1
+   97| 0007E0 extsw    7CC607B4   1     EXTS4     gr6=gr6
+   97| 0007E4 rldicr   78C61F24   1     SLL8      gr6=gr6,3
+   97| 0007E8 lfdx     7D4534AE   1     LFL       qr10=pwspc(gr5,gr6,0)
+   97| 0007EC bc       419D0110   1     BT        CL.130,cr7,0x40/fgt,taken=50%(0,0)
+   97| 0007F0 qvfmr    11805890   1     LRQV      qr12=qr11
+   97| 0007F4 bc       4182006C   1     BT        CL.131,cr0,0x80/feq,taken=40%(40,60)
+   97| 0007F8 fmsub    FD2B0BF8   1     FMS       qr9=qr1,qr11,qr15,fcr
+   97| 0007FC fnmsub   FD2F7A7C   2     FNMS      qr9=qr15,qr15,qr9,fcr
+   97| 000800 fmsub    FD8B0A78   2     FMS       qr12=qr1,qr11,qr9,fcr
+   97| 000804 fnmsub   FD294B3C   2     FNMS      qr9=qr9,qr9,qr12,fcr
+   97| 000808 fmul     FD900272   2     MFL       qr12=qr16,qr9,fcr
+   97| 00080C fmsub    FDAB8338   2     FMS       qr13=qr16,qr11,qr12,fcr
+   97| 000810 fnmsub   FD29637C   2     FNMS      qr9=qr12,qr9,qr13,fcr
+   97| 000814 fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 000818 frsqrte  FD804834   2     FRSQRE    qr12=qr9
+   97| 00081C fnabs    FDA04910   2     NABSFL    qr13=qr9
+   97| 000820 fmul     FDC90332   2     MFL       qr14=qr9,qr12,fcr
+   97| 000824 fmadd    FE0C13BA   2     FMA       qr16=qr2,qr12,qr14,fcr
+   97| 000828 fmadd    FDF020FA   2     FMA       qr15=qr4,qr16,qr3,fcr
+   97| 00082C fmadd    FDF02BFA   2     FMA       qr15=qr5,qr16,qr15,fcr
+   97| 000830 fmul     FDF003F2   2     MFL       qr15=qr16,qr15,fcr
+   97| 000834 fmul     FDCE03F2   2     MFL       qr14=qr14,qr15,fcr
+   97| 000838 fmadd    FDEC63FA   2     FMA       qr15=qr12,qr12,qr15,fcr
+   97| 00083C fmadd    FD89733A   2     FMA       qr12=qr14,qr9,qr12,fcr
+   97| 000840 fmul     FDCF01B2   2     MFL       qr14=qr15,qr6,fcr
+   97| 000844 fmsub    FDEC4B38   2     FMS       qr15=qr9,qr12,qr12,fcr
+   97| 000848 fnmsub   FD8F63BC   2     FNMS      qr12=qr12,qr15,qr14,fcr
+   97| 00084C fsel     FD2D626E   2     FSEL      qr9=qr13,qr12,qr9
+   97| 000850 fmul     FD8B0272   2     MFL       qr12=qr11,qr9,fcr
+    0| 000854 ori      60210000   2     XNOP      
+    0| 000858 ori      60210000   1     XNOP      
+    0| 00085C ori      60210000   1     XNOP      
+   97|                              CL.131:
+   97| 000860 fmadd    FD2C533A   1     FMA       qr9=qr10,qr12,qr12,fcr
+   99| 000864 cmpld    7C3B0040   1     CL8       cr0=gr27,gr0
+   99| 000868 or       7F67DB78   1     LR        gr7=gr27
+    0| 00086C add      7FAAEA14   1     A         gr29=gr10,gr29
+   97| 000870 stfdx    7D2535AE   1     STFL      pwspc(gr5,gr6,0)=qr9
+   99| 000874 bc       4180F95C   1     BT        CL.22,cr0,0x8/llt,taken=80%(80,20)
+  100| 000878 cmpld    7C230040   1     CL8       cr0=gr3,gr0
+    0| 00087C add      7D695A14   1     A         gr11=gr9,gr11
+  100| 000880 bc       4180F924   1     BT        CL.20,cr0,0x8/llt,taken=80%(80,20)
+  102|                              CL.47:
+  102| 000884 ld       E99F0010   1     L8        gr12=#stack(gr31,16)
+  102| 000888 or       7FE1FB78   1     LR        gr1=gr31
+  102| 00088C ld       EB1FFF30   1     L8        gr24=#stack(gr31,-208)
+  102| 000890 ld       EB3FFF38   1     L8        gr25=#stack(gr31,-200)
+  102| 000894 ld       EB5FFF40   1     L8        gr26=#stack(gr31,-192)
+  102| 000898 ld       EB7FFF48   1     L8        gr27=#stack(gr31,-184)
+  102| 00089C mtspr    7D8803A6   1     LLR       lr=gr12
+  102| 0008A0 ld       EB9FFF50   1     L8        gr28=#stack(gr31,-176)
+  102| 0008A4 ld       EBBFFF58   1     L8        gr29=#stack(gr31,-168)
+  102| 0008A8 ld       EBDFFF60   1     L8        gr30=#stack(gr31,-160)
+  102| 0008AC lfd      CBFFFFF8   1     LFL       qr31=#stack(gr31,-8)
+  102| 0008B0 lfd      CBDFFFF0   1     LFL       qr30=#stack(gr31,-16)
+  102| 0008B4 lfd      CBBFFFE8   1     LFL       qr29=#stack(gr31,-24)
+  102| 0008B8 lfd      CB9FFFE0   1     LFL       qr28=#stack(gr31,-32)
+  102| 0008BC lfd      CB7FFFD8   1     LFL       qr27=#stack(gr31,-40)
+  102| 0008C0 lfd      CB5FFFD0   1     LFL       qr26=#stack(gr31,-48)
+  102| 0008C4 lfd      CB3FFFC8   1     LFL       qr25=#stack(gr31,-56)
+  102| 0008C8 lfd      CB1FFFC0   1     LFL       qr24=#stack(gr31,-64)
+  102| 0008CC lfd      CAFFFFB8   1     LFL       qr23=#stack(gr31,-72)
+  102| 0008D0 lfd      CADFFFB0   1     LFL       qr22=#stack(gr31,-80)
+  102| 0008D4 lfd      CABFFFA8   1     LFL       qr21=#stack(gr31,-88)
+  102| 0008D8 lfd      CA9FFFA0   1     LFL       qr20=#stack(gr31,-96)
+  102| 0008DC lfd      CA7FFF98   1     LFL       qr19=#stack(gr31,-104)
+  102| 0008E0 lfd      CA5FFF90   1     LFL       qr18=#stack(gr31,-112)
+  102| 0008E4 lfd      CA3FFF88   1     LFL       qr17=#stack(gr31,-120)
+  102| 0008E8 lfd      CA1FFF80   1     LFL       qr16=#stack(gr31,-128)
+  102| 0008EC lfd      C9FFFF78   1     LFL       qr15=#stack(gr31,-136)
+  102| 0008F0 lfd      C9DFFF70   1     LFL       qr14=#stack(gr31,-144)
+  102| 0008F4 ld       EBE1FF68   1     L8        gr31=#stack(gr1,-152)
+  102| 0008F8 bclr     4E800020   1     BA        lr
+   97|                              CL.130:
+   97| 0008FC bc       4186FF64   1     BT        CL.131,cr1,0x80/feq,taken=40%(40,60)
+   97| 000900 fmsub    FDA90C78   1     FMS       qr13=qr1,qr9,qr17,fcr
+   97| 000904 fnmsub   FDB18B7C   2     FNMS      qr13=qr17,qr17,qr13,fcr
+   97| 000908 fmsub    FD290B78   2     FMS       qr9=qr1,qr9,qr13,fcr
+   97| 00090C fnmsub   FD2D6A7C   2     FNMS      qr9=qr13,qr13,qr9,fcr
+   97| 000910 fmul     FDAB0272   2     MFL       qr13=qr11,qr9,fcr
+   97| 000914 fmsub    FD6C5B78   2     FMS       qr11=qr11-qr13,fcr
+   97| 000918 fnmsub   FD296AFC   2     FNMS      qr9=qr13,qr9,qr11,fcr
+   97| 00091C fmadd    FD290A7A   2     FMA       qr9=qr1,qr9,qr9,fcr
+   97| 000920 frsqrte  FD604834   2     FRSQRE    qr11=qr9
+   97| 000924 fnabs    FDA04910   2     NABSFL    qr13=qr9
+   97| 000928 fmul     FDC902F2   2     MFL       qr14=qr9,qr11,fcr
+   97| 00092C fmadd    FE0B13BA   2     FMA       qr16=qr2,qr11,qr14,fcr
+   97| 000930 fmadd    FDF020FA   2     FMA       qr15=qr4,qr16,qr3,fcr
+   97| 000934 fmadd    FDF02BFA   2     FMA       qr15=qr5,qr16,qr15,fcr
+   97| 000938 fmul     FDF003F2   2     MFL       qr15=qr16,qr15,fcr
+   97| 00093C fmul     FDCE03F2   2     MFL       qr14=qr14,qr15,fcr
+   97| 000940 fmadd    FDEB5BFA   2     FMA       qr15=qr11,qr11,qr15,fcr
+   97| 000944 fmadd    FD6972FA   2     FMA       qr11=qr14,qr9,qr11,fcr
+   97| 000948 fmul     FDCF01B2   2     MFL       qr14=qr15,qr6,fcr
+   97| 00094C fmsub    FDEB4AF8   2     FMS       qr15=qr9,qr11,qr11,fcr
+   97| 000950 fnmsub   FD6F5BBC   2     FNMS      qr11=qr11,qr15,qr14,fcr
+   97| 000954 fsel     FD2D5A6E   2     FSEL      qr9=qr13,qr11,qr9
+   97| 000958 fmul     FD8C0272   2     MFL       qr12=qr12,qr9,fcr
+    0| 00095C b        4BFFFF04   1     B         CL.131,-1
+   77|                              CL.153:
+  102| 000960 ld       E99F0010   1     L8        gr12=#stack(gr31,16)
+  102| 000964 or       7FE1FB78   1     LR        gr1=gr31
+  102| 000968 ld       EB9FFF50   1     L8        gr28=#stack(gr31,-176)
+  102| 00096C ld       EBBFFF58   1     L8        gr29=#stack(gr31,-168)
+  102| 000970 ld       EBDFFF60   1     L8        gr30=#stack(gr31,-160)
+  102| 000974 lfd      CBFFFFF8   1     LFL       qr31=#stack(gr31,-8)
+  102| 000978 mtspr    7D8803A6   1     LLR       lr=gr12
+  102| 00097C lfd      CBDFFFF0   1     LFL       qr30=#stack(gr31,-16)
+  102| 000980 lfd      CBBFFFE8   1     LFL       qr29=#stack(gr31,-24)
+  102| 000984 lfd      CB9FFFE0   1     LFL       qr28=#stack(gr31,-32)
+  102| 000988 lfd      CB7FFFD8   1     LFL       qr27=#stack(gr31,-40)
+  102| 00098C lfd      CB5FFFD0   1     LFL       qr26=#stack(gr31,-48)
+  102| 000990 lfd      CB3FFFC8   1     LFL       qr25=#stack(gr31,-56)
+  102| 000994 lfd      CB1FFFC0   1     LFL       qr24=#stack(gr31,-64)
+  102| 000998 lfd      CAFFFFB8   1     LFL       qr23=#stack(gr31,-72)
+  102| 00099C lfd      CADFFFB0   1     LFL       qr22=#stack(gr31,-80)
+  102| 0009A0 lfd      CABFFFA8   1     LFL       qr21=#stack(gr31,-88)
+  102| 0009A4 lfd      CA9FFFA0   1     LFL       qr20=#stack(gr31,-96)
+  102| 0009A8 lfd      CA7FFF98   1     LFL       qr19=#stack(gr31,-104)
+  102| 0009AC lfd      CA5FFF90   1     LFL       qr18=#stack(gr31,-112)
+  102| 0009B0 lfd      CA3FFF88   1     LFL       qr17=#stack(gr31,-120)
+  102| 0009B4 lfd      CA1FFF80   1     LFL       qr16=#stack(gr31,-128)
+  102| 0009B8 lfd      C9FFFF78   1     LFL       qr15=#stack(gr31,-136)
+  102| 0009BC lfd      C9DFFF70   1     LFL       qr14=#stack(gr31,-144)
+  102| 0009C0 ld       EBE1FF68   1     L8        gr31=#stack(gr1,-152)
+  102| 0009C4 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 0009C8        00000000 00012201 92080000 000009C8
+     |               Instruction count          626
+     |               Straight-line exec time    879
+     |               Constant Area
+     | 000000        3FDDB3D7 BF800000 BEA00000 3EC00000 BF000000 3F800000
+     | 000018        3F000000
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    mk1dspc.f90                 07/08/15   15:48:53
+     1    ./fftw_f77.i                06/07/15   11:14:28      0      17
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     136
+1501-510  Compilation successful for file mk1dspc.f90.
+1501-543  Object file created.

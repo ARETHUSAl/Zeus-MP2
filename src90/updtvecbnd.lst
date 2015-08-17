@@ -1,0 +1,2035 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- updtvecbnd.f90 07/08/15 15:48:44
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** updt_vec_bnd_1   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+     6|         SUBROUTINE updt_vec_bnd_1 (isx, iex, isy, iey, isz, iez, x)
+     6|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+    21|           nelm = 1
+    27|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_2
+                  ENDIF
+    28|           nreq = nreq + 1
+    29|           T_2 = nsub + 15700
+                  CALL mpi_isend((x + ((-16) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(1) + (8)*(int(isx)) + (8)*(1)),nelm,ils_slice,&
+                &   n1m,T_2,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+    32|           lab_2
+    33|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_5
+                  ENDIF
+    34|           nreq = nreq + 1
+    35|           T_3 = nsub + 15700
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(1) + (8)*(int((iex + 1))) + (8)*(1)),&
+                &   nelm,ils_slice,n1p,T_3,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+    38|           lab_5
+    44|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_8
+                  ENDIF
+    45|           nreq = nreq + 1
+    46|           T_4 = nsub + 15800
+                  CALL mpi_isend((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(1) + (8)*(int(iex)) + (8)*(1)),nelm,&
+                &   ils_slice,n1p,T_4,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),&
+                &   ierr)
+    49|           lab_8
+    50|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_13
+                  ENDIF
+    51|           nreq = nreq + 1
+    52|           T_5 = nsub + 15800
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(1) + (8)*(int((isx - 1))) + (8)*(1)),&
+                &   nelm,ils_slice,n1m,T_5,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+    59|           lab_13
+                  RETURN
+                END SUBROUTINE updt_vec_bnd_1
+
+
+     6|         SUBROUTINE updt_vec_bnd_1 (isx, iex, isy, iey, isz, iez, x)
+     6|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+    21|           nelm = 1
+    27|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_2
+                  ENDIF
+    28|           nreq = nreq + 1
+    29|           T_2 = nsub + 15700
+                  CALL mpi_isend((x + ((-16) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(1) + (8)*(int(isx)) + (8)*(1)),nelm,ils_slice,&
+                &   n1m,T_2,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+    32|           lab_2
+    33|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_5
+                  ENDIF
+    34|           nreq = nreq + 1
+    35|           T_3 = nsub + 15700
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(1) + (8)*(int((iex + 1))) + (8)*(1)),&
+                &   nelm,ils_slice,n1p,T_3,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+    38|           lab_5
+    44|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_8
+                  ENDIF
+    45|           nreq = nreq + 1
+    46|           T_4 = nsub + 15800
+                  CALL mpi_isend((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(1) + (8)*(int(iex)) + (8)*(1)),nelm,&
+                &   ils_slice,n1p,T_4,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),&
+                &   ierr)
+    49|           lab_8
+    50|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_13
+                  ENDIF
+    51|           nreq = nreq + 1
+    52|           T_5 = nsub + 15800
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(1) + (8)*(int((isx - 1))) + (8)*(1)),&
+                &   nelm,ils_slice,n1m,T_5,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+    59|           lab_13
+                  RETURN
+                END SUBROUTINE updt_vec_bnd_1
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---- ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     updt_vec_bnd_1
+    6|                                  PROC      .isx,.iex,.isy,.iey,.isz,.iez,.x,gr3-gr9
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000014 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000018 stdu     F821FF41   1     ST8U      gr1,#stack(gr1,-192)=gr1
+   27| 00001C ld       EBE20000   1     L8        gr31=.&&N&&bndry(gr2,0)
+   21| 000020 addi     38000001   1     LI        gr0=1
+    0| 000024 or       7D3E4B78   1     LR        gr30=gr9
+   21| 000028 stw      90010080   1     ST4Z      nelm(gr1,128)=gr0
+    0| 00002C or       7C7D1B78   1     LR        gr29=gr3
+    0| 000030 or       7C9C2378   1     LR        gr28=gr4
+   27| 000034 lwz      80DF02A8   1     L4Z       gr6=<s32:d680:l4>(gr31,680)
+   28| 000038 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   29| 00003C ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+   29| 000040 addi     3809FFF8   1     AI        gr0=gr9,-8
+   29| 000044 addi     38E10084   1     AI        gr7=gr1,132
+   29| 000048 addi     38810080   1     AI        gr4=gr1,128
+   27| 00004C cmpdi    2C260000   1     C8        cr0=gr6,0
+   27| 000050 bc       41820020   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+   27| 000054 cmpwi    2C060004   1     C4        cr0=gr6,4
+   27| 000058 bc       41820018   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+   33| 00005C lwz      801F02B4   1     L4Z       gr0=<s32:d692:l4>(gr31,692)
+   33| 000060 cmpdi    2C200000   1     C8        cr0=gr0,0
+   33| 000064 cmpwi    2C800000   1     C4        cr1=gr0,0
+   33| 000068 bc       41820074   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0| 00006C b        48000060   1     B         CL.16,-1
+   27|                              CL.1:
+   28| 000070 lwz      81230018   1     L4Z       gr9=<s34:d24:l4>(gr3,24)
+   29| 000074 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+   29| 000078 lwa      E97D0002   1     L4A       gr11=isx(gr29,0)
+   29| 00007C addi     38A5176C   1     AI        gr5=gr5,5996
+   29| 000080 addi     39430014   1     AI        gr10=gr3,20
+   29| 000084 addi     39030020   1     AI        gr8=gr3,32
+   28| 000088 addi     39290001   1     AI        gr9=gr9,1
+   29| 00008C addi     38C63D54   1     AI        gr6=gr6,15700
+   28| 000090 stw      91230018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr9
+   29| 000094 extsw    7D2907B4   1     EXTS4     gr9=gr9
+   29| 000098 rldicr   796B1F24   1     SLL8      gr11=gr11,3
+   29| 00009C rldicr   79291764   1     SLL8      gr9=gr9,2
+   29| 0000A0 stw      90C10084   1     ST4Z      T_2(gr1,132)=gr6
+   29| 0000A4 addi     38C30024   1     AI        gr6=gr3,36
+   29| 0000A8 add      7D254A14   1     A         gr9=gr5,gr9
+   29| 0000AC addi     38A30048   1     AI        gr5=gr3,72
+   29| 0000B0 add      7C605A14   1     A         gr3=gr0,gr11
+   29| 0000B4 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,ils_slice",gr5,n1m",gr6,T_2",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   29| 0000B8 ori      60000000   1
+   33| 0000BC lwz      801F02B4   1     L4Z       gr0=<s32:d692:l4>(gr31,692)
+   33| 0000C0 cmpdi    2C200000   1     C8        cr0=gr0,0
+   33| 0000C4 cmpwi    2C800000   1     C4        cr1=gr0,0
+   33| 0000C8 bc       41820014   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.16:
+   33| 0000CC cmpwi    2C000004   1     C4        cr0=gr0,4
+   33| 0000D0 bc       4182000C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+   44| 0000D4 bc       41860094   1     BT        CL.7,cr1,0x4/eq,taken=40%(40,60)
+    0| 0000D8 b        48000078   1     B         CL.18,-1
+   33|                              CL.4:
+   34| 0000DC ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   35| 0000E0 lwz      80BC0000   1     L4Z       gr5=iex(gr28,0)
+   35| 0000E4 ld       E9220000   1     L8        gr9=.&&N&&mpiyes(gr2,0)
+   35| 0000E8 addi     381EFFF8   1     AI        gr0=gr30,-8
+   35| 0000EC addi     38E10088   1     AI        gr7=gr1,136
+   35| 0000F0 addi     38810080   1     AI        gr4=gr1,128
+   34| 0000F4 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+   35| 0000F8 lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+   35| 0000FC addi     39450001   1     AI        gr10=gr5,1
+   35| 000100 addi     38A9176C   1     AI        gr5=gr9,5996
+   35| 000104 extsw    7D4907B4   1     EXTS4     gr9=gr10
+   35| 000108 addi     39430014   1     AI        gr10=gr3,20
+   34| 00010C addi     38C60001   1     AI        gr6=gr6,1
+   35| 000110 addi     39083D54   1     AI        gr8=gr8,15700
+   34| 000114 stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+   35| 000118 extsw    7CC607B4   1     EXTS4     gr6=gr6
+   35| 00011C rldicr   792B1F24   1     SLL8      gr11=gr9,3
+   35| 000120 rldicr   78C61764   1     SLL8      gr6=gr6,2
+   35| 000124 stw      91010088   1     ST4Z      T_3(gr1,136)=gr8
+   35| 000128 addi     39030020   1     AI        gr8=gr3,32
+   35| 00012C add      7D253214   1     A         gr9=gr5,gr6
+   35| 000130 addi     38C30028   1     AI        gr6=gr3,40
+   35| 000134 addi     38A30048   1     AI        gr5=gr3,72
+   35| 000138 add      7C605A14   1     A         gr3=gr0,gr11
+   35| 00013C bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,ils_slice",gr5,n1p",gr6,T_3",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   35| 000140 ori      60000000   1
+    0| 000144 lwa      E81F02B6   1     L4A       gr0=<s32:d692:l4>(gr31,692)
+    0| 000148 cmpwi    2C000000   1     C4        cr0=gr0,0
+   44| 00014C bc       4182001C   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.18:
+   44| 000150 cmpwi    2C000004   1     C4        cr0=gr0,4
+   44| 000154 bc       41820014   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+   50| 000158 lwz      801F02A8   1     L4Z       gr0=<s32:d680:l4>(gr31,680)
+   50| 00015C cmpdi    2C200000   1     C8        cr0=gr0,0
+   50| 000160 bc       4182009C   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0| 000164 b        48000070   1     B         CL.20,-1
+   44|                              CL.7:
+   45| 000168 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   46| 00016C lwa      E91C0002   1     L4A       gr8=iex(gr28,0)
+   46| 000170 ld       E9220000   1     L8        gr9=.&&N&&mpiyes(gr2,0)
+   46| 000174 addi     381EFFF8   1     AI        gr0=gr30,-8
+   46| 000178 addi     38E1008C   1     AI        gr7=gr1,140
+   46| 00017C addi     38810080   1     AI        gr4=gr1,128
+   45| 000180 lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+   46| 000184 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+   46| 000188 addi     3989176C   1     AI        gr12=gr9,5996
+   46| 00018C rldicr   790B1F24   1     SLL8      gr11=gr8,3
+   46| 000190 addi     39430014   1     AI        gr10=gr3,20
+   46| 000194 addi     39030020   1     AI        gr8=gr3,32
+   45| 000198 addi     38A50001   1     AI        gr5=gr5,1
+   46| 00019C addi     38C63DB8   1     AI        gr6=gr6,15800
+   45| 0001A0 stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+   46| 0001A4 extsw    7CA507B4   1     EXTS4     gr5=gr5
+   46| 0001A8 stw      90C1008C   1     ST4Z      T_4(gr1,140)=gr6
+   46| 0001AC rldicr   78A91764   1     SLL8      gr9=gr5,2
+   46| 0001B0 addi     38C30028   1     AI        gr6=gr3,40
+   46| 0001B4 addi     38A30048   1     AI        gr5=gr3,72
+   46| 0001B8 add      7D296214   1     A         gr9=gr9,gr12
+   46| 0001BC add      7C605A14   1     A         gr3=gr0,gr11
+   46| 0001C0 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,ils_slice",gr5,n1p",gr6,T_4",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   46| 0001C4 ori      60000000   1
+   50| 0001C8 lwz      801F02A8   1     L4Z       gr0=<s32:d680:l4>(gr31,680)
+   50| 0001CC cmpdi    2C200000   1     C8        cr0=gr0,0
+   50| 0001D0 bc       4182002C   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0|                              CL.20:
+   50| 0001D4 cmpwi    2C000004   1     C4        cr0=gr0,4
+   50| 0001D8 bc       41820024   1     BT        CL.10,cr0,0x4/eq,taken=40%(40,60)
+   59|                              CL.14:
+   59| 0001DC ld       E98100D0   1     L8        gr12=#stack(gr1,208)
+   59| 0001E0 addi     382100C0   1     AI        gr1=gr1,192
+   59| 0001E4 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+   59| 0001E8 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+   59| 0001EC ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+   59| 0001F0 mtspr    7D8803A6   1     LLR       lr=gr12
+   59| 0001F4 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+   59| 0001F8 bclr     4E800020   1     BA        lr
+   50|                              CL.10:
+   51| 0001FC ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   52| 000200 lwz      80BD0000   1     L4Z       gr5=isx(gr29,0)
+   52| 000204 ld       E8C20000   1     L8        gr6=.&&N&&mpiyes(gr2,0)
+   52| 000208 addi     381EFFF8   1     AI        gr0=gr30,-8
+   52| 00020C addi     38E10090   1     AI        gr7=gr1,144
+   52| 000210 addi     38810080   1     AI        gr4=gr1,128
+   51| 000214 lwz      81030018   1     L4Z       gr8=<s34:d24:l4>(gr3,24)
+   52| 000218 lwz      8123001C   1     L4Z       gr9=<s34:d28:l4>(gr3,28)
+   52| 00021C addi     3945FFFF   1     AI        gr10=gr5,-1
+   52| 000220 addi     38A6176C   1     AI        gr5=gr6,5996
+   52| 000224 extsw    7D4607B4   1     EXTS4     gr6=gr10
+   52| 000228 addi     39430014   1     AI        gr10=gr3,20
+   51| 00022C addi     39080001   1     AI        gr8=gr8,1
+   52| 000230 addi     39293DB8   1     AI        gr9=gr9,15800
+   51| 000234 stw      91030018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr8
+   52| 000238 extsw    7D0807B4   1     EXTS4     gr8=gr8
+   52| 00023C rldicr   78CB1F24   1     SLL8      gr11=gr6,3
+   52| 000240 rldicr   79061764   1     SLL8      gr6=gr8,2
+   52| 000244 stw      91210090   1     ST4Z      T_5(gr1,144)=gr9
+   52| 000248 addi     39030020   1     AI        gr8=gr3,32
+   52| 00024C add      7D253214   1     A         gr9=gr5,gr6
+   52| 000250 addi     38C30024   1     AI        gr6=gr3,36
+   52| 000254 addi     38A30048   1     AI        gr5=gr3,72
+   52| 000258 add      7C605A14   1     A         gr3=gr0,gr11
+   52| 00025C bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,ils_slice",gr5,n1m",gr6,T_5",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   52| 000260 ori      60000000   1
+    0| 000264 b        4BFFFF78   1     B         CL.14,-1
+     |               Tag Table
+     | 000268        00000000 00012001 80040000 00000268
+     |               Instruction count          154
+     |               Straight-line exec time    154
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** updt_vec_bnd_2   === End of Compilation 2 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+    61|         SUBROUTINE updt_vec_bnd_2 (isx, iex, isy, iey, isz, iez, x)
+    61|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+    76|           nelm = 1
+    82|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_2
+                  ENDIF
+    83|           nreq = nreq + 1
+    84|           T_7 = nsub + 15900
+                  CALL mpi_isend((x + ((-16) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(int(isy)) + (8)*(1) + (8)*(1)),nelm,jls_slice,&
+                &   n2m,T_7,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+    87|           lab_2
+    88|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_5
+                  ENDIF
+    89|           nreq = nreq + 1
+    90|           T_8 = nsub + 15900
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(int((iey + 1))) + (8)*(1) + (8)*(1)),&
+                &   nelm,jls_slice,n2p,T_8,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+    93|           lab_5
+    99|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_8
+                  ENDIF
+   100|           nreq = nreq + 1
+   101|           T_9 = nsub + 16000
+                  CALL mpi_isend((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(int(iey)) + (8)*(1) + (8)*(1)),nelm,&
+                &   jls_slice,n2p,T_9,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),&
+                &   ierr)
+   104|           lab_8
+   105|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_13
+                  ENDIF
+   106|           nreq = nreq + 1
+   107|           T_10 = nsub + 16000
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(int((isy - 1))) + (8)*(1) + (8)*(1)),&
+                &   nelm,jls_slice,n2m,T_10,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+   113|           lab_13
+                  RETURN
+                END SUBROUTINE updt_vec_bnd_2
+
+
+    61|         SUBROUTINE updt_vec_bnd_2 (isx, iex, isy, iey, isz, iez, x)
+    61|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+    76|           nelm = 1
+    82|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_2
+                  ENDIF
+    83|           nreq = nreq + 1
+    84|           T_7 = nsub + 15900
+                  CALL mpi_isend((x + ((-16) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(int(isy)) + (8)*(1) + (8)*(1)),nelm,jls_slice,&
+                &   n2m,T_7,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+    87|           lab_2
+    88|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_5
+                  ENDIF
+    89|           nreq = nreq + 1
+    90|           T_8 = nsub + 15900
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(int((iey + 1))) + (8)*(1) + (8)*(1)),&
+                &   nelm,jls_slice,n2p,T_8,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+    93|           lab_5
+    99|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_8
+                  ENDIF
+   100|           nreq = nreq + 1
+   101|           T_9 = nsub + 16000
+                  CALL mpi_isend((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(int(iey)) + (8)*(1) + (8)*(1)),nelm,&
+                &   jls_slice,n2p,T_9,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),&
+                &   ierr)
+   104|           lab_8
+   105|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_13
+                  ENDIF
+   106|           nreq = nreq + 1
+   107|           T_10 = nsub + 16000
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(1) + (%VAL(#4))*(int((isy - 1))) + (8)*(1) + (8)*(1)),&
+                &   nelm,jls_slice,n2m,T_10,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+   113|           lab_13
+                  RETURN
+                END SUBROUTINE updt_vec_bnd_2
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---s ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     updt_vec_bnd_2
+   61|                                  PROC      .isx,.iex,.isy,.iey,.isz,.iez,.x,gr3-gr9
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000018 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 00001C stdu     F821FF21   1     ST8U      gr1,#stack(gr1,-224)=gr1
+    0| 000020 ld       E8620000   1     L8        gr3=.&&N&&param(gr2,0)
+   82| 000024 ld       EBE20000   1     L8        gr31=.&&N&&bndry(gr2,0)
+   76| 000028 addi     38000001   1     LI        gr0=1
+    0| 00002C or       7CBE2B78   1     LR        gr30=gr5
+   76| 000030 stw      90010080   1     ST4Z      nelm(gr1,128)=gr0
+    0| 000034 or       7D3D4B78   1     LR        gr29=gr9
+    0| 000038 lwa      E8830002   1     L4A       gr4=<s16:d0:l4>(gr3,0)
+   82| 00003C lwz      801F02C0   1     L4Z       gr0=<s32:d704:l4>(gr31,704)
+    0| 000040 or       7CDC3378   1     LR        gr28=gr6
+   83| 000044 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   84| 000048 ld       E9220000   1     L8        gr9=.&&N&&mpiyes(gr2,0)
+   84| 00004C addi     38E10084   1     AI        gr7=gr1,132
+    0| 000050 sradi    7C85FE76   1     SRA8      gr5=gr4,63,ca"
+   82| 000054 cmpdi    2C200000   1     C8        cr0=gr0,0
+    0| 000058 andc     7C852878   1     ANDC      gr5=gr4,gr5
+   84| 00005C addi     38810080   1     AI        gr4=gr1,128
+    0| 000060 rldicr   78BB1F24   1     SLL8      gr27=gr5,3
+   82| 000064 bc       41820020   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+   82| 000068 cmpwi    2C000004   1     C4        cr0=gr0,4
+   82| 00006C bc       41820018   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+   88| 000070 lwz      801F02CC   1     L4Z       gr0=<s32:d716:l4>(gr31,716)
+   88| 000074 cmpdi    2C200000   1     C8        cr0=gr0,0
+   88| 000078 cmpwi    2C800000   1     C4        cr1=gr0,0
+   88| 00007C bc       41820078   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0| 000080 b        48000064   1     B         CL.16,-1
+   82|                              CL.1:
+   84| 000084 lwa      E91E0002   1     L4A       gr8=isy(gr30,0)
+   83| 000088 lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+   84| 00008C lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+   84| 000090 addi     3929176C   1     AI        gr9=gr9,5996
+   84| 000094 subf     7C1BE850   1     S         gr0=gr29,gr27
+   84| 000098 addi     39430014   1     AI        gr10=gr3,20
+   84| 00009C mulld    7D68D9D2   1     M         gr11=gr8,gr27
+   83| 0000A0 addi     38A50001   1     AI        gr5=gr5,1
+   84| 0000A4 addi     38C63E1C   1     AI        gr6=gr6,15900
+   83| 0000A8 stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+   84| 0000AC extsw    7CA507B4   1     EXTS4     gr5=gr5
+   84| 0000B0 stw      90C10084   1     ST4Z      T_7(gr1,132)=gr6
+   84| 0000B4 rldicr   78A51764   1     SLL8      gr5=gr5,2
+   84| 0000B8 addi     39030020   1     AI        gr8=gr3,32
+   84| 0000BC add      7D292A14   1     A         gr9=gr9,gr5
+   84| 0000C0 addi     38C3002C   1     AI        gr6=gr3,44
+   84| 0000C4 addi     38A3004C   1     AI        gr5=gr3,76
+   84| 0000C8 add      7C605A14   1     A         gr3=gr0,gr11
+   84| 0000CC bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,jls_slice",gr5,n2m",gr6,T_7",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   84| 0000D0 ori      60000000   1
+   88| 0000D4 lwz      801F02CC   1     L4Z       gr0=<s32:d716:l4>(gr31,716)
+   88| 0000D8 cmpdi    2C200000   1     C8        cr0=gr0,0
+   88| 0000DC cmpwi    2C800000   1     C4        cr1=gr0,0
+   88| 0000E0 bc       41820014   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.16:
+   88| 0000E4 cmpwi    2C000004   1     C4        cr0=gr0,4
+   88| 0000E8 bc       4182000C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+   99| 0000EC bc       41860094   1     BT        CL.7,cr1,0x4/eq,taken=40%(40,60)
+    0| 0000F0 b        48000078   1     B         CL.18,-1
+   88|                              CL.4:
+   90| 0000F4 lwz      80DC0000   1     L4Z       gr6=iey(gr28,0)
+   89| 0000F8 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+   90| 0000FC ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+   90| 000100 subf     7C1BE850   1     S         gr0=gr29,gr27
+   90| 000104 addi     38E10088   1     AI        gr7=gr1,136
+   90| 000108 addi     38810080   1     AI        gr4=gr1,128
+   90| 00010C addi     39060001   1     AI        gr8=gr6,1
+   89| 000110 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+   90| 000114 extsw    7D0907B4   1     EXTS4     gr9=gr8
+   90| 000118 lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+   90| 00011C mulld    7D69D9D2   1     M         gr11=gr9,gr27
+   89| 000120 addi     38C60001   1     AI        gr6=gr6,1
+   90| 000124 addi     38A5176C   1     AI        gr5=gr5,5996
+   89| 000128 stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+   90| 00012C extsw    7CC607B4   1     EXTS4     gr6=gr6
+   90| 000130 addi     39083E1C   1     AI        gr8=gr8,15900
+   90| 000134 rldicr   78C61764   1     SLL8      gr6=gr6,2
+   90| 000138 stw      91010088   1     ST4Z      T_8(gr1,136)=gr8
+   90| 00013C addi     39430014   1     AI        gr10=gr3,20
+   90| 000140 add      7D253214   1     A         gr9=gr5,gr6
+   90| 000144 addi     39030020   1     AI        gr8=gr3,32
+   90| 000148 addi     38C30030   1     AI        gr6=gr3,48
+   90| 00014C addi     38A3004C   1     AI        gr5=gr3,76
+   90| 000150 add      7C605A14   1     A         gr3=gr0,gr11
+   90| 000154 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,jls_slice",gr5,n2p",gr6,T_8",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   90| 000158 ori      60000000   1
+    0| 00015C lwa      E81F02CE   1     L4A       gr0=<s32:d716:l4>(gr31,716)
+    0| 000160 cmpwi    2C000000   1     C4        cr0=gr0,0
+   99| 000164 bc       4182001C   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.18:
+   99| 000168 cmpwi    2C000004   1     C4        cr0=gr0,4
+   99| 00016C bc       41820014   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+  105| 000170 lwz      801F02C0   1     L4Z       gr0=<s32:d704:l4>(gr31,704)
+  105| 000174 cmpdi    2C200000   1     C8        cr0=gr0,0
+  105| 000178 bc       418200A0   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0| 00017C b        48000070   1     B         CL.20,-1
+   99|                              CL.7:
+  100| 000180 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  101| 000184 lwa      E93C0002   1     L4A       gr9=iey(gr28,0)
+  101| 000188 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  101| 00018C subf     7C1BE850   1     S         gr0=gr29,gr27
+  101| 000190 addi     38E1008C   1     AI        gr7=gr1,140
+  101| 000194 addi     38810080   1     AI        gr4=gr1,128
+  100| 000198 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  101| 00019C lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  101| 0001A0 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  100| 0001A4 addi     38C60001   1     AI        gr6=gr6,1
+  101| 0001A8 addi     39083E80   1     AI        gr8=gr8,16000
+  100| 0001AC stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  101| 0001B0 extsw    7CC607B4   1     EXTS4     gr6=gr6
+  101| 0001B4 addi     38A5176C   1     AI        gr5=gr5,5996
+  101| 0001B8 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  101| 0001BC stw      9101008C   1     ST4Z      T_9(gr1,140)=gr8
+  101| 0001C0 addi     39430014   1     AI        gr10=gr3,20
+  101| 0001C4 add      7D253214   1     A         gr9=gr5,gr6
+  101| 0001C8 addi     39030020   1     AI        gr8=gr3,32
+  101| 0001CC addi     38C30030   1     AI        gr6=gr3,48
+  101| 0001D0 addi     38A3004C   1     AI        gr5=gr3,76
+  101| 0001D4 add      7C605A14   1     A         gr3=gr0,gr11
+  101| 0001D8 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,jls_slice",gr5,n2p",gr6,T_9",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  101| 0001DC ori      60000000   1
+  105| 0001E0 lwz      801F02C0   1     L4Z       gr0=<s32:d704:l4>(gr31,704)
+  105| 0001E4 cmpdi    2C200000   1     C8        cr0=gr0,0
+  105| 0001E8 bc       41820030   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0|                              CL.20:
+  105| 0001EC cmpwi    2C000004   1     C4        cr0=gr0,4
+  105| 0001F0 bc       41820028   1     BT        CL.10,cr0,0x4/eq,taken=40%(40,60)
+  113|                              CL.14:
+  113| 0001F4 ld       E98100F0   1     L8        gr12=#stack(gr1,240)
+  113| 0001F8 addi     382100E0   1     AI        gr1=gr1,224
+  113| 0001FC ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+  113| 000200 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  113| 000204 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  113| 000208 mtspr    7D8803A6   1     LLR       lr=gr12
+  113| 00020C ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  113| 000210 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  113| 000214 bclr     4E800020   1     BA        lr
+  105|                              CL.10:
+  107| 000218 lwz      80DE0000   1     L4Z       gr6=isy(gr30,0)
+  106| 00021C ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  107| 000220 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  107| 000224 subf     7C1BE850   1     S         gr0=gr29,gr27
+  107| 000228 addi     38E10090   1     AI        gr7=gr1,144
+  107| 00022C addi     38810080   1     AI        gr4=gr1,128
+  107| 000230 addi     3906FFFF   1     AI        gr8=gr6,-1
+  106| 000234 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  107| 000238 extsw    7D0907B4   1     EXTS4     gr9=gr8
+  107| 00023C lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  107| 000240 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  106| 000244 addi     38C60001   1     AI        gr6=gr6,1
+  107| 000248 addi     38A5176C   1     AI        gr5=gr5,5996
+  106| 00024C stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  107| 000250 extsw    7CC607B4   1     EXTS4     gr6=gr6
+  107| 000254 addi     39083E80   1     AI        gr8=gr8,16000
+  107| 000258 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  107| 00025C stw      91010090   1     ST4Z      T_10(gr1,144)=gr8
+  107| 000260 addi     39430014   1     AI        gr10=gr3,20
+  107| 000264 add      7D253214   1     A         gr9=gr5,gr6
+  107| 000268 addi     39030020   1     AI        gr8=gr3,32
+  107| 00026C addi     38C3002C   1     AI        gr6=gr3,44
+  107| 000270 addi     38A3004C   1     AI        gr5=gr3,76
+  107| 000274 add      7C605A14   1     A         gr3=gr0,gr11
+  107| 000278 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,jls_slice",gr5,n2m",gr6,T_10",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  107| 00027C ori      60000000   1
+    0| 000280 b        4BFFFF74   1     B         CL.14,-1
+     |               Tag Table
+     | 000284        00000000 00012001 80050000 00000284
+     |               Instruction count          161
+     |               Straight-line exec time    161
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** updt_vec_bnd_3   === End of Compilation 3 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   115|         SUBROUTINE updt_vec_bnd_3 (isx, iex, isy, iey, isz, iez, x)
+   115|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   130|           nelm = 1
+   136|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_2
+                  ENDIF
+   137|           nreq = nreq + 1
+   138|           T_12 = nsub + 16100
+                  CALL mpi_isend((x + ((-16) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(int(iez)) + (max(&
+                &   int(%VAL(in)),0) * 8)*(1) + (8)*(1) + (8)*(1)),nelm,kls_slice,&
+                &   n3p,T_12,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   141|           lab_2
+   142|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_5
+                  ENDIF
+   143|           nreq = nreq + 1
+   144|           T_13 = nsub + 16100
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(int((isz - 1))) + (%VAL(#4))*(1) + (8)*(1) + (8)*(1)),&
+                &   nelm,kls_slice,n3m,T_13,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+   147|           lab_5
+   153|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_8
+                  ENDIF
+   154|           nreq = nreq + 1
+   155|           T_14 = nsub + 16200
+                  CALL mpi_isend((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(int(isz)) + (%VAL(#4))*(1) + (8)*(1) + (8)*(1)),nelm,&
+                &   kls_slice,n3m,T_14,comm3d,(req + (-4) + (4)*(int(%VAL(nreq))))&
+                &   ,ierr)
+   158|           lab_8
+   159|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_13
+                  ENDIF
+   160|           nreq = nreq + 1
+   161|           T_15 = nsub + 16200
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(int((iez + 1))) + (%VAL(#4))*(1) + (8)*(1) + (8)*(1)),&
+                &   nelm,kls_slice,n3p,T_15,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+   167|           lab_13
+                  RETURN
+                END SUBROUTINE updt_vec_bnd_3
+
+
+   115|         SUBROUTINE updt_vec_bnd_3 (isx, iex, isy, iey, isz, iez, x)
+   115|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   130|           nelm = 1
+   136|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_2
+                  ENDIF
+   137|           nreq = nreq + 1
+   138|           T_12 = nsub + 16100
+                  CALL mpi_isend((x + ((-16) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(int(iez)) + (max(&
+                &   int(%VAL(in)),0) * 8)*(1) + (8)*(1) + (8)*(1)),nelm,kls_slice,&
+                &   n3p,T_12,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   141|           lab_2
+   142|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_5
+                  ENDIF
+   143|           nreq = nreq + 1
+   144|           T_13 = nsub + 16100
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(int((isz - 1))) + (%VAL(#4))*(1) + (8)*(1) + (8)*(1)),&
+                &   nelm,kls_slice,n3m,T_13,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+   147|           lab_5
+   153|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_8
+                  ENDIF
+   154|           nreq = nreq + 1
+   155|           T_14 = nsub + 16200
+                  CALL mpi_isend((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(int(isz)) + (%VAL(#4))*(1) + (8)*(1) + (8)*(1)),nelm,&
+                &   kls_slice,n3m,T_14,comm3d,(req + (-4) + (4)*(int(%VAL(nreq))))&
+                &   ,ierr)
+   158|           lab_8
+   159|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_13
+                  ENDIF
+   160|           nreq = nreq + 1
+   161|           T_15 = nsub + 16200
+                  CALL mpi_irecv((x + ((-16) - (%VAL(#5) + %VAL(#4))) + (%VAL(&
+                &   #5))*(int((iez + 1))) + (%VAL(#4))*(1) + (8)*(1) + (8)*(1)),&
+                &   nelm,kls_slice,n3p,T_15,comm3d,(req + (-4) + (4)*(int(%VAL(&
+                &   nreq)))),ierr)
+   167|           lab_13
+                  RETURN
+                END SUBROUTINE updt_vec_bnd_3
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---s ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     updt_vec_bnd_3
+  115|                                  PROC      .isx,.iex,.isy,.iey,.isz,.iez,.x,gr3-gr9
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000018 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 00001C stdu     F821FF21   1     ST8U      gr1,#stack(gr1,-224)=gr1
+    0| 000020 ld       E8620000   1     L8        gr3=.&&N&&param(gr2,0)
+  130| 000024 addi     38000001   1     LI        gr0=1
+  136| 000028 ld       EBE20000   1     L8        gr31=.&&N&&bndry(gr2,0)
+  130| 00002C stw      90010080   1     ST4Z      nelm(gr1,128)=gr0
+    0| 000030 or       7D1E4378   1     LR        gr30=gr8
+    0| 000034 or       7CFC3B78   1     LR        gr28=gr7
+    0| 000038 lwa      E8030002   1     L4A       gr0=<s16:d0:l4>(gr3,0)
+    0| 00003C lwa      E8A30006   1     L4A       gr5=<s16:d4:l4>(gr3,4)
+  136| 000040 lwz      80DF02E4   1     L4Z       gr6=<s32:d740:l4>(gr31,740)
+    0| 000044 or       7D3D4B78   1     LR        gr29=gr9
+  137| 000048 ld       E8820000   1     L8        gr4=.&&N&&mpipar(gr2,0)
+  138| 00004C ld       E8620000   1     L8        gr3=.&&N&&mpiyes(gr2,0)
+    0| 000050 sradi    7C07FE76   1     SRA8      gr7=gr0,63,ca"
+    0| 000054 sradi    7CA8FE76   1     SRA8      gr8=gr5,63,ca"
+    0| 000058 andc     7C073878   1     ANDC      gr7=gr0,gr7
+    0| 00005C andc     7CA04078   1     ANDC      gr0=gr5,gr8
+    0| 000060 mulld    7D0039D2   1     M         gr8=gr0,gr7
+  136| 000064 cmpdi    2C260000   1     C8        cr0=gr6,0
+    0| 000068 rldicr   78E51F24   1     SLL8      gr5=gr7,3
+    0| 00006C rldicr   791B1F24   1     SLL8      gr27=gr8,3
+  136| 000070 bc       41820020   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  136| 000074 cmpwi    2C060004   1     C4        cr0=gr6,4
+  136| 000078 bc       41820018   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  142| 00007C lwz      801F02D8   1     L4Z       gr0=<s32:d728:l4>(gr31,728)
+  142| 000080 cmpdi    2C200000   1     C8        cr0=gr0,0
+  142| 000084 cmpwi    2C800000   1     C4        cr1=gr0,0
+  142| 000088 bc       4182008C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0| 00008C b        48000078   1     B         CL.16,-1
+  136|                              CL.1:
+  138| 000090 lwa      E8FE0002   1     L4A       gr7=iez(gr30,0)
+  138| 000094 mulld    7D2029D2   1     M         gr9=gr0,gr5
+  137| 000098 lwz      80C40018   1     L4Z       gr6=<s34:d24:l4>(gr4,24)
+  138| 00009C neg      7D0500D0   1     COMP      gr8=gr5
+  138| 0000A0 lwz      80A4001C   1     L4Z       gr5=<s34:d28:l4>(gr4,28)
+  138| 0000A4 mulld    7CE749D2   1     M         gr7=gr7,gr9
+  137| 0000A8 addi     38C60001   1     AI        gr6=gr6,1
+  138| 0000AC mulld    7C0041D2   1     M         gr0=gr0,gr8
+  137| 0000B0 stw      90C40018   1     ST4Z      <s34:d24:l4>(gr4,24)=gr6
+  138| 0000B4 extsw    7CC607B4   1     EXTS4     gr6=gr6
+  138| 0000B8 addi     39053EE4   1     AI        gr8=gr5,16100
+  138| 0000BC rldicr   78C51764   1     SLL8      gr5=gr6,2
+  138| 0000C0 addi     38C3176C   1     AI        gr6=gr3,5996
+  138| 0000C4 add      7C67EA14   1     A         gr3=gr7,gr29
+  138| 0000C8 stw      91010084   1     ST4Z      T_12(gr1,132)=gr8
+  138| 0000CC addi     39440014   1     AI        gr10=gr4,20
+  138| 0000D0 add      7D253214   1     A         gr9=gr5,gr6
+  138| 0000D4 addi     39040020   1     AI        gr8=gr4,32
+  138| 0000D8 addi     38E10084   1     AI        gr7=gr1,132
+  138| 0000DC addi     38C40038   1     AI        gr6=gr4,56
+  138| 0000E0 addi     38A40050   1     AI        gr5=gr4,80
+  138| 0000E4 addi     38810080   1     AI        gr4=gr1,128
+  138| 0000E8 add      7C630214   1     A         gr3=gr3,gr0
+  138| 0000EC bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,kls_slice",gr5,n3p",gr6,T_12",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  138| 0000F0 ori      60000000   1
+  142| 0000F4 lwz      801F02D8   1     L4Z       gr0=<s32:d728:l4>(gr31,728)
+  142| 0000F8 cmpdi    2C200000   1     C8        cr0=gr0,0
+  142| 0000FC cmpwi    2C800000   1     C4        cr1=gr0,0
+  142| 000100 bc       41820014   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.16:
+  142| 000104 cmpwi    2C000004   1     C4        cr0=gr0,4
+  142| 000108 bc       4182000C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+  153| 00010C bc       41860094   1     BT        CL.7,cr1,0x4/eq,taken=40%(40,60)
+    0| 000110 b        48000078   1     B         CL.18,-1
+  142|                              CL.4:
+  144| 000114 lwz      80DC0000   1     L4Z       gr6=isz(gr28,0)
+  143| 000118 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  144| 00011C ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  144| 000120 subf     7C1BE850   1     S         gr0=gr29,gr27
+  144| 000124 addi     38E10088   1     AI        gr7=gr1,136
+  144| 000128 addi     38810080   1     AI        gr4=gr1,128
+  144| 00012C addi     3906FFFF   1     AI        gr8=gr6,-1
+  143| 000130 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  144| 000134 extsw    7D0907B4   1     EXTS4     gr9=gr8
+  144| 000138 lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  144| 00013C mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  143| 000140 addi     38C60001   1     AI        gr6=gr6,1
+  144| 000144 addi     38A5176C   1     AI        gr5=gr5,5996
+  143| 000148 stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  144| 00014C extsw    7CC607B4   1     EXTS4     gr6=gr6
+  144| 000150 addi     39083EE4   1     AI        gr8=gr8,16100
+  144| 000154 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  144| 000158 stw      91010088   1     ST4Z      T_13(gr1,136)=gr8
+  144| 00015C addi     39430014   1     AI        gr10=gr3,20
+  144| 000160 add      7D253214   1     A         gr9=gr5,gr6
+  144| 000164 addi     39030020   1     AI        gr8=gr3,32
+  144| 000168 addi     38C30034   1     AI        gr6=gr3,52
+  144| 00016C addi     38A30050   1     AI        gr5=gr3,80
+  144| 000170 add      7C605A14   1     A         gr3=gr0,gr11
+  144| 000174 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,kls_slice",gr5,n3m",gr6,T_13",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  144| 000178 ori      60000000   1
+    0| 00017C lwa      E81F02DA   1     L4A       gr0=<s32:d728:l4>(gr31,728)
+    0| 000180 cmpwi    2C000000   1     C4        cr0=gr0,0
+  153| 000184 bc       4182001C   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.18:
+  153| 000188 cmpwi    2C000004   1     C4        cr0=gr0,4
+  153| 00018C bc       41820014   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+  159| 000190 lwz      801F02E4   1     L4Z       gr0=<s32:d740:l4>(gr31,740)
+  159| 000194 cmpdi    2C200000   1     C8        cr0=gr0,0
+  159| 000198 bc       418200A0   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0| 00019C b        48000070   1     B         CL.20,-1
+  153|                              CL.7:
+  154| 0001A0 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  155| 0001A4 lwa      E93C0002   1     L4A       gr9=isz(gr28,0)
+  155| 0001A8 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  155| 0001AC subf     7C1BE850   1     S         gr0=gr29,gr27
+  155| 0001B0 addi     38E1008C   1     AI        gr7=gr1,140
+  155| 0001B4 addi     38810080   1     AI        gr4=gr1,128
+  154| 0001B8 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  155| 0001BC lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  155| 0001C0 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  154| 0001C4 addi     38C60001   1     AI        gr6=gr6,1
+  155| 0001C8 addi     39083F48   1     AI        gr8=gr8,16200
+  154| 0001CC stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  155| 0001D0 extsw    7CC607B4   1     EXTS4     gr6=gr6
+  155| 0001D4 addi     38A5176C   1     AI        gr5=gr5,5996
+  155| 0001D8 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  155| 0001DC stw      9101008C   1     ST4Z      T_14(gr1,140)=gr8
+  155| 0001E0 addi     39430014   1     AI        gr10=gr3,20
+  155| 0001E4 add      7D253214   1     A         gr9=gr5,gr6
+  155| 0001E8 addi     39030020   1     AI        gr8=gr3,32
+  155| 0001EC addi     38C30034   1     AI        gr6=gr3,52
+  155| 0001F0 addi     38A30050   1     AI        gr5=gr3,80
+  155| 0001F4 add      7C605A14   1     A         gr3=gr0,gr11
+  155| 0001F8 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,kls_slice",gr5,n3m",gr6,T_14",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  155| 0001FC ori      60000000   1
+  159| 000200 lwz      801F02E4   1     L4Z       gr0=<s32:d740:l4>(gr31,740)
+  159| 000204 cmpdi    2C200000   1     C8        cr0=gr0,0
+  159| 000208 bc       41820030   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0|                              CL.20:
+  159| 00020C cmpwi    2C000004   1     C4        cr0=gr0,4
+  159| 000210 bc       41820028   1     BT        CL.10,cr0,0x4/eq,taken=40%(40,60)
+  167|                              CL.14:
+  167| 000214 ld       E98100F0   1     L8        gr12=#stack(gr1,240)
+  167| 000218 addi     382100E0   1     AI        gr1=gr1,224
+  167| 00021C ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+  167| 000220 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  167| 000224 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  167| 000228 mtspr    7D8803A6   1     LLR       lr=gr12
+  167| 00022C ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  167| 000230 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  167| 000234 bclr     4E800020   1     BA        lr
+  159|                              CL.10:
+  161| 000238 lwz      80DE0000   1     L4Z       gr6=iez(gr30,0)
+  160| 00023C ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  161| 000240 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  161| 000244 subf     7C1BE850   1     S         gr0=gr29,gr27
+  161| 000248 addi     38E10090   1     AI        gr7=gr1,144
+  161| 00024C addi     38810080   1     AI        gr4=gr1,128
+  161| 000250 addi     39060001   1     AI        gr8=gr6,1
+  160| 000254 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  161| 000258 extsw    7D0907B4   1     EXTS4     gr9=gr8
+  161| 00025C lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  161| 000260 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  160| 000264 addi     38C60001   1     AI        gr6=gr6,1
+  161| 000268 addi     38A5176C   1     AI        gr5=gr5,5996
+  160| 00026C stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  161| 000270 extsw    7CC607B4   1     EXTS4     gr6=gr6
+  161| 000274 addi     39083F48   1     AI        gr8=gr8,16200
+  161| 000278 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  161| 00027C stw      91010090   1     ST4Z      T_15(gr1,144)=gr8
+  161| 000280 addi     39430014   1     AI        gr10=gr3,20
+  161| 000284 add      7D253214   1     A         gr9=gr5,gr6
+  161| 000288 addi     39030020   1     AI        gr8=gr3,32
+  161| 00028C addi     38C30038   1     AI        gr6=gr3,56
+  161| 000290 addi     38A30050   1     AI        gr5=gr3,80
+  161| 000294 add      7C605A14   1     A         gr3=gr0,gr11
+  161| 000298 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,kls_slice",gr5,n3p",gr6,T_15",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  161| 00029C ori      60000000   1
+    0| 0002A0 b        4BFFFF74   1     B         CL.14,-1
+     |               Tag Table
+     | 0002A4        00000000 00012001 80050000 000002A4
+     |               Instruction count          169
+     |               Straight-line exec time    169
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** updt_gp_bnd_1   === End of Compilation 4 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   173|         SUBROUTINE updt_gp_bnd_1 (isx, iex, isy, iey, isz, iez, x)
+   173|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   188|           nelm = 1
+   194|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_2
+                  ENDIF
+   195|           nreq = nreq + 1
+   196|           T_17 = nsub * 25 + 14000
+                  CALL mpi_isend((x + ((-8) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(1) + (8)*(int(isx))),nelm,i_slice,n1m,T_17,&
+                &   comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   199|           lab_2
+   200|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_5
+                  ENDIF
+   201|           nreq = nreq + 1
+   202|           T_18 = nsub * 25 + 14000
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(1) + (8)*(int((iex + 1)))),nelm,i_slice,&
+                &   n1p,T_18,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   205|           lab_5
+   211|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_8
+                  ENDIF
+   212|           nreq = nreq + 1
+   213|           T_19 = nsub * 25 + 14100
+                  CALL mpi_isend((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(1) + (8)*(int(iex))),nelm,i_slice,n1p,&
+                &   T_19,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   216|           lab_8
+   217|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_13
+                  ENDIF
+   218|           nreq = nreq + 1
+   219|           T_20 = nsub * 25 + 14100
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(1) + (8)*(int((isx - 1)))),nelm,i_slice,&
+                &   n1m,T_20,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   226|           lab_13
+                  RETURN
+                END SUBROUTINE updt_gp_bnd_1
+
+
+   173|         SUBROUTINE updt_gp_bnd_1 (isx, iex, isy, iey, isz, iez, x)
+   173|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   188|           nelm = 1
+   194|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_2
+                  ENDIF
+   195|           nreq = nreq + 1
+   196|           T_17 = nsub * 25 + 14000
+                  CALL mpi_isend((x + ((-8) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(1) + (8)*(int(isx))),nelm,i_slice,n1m,T_17,&
+                &   comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   199|           lab_2
+   200|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_5
+                  ENDIF
+   201|           nreq = nreq + 1
+   202|           T_18 = nsub * 25 + 14000
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(1) + (8)*(int((iex + 1)))),nelm,i_slice,&
+                &   n1p,T_18,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   205|           lab_5
+   211|           IF (.NOT.nois[].off692 == 0) THEN
+                    IF (.NOT.(nois[].off692 == 4)) GOTO lab_8
+                  ENDIF
+   212|           nreq = nreq + 1
+   213|           T_19 = nsub * 25 + 14100
+                  CALL mpi_isend((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(1) + (8)*(int(iex))),nelm,i_slice,n1p,&
+                &   T_19,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   216|           lab_8
+   217|           IF (.NOT.niis[].off680 == 0) THEN
+                    IF (.NOT.(niis[].off680 == 4)) GOTO lab_13
+                  ENDIF
+   218|           nreq = nreq + 1
+   219|           T_20 = nsub * 25 + 14100
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(1) + (8)*(int((isx - 1)))),nelm,i_slice,&
+                &   n1m,T_20,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   226|           lab_13
+                  RETURN
+                END SUBROUTINE updt_gp_bnd_1
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---- ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     updt_gp_bnd_1
+  173|                                  PROC      .isx,.iex,.isy,.iey,.isz,.iez,.x,gr3-gr9
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000014 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000018 stdu     F821FF41   1     ST8U      gr1,#stack(gr1,-192)=gr1
+  194| 00001C ld       EBE20000   1     L8        gr31=.&&N&&bndry(gr2,0)
+  188| 000020 addi     38000001   1     LI        gr0=1
+    0| 000024 or       7D3E4B78   1     LR        gr30=gr9
+  188| 000028 stw      90010080   1     ST4Z      nelm(gr1,128)=gr0
+    0| 00002C or       7C7D1B78   1     LR        gr29=gr3
+    0| 000030 or       7C9C2378   1     LR        gr28=gr4
+  194| 000034 lwz      80BF02A8   1     L4Z       gr5=<s32:d680:l4>(gr31,680)
+  195| 000038 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  196| 00003C ld       E9020000   1     L8        gr8=.&&N&&mpiyes(gr2,0)
+  196| 000040 addi     3809FFF8   1     AI        gr0=gr9,-8
+  196| 000044 addi     38E10084   1     AI        gr7=gr1,132
+  196| 000048 addi     38810080   1     AI        gr4=gr1,128
+  194| 00004C cmpdi    2C250000   1     C8        cr0=gr5,0
+  194| 000050 bc       41820020   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  194| 000054 cmpwi    2C050004   1     C4        cr0=gr5,4
+  194| 000058 bc       41820018   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  200| 00005C lwz      801F02B4   1     L4Z       gr0=<s32:d692:l4>(gr31,692)
+  200| 000060 cmpdi    2C200000   1     C8        cr0=gr0,0
+  200| 000064 cmpwi    2C800000   1     C4        cr1=gr0,0
+  200| 000068 bc       41820084   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0| 00006C b        48000070   1     B         CL.16,-1
+  194|                              CL.1:
+  196| 000070 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+  195| 000074 lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+  196| 000078 lwa      E93D0002   1     L4A       gr9=isx(gr29,0)
+  196| 00007C addi     3968176C   1     AI        gr11=gr8,5996
+  196| 000080 addi     39430014   1     AI        gr10=gr3,20
+  196| 000084 addi     39030020   1     AI        gr8=gr3,32
+  196| 000088 rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  195| 00008C addi     38A50001   1     AI        gr5=gr5,1
+  196| 000090 add      7CC66214   1     A         gr6=gr6,gr12
+  195| 000094 stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+  196| 000098 rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  196| 00009C extsw    7CA507B4   1     EXTS4     gr5=gr5
+  196| 0000A0 add      7CC66214   1     A         gr6=gr6,gr12
+  196| 0000A4 rldicr   78A51764   1     SLL8      gr5=gr5,2
+  196| 0000A8 rldicr   792C1F24   1     SLL8      gr12=gr9,3
+  196| 0000AC addi     38C636B0   1     AI        gr6=gr6,14000
+  196| 0000B0 add      7D255A14   1     A         gr9=gr5,gr11
+  196| 0000B4 stw      90C10084   1     ST4Z      T_17(gr1,132)=gr6
+  196| 0000B8 addi     38C30024   1     AI        gr6=gr3,36
+  196| 0000BC addi     38A3003C   1     AI        gr5=gr3,60
+  196| 0000C0 add      7C606214   1     A         gr3=gr0,gr12
+  196| 0000C4 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,i_slice",gr5,n1m",gr6,T_17",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  196| 0000C8 ori      60000000   1
+  200| 0000CC lwz      801F02B4   1     L4Z       gr0=<s32:d692:l4>(gr31,692)
+  200| 0000D0 cmpdi    2C200000   1     C8        cr0=gr0,0
+  200| 0000D4 cmpwi    2C800000   1     C4        cr1=gr0,0
+  200| 0000D8 bc       41820014   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.16:
+  200| 0000DC cmpwi    2C000004   1     C4        cr0=gr0,4
+  200| 0000E0 bc       4182000C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+  211| 0000E4 bc       418600A4   1     BT        CL.7,cr1,0x4/eq,taken=40%(40,60)
+    0| 0000E8 b        48000088   1     B         CL.18,-1
+  200|                              CL.4:
+  201| 0000EC ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  202| 0000F0 lwz      80DC0000   1     L4Z       gr6=iex(gr28,0)
+  202| 0000F4 ld       E9020000   1     L8        gr8=.&&N&&mpiyes(gr2,0)
+  202| 0000F8 addi     397EFFF8   1     AI        gr11=gr30,-8
+  202| 0000FC addi     38E10088   1     AI        gr7=gr1,136
+  202| 000100 addi     38810080   1     AI        gr4=gr1,128
+  202| 000104 lwz      8003001C   1     L4Z       gr0=<s34:d28:l4>(gr3,28)
+  202| 000108 addi     39260001   1     AI        gr9=gr6,1
+  201| 00010C lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+  202| 000110 addi     38C8176C   1     AI        gr6=gr8,5996
+  202| 000114 extsw    7D2807B4   1     EXTS4     gr8=gr9
+  202| 000118 addi     39430014   1     AI        gr10=gr3,20
+  202| 00011C rldicr   78091764   1     SLL8      gr9=gr0,2
+  202| 000120 add      7C004A14   1     A         gr0=gr0,gr9
+  201| 000124 addi     38A50001   1     AI        gr5=gr5,1
+  202| 000128 rldicr   78091764   1     SLL8      gr9=gr0,2
+  201| 00012C stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+  202| 000130 extsw    7CA507B4   1     EXTS4     gr5=gr5
+  202| 000134 add      7D204A14   1     A         gr9=gr0,gr9
+  202| 000138 rldicr   78A51764   1     SLL8      gr5=gr5,2
+  202| 00013C rldicr   79001F24   1     SLL8      gr0=gr8,3
+  202| 000140 addi     390936B0   1     AI        gr8=gr9,14000
+  202| 000144 add      7D253214   1     A         gr9=gr5,gr6
+  202| 000148 stw      91010088   1     ST4Z      T_18(gr1,136)=gr8
+  202| 00014C addi     39030020   1     AI        gr8=gr3,32
+  202| 000150 addi     38C30028   1     AI        gr6=gr3,40
+  202| 000154 addi     38A3003C   1     AI        gr5=gr3,60
+  202| 000158 add      7C605A14   1     A         gr3=gr0,gr11
+  202| 00015C bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,i_slice",gr5,n1p",gr6,T_18",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  202| 000160 ori      60000000   1
+    0| 000164 lwa      E81F02B6   1     L4A       gr0=<s32:d692:l4>(gr31,692)
+    0| 000168 cmpwi    2C000000   1     C4        cr0=gr0,0
+  211| 00016C bc       4182001C   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.18:
+  211| 000170 cmpwi    2C000004   1     C4        cr0=gr0,4
+  211| 000174 bc       41820014   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+  217| 000178 lwz      801F02A8   1     L4Z       gr0=<s32:d680:l4>(gr31,680)
+  217| 00017C cmpdi    2C200000   1     C8        cr0=gr0,0
+  217| 000180 bc       418200AC   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0| 000184 b        48000080   1     B         CL.20,-1
+  211|                              CL.7:
+  212| 000188 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  213| 00018C lwa      E91C0002   1     L4A       gr8=iex(gr28,0)
+  213| 000190 ld       E9220000   1     L8        gr9=.&&N&&mpiyes(gr2,0)
+  213| 000194 addi     381EFFF8   1     AI        gr0=gr30,-8
+  213| 000198 addi     38E1008C   1     AI        gr7=gr1,140
+  213| 00019C addi     38810080   1     AI        gr4=gr1,128
+  213| 0001A0 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+  212| 0001A4 lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+  213| 0001A8 addi     3929176C   1     AI        gr9=gr9,5996
+  213| 0001AC rldicr   790B1F24   1     SLL8      gr11=gr8,3
+  213| 0001B0 addi     39430014   1     AI        gr10=gr3,20
+  213| 0001B4 addi     39030020   1     AI        gr8=gr3,32
+  213| 0001B8 rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  212| 0001BC addi     38A50001   1     AI        gr5=gr5,1
+  213| 0001C0 add      7CC66214   1     A         gr6=gr6,gr12
+  212| 0001C4 stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+  213| 0001C8 rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  213| 0001CC extsw    7CA507B4   1     EXTS4     gr5=gr5
+  213| 0001D0 add      7CC66214   1     A         gr6=gr6,gr12
+  213| 0001D4 rldicr   78A51764   1     SLL8      gr5=gr5,2
+  213| 0001D8 addi     38C63714   1     AI        gr6=gr6,14100
+  213| 0001DC add      7D254A14   1     A         gr9=gr5,gr9
+  213| 0001E0 stw      90C1008C   1     ST4Z      T_19(gr1,140)=gr6
+  213| 0001E4 addi     38C30028   1     AI        gr6=gr3,40
+  213| 0001E8 addi     38A3003C   1     AI        gr5=gr3,60
+  213| 0001EC add      7C605A14   1     A         gr3=gr0,gr11
+  213| 0001F0 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,i_slice",gr5,n1p",gr6,T_19",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  213| 0001F4 ori      60000000   1
+  217| 0001F8 lwz      801F02A8   1     L4Z       gr0=<s32:d680:l4>(gr31,680)
+  217| 0001FC cmpdi    2C200000   1     C8        cr0=gr0,0
+  217| 000200 bc       4182002C   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0|                              CL.20:
+  217| 000204 cmpwi    2C000004   1     C4        cr0=gr0,4
+  217| 000208 bc       41820024   1     BT        CL.10,cr0,0x4/eq,taken=40%(40,60)
+  226|                              CL.14:
+  226| 00020C ld       E98100D0   1     L8        gr12=#stack(gr1,208)
+  226| 000210 addi     382100C0   1     AI        gr1=gr1,192
+  226| 000214 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  226| 000218 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  226| 00021C ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  226| 000220 mtspr    7D8803A6   1     LLR       lr=gr12
+  226| 000224 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  226| 000228 bclr     4E800020   1     BA        lr
+  217|                              CL.10:
+  218| 00022C ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  219| 000230 lwz      80DD0000   1     L4Z       gr6=isx(gr29,0)
+  219| 000234 ld       E9020000   1     L8        gr8=.&&N&&mpiyes(gr2,0)
+  219| 000238 addi     397EFFF8   1     AI        gr11=gr30,-8
+  219| 00023C addi     38E10090   1     AI        gr7=gr1,144
+  219| 000240 addi     38810080   1     AI        gr4=gr1,128
+  219| 000244 lwz      8003001C   1     L4Z       gr0=<s34:d28:l4>(gr3,28)
+  219| 000248 addi     3926FFFF   1     AI        gr9=gr6,-1
+  218| 00024C lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+  219| 000250 addi     38C8176C   1     AI        gr6=gr8,5996
+  219| 000254 extsw    7D2807B4   1     EXTS4     gr8=gr9
+  219| 000258 addi     39430014   1     AI        gr10=gr3,20
+  219| 00025C rldicr   78091764   1     SLL8      gr9=gr0,2
+  219| 000260 add      7C004A14   1     A         gr0=gr0,gr9
+  218| 000264 addi     38A50001   1     AI        gr5=gr5,1
+  219| 000268 rldicr   78091764   1     SLL8      gr9=gr0,2
+  218| 00026C stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+  219| 000270 extsw    7CA507B4   1     EXTS4     gr5=gr5
+  219| 000274 add      7D204A14   1     A         gr9=gr0,gr9
+  219| 000278 rldicr   78A51764   1     SLL8      gr5=gr5,2
+  219| 00027C rldicr   79001F24   1     SLL8      gr0=gr8,3
+  219| 000280 addi     39093714   1     AI        gr8=gr9,14100
+  219| 000284 add      7D253214   1     A         gr9=gr5,gr6
+  219| 000288 stw      91010090   1     ST4Z      T_20(gr1,144)=gr8
+  219| 00028C addi     39030020   1     AI        gr8=gr3,32
+  219| 000290 addi     38C30024   1     AI        gr6=gr3,36
+  219| 000294 addi     38A3003C   1     AI        gr5=gr3,60
+  219| 000298 add      7C605A14   1     A         gr3=gr0,gr11
+  219| 00029C bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,i_slice",gr5,n1m",gr6,T_20",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  219| 0002A0 ori      60000000   1
+    0| 0002A4 b        4BFFFF68   1     B         CL.14,-1
+     |               Tag Table
+     | 0002A8        00000000 00012001 80040000 000002A8
+     |               Instruction count          170
+     |               Straight-line exec time    170
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** updt_gp_bnd_2   === End of Compilation 5 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   228|         SUBROUTINE updt_gp_bnd_2 (isx, iex, isy, iey, isz, iez, x)
+   228|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   243|           nelm = 1
+   249|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_2
+                  ENDIF
+   250|           nreq = nreq + 1
+   251|           T_22 = nsub * 25 + 14200
+                  CALL mpi_isend((x + ((-8) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(int(isy)) + (8)*(1)),nelm,j_slice,n2m,T_22,&
+                &   comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   254|           lab_2
+   255|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_5
+                  ENDIF
+   256|           nreq = nreq + 1
+   257|           T_23 = nsub * 25 + 14200
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(int((iey + 1))) + (8)*(1)),nelm,j_slice,&
+                &   n2p,T_23,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   260|           lab_5
+   266|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_8
+                  ENDIF
+   267|           nreq = nreq + 1
+   268|           T_24 = nsub * 25 + 14300
+                  CALL mpi_isend((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(int(iey)) + (8)*(1)),nelm,j_slice,n2p,&
+                &   T_24,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   271|           lab_8
+   272|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_13
+                  ENDIF
+   273|           nreq = nreq + 1
+   274|           T_25 = nsub * 25 + 14300
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(int((isy - 1))) + (8)*(1)),nelm,j_slice,&
+                &   n2m,T_25,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   280|           lab_13
+                  RETURN
+                END SUBROUTINE updt_gp_bnd_2
+
+
+   228|         SUBROUTINE updt_gp_bnd_2 (isx, iex, isy, iey, isz, iez, x)
+   228|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   243|           nelm = 1
+   249|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_2
+                  ENDIF
+   250|           nreq = nreq + 1
+   251|           T_22 = nsub * 25 + 14200
+                  CALL mpi_isend((x + ((-8) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(1) + (max(int(%VAL(&
+                &   in)),0) * 8)*(int(isy)) + (8)*(1)),nelm,j_slice,n2m,T_22,&
+                &   comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   254|           lab_2
+   255|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_5
+                  ENDIF
+   256|           nreq = nreq + 1
+   257|           T_23 = nsub * 25 + 14200
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(int((iey + 1))) + (8)*(1)),nelm,j_slice,&
+                &   n2p,T_23,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   260|           lab_5
+   266|           IF (.NOT.nojs[].off716 == 0) THEN
+                    IF (.NOT.(nojs[].off716 == 4)) GOTO lab_8
+                  ENDIF
+   267|           nreq = nreq + 1
+   268|           T_24 = nsub * 25 + 14300
+                  CALL mpi_isend((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(int(iey)) + (8)*(1)),nelm,j_slice,n2p,&
+                &   T_24,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   271|           lab_8
+   272|           IF (.NOT.nijs[].off704 == 0) THEN
+                    IF (.NOT.(nijs[].off704 == 4)) GOTO lab_13
+                  ENDIF
+   273|           nreq = nreq + 1
+   274|           T_25 = nsub * 25 + 14300
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(1) + (%VAL(#4))*(int((isy - 1))) + (8)*(1)),nelm,j_slice,&
+                &   n2m,T_25,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   280|           lab_13
+                  RETURN
+                END SUBROUTINE updt_gp_bnd_2
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---s ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     updt_gp_bnd_2
+  228|                                  PROC      .isx,.iex,.isy,.iey,.isz,.iez,.x,gr3-gr9
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000018 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 00001C stdu     F821FF21   1     ST8U      gr1,#stack(gr1,-224)=gr1
+    0| 000020 ld       E8620000   1     L8        gr3=.&&N&&param(gr2,0)
+  249| 000024 ld       EBE20000   1     L8        gr31=.&&N&&bndry(gr2,0)
+  243| 000028 addi     38000001   1     LI        gr0=1
+    0| 00002C or       7CDC3378   1     LR        gr28=gr6
+  243| 000030 stw      90010080   1     ST4Z      nelm(gr1,128)=gr0
+    0| 000034 or       7CBE2B78   1     LR        gr30=gr5
+    0| 000038 lwa      E8830002   1     L4A       gr4=<s16:d0:l4>(gr3,0)
+  249| 00003C lwz      801F02C0   1     L4Z       gr0=<s32:d704:l4>(gr31,704)
+    0| 000040 or       7D3D4B78   1     LR        gr29=gr9
+  250| 000044 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  251| 000048 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  251| 00004C addi     38E10084   1     AI        gr7=gr1,132
+    0| 000050 sradi    7C86FE76   1     SRA8      gr6=gr4,63,ca"
+  249| 000054 cmpdi    2C200000   1     C8        cr0=gr0,0
+    0| 000058 andc     7C863078   1     ANDC      gr6=gr4,gr6
+  251| 00005C addi     38810080   1     AI        gr4=gr1,128
+    0| 000060 rldicr   78DB1F24   1     SLL8      gr27=gr6,3
+  249| 000064 bc       41820020   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  249| 000068 cmpwi    2C000004   1     C4        cr0=gr0,4
+  249| 00006C bc       41820018   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  255| 000070 lwz      801F02CC   1     L4Z       gr0=<s32:d716:l4>(gr31,716)
+  255| 000074 cmpdi    2C200000   1     C8        cr0=gr0,0
+  255| 000078 cmpwi    2C800000   1     C4        cr1=gr0,0
+  255| 00007C bc       41820088   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0| 000080 b        48000074   1     B         CL.16,-1
+  249|                              CL.1:
+  251| 000084 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+  251| 000088 lwa      E97E0002   1     L4A       gr11=isy(gr30,0)
+  250| 00008C lwz      81030018   1     L4Z       gr8=<s34:d24:l4>(gr3,24)
+  251| 000090 subf     7C1B4850   1     S         gr0=gr9,gr27
+  251| 000094 addi     38A5176C   1     AI        gr5=gr5,5996
+  251| 000098 addi     39430014   1     AI        gr10=gr3,20
+  251| 00009C rldicr   78C91764   1     SLL8      gr9=gr6,2
+  251| 0000A0 mulld    7D6BD9D2   1     M         gr11=gr11,gr27
+  251| 0000A4 add      7CC64A14   1     A         gr6=gr6,gr9
+  250| 0000A8 addi     39080001   1     AI        gr8=gr8,1
+  251| 0000AC rldicr   78C91764   1     SLL8      gr9=gr6,2
+  250| 0000B0 stw      91030018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr8
+  251| 0000B4 extsw    7D0807B4   1     EXTS4     gr8=gr8
+  251| 0000B8 add      7CC64A14   1     A         gr6=gr6,gr9
+  251| 0000BC rldicr   79081764   1     SLL8      gr8=gr8,2
+  251| 0000C0 addi     38C63778   1     AI        gr6=gr6,14200
+  251| 0000C4 add      7D254214   1     A         gr9=gr5,gr8
+  251| 0000C8 stw      90C10084   1     ST4Z      T_22(gr1,132)=gr6
+  251| 0000CC addi     39030020   1     AI        gr8=gr3,32
+  251| 0000D0 addi     38C3002C   1     AI        gr6=gr3,44
+  251| 0000D4 addi     38A30040   1     AI        gr5=gr3,64
+  251| 0000D8 add      7C605A14   1     A         gr3=gr0,gr11
+  251| 0000DC bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,j_slice",gr5,n2m",gr6,T_22",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  251| 0000E0 ori      60000000   1
+  255| 0000E4 lwz      801F02CC   1     L4Z       gr0=<s32:d716:l4>(gr31,716)
+  255| 0000E8 cmpdi    2C200000   1     C8        cr0=gr0,0
+  255| 0000EC cmpwi    2C800000   1     C4        cr1=gr0,0
+  255| 0000F0 bc       41820014   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.16:
+  255| 0000F4 cmpwi    2C000004   1     C4        cr0=gr0,4
+  255| 0000F8 bc       4182000C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+  266| 0000FC bc       418600A4   1     BT        CL.7,cr1,0x4/eq,taken=40%(40,60)
+    0| 000100 b        48000088   1     B         CL.18,-1
+  255|                              CL.4:
+  257| 000104 lwz      80BC0000   1     L4Z       gr5=iey(gr28,0)
+  256| 000108 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  257| 00010C ld       E8C20000   1     L8        gr6=.&&N&&mpiyes(gr2,0)
+  257| 000110 subf     7C1BE850   1     S         gr0=gr29,gr27
+  257| 000114 addi     38E10088   1     AI        gr7=gr1,136
+  257| 000118 addi     38810080   1     AI        gr4=gr1,128
+  257| 00011C addi     39250001   1     AI        gr9=gr5,1
+  257| 000120 lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  257| 000124 extsw    7D2907B4   1     EXTS4     gr9=gr9
+  256| 000128 lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+  257| 00012C mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  257| 000130 rldicr   79091764   1     SLL8      gr9=gr8,2
+  256| 000134 addi     38A50001   1     AI        gr5=gr5,1
+  257| 000138 add      7D084A14   1     A         gr8=gr8,gr9
+  256| 00013C stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+  257| 000140 rldicr   79091764   1     SLL8      gr9=gr8,2
+  257| 000144 extsw    7CA507B4   1     EXTS4     gr5=gr5
+  257| 000148 add      7D084A14   1     A         gr8=gr8,gr9
+  257| 00014C addi     38C6176C   1     AI        gr6=gr6,5996
+  257| 000150 rldicr   78A51764   1     SLL8      gr5=gr5,2
+  257| 000154 addi     39083778   1     AI        gr8=gr8,14200
+  257| 000158 addi     39430014   1     AI        gr10=gr3,20
+  257| 00015C stw      91010088   1     ST4Z      T_23(gr1,136)=gr8
+  257| 000160 add      7D253214   1     A         gr9=gr5,gr6
+  257| 000164 addi     39030020   1     AI        gr8=gr3,32
+  257| 000168 addi     38C30030   1     AI        gr6=gr3,48
+  257| 00016C addi     38A30040   1     AI        gr5=gr3,64
+  257| 000170 add      7C605A14   1     A         gr3=gr0,gr11
+  257| 000174 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,j_slice",gr5,n2p",gr6,T_23",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  257| 000178 ori      60000000   1
+    0| 00017C lwa      E81F02CE   1     L4A       gr0=<s32:d716:l4>(gr31,716)
+    0| 000180 cmpwi    2C000000   1     C4        cr0=gr0,0
+  266| 000184 bc       4182001C   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+    0|                              CL.18:
+  266| 000188 cmpwi    2C000004   1     C4        cr0=gr0,4
+  266| 00018C bc       41820014   1     BT        CL.7,cr0,0x4/eq,taken=40%(40,60)
+  272| 000190 lwz      801F02C0   1     L4Z       gr0=<s32:d704:l4>(gr31,704)
+  272| 000194 cmpdi    2C200000   1     C8        cr0=gr0,0
+  272| 000198 bc       418200B0   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0| 00019C b        48000080   1     B         CL.20,-1
+  266|                              CL.7:
+  267| 0001A0 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  268| 0001A4 lwa      E93C0002   1     L4A       gr9=iey(gr28,0)
+  268| 0001A8 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  268| 0001AC subf     7C1BE850   1     S         gr0=gr29,gr27
+  268| 0001B0 addi     38E1008C   1     AI        gr7=gr1,140
+  268| 0001B4 addi     38810080   1     AI        gr4=gr1,128
+  268| 0001B8 lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  267| 0001BC lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  268| 0001C0 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  268| 0001C4 rldicr   79091764   1     SLL8      gr9=gr8,2
+  267| 0001C8 addi     38C60001   1     AI        gr6=gr6,1
+  268| 0001CC add      7D084A14   1     A         gr8=gr8,gr9
+  267| 0001D0 stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  268| 0001D4 rldicr   79091764   1     SLL8      gr9=gr8,2
+  268| 0001D8 extsw    7CC607B4   1     EXTS4     gr6=gr6
+  268| 0001DC add      7D084A14   1     A         gr8=gr8,gr9
+  268| 0001E0 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  268| 0001E4 addi     38A5176C   1     AI        gr5=gr5,5996
+  268| 0001E8 addi     390837DC   1     AI        gr8=gr8,14300
+  268| 0001EC addi     39430014   1     AI        gr10=gr3,20
+  268| 0001F0 stw      9101008C   1     ST4Z      T_24(gr1,140)=gr8
+  268| 0001F4 add      7D253214   1     A         gr9=gr5,gr6
+  268| 0001F8 addi     39030020   1     AI        gr8=gr3,32
+  268| 0001FC addi     38C30030   1     AI        gr6=gr3,48
+  268| 000200 addi     38A30040   1     AI        gr5=gr3,64
+  268| 000204 add      7C605A14   1     A         gr3=gr0,gr11
+  268| 000208 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,j_slice",gr5,n2p",gr6,T_24",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  268| 00020C ori      60000000   1
+  272| 000210 lwz      801F02C0   1     L4Z       gr0=<s32:d704:l4>(gr31,704)
+  272| 000214 cmpdi    2C200000   1     C8        cr0=gr0,0
+  272| 000218 bc       41820030   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+    0|                              CL.20:
+  272| 00021C cmpwi    2C000004   1     C4        cr0=gr0,4
+  272| 000220 bc       41820028   1     BT        CL.10,cr0,0x4/eq,taken=40%(40,60)
+  280|                              CL.14:
+  280| 000224 ld       E98100F0   1     L8        gr12=#stack(gr1,240)
+  280| 000228 addi     382100E0   1     AI        gr1=gr1,224
+  280| 00022C ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+  280| 000230 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  280| 000234 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  280| 000238 mtspr    7D8803A6   1     LLR       lr=gr12
+  280| 00023C ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  280| 000240 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  280| 000244 bclr     4E800020   1     BA        lr
+  272|                              CL.10:
+  274| 000248 lwz      80BE0000   1     L4Z       gr5=isy(gr30,0)
+  273| 00024C ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  274| 000250 ld       E8C20000   1     L8        gr6=.&&N&&mpiyes(gr2,0)
+  274| 000254 subf     7C1BE850   1     S         gr0=gr29,gr27
+  274| 000258 addi     38E10090   1     AI        gr7=gr1,144
+  274| 00025C addi     38810080   1     AI        gr4=gr1,128
+  274| 000260 addi     3925FFFF   1     AI        gr9=gr5,-1
+  274| 000264 lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  274| 000268 extsw    7D2907B4   1     EXTS4     gr9=gr9
+  273| 00026C lwz      80A30018   1     L4Z       gr5=<s34:d24:l4>(gr3,24)
+  274| 000270 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  274| 000274 rldicr   79091764   1     SLL8      gr9=gr8,2
+  273| 000278 addi     38A50001   1     AI        gr5=gr5,1
+  274| 00027C add      7D084A14   1     A         gr8=gr8,gr9
+  273| 000280 stw      90A30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr5
+  274| 000284 rldicr   79091764   1     SLL8      gr9=gr8,2
+  274| 000288 extsw    7CA507B4   1     EXTS4     gr5=gr5
+  274| 00028C add      7D084A14   1     A         gr8=gr8,gr9
+  274| 000290 addi     38C6176C   1     AI        gr6=gr6,5996
+  274| 000294 rldicr   78A51764   1     SLL8      gr5=gr5,2
+  274| 000298 addi     390837DC   1     AI        gr8=gr8,14300
+  274| 00029C addi     39430014   1     AI        gr10=gr3,20
+  274| 0002A0 stw      91010090   1     ST4Z      T_25(gr1,144)=gr8
+  274| 0002A4 add      7D253214   1     A         gr9=gr5,gr6
+  274| 0002A8 addi     39030020   1     AI        gr8=gr3,32
+  274| 0002AC addi     38C3002C   1     AI        gr6=gr3,44
+  274| 0002B0 addi     38A30040   1     AI        gr5=gr3,64
+  274| 0002B4 add      7C605A14   1     A         gr3=gr0,gr11
+  274| 0002B8 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,j_slice",gr5,n2m",gr6,T_25",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  274| 0002BC ori      60000000   1
+    0| 0002C0 b        4BFFFF64   1     B         CL.14,-1
+     |               Tag Table
+     | 0002C4        00000000 00012001 80050000 000002C4
+     |               Instruction count          177
+     |               Straight-line exec time    177
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** updt_gp_bnd_3   === End of Compilation 6 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+
+   282|         SUBROUTINE updt_gp_bnd_3 (isx, iex, isy, iey, isz, iez, x)
+   282|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   297|           nelm = 1
+   303|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_2
+                  ENDIF
+   304|           nreq = nreq + 1
+   305|           T_27 = nsub * 25 + 14400
+                  CALL mpi_isend((x + ((-8) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(int(iez)) + (max(&
+                &   int(%VAL(in)),0) * 8)*(1) + (8)*(1)),nelm,k_slice,n3p,T_27,&
+                &   comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   308|           lab_2
+   309|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_5
+                  ENDIF
+   310|           nreq = nreq + 1
+   311|           T_28 = nsub * 25 + 14400
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(int((isz - 1))) + (%VAL(#4))*(1) + (8)*(1)),nelm,k_slice,&
+                &   n3m,T_28,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   314|           lab_5
+   320|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_8
+                  ENDIF
+   321|           nreq = nreq + 1
+   322|           T_29 = nsub * 25 + 14500
+                  CALL mpi_isend((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(int(isz)) + (%VAL(#4))*(1) + (8)*(1)),nelm,k_slice,n3m,&
+                &   T_29,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   325|           lab_8
+   326|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_13
+                  ENDIF
+   327|           nreq = nreq + 1
+   328|           T_30 = nsub * 25 + 14500
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(int((iez + 1))) + (%VAL(#4))*(1) + (8)*(1)),nelm,k_slice,&
+                &   n3p,T_30,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   334|           lab_13
+                  RETURN
+                END SUBROUTINE updt_gp_bnd_3
+
+
+   282|         SUBROUTINE updt_gp_bnd_3 (isx, iex, isy, iey, isz, iez, x)
+   282|           #4 = max(int(in),0) * 8
+                  #5 = 8 * (max(int(jn),0) * max(int(in),0))
+   297|           nelm = 1
+   303|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_2
+                  ENDIF
+   304|           nreq = nreq + 1
+   305|           T_27 = nsub * 25 + 14400
+                  CALL mpi_isend((x + ((-8) - (8 * (max(int(%VAL(jn)),0) * max(&
+                &   int(%VAL(in)),0)) + max(int(%VAL(in)),0) * 8)) + (8 * (max(&
+                &   int(%VAL(jn)),0) * max(int(%VAL(in)),0)))*(int(iez)) + (max(&
+                &   int(%VAL(in)),0) * 8)*(1) + (8)*(1)),nelm,k_slice,n3p,T_27,&
+                &   comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   308|           lab_2
+   309|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_5
+                  ENDIF
+   310|           nreq = nreq + 1
+   311|           T_28 = nsub * 25 + 14400
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(int((isz - 1))) + (%VAL(#4))*(1) + (8)*(1)),nelm,k_slice,&
+                &   n3m,T_28,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   314|           lab_5
+   320|           IF (.NOT.niks[].off728 == 0) THEN
+                    IF (.NOT.(niks[].off728 == 4)) GOTO lab_8
+                  ENDIF
+   321|           nreq = nreq + 1
+   322|           T_29 = nsub * 25 + 14500
+                  CALL mpi_isend((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(int(isz)) + (%VAL(#4))*(1) + (8)*(1)),nelm,k_slice,n3m,&
+                &   T_29,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   325|           lab_8
+   326|           IF (.NOT.noks[].off740 == 0) THEN
+                    IF (.NOT.(noks[].off740 == 4)) GOTO lab_13
+                  ENDIF
+   327|           nreq = nreq + 1
+   328|           T_30 = nsub * 25 + 14500
+                  CALL mpi_irecv((x + ((-8) - (%VAL(#5) + %VAL(#4))) + (%VAL(#5)&
+                &   )*(int((iez + 1))) + (%VAL(#4))*(1) + (8)*(1)),nelm,k_slice,&
+                &   n3p,T_30,comm3d,(req + (-4) + (4)*(int(%VAL(nreq)))),ierr)
+   334|           lab_13
+                  RETURN
+                END SUBROUTINE updt_gp_bnd_3
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---s ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     updt_gp_bnd_3
+  282|                                  PROC      .isx,.iex,.isy,.iey,.isz,.iez,.x,gr3-gr9
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000018 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 00001C stdu     F821FF21   1     ST8U      gr1,#stack(gr1,-224)=gr1
+    0| 000020 ld       E8620000   1     L8        gr3=.&&N&&param(gr2,0)
+  297| 000024 addi     38000001   1     LI        gr0=1
+  303| 000028 ld       EBE20000   1     L8        gr31=.&&N&&bndry(gr2,0)
+  297| 00002C stw      90010080   1     ST4Z      nelm(gr1,128)=gr0
+    0| 000030 or       7D1E4378   1     LR        gr30=gr8
+    0| 000034 or       7CFC3B78   1     LR        gr28=gr7
+    0| 000038 lwa      E8030002   1     L4A       gr0=<s16:d0:l4>(gr3,0)
+    0| 00003C lwa      E8C30006   1     L4A       gr6=<s16:d4:l4>(gr3,4)
+  303| 000040 lwz      80BF02E4   1     L4Z       gr5=<s32:d740:l4>(gr31,740)
+    0| 000044 or       7D3D4B78   1     LR        gr29=gr9
+  304| 000048 ld       E8820000   1     L8        gr4=.&&N&&mpipar(gr2,0)
+  305| 00004C ld       E8620000   1     L8        gr3=.&&N&&mpiyes(gr2,0)
+    0| 000050 sradi    7C07FE76   1     SRA8      gr7=gr0,63,ca"
+    0| 000054 sradi    7CC8FE76   1     SRA8      gr8=gr6,63,ca"
+    0| 000058 andc     7C073878   1     ANDC      gr7=gr0,gr7
+    0| 00005C andc     7CC04078   1     ANDC      gr0=gr6,gr8
+    0| 000060 mulld    7D0039D2   1     M         gr8=gr0,gr7
+  303| 000064 cmpdi    2C250000   1     C8        cr0=gr5,0
+    0| 000068 rldicr   78E61F24   1     SLL8      gr6=gr7,3
+    0| 00006C rldicr   791B1F24   1     SLL8      gr27=gr8,3
+  303| 000070 bc       4182000C   1     BT        CL.1,cr0,0x4/eq,taken=40%(40,60)
+  303| 000074 cmpwi    2C050004   1     C4        cr0=gr5,4
+  303| 000078 bc       40820078   1     BF        CL.2,cr0,0x4/eq,taken=60%(60,40)
+  303|                              CL.1:
+  305| 00007C lwz      80E4001C   1     L4Z       gr7=<s34:d28:l4>(gr4,28)
+  305| 000080 lwa      E91E0002   1     L4A       gr8=iez(gr30,0)
+  305| 000084 mulld    7D2031D2   1     M         gr9=gr0,gr6
+  304| 000088 lwz      80A40018   1     L4Z       gr5=<s34:d24:l4>(gr4,24)
+  305| 00008C rldicr   78EA1764   1     SLL8      gr10=gr7,2
+  305| 000090 neg      7CC600D0   1     COMP      gr6=gr6
+  305| 000094 add      7CE75214   1     A         gr7=gr7,gr10
+  305| 000098 mulld    7D0849D2   1     M         gr8=gr8,gr9
+  304| 00009C addi     39250001   1     AI        gr9=gr5,1
+  305| 0000A0 rldicr   78E51764   1     SLL8      gr5=gr7,2
+  305| 0000A4 mulld    7C0031D2   1     M         gr0=gr0,gr6
+  305| 0000A8 add      7CA53A14   1     A         gr5=gr5,gr7
+  305| 0000AC extsw    7D2607B4   1     EXTS4     gr6=gr9
+  305| 0000B0 addi     38E53840   1     AI        gr7=gr5,14400
+  304| 0000B4 stw      91240018   1     ST4Z      <s34:d24:l4>(gr4,24)=gr9
+  305| 0000B8 stw      90E10084   1     ST4Z      T_27(gr1,132)=gr7
+  305| 0000BC rldicr   78C51764   1     SLL8      gr5=gr6,2
+  305| 0000C0 addi     38C3176C   1     AI        gr6=gr3,5996
+  305| 0000C4 add      7C68EA14   1     A         gr3=gr8,gr29
+  305| 0000C8 addi     39440014   1     AI        gr10=gr4,20
+  305| 0000CC add      7D253214   1     A         gr9=gr5,gr6
+  305| 0000D0 addi     39040020   1     AI        gr8=gr4,32
+  305| 0000D4 addi     38E10084   1     AI        gr7=gr1,132
+  305| 0000D8 addi     38C40038   1     AI        gr6=gr4,56
+  305| 0000DC addi     38A40044   1     AI        gr5=gr4,68
+  305| 0000E0 addi     38810080   1     AI        gr4=gr1,128
+  305| 0000E4 add      7C630214   1     A         gr3=gr3,gr0
+  305| 0000E8 bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,k_slice",gr5,n3p",gr6,T_27",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  305| 0000EC ori      60000000   1
+  308|                              CL.2:
+  309| 0000F0 lwz      80DF02D8   1     L4Z       gr6=<s32:d728:l4>(gr31,728)
+  310| 0000F4 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  311| 0000F8 ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  311| 0000FC subf     7C1BE850   1     S         gr0=gr29,gr27
+  311| 000100 addi     38E10088   1     AI        gr7=gr1,136
+  311| 000104 addi     38810080   1     AI        gr4=gr1,128
+  309| 000108 cmpdi    2C260000   1     C8        cr0=gr6,0
+  309| 00010C cmpwi    2C860000   1     C4        cr1=gr6,0
+  309| 000110 bc       4182000C   1     BT        CL.4,cr0,0x4/eq,taken=40%(40,60)
+  309| 000114 cmpwi    2C060004   1     C4        cr0=gr6,4
+  309| 000118 bc       40820070   1     BF        CL.5,cr0,0x4/eq,taken=60%(60,40)
+  309|                              CL.4:
+  311| 00011C lwz      817C0000   1     L4Z       gr11=isz(gr28,0)
+  311| 000120 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+  310| 000124 lwz      81230018   1     L4Z       gr9=<s34:d24:l4>(gr3,24)
+  311| 000128 addi     38A5176C   1     AI        gr5=gr5,5996
+  311| 00012C addi     39430014   1     AI        gr10=gr3,20
+  311| 000130 addi     39030020   1     AI        gr8=gr3,32
+  311| 000134 addi     396BFFFF   1     AI        gr11=gr11,-1
+  311| 000138 rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  311| 00013C extsw    7D6B07B4   1     EXTS4     gr11=gr11
+  311| 000140 add      7CC66214   1     A         gr6=gr6,gr12
+  310| 000144 addi     39290001   1     AI        gr9=gr9,1
+  311| 000148 rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  311| 00014C mulld    7D6BD9D2   1     M         gr11=gr11,gr27
+  310| 000150 stw      91230018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr9
+  311| 000154 add      7CC66214   1     A         gr6=gr6,gr12
+  311| 000158 extsw    7D2907B4   1     EXTS4     gr9=gr9
+  311| 00015C addi     38C63840   1     AI        gr6=gr6,14400
+  311| 000160 rldicr   79291764   1     SLL8      gr9=gr9,2
+  311| 000164 stw      90C10088   1     ST4Z      T_28(gr1,136)=gr6
+  311| 000168 addi     38C30034   1     AI        gr6=gr3,52
+  311| 00016C add      7D292A14   1     A         gr9=gr9,gr5
+  311| 000170 addi     38A30044   1     AI        gr5=gr3,68
+  311| 000174 add      7C605A14   1     A         gr3=gr0,gr11
+  311| 000178 bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,k_slice",gr5,n3m",gr6,T_28",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  311| 00017C ori      60000000   1
+    0| 000180 lwa      E8DF02DA   1     L4A       gr6=<s32:d728:l4>(gr31,728)
+    0| 000184 cmpwi    2C860000   1     C4        cr1=gr6,0
+  314|                              CL.5:
+  320| 000188 bc       4186000C   1     BT        CL.7,cr1,0x4/eq,taken=40%(40,60)
+  320| 00018C cmpwi    2C060004   1     C4        cr0=gr6,4
+  320| 000190 bc       40820074   1     BF        CL.8,cr0,0x4/eq,taken=60%(60,40)
+  320|                              CL.7:
+  321| 000194 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  322| 000198 lwa      E93C0002   1     L4A       gr9=isz(gr28,0)
+  322| 00019C ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  322| 0001A0 subf     7C1BE850   1     S         gr0=gr29,gr27
+  322| 0001A4 addi     38E1008C   1     AI        gr7=gr1,140
+  322| 0001A8 addi     38810080   1     AI        gr4=gr1,128
+  322| 0001AC lwz      8103001C   1     L4Z       gr8=<s34:d28:l4>(gr3,28)
+  321| 0001B0 lwz      80C30018   1     L4Z       gr6=<s34:d24:l4>(gr3,24)
+  322| 0001B4 mulld    7D69D9D2   1     M         gr11=gr9,gr27
+  322| 0001B8 rldicr   79091764   1     SLL8      gr9=gr8,2
+  321| 0001BC addi     38C60001   1     AI        gr6=gr6,1
+  322| 0001C0 add      7D084A14   1     A         gr8=gr8,gr9
+  321| 0001C4 stw      90C30018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr6
+  322| 0001C8 rldicr   79091764   1     SLL8      gr9=gr8,2
+  322| 0001CC extsw    7CC607B4   1     EXTS4     gr6=gr6
+  322| 0001D0 add      7D084A14   1     A         gr8=gr8,gr9
+  322| 0001D4 rldicr   78C61764   1     SLL8      gr6=gr6,2
+  322| 0001D8 addi     38A5176C   1     AI        gr5=gr5,5996
+  322| 0001DC addi     390838A4   1     AI        gr8=gr8,14500
+  322| 0001E0 addi     39430014   1     AI        gr10=gr3,20
+  322| 0001E4 stw      9101008C   1     ST4Z      T_29(gr1,140)=gr8
+  322| 0001E8 add      7D253214   1     A         gr9=gr5,gr6
+  322| 0001EC addi     39030020   1     AI        gr8=gr3,32
+  322| 0001F0 addi     38C30034   1     AI        gr6=gr3,52
+  322| 0001F4 addi     38A30044   1     AI        gr5=gr3,68
+  322| 0001F8 add      7C605A14   1     A         gr3=gr0,gr11
+  322| 0001FC bl       48000001   1     CALL      mpi_isend,8,x[]",gr3,nelm",gr4,k_slice",gr5,n3m",gr6,T_29",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,#ProcAlias",mpi_isend",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  322| 000200 ori      60000000   1
+  325|                              CL.8:
+  326| 000204 lwz      80DF02E4   1     L4Z       gr6=<s32:d740:l4>(gr31,740)
+  327| 000208 ld       E8620000   1     L8        gr3=.&&N&&mpipar(gr2,0)
+  328| 00020C ld       E8A20000   1     L8        gr5=.&&N&&mpiyes(gr2,0)
+  328| 000210 subf     7C1BE850   1     S         gr0=gr29,gr27
+  328| 000214 addi     38E10090   1     AI        gr7=gr1,144
+  328| 000218 addi     38810080   1     AI        gr4=gr1,128
+  326| 00021C cmpdi    2C260000   1     C8        cr0=gr6,0
+  326| 000220 bc       41820030   1     BT        CL.10,cr0,0x4/eq,taken=30%(30,70)
+  326| 000224 cmpwi    2C060004   1     C4        cr0=gr6,4
+  326| 000228 bc       41820028   1     BT        CL.10,cr0,0x4/eq,taken=40%(40,60)
+  334|                              CL.14:
+  334| 00022C ld       E98100F0   1     L8        gr12=#stack(gr1,240)
+  334| 000230 addi     382100E0   1     AI        gr1=gr1,224
+  334| 000234 ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+  334| 000238 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  334| 00023C ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  334| 000240 mtspr    7D8803A6   1     LLR       lr=gr12
+  334| 000244 ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  334| 000248 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  334| 00024C bclr     4E800020   1     BA        lr
+  326|                              CL.10:
+  328| 000250 lwz      817E0000   1     L4Z       gr11=iez(gr30,0)
+  328| 000254 lwz      80C3001C   1     L4Z       gr6=<s34:d28:l4>(gr3,28)
+  327| 000258 lwz      81230018   1     L4Z       gr9=<s34:d24:l4>(gr3,24)
+  328| 00025C addi     38A5176C   1     AI        gr5=gr5,5996
+  328| 000260 addi     39430014   1     AI        gr10=gr3,20
+  328| 000264 addi     39030020   1     AI        gr8=gr3,32
+  328| 000268 addi     396B0001   1     AI        gr11=gr11,1
+  328| 00026C rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  328| 000270 extsw    7D6B07B4   1     EXTS4     gr11=gr11
+  328| 000274 add      7CC66214   1     A         gr6=gr6,gr12
+  327| 000278 addi     39290001   1     AI        gr9=gr9,1
+  328| 00027C rldicr   78CC1764   1     SLL8      gr12=gr6,2
+  327| 000280 stw      91230018   1     ST4Z      <s34:d24:l4>(gr3,24)=gr9
+  328| 000284 mulld    7D6BD9D2   1     M         gr11=gr11,gr27
+  328| 000288 add      7CC66214   1     A         gr6=gr6,gr12
+  328| 00028C extsw    7D2907B4   1     EXTS4     gr9=gr9
+  328| 000290 addi     38C638A4   1     AI        gr6=gr6,14500
+  328| 000294 rldicr   79291764   1     SLL8      gr9=gr9,2
+  328| 000298 stw      90C10090   1     ST4Z      T_30(gr1,144)=gr6
+  328| 00029C add      7D292A14   1     A         gr9=gr9,gr5
+  328| 0002A0 addi     38C30038   1     AI        gr6=gr3,56
+  328| 0002A4 addi     38A30044   1     AI        gr5=gr3,68
+  328| 0002A8 add      7C605A14   1     A         gr3=gr0,gr11
+  328| 0002AC bl       48000001   1     CALL      mpi_irecv,8,x[]",gr3,nelm",gr4,k_slice",gr5,n3p",gr6,T_30",gr7,comm3d",gr8,req[]",gr9,ierr",gr10,mpi_irecv",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  328| 0002B0 ori      60000000   1
+    0| 0002B4 b        4BFFFF78   1     B         CL.14,-1
+     |               Tag Table
+     | 0002B8        00000000 00012001 80050000 000002B8
+     |               Instruction count          174
+     |               Straight-line exec time    174
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    updtvecbnd.f90              07/08/15   15:48:44
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     334
+1501-510  Compilation successful for file updtvecbnd.f90.
+1501-543  Object file created.

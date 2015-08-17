@@ -1,0 +1,223 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- rad_solve.f90 07/08/15 15:48:30
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** rad_solve   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+    10|         SUBROUTINE rad_solve ()
+    30|           IF ((lrad == 1)) THEN
+    31|             CALL grey_fld(d-w3dd%addr,d-e%addr,d-w3de%addr,d-w3dh%addr,&
+                &     d-er%addr)
+    32|             CALL rad_imp_dt(d-w3dh%addr,d-er%addr)
+    33|             dtnri2 = dtnri2 *  6.2988158513815473E-001
+    34|           ENDIF
+    35|           IF (.NOT.(lrad > 1)) GOTO lab_2
+    36|           IF ((myid == 0)) THEN
+    37|             |fmt_args%version = 129
+                    |fmt_args%fmt_string_addr = NULL
+                    |fmt_args%fmt_string_len = int(")
+                    |fmt_args%stack_frame = NULL
+                    |fmt_args%call_back = NULL
+                    #2 = _xlfBeginIO(6,259,#1,32772,NULL,0,|fmt_args)
+                    _xlfEndIO(%VAL(#2))
+                  ENDIF
+    38|           CALL mpi_finalize(ierr)
+    39|           CALL _xlfStop(NULL,0)
+                  RETURN
+    40|           lab_2
+    43|           RETURN
+                END SUBROUTINE rad_solve
+
+
+    10|         SUBROUTINE rad_solve ()
+    30|           IF ((lrad == 1)) THEN
+    31|             CALL grey_fld(d-w3dd%addr,d-e%addr,d-w3de%addr,d-w3dh%addr,&
+                &     d-er%addr)
+    32|             CALL rad_imp_dt(d-w3dh%addr,d-er%addr)
+    33|             dtnri2 = dtnri2 *  6.2988158513815473E-001
+    34|           ENDIF
+    35|           IF (.NOT.(lrad > 1)) GOTO lab_2
+    36|           IF ((myid == 0)) THEN
+    37|             |fmt_args%version = 129
+                    |fmt_args%fmt_string_addr = NULL
+                    |fmt_args%fmt_string_len = int(")
+                    |fmt_args%stack_frame = NULL
+                    |fmt_args%call_back = NULL
+                    #2 = _xlfBeginIO(6,259,#1,32772,NULL,0,|fmt_args)
+                    _xlfEndIO(%VAL(#2))
+                  ENDIF
+    38|           CALL mpi_finalize(ierr)
+    39|           CALL _xlfStop(NULL,0)
+                  RETURN
+    40|           lab_2
+    43|           RETURN
+                END SUBROUTINE rad_solve
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  ---- ---- ---- -sss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     rad_solve
+   10|                                  PROC      
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000010 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000014 stdu     F821FF21   1     ST8U      gr1,#stack(gr1,-224)=gr1
+   30| 000018 ld       EBA20000   1     L8        gr29=.&&N&&config(gr2,0)
+   30| 00001C lwz      801D0018   1     L4Z       gr0=<s60:d24:l4>(gr29,24)
+   30| 000020 cmpwi    2C000001   1     C4        cr0=gr0,1
+   30| 000024 bc       418200A4   1     BT        CL.9,cr0,0x4/eq,taken=40%(40,60)
+   35| 000028 bc       40810094   1     BF        CL.11,cr0,0x2/gt,taken=30%(30,70)
+    0| 00002C ori      60210000   1     XNOP      
+    0| 000030 ori      60210000   1     XNOP      
+    0| 000034 ori      60210000   1     XNOP      
+    0|                              CL.8:
+   36| 000038 ld       EBE20000   1     L8        gr31=.&&N&&mpipar(gr2,0)
+   36| 00003C lwz      801F0004   1     L4Z       gr0=<s70:d4:l4>(gr31,4)
+   36| 000040 cmpdi    2C200000   1     C8        cr0=gr0,0
+   36| 000044 bc       41820024   1     BT        CL.12,cr0,0x4/eq,taken=40%(40,60)
+   37|                              CL.3:
+   38| 000048 addi     387F0014   1     AI        gr3=gr31,20
+   38| 00004C bl       48000001   1     CALL      mpi_finalize,1,ierr",gr3,mpi_finalize",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   38| 000050 ori      60000000   1
+   39| 000054 addi     38600000   1     LI        gr3=0
+   39| 000058 addi     38800000   1     LI        gr4=0
+   39| 00005C bl       48000001   1     CALL      _xlfStop,2,@PALI_SHADOW_CONST.rns0.,gr3,gr4,_xlfStop",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   39| 000060 ori      60000000   1
+   39| 000064 tw       7C8E7008   1     TRAP      9
+    0|                              CL.12:
+   37| 000068 ld       E8620000   1     L8        gr3=.+CONSTANT_AREA(gr2,0)
+   37| 00006C addi     38800081   1     LI        gr4=129
+   37| 000070 addi     38000000   1     LI        gr0=0
+   37| 000074 stw      90810080   1     ST4Z      <a1:d128:l4>(gr1,128)=gr4
+   37| 000078 std      F8010088   1     ST8       <a1:d136:l8>(gr1,136)=gr0
+   37| 00007C std      F8010098   1     ST8       <a1:d152:l8>(gr1,152)=gr0
+   37| 000080 addi     38630010   1     AI        gr3=gr3,16
+   37| 000084 std      F80100A0   1     ST8       <a1:d160:l8>(gr1,160)=gr0
+   37| 000088 std      F8610090   1     ST8       <a1:d144:l8>(gr1,144)=gr3
+   37| 00008C ld       E8A20000   1     L8        gr5=.$STATIC(gr2,0)
+   37| 000090 addi     39210080   1     AI        gr9=gr1,128
+   37| 000094 addi     38600006   1     LI        gr3=6
+   37| 000098 addi     38800103   1     LI        gr4=259
+   37| 00009C ori      60068004   1     OIL       gr6=gr0,0x8004
+   37| 0000A0 addi     38E00000   1     LI        gr7=0
+   37| 0000A4 addi     39000000   1     LI        gr8=0
+   37| 0000A8 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#1",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|fmt_args,gr9,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   37| 0000AC ori      60000000   1
+   37| 0000B0 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   37| 0000B4 ori      60000000   1
+    0| 0000B8 b        4BFFFF90   1     B         CL.3,-1
+   35|                              CL.11:
+   43| 0000BC ld       EBA100C8   1     L8        gr29=#stack(gr1,200)
+   43| 0000C0 addi     382100E0   1     AI        gr1=gr1,224
+   43| 0000C4 bclr     4E800020   1     BA        lr
+    0|                              CL.9:
+   31| 0000C8 ld       EBE20000   1     L8        gr31=.&&N&scratch(gr2,0)
+   31| 0000CC ld       EBC20000   1     L8        gr30=.&&N&field(gr2,0)
+   31| 0000D0 ld       E87F05D0   1     L8        gr3=<s32:d1488:l8>(gr31,1488)
+   31| 0000D4 ld       E89E0068   1     L8        gr4=<s12:d104:l8>(gr30,104)
+   31| 0000D8 ld       E8BF0638   1     L8        gr5=<s32:d1592:l8>(gr31,1592)
+   31| 0000DC ld       E8DF0840   1     L8        gr6=<s32:d2112:l8>(gr31,2112)
+   31| 0000E0 ld       E8FE0410   1     L8        gr7=<s12:d1040:l8>(gr30,1040)
+   31| 0000E4 bl       48000001   1     CALL      grey_fld,5,w3dd",gr3,e",gr4,w3de",gr5,w3dh",gr6,er",gr7,#ProcAlias",grey_fld",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   31| 0000E8 ori      60000000   1
+   32| 0000EC ld       E87F0840   1     L8        gr3=<s32:d2112:l8>(gr31,2112)
+   32| 0000F0 ld       E89E0410   1     L8        gr4=<s12:d1040:l8>(gr30,1040)
+   32| 0000F4 bl       48000001   1     CALL      rad_imp_dt,2,w3dh",gr3,er",gr4,rad_imp_dt",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   32| 0000F8 ori      60000000   1
+   33| 0000FC ld       E8620000   1     L8        gr3=.&&N&&root(gr2,0)
+   33| 000100 ld       E8820000   1     L8        gr4=.+CONSTANT_AREA(gr2,0)
+    0| 000104 lwz      801D0018   1     L4Z       gr0=<s60:d24:l4>(gr29,24)
+   33| 000108 lfd      C80300B0   1     LFL       fp0=<s67:d176:l8>(gr3,176)
+   33| 00010C lfd      C8240098   1     LFL       fp1=+CONSTANT_AREA(gr4,152)
+    0| 000110 cmpwi    2C000001   1     C4        cr0=gr0,1
+   33| 000114 fmul     FC000072   1     MFL       fp0=fp0,fp1,fcr
+   33| 000118 stfd     D80300B0   1     STFL      <s67:d176:l8>(gr3,176)=fp0
+   35| 00011C bc       4181FF1C   1     BT        CL.8,cr0,0x2/gt,taken=70%(70,30)
+   43|                              CL.6:
+   43| 000120 ld       E98100F0   1     L8        gr12=#stack(gr1,240)
+   43| 000124 addi     382100E0   1     AI        gr1=gr1,224
+   43| 000128 ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+   43| 00012C ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+   43| 000130 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+   43| 000134 mtspr    7D8803A6   1     LLR       lr=gr12
+   43| 000138 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 00013C        00000000 00012201 80030000 0000013C
+     |               Instruction count           79
+     |               Straight-line exec time     79
+     |               Constant Area
+     | 000000        7261645F 736F6C76 652E6639 30000000 00000000 80010000
+     | 000018        00000000 0000000F 00000000 00000001 00000000 00000006
+     | 000030        00000000 00000000 00000000 80020000 00000000 802F0011
+     | 000048        00000000 00000024 00000000 00000008 5241445F 534F4C56
+     | 000060        453A2055 6E737570 706F7274 65642076 616C7565 206F6620
+     | 000078        4C524144 00000000 00000000 80050000 7261645F 736F6C76
+     | 000090        652E6639 3049424D 3FE427FD 6D10AC26
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    rad_solve.f90               07/08/15   15:48:30
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................      43
+1501-510  Compilation successful for file rad_solve.f90.
+1501-543  Object file created.

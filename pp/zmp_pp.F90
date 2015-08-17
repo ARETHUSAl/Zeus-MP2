@@ -40,9 +40,7 @@ program zmp_pp
    20  continue
        write(*,"(/'What task would you like performed?')")
        write(*,"( 'Type one of the following:'/)")
-       write(*,"( '   h4splice   (concatenate HDF4 files one by one)')")
        write(*,"( '   h5splice   (concatenate HDF5 files one by one)')")
-       write(*,"( '   auto_h4    (automated h4splice)')")
        write(*,"( '   auto_h5    (automated h5splice)')")
        write(*,"( '   quit       (exit ZMP_PP)'/)")
        read(*,"(a)") task
@@ -51,23 +49,11 @@ program zmp_pp
 !
        if (task(1:4) .eq. 'quit') then
          stop
-       else if (task(1:8) .eq. 'h4splice') then
-!
-! SPLICE HDFDUMPs -- HDF Scientific Data Sets "hdf<id><coords>.<ndump>"
-!
-         call h4splice
-         goto 10
        else if (task(1:8) .eq. 'h5splice') then
 !
 ! SPLICE HDF5 DUMPs -- HDF5 Scientific Data Sets "hdf<id><coords>.<ndump>"
 !
          call h5splice
-         goto 10
-       else if (task(1:7) .eq. 'auto_h4') then
-!
-! AUTO-SPLICE HDF4 DUMPs -- HDF Scientific Data Sets "hdf<id><coords>.<ndump>"
-!
-         call auto_h4
          goto 10
        else if (task(1:7) .eq. 'auto_h5') then
 !

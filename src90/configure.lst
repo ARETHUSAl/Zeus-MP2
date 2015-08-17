@@ -1,0 +1,1015 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- configure.f90 07/08/15 15:47:27
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** configure   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+
+    20|         SUBROUTINE configure ()
+    49|           CALL mpi_init(ierr)
+    50|           T_2 = 1140850688
+                  CALL mpi_comm_rank(T_2,myid_w,ierr)
+    51|           T_3 = 1140850688
+                  CALL mpi_comm_size(T_3,nprocs_w,ierr)
+    57|           IF (.NOT.(myid_w == 0)) GOTO lab_7
+    58|           |speclist%version = 129
+                  |speclist%spec_list%spec_key.off8 = 16
+                  |speclist%spec_list%spec_value_addr.off16 = "zmp_inp"
+                  |speclist%spec_list%spec_value_val.off24 = 7
+                  |speclist%spec_list%spec_key.off32 = 48
+                  |speclist%spec_list%spec_value_addr.off40 = NULL
+                  |speclist%spec_list%spec_key_int4.off48 = 34
+                  |speclist%spec_list%spec_key.off56 = 118
+                  |speclist%spec_list%spec_val_i4.off64 = 58
+                  |speclist%spec_list%spec_key.off80 = 120
+                  |speclist%spec_list%spec_value_addr.off88 = "configure.f90"
+                  |speclist%spec_list%spec_value_val.off96 = 13
+                  |speclist%spec_count = 4
+                  _xlfIOCmd(1,0,|speclist,268435456,NULL)
+    59|           |speclist%version = 129
+                  |speclist%spec_list%spec_key.off8 = 16
+                  |speclist%spec_list%spec_value_addr.off16 = "zmp_log"
+                  |speclist%spec_list%spec_value_val.off24 = 7
+                  |speclist%spec_list%spec_key.off32 = 48
+                  |speclist%spec_list%spec_value_addr.off40 = NULL
+                  |speclist%spec_list%spec_key_int4.off48 = 51
+                  |speclist%spec_list%spec_key.off56 = 118
+                  |speclist%spec_list%spec_val_i4.off64 = 59
+                  |speclist%spec_list%spec_key.off80 = 120
+                  |speclist%spec_list%spec_value_addr.off88 = "configure.f90"
+                  |speclist%spec_list%spec_value_val.off96 = 13
+                  |speclist%spec_count = 4
+                  _xlfIOCmd(2,0,|speclist,268435456,NULL)
+                  GOTO lab_1
+    60|           lab_1
+    68|           lgeom = 1
+    69|           ldimen = 3
+    70|           lrad = 0
+    71|           leos = 1
+    72|           lopac = 0
+    73|           nspec = 1
+    74|           izones = 32
+    75|           jzones = 32
+    76|           kzones = 32
+    77|           maxijk = 32
+    78|           xvgrid = 0
+    79|           xhydro = 0
+    80|           xforce = 0
+    81|           xgrav = 0
+    82|           xgrvfft = 0
+    83|           xsphgrv = 0
+    84|           xptmass = 0
+    85|           xmhd = 0
+    86|           xhse = 0
+    87|           xtotnrg = 0
+    88|           xiso = 0
+    89|           xascii = 1
+    90|           xhdf = 0
+    91|           xhst = 0
+    92|           xrestart = 0
+    93|           xtsl = 0
+    94|           ichem = 0
+    95|           irt = 0
+    96|           nratec = 600
+    97|           nnu1 = 0
+    98|           nnu2 = 1
+    99|           large_no =  9.9999999999999996E+098
+   100|           small_no =  1.0000000000000000E-099
+   107|           |geomconf%name_flags = 0
+                  #2 = _xlfBeginIO(1,2,#1,32768,NULL,0,|geomconf)
+                  _xlfEndIO(%VAL(#2))
+   108|           |geomconf%name_flags = 0
+                  #4 = _xlfBeginIO(2,258,#3,32768,NULL,0,|geomconf)
+                  _xlfEndIO(%VAL(#4))
+   109|           confi_buf[].off0 = lgeom
+   110|           confi_buf[].off4 = ldimen
+   112|           |physconf%name_flags = 0
+                  #6 = _xlfBeginIO(1,2,#5,32768,NULL,0,|physconf)
+                  _xlfEndIO(%VAL(#6))
+   113|           |physconf%name_flags = 0
+                  #8 = _xlfBeginIO(2,258,#7,32768,NULL,0,|physconf)
+                  _xlfEndIO(%VAL(#8))
+   114|           confi_buf[].off8 = lrad
+   115|           confi_buf[].off12 = lopac
+   116|           confi_buf[].off16 = leos
+   117|           confi_buf[].off20 = nspec
+   118|           confl_buf[].off0 = xhydro
+   119|           confl_buf[].off4 = xforce
+   120|           confl_buf[].off8 = xmhd
+   121|           confl_buf[].off12 = xgrav
+   122|           confl_buf[].off16 = xgrvfft
+   123|           confl_buf[].off20 = xptmass
+   124|           confl_buf[].off24 = xtotnrg
+   125|           confl_buf[].off28 = xiso
+   126|           confl_buf[].off32 = xvgrid
+   127|           confl_buf[].off36 = xsubav
+   128|           confl_buf[].off40 = xsphgrv
+   129|           confl_buf[].off44 = xhse
+   131|           |ioconf%name_flags = 0
+                  #10 = _xlfBeginIO(1,2,#9,32768,NULL,0,|ioconf)
+                  _xlfEndIO(%VAL(#10))
+   132|           confl_buf[].off48 = xascii
+   133|           confl_buf[].off52 = xhdf
+   134|           confl_buf[].off56 = xrestart
+   135|           confl_buf[].off60 = xtsl
+   136|           confl_buf[].off64 = xhst
+   138|           |preconf%name_flags = 0
+                  #12 = _xlfBeginIO(1,2,#11,32768,NULL,0,|preconf)
+                  _xlfEndIO(%VAL(#12))
+   139|           confr_buf[].off0 = small_no
+   140|           confr_buf[].off8 = large_no
+   142|           |arrayconf%name_flags = 0
+                  #14 = _xlfBeginIO(1,2,#13,32768,NULL,0,|arrayconf)
+                  _xlfEndIO(%VAL(#14))
+   143|           confi_buf[].off44 = izones
+   144|           confi_buf[].off48 = jzones
+   145|           confi_buf[].off52 = kzones
+   146|           confi_buf[].off56 = maxijk
+   148|           |rchmconf%name_flags = 0
+                  #16 = _xlfBeginIO(1,2,#15,32768,NULL,0,|rchmconf)
+                  _xlfEndIO(%VAL(#16))
+   149|           confi_buf[].off24 = nratec
+   150|           confi_buf[].off28 = nnu1
+   151|           confi_buf[].off32 = nnu2
+   152|           confi_buf[].off36 = irt
+   153|           confi_buf[].off40 = ichem
+   155|           _xlfIOCmd(1,1,#17,0,NULL)
+    59|           lab_7
+                  lgeom = 1
+                  ldimen = 3
+                  lrad = 0
+                  leos = 1
+                  lopac = 0
+                  nspec = 1
+                  izones = 32
+                  jzones = 32
+                  kzones = 32
+                  maxijk = 32
+                  xvgrid = 0
+                  xhydro = 0
+                  xforce = 0
+                  xgrav = 0
+                  xgrvfft = 0
+                  xsphgrv = 0
+                  xptmass = 0
+                  xmhd = 0
+                  xhse = 0
+                  xtotnrg = 0
+                  xiso = 0
+                  xascii = 1
+                  xhdf = 0
+                  xhst = 0
+                  xrestart = 0
+                  xtsl = 0
+                  ichem = 0
+                  irt = 0
+                  nratec = 600
+                  nnu1 = 0
+                  nnu2 = 1
+                  large_no =  9.9999999999999996E+098
+                  small_no =  1.0000000000000000E-099
+                  GOTO lab_2
+   157|           lab_2
+   159|           T_4 = 15
+                  T_5 = 1275069467
+                  T_6 = 0
+                  T_7 = 1140850688
+                  CALL mpi_bcast(confi_buf,T_4,T_5,T_6,T_7,ierr)
+   160|           T_8 = 17
+                  T_9 = 1275069469
+                  T_10 = 0
+                  T_11 = 1140850688
+                  CALL mpi_bcast(confl_buf,T_8,T_9,T_10,T_11,ierr)
+   161|           T_12 = 2
+                  T_13 = 1275070495
+                  T_14 = 0
+                  T_15 = 1140850688
+                  CALL mpi_bcast(confr_buf,T_12,T_13,T_14,T_15,ierr)
+   163|           IF ((myid_w <> 0)) THEN
+   164|             lgeom = confi_buf[].off0
+   165|             ldimen = confi_buf[].off4
+   166|             lrad = confi_buf[].off8
+   167|             lopac = confi_buf[].off12
+   168|             leos = confi_buf[].off16
+   169|             nspec = confi_buf[].off20
+   170|             nratec = confi_buf[].off24
+   171|             nnu1 = confi_buf[].off28
+   172|             nnu2 = confi_buf[].off32
+   173|             irt = confi_buf[].off36
+   174|             ichem = confi_buf[].off40
+   175|             izones = confi_buf[].off44
+   176|             jzones = confi_buf[].off48
+   177|             kzones = confi_buf[].off52
+   178|             maxijk = confi_buf[].off56
+   179|             xhydro = confl_buf[].off0
+   180|             xforce = confl_buf[].off4
+   181|             xmhd = confl_buf[].off8
+   182|             xgrav = confl_buf[].off12
+   183|             xgrvfft = confl_buf[].off16
+   184|             xptmass = confl_buf[].off20
+   185|             xtotnrg = confl_buf[].off24
+   186|             xiso = confl_buf[].off28
+   187|             xvgrid = confl_buf[].off32
+   188|             xsubav = confl_buf[].off36
+   189|             xsphgrv = confl_buf[].off40
+   190|             xhse = confl_buf[].off44
+   191|             xascii = confl_buf[].off48
+   192|             xhdf = confl_buf[].off52
+   193|             xrestart = confl_buf[].off56
+   194|             xtsl = confl_buf[].off60
+   195|             xhst = confl_buf[].off64
+   196|             small_no = confr_buf[].off0
+   197|             large_no = confr_buf[].off8
+   198|           ENDIF
+   200|           T_16 = 1140850688
+                  CALL mpi_barrier(T_16,ierr)
+   202|           CALL alloc_arrays()
+   205|           RETURN
+                END SUBROUTINE configure
+
+
+    20|         SUBROUTINE configure ()
+    49|           CALL mpi_init(ierr)
+    50|           T_2 = 1140850688
+                  CALL mpi_comm_rank(T_2,myid_w,ierr)
+    51|           T_3 = 1140850688
+                  CALL mpi_comm_size(T_3,nprocs_w,ierr)
+    57|           IF (.NOT.(myid_w == 0)) GOTO lab_7
+    58|           |speclist%version = 129
+                  |speclist%spec_list%spec_key.off8 = 16
+                  |speclist%spec_list%spec_value_addr.off16 = "zmp_inp"
+                  |speclist%spec_list%spec_value_val.off24 = 7
+                  |speclist%spec_list%spec_key.off32 = 48
+                  |speclist%spec_list%spec_value_addr.off40 = NULL
+                  |speclist%spec_list%spec_key_int4.off48 = 34
+                  |speclist%spec_list%spec_key.off56 = 118
+                  |speclist%spec_list%spec_val_i4.off64 = 58
+                  |speclist%spec_list%spec_key.off80 = 120
+                  |speclist%spec_list%spec_value_addr.off88 = "configure.f90"
+                  |speclist%spec_list%spec_value_val.off96 = 13
+                  |speclist%spec_count = 4
+                  _xlfIOCmd(1,0,|speclist,268435456,NULL)
+    59|           |speclist%version = 129
+                  |speclist%spec_list%spec_key.off8 = 16
+                  |speclist%spec_list%spec_value_addr.off16 = "zmp_log"
+                  |speclist%spec_list%spec_value_val.off24 = 7
+                  |speclist%spec_list%spec_key.off32 = 48
+                  |speclist%spec_list%spec_value_addr.off40 = NULL
+                  |speclist%spec_list%spec_key_int4.off48 = 51
+                  |speclist%spec_list%spec_key.off56 = 118
+                  |speclist%spec_list%spec_val_i4.off64 = 59
+                  |speclist%spec_list%spec_key.off80 = 120
+                  |speclist%spec_list%spec_value_addr.off88 = "configure.f90"
+                  |speclist%spec_list%spec_value_val.off96 = 13
+                  |speclist%spec_count = 4
+                  _xlfIOCmd(2,0,|speclist,268435456,NULL)
+                  GOTO lab_1
+    60|           lab_1
+    68|           lgeom = 1
+    69|           ldimen = 3
+    70|           lrad = 0
+    71|           leos = 1
+    72|           lopac = 0
+    73|           nspec = 1
+    74|           izones = 32
+    75|           jzones = 32
+    76|           kzones = 32
+    77|           maxijk = 32
+    78|           xvgrid = 0
+    79|           xhydro = 0
+    80|           xforce = 0
+    81|           xgrav = 0
+    82|           xgrvfft = 0
+    83|           xsphgrv = 0
+    84|           xptmass = 0
+    85|           xmhd = 0
+    86|           xhse = 0
+    87|           xtotnrg = 0
+    88|           xiso = 0
+    89|           xascii = 1
+    90|           xhdf = 0
+    91|           xhst = 0
+    92|           xrestart = 0
+    93|           xtsl = 0
+    94|           ichem = 0
+    95|           irt = 0
+    96|           nratec = 600
+    97|           nnu1 = 0
+    98|           nnu2 = 1
+    99|           large_no =  9.9999999999999996E+098
+   100|           small_no =  1.0000000000000000E-099
+   107|           |geomconf%name_flags = 0
+                  #2 = _xlfBeginIO(1,2,#1,32768,NULL,0,|geomconf)
+                  _xlfEndIO(%VAL(#2))
+   108|           |geomconf%name_flags = 0
+                  #4 = _xlfBeginIO(2,258,#3,32768,NULL,0,|geomconf)
+                  _xlfEndIO(%VAL(#4))
+   109|           confi_buf[].off0 = lgeom
+   110|           confi_buf[].off4 = ldimen
+   112|           |physconf%name_flags = 0
+                  #6 = _xlfBeginIO(1,2,#5,32768,NULL,0,|physconf)
+                  _xlfEndIO(%VAL(#6))
+   113|           |physconf%name_flags = 0
+                  #8 = _xlfBeginIO(2,258,#7,32768,NULL,0,|physconf)
+                  _xlfEndIO(%VAL(#8))
+   114|           confi_buf[].off8 = lrad
+   115|           confi_buf[].off12 = lopac
+   116|           confi_buf[].off16 = leos
+   117|           confi_buf[].off20 = nspec
+   118|           confl_buf[].off0 = xhydro
+   119|           confl_buf[].off4 = xforce
+   120|           confl_buf[].off8 = xmhd
+   121|           confl_buf[].off12 = xgrav
+   122|           confl_buf[].off16 = xgrvfft
+   123|           confl_buf[].off20 = xptmass
+   124|           confl_buf[].off24 = xtotnrg
+   125|           confl_buf[].off28 = xiso
+   126|           confl_buf[].off32 = xvgrid
+   127|           confl_buf[].off36 = xsubav
+   128|           confl_buf[].off40 = xsphgrv
+   129|           confl_buf[].off44 = xhse
+   131|           |ioconf%name_flags = 0
+                  #10 = _xlfBeginIO(1,2,#9,32768,NULL,0,|ioconf)
+                  _xlfEndIO(%VAL(#10))
+   132|           confl_buf[].off48 = xascii
+   133|           confl_buf[].off52 = xhdf
+   134|           confl_buf[].off56 = xrestart
+   135|           confl_buf[].off60 = xtsl
+   136|           confl_buf[].off64 = xhst
+   138|           |preconf%name_flags = 0
+                  #12 = _xlfBeginIO(1,2,#11,32768,NULL,0,|preconf)
+                  _xlfEndIO(%VAL(#12))
+   139|           confr_buf[].off0 = small_no
+   140|           confr_buf[].off8 = large_no
+   142|           |arrayconf%name_flags = 0
+                  #14 = _xlfBeginIO(1,2,#13,32768,NULL,0,|arrayconf)
+                  _xlfEndIO(%VAL(#14))
+   143|           confi_buf[].off44 = izones
+   144|           confi_buf[].off48 = jzones
+   145|           confi_buf[].off52 = kzones
+   146|           confi_buf[].off56 = maxijk
+   148|           |rchmconf%name_flags = 0
+                  #16 = _xlfBeginIO(1,2,#15,32768,NULL,0,|rchmconf)
+                  _xlfEndIO(%VAL(#16))
+   149|           confi_buf[].off24 = nratec
+   150|           confi_buf[].off28 = nnu1
+   151|           confi_buf[].off32 = nnu2
+   152|           confi_buf[].off36 = irt
+   153|           confi_buf[].off40 = ichem
+   155|           _xlfIOCmd(1,1,#17,0,NULL)
+    59|           lab_7
+                  lgeom = 1
+                  ldimen = 3
+                  lrad = 0
+                  leos = 1
+                  lopac = 0
+                  nspec = 1
+                  izones = 32
+                  jzones = 32
+                  kzones = 32
+                  maxijk = 32
+                  xvgrid = 0
+                  xhydro = 0
+                  xforce = 0
+                  xgrav = 0
+                  xgrvfft = 0
+                  xsphgrv = 0
+                  xptmass = 0
+                  xmhd = 0
+                  xhse = 0
+                  xtotnrg = 0
+                  xiso = 0
+                  xascii = 1
+                  xhdf = 0
+                  xhst = 0
+                  xrestart = 0
+                  xtsl = 0
+                  ichem = 0
+                  irt = 0
+                  nratec = 600
+                  nnu1 = 0
+                  nnu2 = 1
+                  large_no =  9.9999999999999996E+098
+                  small_no =  1.0000000000000000E-099
+                  GOTO lab_2
+   157|           lab_2
+   159|           T_4 = 15
+                  T_5 = 1275069467
+                  T_6 = 0
+                  T_7 = 1140850688
+                  CALL mpi_bcast(confi_buf,T_4,T_5,T_6,T_7,ierr)
+   160|           T_8 = 17
+                  T_9 = 1275069469
+                  T_10 = 0
+                  T_11 = 1140850688
+                  CALL mpi_bcast(confl_buf,T_8,T_9,T_10,T_11,ierr)
+   161|           T_12 = 2
+                  T_13 = 1275070495
+                  T_14 = 0
+                  T_15 = 1140850688
+                  CALL mpi_bcast(confr_buf,T_12,T_13,T_14,T_15,ierr)
+   163|           IF ((myid_w <> 0)) THEN
+   164|             lgeom = confi_buf[].off0
+   165|             ldimen = confi_buf[].off4
+   166|             lrad = confi_buf[].off8
+   167|             lopac = confi_buf[].off12
+   168|             leos = confi_buf[].off16
+   169|             nspec = confi_buf[].off20
+   170|             nratec = confi_buf[].off24
+   171|             nnu1 = confi_buf[].off28
+   172|             nnu2 = confi_buf[].off32
+   173|             irt = confi_buf[].off36
+   174|             ichem = confi_buf[].off40
+   175|             izones = confi_buf[].off44
+   176|             jzones = confi_buf[].off48
+   177|             kzones = confi_buf[].off52
+   178|             maxijk = confi_buf[].off56
+   179|             xhydro = confl_buf[].off0
+   180|             xforce = confl_buf[].off4
+   181|             xmhd = confl_buf[].off8
+   182|             xgrav = confl_buf[].off12
+   183|             xgrvfft = confl_buf[].off16
+   184|             xptmass = confl_buf[].off20
+   185|             xtotnrg = confl_buf[].off24
+   186|             xiso = confl_buf[].off28
+   187|             xvgrid = confl_buf[].off32
+   188|             xsubav = confl_buf[].off36
+   189|             xsphgrv = confl_buf[].off40
+   190|             xhse = confl_buf[].off44
+   191|             xascii = confl_buf[].off48
+   192|             xhdf = confl_buf[].off52
+   193|             xrestart = confl_buf[].off56
+   194|             xtsl = confl_buf[].off60
+   195|             xhst = confl_buf[].off64
+   196|             small_no = confr_buf[].off0
+   197|             large_no = confr_buf[].off8
+   198|           ENDIF
+   200|           T_16 = 1140850688
+                  CALL mpi_barrier(T_16,ierr)
+   202|           CALL alloc_arrays()
+   205|           RETURN
+                END SUBROUTINE configure
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s---  -sss ssss ssss ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---- ----
+ CCR's set/used:   ss-- -sss
+     | 000000                           PDEF     configure
+   20|                                  PROC      
+    0| 000000 std      FBE1FFF8   1     ST8       #stack(gr1,-8)=gr31
+    0| 000004 std      FBC1FFF0   1     ST8       #stack(gr1,-16)=gr30
+    0| 000008 std      FBA1FFE8   1     ST8       #stack(gr1,-24)=gr29
+    0| 00000C std      FB81FFE0   1     ST8       #stack(gr1,-32)=gr28
+    0| 000010 std      FB61FFD8   1     ST8       #stack(gr1,-40)=gr27
+    0| 000014 std      FB41FFD0   1     ST8       #stack(gr1,-48)=gr26
+    0| 000018 std      FB21FFC8   1     ST8       #stack(gr1,-56)=gr25
+    0| 00001C std      FB01FFC0   1     ST8       #stack(gr1,-64)=gr24
+    0| 000020 std      FAE1FFB8   1     ST8       #stack(gr1,-72)=gr23
+    0| 000024 std      FAC1FFB0   1     ST8       #stack(gr1,-80)=gr22
+    0| 000028 std      FAA1FFA8   1     ST8       #stack(gr1,-88)=gr21
+    0| 00002C std      FA81FFA0   1     ST8       #stack(gr1,-96)=gr20
+    0| 000030 std      FA61FF98   1     ST8       #stack(gr1,-104)=gr19
+    0| 000034 std      FA41FF90   1     ST8       #stack(gr1,-112)=gr18
+    0| 000038 std      FA21FF88   1     ST8       #stack(gr1,-120)=gr17
+    0| 00003C mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000040 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 000044 stdu     F821FA21   1     ST8U      gr1,#stack(gr1,-1504)=gr1
+   49| 000048 ld       EBE20000   1     L8        gr31=.&&N&&mpipar(gr2,0)
+   49| 00004C addi     387F0014   1     AI        gr3=gr31,20
+   49| 000050 bl       48000001   1     CALL      mpi_init,1,ierr",gr3,#ProcAlias",mpi_init",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   49| 000054 ori      60000000   1
+   50| 000058 addis    3FC04400   1     LIU       gr30=17408
+   50| 00005C addi     389F0008   1     AI        gr4=gr31,8
+   50| 000060 stw      93C10080   1     ST4Z      T_2(gr1,128)=gr30
+   50| 000064 addi     38610080   1     AI        gr3=gr1,128
+   50| 000068 addi     38BF0014   1     AI        gr5=gr31,20
+   50| 00006C bl       48000001   1     CALL      mpi_comm_rank,3,T_2",gr3,myid_w",gr4,ierr",gr5,mpi_comm_rank",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   50| 000070 ori      60000000   1
+   51| 000074 stw      93C10084   1     ST4Z      T_3(gr1,132)=gr30
+   51| 000078 addi     389F0010   1     AI        gr4=gr31,16
+   51| 00007C addi     38610084   1     AI        gr3=gr1,132
+   51| 000080 addi     38BF0014   1     AI        gr5=gr31,20
+   51| 000084 bl       48000001   1     CALL      mpi_comm_size,3,T_3",gr3,nprocs_w",gr4,ierr",gr5,mpi_comm_size",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   51| 000088 ori      60000000   1
+   57| 00008C lwz      801F0008   1     L4Z       gr0=<s13:d8:l4>(gr31,8)
+    0| 000090 ld       EBA20000   1     L8        gr29=.&&N&&config(gr2,0)
+    0| 000094 ld       EB820000   1     L8        gr28=.&&N&&chem(gr2,0)
+   57| 000098 cmpdi    2C200000   1     C8        cr0=gr0,0
+   57| 00009C bc       40820410   1     BF        CL.7,cr0,0x4/eq,taken=60%(60,40)
+   58| 0000A0 ld       EB620000   1     L8        gr27=.+CONSTANT_AREA(gr2,0)
+   58| 0000A4 addi     3B400081   1     LI        gr26=129
+   58| 0000A8 addi     3B200010   1     LI        gr25=16
+   58| 0000AC stw      93410180   1     ST4Z      <a1:d384:l4>(gr1,384)=gr26
+   58| 0000B0 stw      93210188   1     ST4Z      <a1:d392:l4>(gr1,392)=gr25
+   58| 0000B4 addi     3B000007   1     LI        gr24=7
+   58| 0000B8 addi     381B0118   1     AI        gr0=gr27,280
+   58| 0000BC std      FB010198   1     ST8       <a1:d408:l8>(gr1,408)=gr24
+   58| 0000C0 std      F8010190   1     ST8       <a1:d400:l8>(gr1,400)=gr0
+   58| 0000C4 addi     38000022   1     LI        gr0=34
+   58| 0000C8 addi     3AE00030   1     LI        gr23=48
+   58| 0000CC stw      900101B0   1     ST4Z      <a1:d432:l4>(gr1,432)=gr0
+   58| 0000D0 stw      92E101A0   1     ST4Z      <a1:d416:l4>(gr1,416)=gr23
+   58| 0000D4 addi     3A200000   1     LI        gr17=0
+   58| 0000D8 addi     3AC00076   1     LI        gr22=118
+   58| 0000DC std      FA2101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr17
+   58| 0000E0 stw      92C101B8   1     ST4Z      <a1:d440:l4>(gr1,440)=gr22
+   58| 0000E4 addi     3800003A   1     LI        gr0=58
+   58| 0000E8 addi     3AA00078   1     LI        gr21=120
+   58| 0000EC stw      900101C0   1     ST4Z      <a1:d448:l4>(gr1,448)=gr0
+   58| 0000F0 stw      92A101D0   1     ST4Z      <a1:d464:l4>(gr1,464)=gr21
+   58| 0000F4 addi     3A9B0108   1     AI        gr20=gr27,264
+   58| 0000F8 addi     3A60000D   1     LI        gr19=13
+   58| 0000FC std      FA8101D8   1     ST8       <a1:d472:l8>(gr1,472)=gr20
+   58| 000100 std      FA6101E0   1     ST8       <a1:d480:l8>(gr1,480)=gr19
+   58| 000104 addi     3A400004   1     LI        gr18=4
+   58| 000108 addi     38600001   1     LI        gr3=1
+   58| 00010C stw      92410184   1     ST4Z      <a1:d388:l4>(gr1,388)=gr18
+   58| 000110 addi     38800000   1     LI        gr4=0
+   58| 000114 addi     38A10180   1     AI        gr5=gr1,384
+   58| 000118 addis    3CC01000   1     LIU       gr6=4096
+   58| 00011C addi     38E00000   1     LI        gr7=0
+   58| 000120 bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,|speclist",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,#use_xlfIOCmd11,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   58| 000124 ori      60000000   1
+   59| 000128 stw      93410180   1     ST4Z      <a1:d384:l4>(gr1,384)=gr26
+   59| 00012C stw      93210188   1     ST4Z      <a1:d392:l4>(gr1,392)=gr25
+   59| 000130 std      FB010198   1     ST8       <a1:d408:l8>(gr1,408)=gr24
+   59| 000134 stw      92E101A0   1     ST4Z      <a1:d416:l4>(gr1,416)=gr23
+   59| 000138 std      FA2101A8   1     ST8       <a1:d424:l8>(gr1,424)=gr17
+   59| 00013C stw      92C101B8   1     ST4Z      <a1:d440:l4>(gr1,440)=gr22
+   59| 000140 stw      92A101D0   1     ST4Z      <a1:d464:l4>(gr1,464)=gr21
+   59| 000144 std      FA8101D8   1     ST8       <a1:d472:l8>(gr1,472)=gr20
+   59| 000148 std      FA6101E0   1     ST8       <a1:d480:l8>(gr1,480)=gr19
+   59| 00014C stw      92410184   1     ST4Z      <a1:d388:l4>(gr1,388)=gr18
+   59| 000150 addi     381B0120   1     AI        gr0=gr27,288
+   59| 000154 addi     38600033   1     LI        gr3=51
+   59| 000158 std      F8010190   1     ST8       <a1:d400:l8>(gr1,400)=gr0
+   59| 00015C stw      906101B0   1     ST4Z      <a1:d432:l4>(gr1,432)=gr3
+   59| 000160 addi     3800003B   1     LI        gr0=59
+   59| 000164 addi     38600002   1     LI        gr3=2
+   59| 000168 stw      900101C0   1     ST4Z      <a1:d448:l4>(gr1,448)=gr0
+   59| 00016C addi     38800000   1     LI        gr4=0
+   59| 000170 addi     38A10180   1     AI        gr5=gr1,384
+   59| 000174 addis    3CC01000   1     LIU       gr6=4096
+   59| 000178 addi     38E00000   1     LI        gr7=0
+   59| 00017C bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,|speclist",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,#use_xlfIOCmd21,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   59| 000180 ori      60000000   1
+   70| 000184 stw      923D0018   1     ST4Z      <s33:d24:l4>(gr29,24)=gr17
+   78| 000188 stw      923D0048   1     ST4Z      <s33:d72:l4>(gr29,72)=gr17
+   79| 00018C stw      923D0028   1     ST4Z      <s33:d40:l4>(gr29,40)=gr17
+   80| 000190 stw      923D0050   1     ST4Z      <s33:d80:l4>(gr29,80)=gr17
+   82| 000194 std      FA3D002C   1     ST8       xgr|av#48|vfft#49_1(gr29,44)=gr17
+   83| 000198 stw      923D003C   1     ST4Z      <s33:d60:l4>(gr29,60)=gr17
+   85| 00019C std      FA3D0034   1     ST8       x|ptmass#51|mhd#52_1(gr29,52)=gr17
+   86| 0001A0 stw      923D0054   1     ST4Z      <s33:d84:l4>(gr29,84)=gr17
+   88| 0001A4 std      FA3D0040   1     ST8       x|totnrg#54|iso#55_1(gr29,64)=gr17
+   91| 0001A8 stw      923D006C   1     ST4Z      <s33:d108:l4>(gr29,108)=gr17
+   93| 0001AC std      FA3D0064   1     ST8       x|restart#59|tsl#60_1(gr29,100)=gr17
+   94| 0001B0 stw      923C0140   1     ST4Z      <s61:d320:l4>(gr28,320)=gr17
+   95| 0001B4 stw      923C010C   1     ST4Z      <s61:d268:l4>(gr28,268)=gr17
+   69| 0001B8 ld       E81B0128   1     L8        gr0=+CONSTANT_AREA(gr27,296)
+   75| 0001BC ld       E87B0130   1     L8        gr3=+CONSTANT_AREA(gr27,304)
+   72| 0001C0 addi     38800001   1     LI        gr4=1
+   99| 0001C4 lfd      C81B0138   1     LFL       fp0=+CONSTANT_AREA(gr27,312)
+   72| 0001C8 std      F89D001C   1     ST8       l|opac#39|eos#38_1(gr29,28)=gr4
+   73| 0001CC stw      909D0024   1     ST4Z      <s33:d36:l4>(gr29,36)=gr4
+   69| 0001D0 std      F81D0000   1     ST8       l|geom#35|dimen#36_1(gr29,0)=gr0
+   75| 0001D4 std      F87D0008   1     ST8       |izones#41|jzones#42_1(gr29,8)=gr3
+   77| 0001D8 std      F87D0010   1     ST8       |kzones#43|maxijk#44_1(gr29,16)=gr3
+   98| 0001DC std      F89C0138   1     ST8       nnu|1#66|2#67_1(gr28,312)=gr4
+   90| 0001E0 rldicr   788007C6   1     SLL8      gr0=gr4,32
+   96| 0001E4 addi     38600258   1     LI        gr3=600
+   90| 0001E8 std      F81D005C   1     ST8       x|ascii#56|hdf#57_1(gr29,92)=gr0
+   96| 0001EC stw      907C0144   1     ST4Z      <s61:d324:l4>(gr28,324)=gr3
+   99| 0001F0 stfd     D81D0078   1     STFL      <s33:d120:l8>(gr29,120)=fp0
+  100| 0001F4 lfd      C83B0140   1     LFL       fp1=+CONSTANT_AREA(gr27,320)
+  107| 0001F8 ld       EB620000   1     L8        gr27=.$STATIC(gr2,0)
+  107| 0001FC ori      623A8000   1     OIL       gr26=gr17,0x8000
+  107| 000200 addi     38600001   1     LI        gr3=1
+  107| 000204 addi     38800002   1     LI        gr4=2
+  107| 000208 or       7F46D378   1     LR        gr6=gr26
+  107| 00020C addi     38E00000   1     LI        gr7=0
+  107| 000210 stw      923B0244   1     ST4Z      <s70:d580:l4>(gr27,580)=gr17
+  100| 000214 stfd     D83D0070   1     STFL      <s33:d112:l8>(gr29,112)=fp1
+  107| 000218 or       7F65DB78   1     LR        gr5=gr27
+  107| 00021C addi     393B0240   1     AI        gr9=gr27,576
+  107| 000220 addi     39000000   1     LI        gr8=0
+  107| 000224 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#1",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|geomconf,gr9,#def_xlfBeginIO11",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  107| 000228 ori      60000000   1
+  107| 00022C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  107| 000230 ori      60000000   1
+  108| 000234 addi     38BB0040   1     AI        gr5=gr27,64
+  108| 000238 or       7F46D378   1     LR        gr6=gr26
+  108| 00023C addi     393B0240   1     AI        gr9=gr27,576
+  108| 000240 addi     38600002   1     LI        gr3=2
+  108| 000244 addi     38800102   1     LI        gr4=258
+  108| 000248 addi     38E00000   1     LI        gr7=0
+  108| 00024C addi     39000000   1     LI        gr8=0
+  108| 000250 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#3",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|geomconf,gr9,#use_xlfBeginIO21,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  108| 000254 ori      60000000   1
+  108| 000258 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  108| 00025C ori      60000000   1
+  112| 000260 stw      923B0704   1     ST4Z      <s94:d1796:l4>(gr27,1796)=gr17
+  109| 000264 lwz      801D0000   1     L4Z       gr0=<s33:d0:l4>(gr29,0)
+  110| 000268 lwz      815D0004   1     L4Z       gr10=<s33:d4:l4>(gr29,4)
+  112| 00026C addi     38BB0080   1     AI        gr5=gr27,128
+  112| 000270 or       7F46D378   1     LR        gr6=gr26
+  112| 000274 addi     393B0700   1     AI        gr9=gr27,1792
+  112| 000278 addi     38600001   1     LI        gr3=1
+  109| 00027C stw      900100C0   1     ST4Z      <a1:d192:l4>(gr1,192)=gr0
+  110| 000280 stw      914100C4   1     ST4Z      <a1:d196:l4>(gr1,196)=gr10
+  112| 000284 addi     38800002   1     LI        gr4=2
+  112| 000288 addi     38E00000   1     LI        gr7=0
+  112| 00028C addi     39000000   1     LI        gr8=0
+  112| 000290 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#5",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|physconf,gr9,#def_xlfBeginIO31",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  112| 000294 ori      60000000   1
+  112| 000298 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  112| 00029C ori      60000000   1
+  113| 0002A0 addi     38BB00C0   1     AI        gr5=gr27,192
+  113| 0002A4 or       7F46D378   1     LR        gr6=gr26
+  113| 0002A8 addi     393B0700   1     AI        gr9=gr27,1792
+  113| 0002AC addi     38600002   1     LI        gr3=2
+  113| 0002B0 addi     38800102   1     LI        gr4=258
+  113| 0002B4 addi     38E00000   1     LI        gr7=0
+  113| 0002B8 addi     39000000   1     LI        gr8=0
+  113| 0002BC bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#7",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|physconf,gr9,#use_xlfBeginIO41,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  113| 0002C0 ori      60000000   1
+  113| 0002C4 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  113| 0002C8 ori      60000000   1
+  131| 0002CC stw      923B0484   1     ST4Z      <s115:d1156:l4>(gr27,1156)=gr17
+  114| 0002D0 lwz      801D0018   1     L4Z       gr0=<s33:d24:l4>(gr29,24)
+  117| 0002D4 lwz      80FD0024   1     L4Z       gr7=<s33:d36:l4>(gr29,36)
+  118| 0002D8 lwz      811D0028   1     L4Z       gr8=<s33:d40:l4>(gr29,40)
+  119| 0002DC lwz      815D0050   1     L4Z       gr10=<s33:d80:l4>(gr29,80)
+  115| 0002E0 lwz      807D001C   1     L4Z       gr3=<s33:d28:l4>(gr29,28)
+  116| 0002E4 lwz      809D0020   1     L4Z       gr4=<s33:d32:l4>(gr29,32)
+  114| 0002E8 stw      900100C8   1     ST4Z      <a1:d200:l4>(gr1,200)=gr0
+  117| 0002EC stw      90E100D4   1     ST4Z      <a1:d212:l4>(gr1,212)=gr7
+  118| 0002F0 stw      91010120   1     ST4Z      <a1:d288:l4>(gr1,288)=gr8
+  119| 0002F4 stw      91410124   1     ST4Z      <a1:d292:l4>(gr1,292)=gr10
+  115| 0002F8 stw      906100CC   1     ST4Z      <a1:d204:l4>(gr1,204)=gr3
+  116| 0002FC stw      908100D0   1     ST4Z      <a1:d208:l4>(gr1,208)=gr4
+  120| 000300 lwz      801D0038   1     L4Z       gr0=<s33:d56:l4>(gr29,56)
+  123| 000304 lwz      80FD0034   1     L4Z       gr7=<s33:d52:l4>(gr29,52)
+  124| 000308 lwz      811D0040   1     L4Z       gr8=<s33:d64:l4>(gr29,64)
+  125| 00030C lwz      815D0044   1     L4Z       gr10=<s33:d68:l4>(gr29,68)
+  121| 000310 lwz      807D002C   1     L4Z       gr3=<s33:d44:l4>(gr29,44)
+  122| 000314 lwz      809D0030   1     L4Z       gr4=<s33:d48:l4>(gr29,48)
+  120| 000318 stw      90010128   1     ST4Z      <a1:d296:l4>(gr1,296)=gr0
+  123| 00031C stw      90E10134   1     ST4Z      <a1:d308:l4>(gr1,308)=gr7
+  124| 000320 stw      91010138   1     ST4Z      <a1:d312:l4>(gr1,312)=gr8
+  125| 000324 stw      9141013C   1     ST4Z      <a1:d316:l4>(gr1,316)=gr10
+  121| 000328 stw      9061012C   1     ST4Z      <a1:d300:l4>(gr1,300)=gr3
+  122| 00032C stw      90810130   1     ST4Z      <a1:d304:l4>(gr1,304)=gr4
+  126| 000330 lwz      801D0048   1     L4Z       gr0=<s33:d72:l4>(gr29,72)
+  127| 000334 lwz      80FD004C   1     L4Z       gr7=<s33:d76:l4>(gr29,76)
+  128| 000338 lwz      811D003C   1     L4Z       gr8=<s33:d60:l4>(gr29,60)
+  129| 00033C lwz      815D0054   1     L4Z       gr10=<s33:d84:l4>(gr29,84)
+  131| 000340 addi     393B0480   1     AI        gr9=gr27,1152
+  131| 000344 addi     38BB0100   1     AI        gr5=gr27,256
+  126| 000348 stw      90010140   1     ST4Z      <a1:d320:l4>(gr1,320)=gr0
+  127| 00034C stw      90E10144   1     ST4Z      <a1:d324:l4>(gr1,324)=gr7
+  128| 000350 stw      91010148   1     ST4Z      <a1:d328:l4>(gr1,328)=gr8
+  129| 000354 stw      9141014C   1     ST4Z      <a1:d332:l4>(gr1,332)=gr10
+  131| 000358 or       7F46D378   1     LR        gr6=gr26
+  131| 00035C addi     38600001   1     LI        gr3=1
+  131| 000360 addi     38800002   1     LI        gr4=2
+  131| 000364 addi     38E00000   1     LI        gr7=0
+  131| 000368 addi     39000000   1     LI        gr8=0
+  131| 00036C bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#9",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|ioconf,gr9,#def_xlfBeginIO51",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  131| 000370 ori      60000000   1
+  131| 000374 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  131| 000378 ori      60000000   1
+  138| 00037C stw      923B02E4   1     ST4Z      <s130:d740:l4>(gr27,740)=gr17
+  132| 000380 lwz      801D005C   1     L4Z       gr0=<s33:d92:l4>(gr29,92)
+  133| 000384 lwz      807D0060   1     L4Z       gr3=<s33:d96:l4>(gr29,96)
+  134| 000388 lwz      809D0064   1     L4Z       gr4=<s33:d100:l4>(gr29,100)
+  135| 00038C lwz      80BD0068   1     L4Z       gr5=<s33:d104:l4>(gr29,104)
+  136| 000390 lwz      80DD006C   1     L4Z       gr6=<s33:d108:l4>(gr29,108)
+  138| 000394 addi     393B02E0   1     AI        gr9=gr27,736
+  132| 000398 stw      90010150   1     ST4Z      <a1:d336:l4>(gr1,336)=gr0
+  133| 00039C stw      90610154   1     ST4Z      <a1:d340:l4>(gr1,340)=gr3
+  134| 0003A0 stw      90810158   1     ST4Z      <a1:d344:l4>(gr1,344)=gr4
+  135| 0003A4 stw      90A1015C   1     ST4Z      <a1:d348:l4>(gr1,348)=gr5
+  136| 0003A8 stw      90C10160   1     ST4Z      <a1:d352:l4>(gr1,352)=gr6
+  138| 0003AC addi     38BB0140   1     AI        gr5=gr27,320
+  138| 0003B0 or       7F46D378   1     LR        gr6=gr26
+  138| 0003B4 addi     38600001   1     LI        gr3=1
+  138| 0003B8 addi     38800002   1     LI        gr4=2
+  138| 0003BC addi     38E00000   1     LI        gr7=0
+  138| 0003C0 addi     39000000   1     LI        gr8=0
+  138| 0003C4 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#11",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|preconf,gr9,#def_xlfBeginIO61",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  138| 0003C8 ori      60000000   1
+  138| 0003CC bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  138| 0003D0 ori      60000000   1
+  142| 0003D4 stw      923B0384   1     ST4Z      <s147:d900:l4>(gr27,900)=gr17
+  139| 0003D8 lfd      C81D0070   1     LFL       fp0=<s33:d112:l8>(gr29,112)
+  140| 0003DC lfd      C83D0078   1     LFL       fp1=<s33:d120:l8>(gr29,120)
+  142| 0003E0 addi     393B0380   1     AI        gr9=gr27,896
+  142| 0003E4 addi     38BB0180   1     AI        gr5=gr27,384
+  142| 0003E8 or       7F46D378   1     LR        gr6=gr26
+  142| 0003EC addi     38600001   1     LI        gr3=1
+  142| 0003F0 addi     38800002   1     LI        gr4=2
+  142| 0003F4 addi     38E00000   1     LI        gr7=0
+  139| 0003F8 stfd     D8010100   1     STFL      <a1:d256:l8>(gr1,256)=fp0
+  140| 0003FC stfd     D8210108   1     STFL      <a1:d264:l8>(gr1,264)=fp1
+  142| 000400 addi     39000000   1     LI        gr8=0
+  142| 000404 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#13",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|arrayconf,gr9,#def_xlfBeginIO71",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  142| 000408 ori      60000000   1
+  142| 00040C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  142| 000410 ori      60000000   1
+  148| 000414 stw      923B05C4   1     ST4Z      <s162:d1476:l4>(gr27,1476)=gr17
+  143| 000418 lwz      801D0008   1     L4Z       gr0=<s33:d8:l4>(gr29,8)
+  144| 00041C lwz      80FD000C   1     L4Z       gr7=<s33:d12:l4>(gr29,12)
+  145| 000420 lwz      811D0010   1     L4Z       gr8=<s33:d16:l4>(gr29,16)
+  146| 000424 lwz      815D0014   1     L4Z       gr10=<s33:d20:l4>(gr29,20)
+  148| 000428 or       7F46D378   1     LR        gr6=gr26
+  148| 00042C addi     393B05C0   1     AI        gr9=gr27,1472
+  143| 000430 stw      900100EC   1     ST4Z      <a1:d236:l4>(gr1,236)=gr0
+  144| 000434 stw      90E100F0   1     ST4Z      <a1:d240:l4>(gr1,240)=gr7
+  145| 000438 stw      910100F4   1     ST4Z      <a1:d244:l4>(gr1,244)=gr8
+  146| 00043C stw      914100F8   1     ST4Z      <a1:d248:l4>(gr1,248)=gr10
+  148| 000440 addi     38BB01C0   1     AI        gr5=gr27,448
+  148| 000444 addi     38600001   1     LI        gr3=1
+  148| 000448 addi     38800002   1     LI        gr4=2
+  148| 00044C addi     38E00000   1     LI        gr7=0
+  148| 000450 addi     39000000   1     LI        gr8=0
+  148| 000454 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#15",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|rchmconf,gr9,#def_xlfBeginIO81",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  148| 000458 ori      60000000   1
+  148| 00045C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  148| 000460 ori      60000000   1
+  149| 000464 lwz      801C0144   1     L4Z       gr0=<s61:d324:l4>(gr28,324)
+  150| 000468 lwz      809C0138   1     L4Z       gr4=<s61:d312:l4>(gr28,312)
+  151| 00046C lwz      80DC013C   1     L4Z       gr6=<s61:d316:l4>(gr28,316)
+  152| 000470 lwz      80FC010C   1     L4Z       gr7=<s61:d268:l4>(gr28,268)
+  153| 000474 lwz      811C0140   1     L4Z       gr8=<s61:d320:l4>(gr28,320)
+  155| 000478 addi     38BB0200   1     AI        gr5=gr27,512
+  149| 00047C stw      900100D8   1     ST4Z      <a1:d216:l4>(gr1,216)=gr0
+  150| 000480 stw      908100DC   1     ST4Z      <a1:d220:l4>(gr1,220)=gr4
+  151| 000484 stw      90C100E0   1     ST4Z      <a1:d224:l4>(gr1,224)=gr6
+  152| 000488 stw      90E100E4   1     ST4Z      <a1:d228:l4>(gr1,228)=gr7
+  155| 00048C addi     38600001   1     LI        gr3=1
+  153| 000490 stw      910100E8   1     ST4Z      <a1:d232:l4>(gr1,232)=gr8
+  155| 000494 addi     38800001   1     LI        gr4=1
+  155| 000498 addi     38C00000   1     LI        gr6=0
+  155| 00049C addi     38E00000   1     LI        gr7=0
+  155| 0004A0 bl       48000001   1     CALL      gr3=_xlfIOCmd,5,gr3,gr4,#17",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,_xlfIOCmd",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  155| 0004A4 ori      60000000   1
+  155| 0004A8 b        48000084   1     B         CL.2,-1
+   59|                              CL.7:
+   59| 0004AC ld       E8620000   1     L8        gr3=.+CONSTANT_AREA(gr2,0)
+   59| 0004B0 addi     38000001   1     LI        gr0=1
+   59| 0004B4 addi     3A200000   1     LI        gr17=0
+   59| 0004B8 std      F81D001C   1     ST8       l|opac#39|eos#38_1(gr29,28)=gr0
+   59| 0004BC stw      901D0024   1     ST4Z      <s33:d36:l4>(gr29,36)=gr0
+   59| 0004C0 std      F81C0138   1     ST8       nnu|1#66|2#67_1(gr28,312)=gr0
+   59| 0004C4 stw      923D0018   1     ST4Z      <s33:d24:l4>(gr29,24)=gr17
+   59| 0004C8 stw      923D0048   1     ST4Z      <s33:d72:l4>(gr29,72)=gr17
+   59| 0004CC stw      923D0028   1     ST4Z      <s33:d40:l4>(gr29,40)=gr17
+   59| 0004D0 stw      923D0050   1     ST4Z      <s33:d80:l4>(gr29,80)=gr17
+   59| 0004D4 std      FA3D002C   1     ST8       xgr|av#48|vfft#49_1(gr29,44)=gr17
+   59| 0004D8 stw      923D003C   1     ST4Z      <s33:d60:l4>(gr29,60)=gr17
+   59| 0004DC std      FA3D0034   1     ST8       x|ptmass#51|mhd#52_1(gr29,52)=gr17
+   59| 0004E0 stw      923D0054   1     ST4Z      <s33:d84:l4>(gr29,84)=gr17
+   59| 0004E4 std      FA3D0040   1     ST8       x|totnrg#54|iso#55_1(gr29,64)=gr17
+   59| 0004E8 stw      923D006C   1     ST4Z      <s33:d108:l4>(gr29,108)=gr17
+   59| 0004EC std      FA3D0064   1     ST8       x|restart#59|tsl#60_1(gr29,100)=gr17
+   59| 0004F0 stw      923C0140   1     ST4Z      <s61:d320:l4>(gr28,320)=gr17
+   59| 0004F4 stw      923C010C   1     ST4Z      <s61:d268:l4>(gr28,268)=gr17
+   59| 0004F8 lfd      C8030138   1     LFL       fp0=+CONSTANT_AREA(gr3,312)
+   59| 0004FC lfd      C8230140   1     LFL       fp1=+CONSTANT_AREA(gr3,320)
+   59| 000500 ld       E8830128   1     L8        gr4=+CONSTANT_AREA(gr3,296)
+   59| 000504 ld       E8630130   1     L8        gr3=+CONSTANT_AREA(gr3,304)
+   59| 000508 rldicr   780007C6   1     SLL8      gr0=gr0,32
+   59| 00050C addi     38A00258   1     LI        gr5=600
+   59| 000510 std      F81D005C   1     ST8       x|ascii#56|hdf#57_1(gr29,92)=gr0
+   59| 000514 stw      90BC0144   1     ST4Z      <s61:d324:l4>(gr28,324)=gr5
+   59| 000518 std      F89D0000   1     ST8       l|geom#35|dimen#36_1(gr29,0)=gr4
+   59| 00051C std      F87D0008   1     ST8       |izones#41|jzones#42_1(gr29,8)=gr3
+   59| 000520 std      F87D0010   1     ST8       |kzones#43|maxijk#44_1(gr29,16)=gr3
+   59| 000524 stfd     D81D0078   1     STFL      <s33:d120:l8>(gr29,120)=fp0
+   59| 000528 stfd     D83D0070   1     STFL      <s33:d112:l8>(gr29,112)=fp1
+  157|                              CL.2:
+  159| 00052C addi     3800000F   1     LI        gr0=15
+  159| 000530 stw      93C10094   1     ST4Z      T_7(gr1,148)=gr30
+  159| 000534 stw      90010088   1     ST4Z      T_4(gr1,136)=gr0
+  159| 000538 addis    3F604C00   1     LIU       gr27=19456
+  159| 00053C stw      92210090   1     ST4Z      T_6(gr1,144)=gr17
+  159| 000540 addi     387B041B   1     AI        gr3=gr27,1051
+  159| 000544 addi     38E10094   1     AI        gr7=gr1,148
+  159| 000548 stw      9061008C   1     ST4Z      T_5(gr1,140)=gr3
+  159| 00054C addi     386100C0   1     AI        gr3=gr1,192
+  159| 000550 addi     38C10090   1     AI        gr6=gr1,144
+  159| 000554 addi     38A1008C   1     AI        gr5=gr1,140
+  159| 000558 addi     38810088   1     AI        gr4=gr1,136
+  159| 00055C addi     391F0014   1     AI        gr8=gr31,20
+  159| 000560 bl       48000001   1     CALL      mpi_bcast,6,confi_buf[]",gr3,T_4",gr4,T_5",gr5,T_6",gr6,T_7",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  159| 000564 ori      60000000   1
+  160| 000568 stw      922100A0   1     ST4Z      T_10(gr1,160)=gr17
+  160| 00056C stw      93C100A4   1     ST4Z      T_11(gr1,164)=gr30
+  160| 000570 addi     387B041D   1     AI        gr3=gr27,1053
+  160| 000574 addi     38000011   1     LI        gr0=17
+  160| 000578 stw      9061009C   1     ST4Z      T_9(gr1,156)=gr3
+  160| 00057C stw      90010098   1     ST4Z      T_8(gr1,152)=gr0
+  160| 000580 addi     38610120   1     AI        gr3=gr1,288
+  160| 000584 addi     38E100A4   1     AI        gr7=gr1,164
+  160| 000588 addi     38C100A0   1     AI        gr6=gr1,160
+  160| 00058C addi     38A1009C   1     AI        gr5=gr1,156
+  160| 000590 addi     38810098   1     AI        gr4=gr1,152
+  160| 000594 addi     391F0014   1     AI        gr8=gr31,20
+  160| 000598 bl       48000001   1     CALL      mpi_bcast,6,confl_buf[]",gr3,T_8",gr4,T_9",gr5,T_10",gr6,T_11",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  160| 00059C ori      60000000   1
+  161| 0005A0 stw      922100B0   1     ST4Z      T_14(gr1,176)=gr17
+  161| 0005A4 stw      93C100B4   1     ST4Z      T_15(gr1,180)=gr30
+  161| 0005A8 addi     38000002   1     LI        gr0=2
+  161| 0005AC addi     387B081F   1     AI        gr3=gr27,2079
+  161| 0005B0 stw      900100A8   1     ST4Z      T_12(gr1,168)=gr0
+  161| 0005B4 stw      906100AC   1     ST4Z      T_13(gr1,172)=gr3
+  161| 0005B8 addi     38E100B4   1     AI        gr7=gr1,180
+  161| 0005BC addi     38C100B0   1     AI        gr6=gr1,176
+  161| 0005C0 addi     38A100AC   1     AI        gr5=gr1,172
+  161| 0005C4 addi     388100A8   1     AI        gr4=gr1,168
+  161| 0005C8 addi     38610100   1     AI        gr3=gr1,256
+  161| 0005CC addi     391F0014   1     AI        gr8=gr31,20
+  161| 0005D0 bl       48000001   1     CALL      mpi_bcast,6,confr_buf[]",gr3,T_12",gr4,T_13",gr5,T_14",gr6,T_15",gr7,ierr",gr8,mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  161| 0005D4 ori      60000000   1
+  163| 0005D8 lwz      801F0008   1     L4Z       gr0=<s13:d8:l4>(gr31,8)
+  163| 0005DC cmpdi    2C200000   1     C8        cr0=gr0,0
+  163| 0005E0 bc       41820114   1     BT        CL.3,cr0,0x4/eq,taken=50%(0,0)
+  164| 0005E4 lwz      800100C0   1     L4Z       gr0=<a1:d192:l4>(gr1,192)
+  165| 0005E8 lwz      806100C4   1     L4Z       gr3=<a1:d196:l4>(gr1,196)
+  166| 0005EC lwz      808100C8   1     L4Z       gr4=<a1:d200:l4>(gr1,200)
+  167| 0005F0 lwz      80A100CC   1     L4Z       gr5=<a1:d204:l4>(gr1,204)
+  168| 0005F4 lwz      80C100D0   1     L4Z       gr6=<a1:d208:l4>(gr1,208)
+  169| 0005F8 lwz      80E100D4   1     L4Z       gr7=<a1:d212:l4>(gr1,212)
+  164| 0005FC stw      901D0000   1     ST4Z      <s33:d0:l4>(gr29,0)=gr0
+  165| 000600 stw      907D0004   1     ST4Z      <s33:d4:l4>(gr29,4)=gr3
+  166| 000604 stw      909D0018   1     ST4Z      <s33:d24:l4>(gr29,24)=gr4
+  167| 000608 stw      90BD001C   1     ST4Z      <s33:d28:l4>(gr29,28)=gr5
+  168| 00060C stw      90DD0020   1     ST4Z      <s33:d32:l4>(gr29,32)=gr6
+  169| 000610 stw      90FD0024   1     ST4Z      <s33:d36:l4>(gr29,36)=gr7
+  170| 000614 lwz      800100D8   1     L4Z       gr0=<a1:d216:l4>(gr1,216)
+  171| 000618 lwz      806100DC   1     L4Z       gr3=<a1:d220:l4>(gr1,220)
+  172| 00061C lwz      808100E0   1     L4Z       gr4=<a1:d224:l4>(gr1,224)
+  173| 000620 lwz      80A100E4   1     L4Z       gr5=<a1:d228:l4>(gr1,228)
+  174| 000624 lwz      80C100E8   1     L4Z       gr6=<a1:d232:l4>(gr1,232)
+  175| 000628 lwz      80E100EC   1     L4Z       gr7=<a1:d236:l4>(gr1,236)
+  170| 00062C stw      901C0144   1     ST4Z      <s61:d324:l4>(gr28,324)=gr0
+  171| 000630 stw      907C0138   1     ST4Z      <s61:d312:l4>(gr28,312)=gr3
+  172| 000634 stw      909C013C   1     ST4Z      <s61:d316:l4>(gr28,316)=gr4
+  173| 000638 stw      90BC010C   1     ST4Z      <s61:d268:l4>(gr28,268)=gr5
+  174| 00063C stw      90DC0140   1     ST4Z      <s61:d320:l4>(gr28,320)=gr6
+  175| 000640 stw      90FD0008   1     ST4Z      <s33:d8:l4>(gr29,8)=gr7
+  176| 000644 lwz      800100F0   1     L4Z       gr0=<a1:d240:l4>(gr1,240)
+  177| 000648 lwz      806100F4   1     L4Z       gr3=<a1:d244:l4>(gr1,244)
+  178| 00064C lwz      808100F8   1     L4Z       gr4=<a1:d248:l4>(gr1,248)
+  179| 000650 lwz      80A10120   1     L4Z       gr5=<a1:d288:l4>(gr1,288)
+  180| 000654 lwz      80C10124   1     L4Z       gr6=<a1:d292:l4>(gr1,292)
+  181| 000658 lwz      80E10128   1     L4Z       gr7=<a1:d296:l4>(gr1,296)
+  176| 00065C stw      901D000C   1     ST4Z      <s33:d12:l4>(gr29,12)=gr0
+  177| 000660 stw      907D0010   1     ST4Z      <s33:d16:l4>(gr29,16)=gr3
+  178| 000664 stw      909D0014   1     ST4Z      <s33:d20:l4>(gr29,20)=gr4
+  179| 000668 stw      90BD0028   1     ST4Z      <s33:d40:l4>(gr29,40)=gr5
+  180| 00066C stw      90DD0050   1     ST4Z      <s33:d80:l4>(gr29,80)=gr6
+  181| 000670 stw      90FD0038   1     ST4Z      <s33:d56:l4>(gr29,56)=gr7
+  182| 000674 lwz      8001012C   1     L4Z       gr0=<a1:d300:l4>(gr1,300)
+  183| 000678 lwz      80610130   1     L4Z       gr3=<a1:d304:l4>(gr1,304)
+  184| 00067C lwz      80810134   1     L4Z       gr4=<a1:d308:l4>(gr1,308)
+  185| 000680 lwz      80A10138   1     L4Z       gr5=<a1:d312:l4>(gr1,312)
+  186| 000684 lwz      80C1013C   1     L4Z       gr6=<a1:d316:l4>(gr1,316)
+  187| 000688 lwz      80E10140   1     L4Z       gr7=<a1:d320:l4>(gr1,320)
+  182| 00068C stw      901D002C   1     ST4Z      <s33:d44:l4>(gr29,44)=gr0
+  183| 000690 stw      907D0030   1     ST4Z      <s33:d48:l4>(gr29,48)=gr3
+  184| 000694 stw      909D0034   1     ST4Z      <s33:d52:l4>(gr29,52)=gr4
+  185| 000698 stw      90BD0040   1     ST4Z      <s33:d64:l4>(gr29,64)=gr5
+  186| 00069C stw      90DD0044   1     ST4Z      <s33:d68:l4>(gr29,68)=gr6
+  187| 0006A0 stw      90FD0048   1     ST4Z      <s33:d72:l4>(gr29,72)=gr7
+  188| 0006A4 lwz      80010144   1     L4Z       gr0=<a1:d324:l4>(gr1,324)
+  189| 0006A8 lwz      80610148   1     L4Z       gr3=<a1:d328:l4>(gr1,328)
+  190| 0006AC lwz      8081014C   1     L4Z       gr4=<a1:d332:l4>(gr1,332)
+  191| 0006B0 lwz      80A10150   1     L4Z       gr5=<a1:d336:l4>(gr1,336)
+  192| 0006B4 lwz      80C10154   1     L4Z       gr6=<a1:d340:l4>(gr1,340)
+  188| 0006B8 stw      901D004C   1     ST4Z      <s33:d76:l4>(gr29,76)=gr0
+  189| 0006BC stw      907D003C   1     ST4Z      <s33:d60:l4>(gr29,60)=gr3
+  190| 0006C0 stw      909D0054   1     ST4Z      <s33:d84:l4>(gr29,84)=gr4
+  191| 0006C4 stw      90BD005C   1     ST4Z      <s33:d92:l4>(gr29,92)=gr5
+  192| 0006C8 stw      90DD0060   1     ST4Z      <s33:d96:l4>(gr29,96)=gr6
+  196| 0006CC lfd      C8010100   1     LFL       fp0=<a1:d256:l8>(gr1,256)
+  197| 0006D0 lfd      C8210108   1     LFL       fp1=<a1:d264:l8>(gr1,264)
+  193| 0006D4 lwz      80010158   1     L4Z       gr0=<a1:d344:l4>(gr1,344)
+  194| 0006D8 lwz      8061015C   1     L4Z       gr3=<a1:d348:l4>(gr1,348)
+  195| 0006DC lwz      80810160   1     L4Z       gr4=<a1:d352:l4>(gr1,352)
+  193| 0006E0 stw      901D0064   1     ST4Z      <s33:d100:l4>(gr29,100)=gr0
+  194| 0006E4 stw      907D0068   1     ST4Z      <s33:d104:l4>(gr29,104)=gr3
+  195| 0006E8 stw      909D006C   1     ST4Z      <s33:d108:l4>(gr29,108)=gr4
+  196| 0006EC stfd     D81D0070   1     STFL      <s33:d112:l8>(gr29,112)=fp0
+  197| 0006F0 stfd     D83D0078   1     STFL      <s33:d120:l8>(gr29,120)=fp1
+  198|                              CL.3:
+  200| 0006F4 stw      93C100B8   1     ST4Z      T_16(gr1,184)=gr30
+  200| 0006F8 addi     386100B8   1     AI        gr3=gr1,184
+  200| 0006FC addi     389F0014   1     AI        gr4=gr31,20
+  200| 000700 bl       48000001   1     CALL      mpi_barrier,2,T_16",gr3,ierr",gr4,mpi_barrier",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  200| 000704 ori      60000000   1
+  202| 000708 bl       48000001   1     CALL      alloc_arrays,0,alloc_arrays",fcr",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+  202| 00070C ori      60000000   1
+  205| 000710 ld       E98105F0   1     L8        gr12=#stack(gr1,1520)
+  205| 000714 addi     382105E0   1     AI        gr1=gr1,1504
+  205| 000718 ld       EA21FF88   1     L8        gr17=#stack(gr1,-120)
+  205| 00071C ld       EA41FF90   1     L8        gr18=#stack(gr1,-112)
+  205| 000720 ld       EA61FF98   1     L8        gr19=#stack(gr1,-104)
+  205| 000724 mtspr    7D8803A6   1     LLR       lr=gr12
+  205| 000728 ld       EA81FFA0   1     L8        gr20=#stack(gr1,-96)
+  205| 00072C ld       EAA1FFA8   1     L8        gr21=#stack(gr1,-88)
+  205| 000730 ld       EAC1FFB0   1     L8        gr22=#stack(gr1,-80)
+  205| 000734 ld       EAE1FFB8   1     L8        gr23=#stack(gr1,-72)
+  205| 000738 ld       EB01FFC0   1     L8        gr24=#stack(gr1,-64)
+  205| 00073C ld       EB21FFC8   1     L8        gr25=#stack(gr1,-56)
+  205| 000740 ld       EB41FFD0   1     L8        gr26=#stack(gr1,-48)
+  205| 000744 ld       EB61FFD8   1     L8        gr27=#stack(gr1,-40)
+  205| 000748 ld       EB81FFE0   1     L8        gr28=#stack(gr1,-32)
+  205| 00074C ld       EBA1FFE8   1     L8        gr29=#stack(gr1,-24)
+  205| 000750 ld       EBC1FFF0   1     L8        gr30=#stack(gr1,-16)
+  205| 000754 ld       EBE1FFF8   1     L8        gr31=#stack(gr1,-8)
+  205| 000758 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 00075C        00000000 00012201 800F0000 0000075C
+     |               Instruction count          471
+     |               Straight-line exec time    471
+     |               Constant Area
+     | 000000        67656F6D 636F6E66 6C67656F 6D496C64 696D656E 70687973
+     | 000018        636F6E66 6C726164 78687964 726F7867 72617649 786D6864
+     | 000030        78677276 66667449 7870746D 61737349 78746F74 6E726749
+     | 000048        7869736F 78766772 69647873 75626176 78666F72 63657873
+     | 000060        70686772 76497868 73656C65 6F736E73 70656349 6C6F7061
+     | 000078        63497863 68656D49 7263686D 636F6E66 69636865 6D496972
+     | 000090        74496E6E 75316E6E 75326E72 61746563 696F636F 6E667861
+     | 0000A8        73636969 78686466 78726573 74617274 7874736C 78687374
+     | 0000C0        70726563 6F6E6649 736D616C 6C5F6E6F 6C617267 655F6E6F
+     | 0000D8        61727261 79636F6E 6649697A 6F6E6573 6A7A6F6E 65736B7A
+     | 0000F0        6F6E6573 6D617869 6A6B636F 6E666967 7572652E 66393000
+     | 000108        636F6E66 69677572 652E6639 30000000 7A6D705F 696E7000
+     | 000120        7A6D705F 6C6F6749 00000001 00000003 00000020 00000020
+     | 000138        547D42AE A2879F2E 2B617F7D 4ED8C33E
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    configure.f90               07/08/15   15:47:27
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     205
+1501-510  Compilation successful for file configure.f90.
+1501-543  Object file created.

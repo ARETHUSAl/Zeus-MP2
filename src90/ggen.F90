@@ -7,7 +7,7 @@
       subroutine ggen
 !
 !  PURPOSE:  Initializes the grid in a new run according to the control
-!  parameters in the input deck namelists "ggen1" and ggen2".  All grid
+!  parameters in the input deck namelists "ggen1" and "ggen2".  All grid
 !  variables are initialized.
 !
 !  LOCALS:

@@ -1,0 +1,1855 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- stream.f90 07/08/15 15:48:49
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** stream   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-534 (I) Loop (loop index 1) at stream.f90 <line 61> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 2) at stream.f90 <line 62> was not SIMD vectorized because the loop is not the innermost loop.
+1586-538 (I) Loop (loop index 3) at stream.f90 <line 63> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 3) at stream.f90 <line 63> was not SIMD vectorized because it contains control flow.
+1586-534 (I) Loop (loop index 4) at stream.f90 <line 75> was not SIMD vectorized because the loop is not the innermost loop.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eiib%addr  + d-eiib%rvo))->eiib[].rns11.[2ll][$$CIV4 + 1ll][$$CIV3 + 1ll] = (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (fiis[].off88 EXP    2.5000000000000000E-001); with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eriib%addr  + d-eriib%rvo))->eriib[].rns10.[1ll][$$CIV4 + 1ll][$$CIV3 + 1ll] = fiis[].off88; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eriib%addr  + d-eriib%rvo))->eriib[].rns10.[2ll][$$CIV4 + 1ll][$$CIV3 + 1ll] = fiis[].off88; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((int *)((char *)d-niib%addr  + d-niib%rvo))->niib[].rns6.[$$CIV4 + 1ll][$$CIV3 + 1ll] = 3; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eiib%addr  + d-eiib%rvo))->eiib[].rns11.[1ll][$$CIV4 + 1ll][$$CIV3 + 1ll] = (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (((double *)((char *)d-eriib%addr  + d-eriib%rvo))->eriib[].rns10.[1ll][$$CIV4 + 1ll][$$CIV3 + 1ll] EXP    2.5000000000000000E-001); with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((int *)((char *)d-liib%addr  + d-liib%rvo))->liib[].rns7.[$$CIV4 + 1ll][$$CIV3 + 1ll] = 3; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((int *)((char *)d-noib%addr  + d-noib%rvo))->noib[].rns8.[$$CIV4 + 1ll][$$CIV3 + 1ll] = 2; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 76> was not SIMD vectorized because it contains memory references ((int *)((char *)d-loib%addr  + d-loib%rvo))->loib[].rns9.[$$CIV4 + 1ll][$$CIV3 + 1ll] = 2; with non-vectorizable strides.
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 84> was not SIMD vectorized because it contains memory references ((char *)d-eiib%addr  + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(2ll) + (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 84> was not SIMD vectorized because it contains memory references ((char *)d-eiib%addr  + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(2ll) + (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 5) at stream.f90 <line 84> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 84> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eiib%addr  + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(2ll) + (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 81> was not SIMD vectorized because it contains memory references ((char *)d-eriib%addr  + d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(1ll) + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 81> was not SIMD vectorized because it contains memory references ((char *)d-eriib%addr  + d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(1ll) + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 5) at stream.f90 <line 81> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 81> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eriib%addr  + d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(1ll) + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 82> was not SIMD vectorized because it contains memory references ((char *)d-eriib%addr  + d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(2ll) + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 82> was not SIMD vectorized because it contains memory references ((char *)d-eriib%addr  + d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(2ll) + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 5) at stream.f90 <line 82> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 82> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eriib%addr  + d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(2ll) + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 77> was not SIMD vectorized because it contains memory references ((char *)d-niib%addr  + d-niib%rvo + (d-niib%bounds%mult[].off48)*($$CIV4 + 1ll) + (d-niib%bounds%mult[].off72)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 77> was not SIMD vectorized because it contains memory references ((char *)d-niib%addr  + d-niib%rvo + (d-niib%bounds%mult[].off48)*($$CIV4 + 1ll) + (d-niib%bounds%mult[].off72)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 5) at stream.f90 <line 77> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 77> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-niib%addr  + d-niib%rvo + (d-niib%bounds%mult[].off48)*($$CIV4 + 1ll) + (d-niib%bounds%mult[].off72)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 83> was not SIMD vectorized because it contains memory references ((char *)d-eiib%addr  + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(1ll) + (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-537 (I) Loop (loop index 5) at stream.f90 <line 83> was not SIMD vectorized because it contains operation in (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (((double *)((char *)d-eriib%addr  + d-eriib%rvo))->eriib[].rns10.[1ll][$$CIV4 + 1ll][$$CIV3 + 1ll] EXP    2.5000000000000000E-001) which is not suitable for SIMD vectorization.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 83> was not SIMD vectorized because it contains memory references ((char *)d-eiib%addr  + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(1ll) + (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 5) at stream.f90 <line 83> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 83> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eiib%addr  + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(1ll) + (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 78> was not SIMD vectorized because it contains memory references ((char *)d-liib%addr  + d-liib%rvo + (d-liib%bounds%mult[].off1968)*($$CIV4 + 1ll) + (d-liib%bounds%mult[].off1992)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 78> was not SIMD vectorized because it contains memory references ((char *)d-liib%addr  + d-liib%rvo + (d-liib%bounds%mult[].off1968)*($$CIV4 + 1ll) + (d-liib%bounds%mult[].off1992)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 5) at stream.f90 <line 78> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 78> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-liib%addr  + d-liib%rvo + (d-liib%bounds%mult[].off1968)*($$CIV4 + 1ll) + (d-liib%bounds%mult[].off1992)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 79> was not SIMD vectorized because it contains memory references ((char *)d-noib%addr  + d-noib%rvo + (d-noib%bounds%mult[].off368)*($$CIV4 + 1ll) + (d-noib%bounds%mult[].off392)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 79> was not SIMD vectorized because it contains memory references ((char *)d-noib%addr  + d-noib%rvo + (d-noib%bounds%mult[].off368)*($$CIV4 + 1ll) + (d-noib%bounds%mult[].off392)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 5) at stream.f90 <line 79> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 79> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-noib%addr  + d-noib%rvo + (d-noib%bounds%mult[].off368)*($$CIV4 + 1ll) + (d-noib%bounds%mult[].off392)*($$CIV3 + 1ll)).
+1586-536 (I) Loop (loop index 5) at stream.f90 <line 80> was not SIMD vectorized because it contains memory references ((char *)d-loib%addr  + d-loib%rvo + (d-loib%bounds%mult[].off2048)*($$CIV4 + 1ll) + (d-loib%bounds%mult[].off2072)*($$CIV3 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 5) at stream.f90 <line 80> was not SIMD vectorized because it contains memory references ((char *)d-loib%addr  + d-loib%rvo + (d-loib%bounds%mult[].off2048)*($$CIV4 + 1ll) + (d-loib%bounds%mult[].off2072)*($$CIV3 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 5) at stream.f90 <line 80> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 5) at stream.f90 <line 80> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-loib%addr  + d-loib%rvo + (d-loib%bounds%mult[].off2048)*($$CIV4 + 1ll) + (d-loib%bounds%mult[].off2072)*($$CIV3 + 1ll)).
+1586-534 (I) Loop (loop index 6) at stream.f90 <line 89> was not SIMD vectorized because the loop is not the innermost loop.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((double *)((char *)d-erijb%addr  + d-erijb%rvo))->erijb[].rns16.[1ll][$$CIV6 + 1ll][$$CIV5 + 1ll] = fijs[].off312; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((int *)((char *)d-nijb%addr  + d-nijb%rvo))->nijb[].rns12.[$$CIV6 + 1ll][$$CIV5 + 1ll] = 3; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eijb%addr  + d-eijb%rvo))->eijb[].rns17.[2ll][$$CIV6 + 1ll][$$CIV5 + 1ll] = (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (fijs[].off312 EXP    2.5000000000000000E-001); with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((double *)((char *)d-erijb%addr  + d-erijb%rvo))->erijb[].rns16.[2ll][$$CIV6 + 1ll][$$CIV5 + 1ll] = fijs[].off312; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((int *)((char *)d-lijb%addr  + d-lijb%rvo))->lijb[].rns13.[$$CIV6 + 1ll][$$CIV5 + 1ll] = 3; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((int *)((char *)d-nojb%addr  + d-nojb%rvo))->nojb[].rns14.[$$CIV6 + 1ll][$$CIV5 + 1ll] = 2; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((int *)((char *)d-lojb%addr  + d-lojb%rvo))->lojb[].rns15.[$$CIV6 + 1ll][$$CIV5 + 1ll] = 2; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 90> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eijb%addr  + d-eijb%rvo))->eijb[].rns17.[1ll][$$CIV6 + 1ll][$$CIV5 + 1ll] = (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (((double *)((char *)d-erijb%addr  + d-erijb%rvo))->erijb[].rns16.[1ll][$$CIV6 + 1ll][$$CIV5 + 1ll] EXP    2.5000000000000000E-001); with non-vectorizable strides.
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 95> was not SIMD vectorized because it contains memory references ((char *)d-erijb%addr  + d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(1ll) + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 95> was not SIMD vectorized because it contains memory references ((char *)d-erijb%addr  + d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(1ll) + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 7) at stream.f90 <line 95> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 95> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-erijb%addr  + d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(1ll) + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 91> was not SIMD vectorized because it contains memory references ((char *)d-nijb%addr  + d-nijb%rvo + (d-nijb%bounds%mult[].off688)*($$CIV6 + 1ll) + (d-nijb%bounds%mult[].off712)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 91> was not SIMD vectorized because it contains memory references ((char *)d-nijb%addr  + d-nijb%rvo + (d-nijb%bounds%mult[].off688)*($$CIV6 + 1ll) + (d-nijb%bounds%mult[].off712)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 7) at stream.f90 <line 91> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 91> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-nijb%addr  + d-nijb%rvo + (d-nijb%bounds%mult[].off688)*($$CIV6 + 1ll) + (d-nijb%bounds%mult[].off712)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 98> was not SIMD vectorized because it contains memory references ((char *)d-eijb%addr  + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(2ll) + (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 98> was not SIMD vectorized because it contains memory references ((char *)d-eijb%addr  + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(2ll) + (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 7) at stream.f90 <line 98> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 98> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eijb%addr  + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(2ll) + (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 96> was not SIMD vectorized because it contains memory references ((char *)d-erijb%addr  + d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(2ll) + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 96> was not SIMD vectorized because it contains memory references ((char *)d-erijb%addr  + d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(2ll) + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 7) at stream.f90 <line 96> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 96> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-erijb%addr  + d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(2ll) + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 92> was not SIMD vectorized because it contains memory references ((char *)d-lijb%addr  + d-lijb%rvo + (d-lijb%bounds%mult[].off2128)*($$CIV6 + 1ll) + (d-lijb%bounds%mult[].off2152)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 92> was not SIMD vectorized because it contains memory references ((char *)d-lijb%addr  + d-lijb%rvo + (d-lijb%bounds%mult[].off2128)*($$CIV6 + 1ll) + (d-lijb%bounds%mult[].off2152)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 7) at stream.f90 <line 92> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 92> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-lijb%addr  + d-lijb%rvo + (d-lijb%bounds%mult[].off2128)*($$CIV6 + 1ll) + (d-lijb%bounds%mult[].off2152)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 93> was not SIMD vectorized because it contains memory references ((char *)d-nojb%addr  + d-nojb%rvo + (d-nojb%bounds%mult[].off1008)*($$CIV6 + 1ll) + (d-nojb%bounds%mult[].off1032)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 93> was not SIMD vectorized because it contains memory references ((char *)d-nojb%addr  + d-nojb%rvo + (d-nojb%bounds%mult[].off1008)*($$CIV6 + 1ll) + (d-nojb%bounds%mult[].off1032)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 7) at stream.f90 <line 93> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 93> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-nojb%addr  + d-nojb%rvo + (d-nojb%bounds%mult[].off1008)*($$CIV6 + 1ll) + (d-nojb%bounds%mult[].off1032)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 94> was not SIMD vectorized because it contains memory references ((char *)d-lojb%addr  + d-lojb%rvo + (d-lojb%bounds%mult[].off2208)*($$CIV6 + 1ll) + (d-lojb%bounds%mult[].off2232)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 94> was not SIMD vectorized because it contains memory references ((char *)d-lojb%addr  + d-lojb%rvo + (d-lojb%bounds%mult[].off2208)*($$CIV6 + 1ll) + (d-lojb%bounds%mult[].off2232)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 7) at stream.f90 <line 94> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 94> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-lojb%addr  + d-lojb%rvo + (d-lojb%bounds%mult[].off2208)*($$CIV6 + 1ll) + (d-lojb%bounds%mult[].off2232)*($$CIV5 + 1ll)).
+1586-536 (I) Loop (loop index 7) at stream.f90 <line 97> was not SIMD vectorized because it contains memory references ((char *)d-eijb%addr  + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(1ll) + (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)) with non-vectorizable alignment.
+1586-537 (I) Loop (loop index 7) at stream.f90 <line 97> was not SIMD vectorized because it contains operation in (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (((double *)((char *)d-erijb%addr  + d-erijb%rvo))->erijb[].rns16.[1ll][$$CIV6 + 1ll][$$CIV5 + 1ll] EXP    2.5000000000000000E-001) which is not suitable for SIMD vectorization.
+1586-540 (I) Loop (loop index 7) at stream.f90 <line 97> was not SIMD vectorized because it contains memory references ((char *)d-eijb%addr  + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(1ll) + (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 7) at stream.f90 <line 97> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 7) at stream.f90 <line 97> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eijb%addr  + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(1ll) + (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)).
+1586-534 (I) Loop (loop index 8) at stream.f90 <line 103> was not SIMD vectorized because the loop is not the innermost loop.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((int *)((char *)d-lokb%addr  + d-lokb%rvo))->lokb[].rns21.[$$CIV8 + 1ll][$$CIV7 + 1ll] = 2; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eikb%addr  + d-eikb%rvo))->eikb[].rns23.[2ll][$$CIV8 + 1ll][$$CIV7 + 1ll] = (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (fiks[].off536 EXP    2.5000000000000000E-001); with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((int *)((char *)d-likb%addr  + d-likb%rvo))->likb[].rns19.[$$CIV8 + 1ll][$$CIV7 + 1ll] = 3; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((double *)((char *)d-erikb%addr  + d-erikb%rvo))->erikb[].rns22.[1ll][$$CIV8 + 1ll][$$CIV7 + 1ll] = fiks[].off536; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((int *)((char *)d-nokb%addr  + d-nokb%rvo))->nokb[].rns20.[$$CIV8 + 1ll][$$CIV7 + 1ll] = 2; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((double *)((char *)d-erikb%addr  + d-erikb%rvo))->erikb[].rns22.[2ll][$$CIV8 + 1ll][$$CIV7 + 1ll] = fiks[].off536; with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((double *)((char *)d-eikb%addr  + d-eikb%rvo))->eikb[].rns23.[1ll][$$CIV8 + 1ll][$$CIV7 + 1ll] = (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (((double *)((char *)d-erikb%addr  + d-erikb%rvo))->erikb[].rns22.[1ll][$$CIV8 + 1ll][$$CIV7 + 1ll] EXP    2.5000000000000000E-001); with non-vectorizable strides.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 104> was not SIMD vectorized because it contains memory references ((int *)((char *)d-nikb%addr  + d-nikb%rvo))->nikb[].rns18.[$$CIV8 + 1ll][$$CIV7 + 1ll] = 3; with non-vectorizable strides.
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 108> was not SIMD vectorized because it contains memory references ((char *)d-lokb%addr  + d-lokb%rvo + (d-lokb%bounds%mult[].off2368)*($$CIV8 + 1ll) + (d-lokb%bounds%mult[].off2392)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 108> was not SIMD vectorized because it contains memory references ((char *)d-lokb%addr  + d-lokb%rvo + (d-lokb%bounds%mult[].off2368)*($$CIV8 + 1ll) + (d-lokb%bounds%mult[].off2392)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 9) at stream.f90 <line 108> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 108> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-lokb%addr  + d-lokb%rvo + (d-lokb%bounds%mult[].off2368)*($$CIV8 + 1ll) + (d-lokb%bounds%mult[].off2392)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 112> was not SIMD vectorized because it contains memory references ((char *)d-eikb%addr  + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(2ll) + (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 112> was not SIMD vectorized because it contains memory references ((char *)d-eikb%addr  + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(2ll) + (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 9) at stream.f90 <line 112> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 112> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eikb%addr  + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(2ll) + (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 106> was not SIMD vectorized because it contains memory references ((char *)d-likb%addr  + d-likb%rvo + (d-likb%bounds%mult[].off2288)*($$CIV8 + 1ll) + (d-likb%bounds%mult[].off2312)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 106> was not SIMD vectorized because it contains memory references ((char *)d-likb%addr  + d-likb%rvo + (d-likb%bounds%mult[].off2288)*($$CIV8 + 1ll) + (d-likb%bounds%mult[].off2312)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 9) at stream.f90 <line 106> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 106> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-likb%addr  + d-likb%rvo + (d-likb%bounds%mult[].off2288)*($$CIV8 + 1ll) + (d-likb%bounds%mult[].off2312)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 109> was not SIMD vectorized because it contains memory references ((char *)d-erikb%addr  + d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(1ll) + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 109> was not SIMD vectorized because it contains memory references ((char *)d-erikb%addr  + d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(1ll) + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 9) at stream.f90 <line 109> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 109> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-erikb%addr  + d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(1ll) + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 107> was not SIMD vectorized because it contains memory references ((char *)d-nokb%addr  + d-nokb%rvo + (d-nokb%bounds%mult[].off1648)*($$CIV8 + 1ll) + (d-nokb%bounds%mult[].off1672)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 107> was not SIMD vectorized because it contains memory references ((char *)d-nokb%addr  + d-nokb%rvo + (d-nokb%bounds%mult[].off1648)*($$CIV8 + 1ll) + (d-nokb%bounds%mult[].off1672)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 9) at stream.f90 <line 107> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 107> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-nokb%addr  + d-nokb%rvo + (d-nokb%bounds%mult[].off1648)*($$CIV8 + 1ll) + (d-nokb%bounds%mult[].off1672)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 110> was not SIMD vectorized because it contains memory references ((char *)d-erikb%addr  + d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(2ll) + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 110> was not SIMD vectorized because it contains memory references ((char *)d-erikb%addr  + d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(2ll) + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 9) at stream.f90 <line 110> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 110> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-erikb%addr  + d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(2ll) + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 111> was not SIMD vectorized because it contains memory references ((char *)d-eikb%addr  + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(1ll) + (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-537 (I) Loop (loop index 9) at stream.f90 <line 111> was not SIMD vectorized because it contains operation in (((dfloor *  8.6250000000000000E+007) / (gamma -  1.0000000000000000E+000)) * ( 1.3221396614849456E+014 EXP    2.5000000000000000E-001)) * (((double *)((char *)d-erikb%addr  + d-erikb%rvo))->erikb[].rns22.[1ll][$$CIV8 + 1ll][$$CIV7 + 1ll] EXP    2.5000000000000000E-001) which is not suitable for SIMD vectorization.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 111> was not SIMD vectorized because it contains memory references ((char *)d-eikb%addr  + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(1ll) + (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-554 (I) Loop (loop index 9) at stream.f90 <line 111> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 111> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-eikb%addr  + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(1ll) + (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)).
+1586-536 (I) Loop (loop index 9) at stream.f90 <line 105> was not SIMD vectorized because it contains memory references ((char *)d-nikb%addr  + d-nikb%rvo + (d-nikb%bounds%mult[].off1328)*($$CIV8 + 1ll) + (d-nikb%bounds%mult[].off1352)*($$CIV7 + 1ll)) with non-vectorizable alignment.
+1586-540 (I) Loop (loop index 9) at stream.f90 <line 105> was not SIMD vectorized because it contains memory references ((char *)d-nikb%addr  + d-nikb%rvo + (d-nikb%bounds%mult[].off1328)*($$CIV8 + 1ll) + (d-nikb%bounds%mult[].off1352)*($$CIV7 + 1ll)) with non-vectorizable strides.
+1586-551 (I) Loop (loop index 9) at stream.f90 <line 105> was not SIMD vectorized because it contains unsupported vector data types.
+1586-556 (I) Loop (loop index 9) at stream.f90 <line 105> was not SIMD vectorized because it contains non-stride-one store references ((char *)d-nikb%addr  + d-nikb%rvo + (d-nikb%bounds%mult[].off1328)*($$CIV8 + 1ll) + (d-nikb%bounds%mult[].off1352)*($$CIV7 + 1ll)).
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"4">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+    11|         SUBROUTINE stream ()
+    40|           idirect = 1
+    41|           amp =  1.0000000000000000E+000
+    42|           x0 =  1.0000000149011611E-001
+    43|           IF ((myid == 0)) THEN
+    11|             |pgen%nlitems%type.off32 = 0
+                    |pgen%nlitems%kind.off40 = 
+                    |pgen%nlitems%size.off48 = 
+                    |pgen%nlitems%name_addr.off56 = &
+                &     "pgenidirectIampIx0stream.f90" + 4
+                    |pgen%nlitems%name_len.off64 = 7
+                    |pgen%nlitems%item_addr.off72 = loc(idirect)
+                    |pgen%nlitems%type.off80 = 4
+                    |pgen%nlitems%kind.off88 = 
+                    |pgen%nlitems%size.off96 = 
+                    |pgen%nlitems%name_addr.off104 = &
+                &     "pgenidirectIampIx0stream.f90" + 12
+                    |pgen%nlitems%name_len.off112 = 3
+                    |pgen%nlitems%item_addr.off120 = loc(amp)
+                    |pgen%version = 129
+                    |pgen%name_addr = "pgenidirectIampIx0stream.f90"
+                    |pgen%name_len = 4
+                    |pgen%num_of_items = 3
+                    |pgen%nlitems%type.off128 = 4
+                    |pgen%nlitems%kind.off136 = 
+                    |pgen%nlitems%size.off144 = 
+                    |pgen%nlitems%name_addr.off152 = &
+                &     "pgenidirectIampIx0stream.f90" + 16
+                    |pgen%nlitems%name_len.off160 = 2
+                    |pgen%nlitems%item_addr.off168 = loc(x0)
+    44|             |pgen%name_flags = 0
+                    #2 = _xlfBeginIO(1,2,#1,32768,NULL,0,|pgen)
+                    _xlfEndIO(%VAL(#2))
+    45|             |pgen%name_flags = 0
+                    #4 = _xlfBeginIO(2,258,#3,32768,NULL,0,|pgen)
+                    _xlfEndIO(%VAL(#4))
+    46|             buf_in[].off1744 = amp
+    47|             buf_in[].off1752 = x0
+    48|             ibuf_in[].off144 = idirect
+    49|           ENDIF
+    50|           T_2 = 2
+                  T_3 = 1275070495
+                  T_4 = 0
+                  CALL mpi_bcast(buf_in,T_2,T_3,T_4,comm3d,ierr)
+    52|           T_5 = 1
+                  T_6 = 1275069467
+                  T_7 = 0
+                  CALL mpi_bcast(ibuf_in,T_5,T_6,T_7,comm3d,ierr)
+    54|           IF ((myid <> 0)) THEN
+    55|             amp = buf_in[].off1744
+    56|             x0 = buf_in[].off1752
+    57|             idirect = ibuf_in[].off144
+    58|           ENDIF
+    61|           IF ((int(kn) > 0)) THEN
+                    $$CIV2 = 0
+       Id=1         DO $$CIV2 = $$CIV2, int(int(kn))-1
+    62|               IF ((int(jn) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int(int(jn))-1
+    63|                   IF ((int(in) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int(int(in))-1
+    64|                       d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = &
+                &               erfloor
+    65|                       IF ((idirect == 1)) THEN
+                                d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = MERGE(erfloor + amp, erfloor, d-x1b%addr%x1b($$CIV0 + 1) <= x0)
+                              ENDIF
+    67|                       IF ((idirect == 2)) THEN
+                                d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = MERGE(d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) + amp, d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1), d-x2b%addr%x2b($$CIV1 + 1) <= x0)
+                              ENDIF
+    69|                       IF ((idirect == 3)) THEN
+                                d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = MERGE(d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) + amp, d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1), d-x3b%addr%x3b($$CIV2 + 1) <= x0)
+                              ENDIF
+    71|                       d-e%addr%e($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = (((&
+                &               dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &               1.0000000000000000E+000)) * ( &
+                &               1.3221396614849456E+014 **  &
+                &               2.5000000000000000E-001)) * (d-er%addr%er($$CIV0 &
+                &               + 1,$$CIV1 + 1,$$CIV2 + 1) **  &
+                &               2.5000000000000000E-001)
+    72|                     ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+    74|           IF ((idirect == 1)) THEN
+    75|             IF (.NOT.(int(kn) > 0)) GOTO lab_57
+                    $$CIV4 = 0
+       Id=4         DO $$CIV4 = $$CIV4, int(int(kn))-1
+    76|               IF ((int(jn) > 0)) THEN
+                        $$CIV3 = 0
+       Id=5             DO $$CIV3 = $$CIV3, int(int(jn))-1
+    77|                   d-niib%addr%niib($$CIV3 + 1,$$CIV4 + 1) = 3
+    78|                   d-liib%addr%liib($$CIV3 + 1,$$CIV4 + 1) = 3
+    79|                   d-noib%addr%noib($$CIV3 + 1,$$CIV4 + 1) = 2
+    80|                   d-loib%addr%loib($$CIV3 + 1,$$CIV4 + 1) = 2
+    81|                   d-eriib%addr%eriib($$CIV3 + 1,$$CIV4 + 1,1) = &
+                &           fiis[].off88
+    82|                   d-eriib%addr%eriib($$CIV3 + 1,$$CIV4 + 1,2) = &
+                &           fiis[].off88
+    83|                   d-eiib%addr%eiib($$CIV3 + 1,$$CIV4 + 1,1) = (((dfloor &
+                &           *  8.6250000000000000E+007) / (gamma -  &
+                &           1.0000000000000000E+000)) * ( 1.3221396614849456E+014 &
+                &           **  2.5000000000000000E-001)) * (d-eriib%addr%eriib(&
+                &           $$CIV3 + 1,$$CIV4 + 1,1) **  2.5000000000000000E-001)
+    84|                   d-eiib%addr%eiib($$CIV3 + 1,$$CIV4 + 1,2) = (((dfloor &
+                &           *  8.6250000000000000E+007) / (gamma -  &
+                &           1.0000000000000000E+000)) * ( 1.3221396614849456E+014 &
+                &           **  2.5000000000000000E-001)) * (fiis[].off88 **  &
+                &           2.5000000000000000E-001)
+    85|                 ENDDO
+                      ENDIF
+                    ENDDO
+                    lab_57
+    86|             lab_24
+    88|             IF ((idirect == 2)) THEN
+    89|               IF (.NOT.(int(kn) > 0)) GOTO lab_61
+                      $$CIV6 = 0
+       Id=6           DO $$CIV6 = $$CIV6, int(int(kn))-1
+    90|                 IF ((int(in) > 0)) THEN
+                          $$CIV5 = 0
+       Id=7               DO $$CIV5 = $$CIV5, int(int(in))-1
+    91|                     d-nijb%addr%nijb($$CIV5 + 1,$$CIV6 + 1) = 3
+    92|                     d-lijb%addr%lijb($$CIV5 + 1,$$CIV6 + 1) = 3
+    93|                     d-nojb%addr%nojb($$CIV5 + 1,$$CIV6 + 1) = 2
+    94|                     d-lojb%addr%lojb($$CIV5 + 1,$$CIV6 + 1) = 2
+    95|                     d-erijb%addr%erijb($$CIV5 + 1,$$CIV6 + 1,1) = &
+                &             fijs[].off312
+    96|                     d-erijb%addr%erijb($$CIV5 + 1,$$CIV6 + 1,2) = &
+                &             fijs[].off312
+    97|                     d-eijb%addr%eijb($$CIV5 + 1,$$CIV6 + 1,1) = (((&
+                &             dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &             1.0000000000000000E+000)) * ( &
+                &             1.3221396614849456E+014 **  2.5000000000000000E-001)&
+                &             ) * (d-erijb%addr%erijb($$CIV5 + 1,$$CIV6 + 1,1) ** &
+                &              2.5000000000000000E-001)
+    98|                     d-eijb%addr%eijb($$CIV5 + 1,$$CIV6 + 1,2) = (((&
+                &             dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &             1.0000000000000000E+000)) * ( &
+                &             1.3221396614849456E+014 **  2.5000000000000000E-001)&
+                &             ) * (fijs[].off312 **  2.5000000000000000E-001)
+    99|                   ENDDO
+                        ENDIF
+                      ENDDO
+                      lab_61
+   100|               lab_33
+   102|               IF ((idirect == 3)) THEN
+   103|                 IF (.NOT.(int(jn) > 0)) GOTO lab_65
+                        $$CIV8 = 0
+       Id=8             DO $$CIV8 = $$CIV8, int(int(jn))-1
+   104|                   IF ((int(in) > 0)) THEN
+                            $$CIV7 = 0
+       Id=9                 DO $$CIV7 = $$CIV7, int(int(in))-1
+   105|                       d-nikb%addr%nikb($$CIV7 + 1,$$CIV8 + 1) = 3
+   106|                       d-likb%addr%likb($$CIV7 + 1,$$CIV8 + 1) = 3
+   107|                       d-nokb%addr%nokb($$CIV7 + 1,$$CIV8 + 1) = 2
+   108|                       d-lokb%addr%lokb($$CIV7 + 1,$$CIV8 + 1) = 2
+   109|                       d-erikb%addr%erikb($$CIV7 + 1,$$CIV8 + 1,1) = &
+                &               fiks[].off536
+   110|                       d-erikb%addr%erikb($$CIV7 + 1,$$CIV8 + 1,2) = &
+                &               fiks[].off536
+   111|                       d-eikb%addr%eikb($$CIV7 + 1,$$CIV8 + 1,1) = (((&
+                &               dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &               1.0000000000000000E+000)) * ( &
+                &               1.3221396614849456E+014 **  &
+                &               2.5000000000000000E-001)) * (d-erikb%addr%erikb(&
+                &               $$CIV7 + 1,$$CIV8 + 1,1) **  &
+                &               2.5000000000000000E-001)
+   112|                       d-eikb%addr%eikb($$CIV7 + 1,$$CIV8 + 1,2) = (((&
+                &               dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &               1.0000000000000000E+000)) * ( &
+                &               1.3221396614849456E+014 **  &
+                &               2.5000000000000000E-001)) * (fiks[].off536 **  &
+                &               2.5000000000000000E-001)
+   113|                     ENDDO
+                          ENDIF
+                        ENDDO
+                        lab_65
+   114|                 lab_42
+   117|                 RETURN
+                      END SUBROUTINE stream
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            61             1    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            62             2    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            63             3    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            63             3    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+         0            75             4    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            77                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-niib%addr  + d-niib%rvo 
+                                          + (d-niib%bounds%mult[].off48)*($$CIV4 + 1ll) + 
+                                          (d-niib%bounds%mult[].off72)*($$CIV3 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            77                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-niib%addr  + d-niib%rvo 
+                                          + (d-niib%bounds%mult[].off48)*($$CIV4 + 1ll) + 
+                                          (d-niib%bounds%mult[].off72)*($$CIV3 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            77                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            77                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-niib%addr 
+                                          + d-niib%rvo + (d-niib%bounds%mult[].off48)*($$CIV4 + 
+                                          1ll) + (d-niib%bounds%mult[].off72)*($$CIV3 + 1ll)).
+         0            78                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-liib%addr  + d-liib%rvo 
+                                          + (d-liib%bounds%mult[].off1968)*($$CIV4 + 1ll) + 
+                                          (d-liib%bounds%mult[].off1992)*($$CIV3 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            78                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-liib%addr  + d-liib%rvo 
+                                          + (d-liib%bounds%mult[].off1968)*($$CIV4 + 1ll) + 
+                                          (d-liib%bounds%mult[].off1992)*($$CIV3 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            78                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            78                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-liib%addr 
+                                          + d-liib%rvo + (d-liib%bounds%mult[].off1968)*($$CIV4 
+                                          + 1ll) + (d-liib%bounds%mult[].off1992)*($$CIV3 + 
+                                          1ll)).
+         0            79                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-noib%addr  + d-noib%rvo 
+                                          + (d-noib%bounds%mult[].off368)*($$CIV4 + 1ll) + 
+                                          (d-noib%bounds%mult[].off392)*($$CIV3 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            79                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-noib%addr  + d-noib%rvo 
+                                          + (d-noib%bounds%mult[].off368)*($$CIV4 + 1ll) + 
+                                          (d-noib%bounds%mult[].off392)*($$CIV3 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            79                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            79                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-noib%addr 
+                                          + d-noib%rvo + (d-noib%bounds%mult[].off368)*($$CIV4 
+                                          + 1ll) + (d-noib%bounds%mult[].off392)*($$CIV3 + 
+                                          1ll)).
+         0            80                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-loib%addr  + d-loib%rvo 
+                                          + (d-loib%bounds%mult[].off2048)*($$CIV4 + 1ll) + 
+                                          (d-loib%bounds%mult[].off2072)*($$CIV3 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            80                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-loib%addr  + d-loib%rvo 
+                                          + (d-loib%bounds%mult[].off2048)*($$CIV4 + 1ll) + 
+                                          (d-loib%bounds%mult[].off2072)*($$CIV3 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            80                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            80                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-loib%addr 
+                                          + d-loib%rvo + (d-loib%bounds%mult[].off2048)*($$CIV4 
+                                          + 1ll) + (d-loib%bounds%mult[].off2072)*($$CIV3 + 
+                                          1ll)).
+         0            81                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eriib%addr  + 
+                                          d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(1ll) 
+                                          + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + 
+                                          (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll))  
+                                          with non-vectorizable alignment.
+         0            81                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eriib%addr  + 
+                                          d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(1ll) 
+                                          + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + 
+                                          (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)) with 
+                                          non-vectorizable strides.
+         0            81                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            81                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-eriib%addr  + d-eriib%rvo + 
+                                          (d-eriib%bounds%mult[].off10080)*(1ll) + 
+                                          (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + 
+                                          (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)).
+         0            82                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eriib%addr  + 
+                                          d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(2ll) 
+                                          + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + 
+                                          (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll))  
+                                          with non-vectorizable alignment.
+         0            82                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eriib%addr  + 
+                                          d-eriib%rvo + (d-eriib%bounds%mult[].off10080)*(2ll) 
+                                          + (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + 
+                                          (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)) with 
+                                          non-vectorizable strides.
+         0            82                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            82                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-eriib%addr  + d-eriib%rvo + 
+                                          (d-eriib%bounds%mult[].off10080)*(2ll) + 
+                                          (d-eriib%bounds%mult[].off10104)*($$CIV4 + 1ll) + 
+                                          (d-eriib%bounds%mult[].off10128)*($$CIV3 + 1ll)).
+         0            83                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eiib%addr  + d-eiib%rvo 
+                                          + (d-eiib%bounds%mult[].off3072)*(1ll) + 
+                                          (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + 
+                                          (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            83                  Loop was not SIMD vectorized because it contains 
+                                          operation in (((dfloor *  8.6250000000000000E+007) / 
+                                          (gamma -  1.0000000000000000E+000)) * ( 
+                                          1.3221396614849456E+014 EXP    
+                                          2.5000000000000000E-001)) * (((double *)((char 
+                                          *)d-eriib%addr  + 
+                                          d-eriib%rvo))->eriib[].rns10.[1ll][$$CIV4 + 
+                                          1ll][$$CIV3 + 1ll] EXP    2.5000000000000000E-001) 
+                                          which is not  suitable for SIMD vectorization.
+         0            83                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eiib%addr  + d-eiib%rvo 
+                                          + (d-eiib%bounds%mult[].off3072)*(1ll) + 
+                                          (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + 
+                                          (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            83                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            83                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-eiib%addr 
+                                          + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(1ll) + 
+                                          (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + 
+                                          (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)).
+         0            84                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eiib%addr  + d-eiib%rvo 
+                                          + (d-eiib%bounds%mult[].off3072)*(2ll) + 
+                                          (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + 
+                                          (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            84                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eiib%addr  + d-eiib%rvo 
+                                          + (d-eiib%bounds%mult[].off3072)*(2ll) + 
+                                          (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + 
+                                          (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            84                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            84                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-eiib%addr 
+                                          + d-eiib%rvo + (d-eiib%bounds%mult[].off3072)*(2ll) + 
+                                          (d-eiib%bounds%mult[].off3096)*($$CIV4 + 1ll) + 
+                                          (d-eiib%bounds%mult[].off3120)*($$CIV3 + 1ll)).
+         0            89             6    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            91                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nijb%addr  + d-nijb%rvo 
+                                          + (d-nijb%bounds%mult[].off688)*($$CIV6 + 1ll) + 
+                                          (d-nijb%bounds%mult[].off712)*($$CIV5 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            91                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nijb%addr  + d-nijb%rvo 
+                                          + (d-nijb%bounds%mult[].off688)*($$CIV6 + 1ll) + 
+                                          (d-nijb%bounds%mult[].off712)*($$CIV5 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            91                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            91                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-nijb%addr 
+                                          + d-nijb%rvo + (d-nijb%bounds%mult[].off688)*($$CIV6 
+                                          + 1ll) + (d-nijb%bounds%mult[].off712)*($$CIV5 + 
+                                          1ll)).
+         0            92                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-lijb%addr  + d-lijb%rvo 
+                                          + (d-lijb%bounds%mult[].off2128)*($$CIV6 + 1ll) + 
+                                          (d-lijb%bounds%mult[].off2152)*($$CIV5 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            92                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-lijb%addr  + d-lijb%rvo 
+                                          + (d-lijb%bounds%mult[].off2128)*($$CIV6 + 1ll) + 
+                                          (d-lijb%bounds%mult[].off2152)*($$CIV5 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            92                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            92                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-lijb%addr 
+                                          + d-lijb%rvo + (d-lijb%bounds%mult[].off2128)*($$CIV6 
+                                          + 1ll) + (d-lijb%bounds%mult[].off2152)*($$CIV5 + 
+                                          1ll)).
+         0            93                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nojb%addr  + d-nojb%rvo 
+                                          + (d-nojb%bounds%mult[].off1008)*($$CIV6 + 1ll) + 
+                                          (d-nojb%bounds%mult[].off1032)*($$CIV5 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            93                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nojb%addr  + d-nojb%rvo 
+                                          + (d-nojb%bounds%mult[].off1008)*($$CIV6 + 1ll) + 
+                                          (d-nojb%bounds%mult[].off1032)*($$CIV5 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            93                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            93                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-nojb%addr 
+                                          + d-nojb%rvo + (d-nojb%bounds%mult[].off1008)*($$CIV6 
+                                          + 1ll) + (d-nojb%bounds%mult[].off1032)*($$CIV5 + 
+                                          1ll)).
+         0            94                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-lojb%addr  + d-lojb%rvo 
+                                          + (d-lojb%bounds%mult[].off2208)*($$CIV6 + 1ll) + 
+                                          (d-lojb%bounds%mult[].off2232)*($$CIV5 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            94                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-lojb%addr  + d-lojb%rvo 
+                                          + (d-lojb%bounds%mult[].off2208)*($$CIV6 + 1ll) + 
+                                          (d-lojb%bounds%mult[].off2232)*($$CIV5 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            94                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0            94                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-lojb%addr 
+                                          + d-lojb%rvo + (d-lojb%bounds%mult[].off2208)*($$CIV6 
+                                          + 1ll) + (d-lojb%bounds%mult[].off2232)*($$CIV5 + 
+                                          1ll)).
+         0            95                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erijb%addr  + 
+                                          d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(1ll) 
+                                          + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + 
+                                          (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll))  
+                                          with non-vectorizable alignment.
+         0            95                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erijb%addr  + 
+                                          d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(1ll) 
+                                          + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + 
+                                          (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)) with 
+                                          non-vectorizable strides.
+         0            95                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            95                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-erijb%addr  + d-erijb%rvo + 
+                                          (d-erijb%bounds%mult[].off10288)*(1ll) + 
+                                          (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + 
+                                          (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)).
+         0            96                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erijb%addr  + 
+                                          d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(2ll) 
+                                          + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + 
+                                          (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll))  
+                                          with non-vectorizable alignment.
+         0            96                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erijb%addr  + 
+                                          d-erijb%rvo + (d-erijb%bounds%mult[].off10288)*(2ll) 
+                                          + (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + 
+                                          (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)) with 
+                                          non-vectorizable strides.
+         0            96                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            96                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-erijb%addr  + d-erijb%rvo + 
+                                          (d-erijb%bounds%mult[].off10288)*(2ll) + 
+                                          (d-erijb%bounds%mult[].off10312)*($$CIV6 + 1ll) + 
+                                          (d-erijb%bounds%mult[].off10336)*($$CIV5 + 1ll)).
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eijb%addr  + d-eijb%rvo 
+                                          + (d-eijb%bounds%mult[].off3280)*(1ll) + 
+                                          (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + 
+                                          (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          operation in (((dfloor *  8.6250000000000000E+007) / 
+                                          (gamma -  1.0000000000000000E+000)) * ( 
+                                          1.3221396614849456E+014 EXP    
+                                          2.5000000000000000E-001)) * (((double *)((char 
+                                          *)d-erijb%addr  + 
+                                          d-erijb%rvo))->erijb[].rns16.[1ll][$$CIV6 + 
+                                          1ll][$$CIV5 + 1ll] EXP    2.5000000000000000E-001) 
+                                          which is not  suitable for SIMD vectorization.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eijb%addr  + d-eijb%rvo 
+                                          + (d-eijb%bounds%mult[].off3280)*(1ll) + 
+                                          (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + 
+                                          (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            97                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            97                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-eijb%addr 
+                                          + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(1ll) + 
+                                          (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + 
+                                          (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)).
+         0            98                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eijb%addr  + d-eijb%rvo 
+                                          + (d-eijb%bounds%mult[].off3280)*(2ll) + 
+                                          (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + 
+                                          (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0            98                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eijb%addr  + d-eijb%rvo 
+                                          + (d-eijb%bounds%mult[].off3280)*(2ll) + 
+                                          (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + 
+                                          (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)) with  
+                                          non-vectorizable strides.
+         0            98                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            98                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-eijb%addr 
+                                          + d-eijb%rvo + (d-eijb%bounds%mult[].off3280)*(2ll) + 
+                                          (d-eijb%bounds%mult[].off3304)*($$CIV6 + 1ll) + 
+                                          (d-eijb%bounds%mult[].off3328)*($$CIV5 + 1ll)).
+         0           103             8    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0           105                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nikb%addr  + d-nikb%rvo 
+                                          + (d-nikb%bounds%mult[].off1328)*($$CIV8 + 1ll) + 
+                                          (d-nikb%bounds%mult[].off1352)*($$CIV7 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0           105                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nikb%addr  + d-nikb%rvo 
+                                          + (d-nikb%bounds%mult[].off1328)*($$CIV8 + 1ll) + 
+                                          (d-nikb%bounds%mult[].off1352)*($$CIV7 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           105                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0           105                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-nikb%addr 
+                                          + d-nikb%rvo + (d-nikb%bounds%mult[].off1328)*($$CIV8 
+                                          + 1ll) + (d-nikb%bounds%mult[].off1352)*($$CIV7 + 
+                                          1ll)).
+         0           106                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-likb%addr  + d-likb%rvo 
+                                          + (d-likb%bounds%mult[].off2288)*($$CIV8 + 1ll) + 
+                                          (d-likb%bounds%mult[].off2312)*($$CIV7 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0           106                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-likb%addr  + d-likb%rvo 
+                                          + (d-likb%bounds%mult[].off2288)*($$CIV8 + 1ll) + 
+                                          (d-likb%bounds%mult[].off2312)*($$CIV7 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           106                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0           106                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-likb%addr 
+                                          + d-likb%rvo + (d-likb%bounds%mult[].off2288)*($$CIV8 
+                                          + 1ll) + (d-likb%bounds%mult[].off2312)*($$CIV7 + 
+                                          1ll)).
+         0           107                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nokb%addr  + d-nokb%rvo 
+                                          + (d-nokb%bounds%mult[].off1648)*($$CIV8 + 1ll) + 
+                                          (d-nokb%bounds%mult[].off1672)*($$CIV7 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0           107                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-nokb%addr  + d-nokb%rvo 
+                                          + (d-nokb%bounds%mult[].off1648)*($$CIV8 + 1ll) + 
+                                          (d-nokb%bounds%mult[].off1672)*($$CIV7 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           107                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0           107                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-nokb%addr 
+                                          + d-nokb%rvo + (d-nokb%bounds%mult[].off1648)*($$CIV8 
+                                          + 1ll) + (d-nokb%bounds%mult[].off1672)*($$CIV7 + 
+                                          1ll)).
+         0           108                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-lokb%addr  + d-lokb%rvo 
+                                          + (d-lokb%bounds%mult[].off2368)*($$CIV8 + 1ll) + 
+                                          (d-lokb%bounds%mult[].off2392)*($$CIV7 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0           108                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-lokb%addr  + d-lokb%rvo 
+                                          + (d-lokb%bounds%mult[].off2368)*($$CIV8 + 1ll) + 
+                                          (d-lokb%bounds%mult[].off2392)*($$CIV7 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           108                  Loop was not SIMD vectorized because it contains 
+                                          unsupported vector data types.
+         0           108                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-lokb%addr 
+                                          + d-lokb%rvo + (d-lokb%bounds%mult[].off2368)*($$CIV8 
+                                          + 1ll) + (d-lokb%bounds%mult[].off2392)*($$CIV7 + 
+                                          1ll)).
+         0           109                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erikb%addr  + 
+                                          d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(1ll) 
+                                          + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + 
+                                          (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll))  
+                                          with non-vectorizable alignment.
+         0           109                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erikb%addr  + 
+                                          d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(1ll) 
+                                          + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + 
+                                          (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)) with 
+                                          non-vectorizable strides.
+         0           109                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           109                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-erikb%addr  + d-erikb%rvo + 
+                                          (d-erikb%bounds%mult[].off10496)*(1ll) + 
+                                          (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + 
+                                          (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)).
+         0           110                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erikb%addr  + 
+                                          d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(2ll) 
+                                          + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + 
+                                          (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll))  
+                                          with non-vectorizable alignment.
+         0           110                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-erikb%addr  + 
+                                          d-erikb%rvo + (d-erikb%bounds%mult[].off10496)*(2ll) 
+                                          + (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + 
+                                          (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)) with 
+                                          non-vectorizable strides.
+         0           110                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           110                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char 
+                                          *)d-erikb%addr  + d-erikb%rvo + 
+                                          (d-erikb%bounds%mult[].off10496)*(2ll) + 
+                                          (d-erikb%bounds%mult[].off10520)*($$CIV8 + 1ll) + 
+                                          (d-erikb%bounds%mult[].off10544)*($$CIV7 + 1ll)).
+         0           111                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eikb%addr  + d-eikb%rvo 
+                                          + (d-eikb%bounds%mult[].off3488)*(1ll) + 
+                                          (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + 
+                                          (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0           111                  Loop was not SIMD vectorized because it contains 
+                                          operation in (((dfloor *  8.6250000000000000E+007) / 
+                                          (gamma -  1.0000000000000000E+000)) * ( 
+                                          1.3221396614849456E+014 EXP    
+                                          2.5000000000000000E-001)) * (((double *)((char 
+                                          *)d-erikb%addr  + 
+                                          d-erikb%rvo))->erikb[].rns22.[1ll][$$CIV8 + 
+                                          1ll][$$CIV7 + 1ll] EXP    2.5000000000000000E-001) 
+                                          which is not  suitable for SIMD vectorization.
+         0           111                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eikb%addr  + d-eikb%rvo 
+                                          + (d-eikb%bounds%mult[].off3488)*(1ll) + 
+                                          (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + 
+                                          (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           111                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           111                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-eikb%addr 
+                                          + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(1ll) + 
+                                          (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + 
+                                          (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)).
+         0           112                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eikb%addr  + d-eikb%rvo 
+                                          + (d-eikb%bounds%mult[].off3488)*(2ll) + 
+                                          (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + 
+                                          (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll))  with 
+                                          non-vectorizable alignment.
+         0           112                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *)d-eikb%addr  + d-eikb%rvo 
+                                          + (d-eikb%bounds%mult[].off3488)*(2ll) + 
+                                          (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + 
+                                          (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           112                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           112                  Loop was not SIMD vectorized because it contains 
+                                          non-stride-one store  references ((char *)d-eikb%addr 
+                                          + d-eikb%rvo + (d-eikb%bounds%mult[].off3488)*(2ll) + 
+                                          (d-eikb%bounds%mult[].off3512)*($$CIV8 + 1ll) + 
+                                          (d-eikb%bounds%mult[].off3536)*($$CIV7 + 1ll)).
+
+
+    11|         SUBROUTINE stream ()
+    40|           idirect = 1
+    41|           amp =  1.0000000000000000E+000
+    42|           x0 =  1.0000000149011611E-001
+    43|           IF ((myid == 0)) THEN
+    11|             |pgen%nlitems%type.off32 = 0
+                    |pgen%nlitems%kind.off40 = 
+                    |pgen%nlitems%size.off48 = 
+                    |pgen%nlitems%name_addr.off56 = &
+                &     "pgenidirectIampIx0stream.f90" + 4
+                    |pgen%nlitems%name_len.off64 = 7
+                    |pgen%nlitems%item_addr.off72 = loc(idirect)
+                    |pgen%nlitems%type.off80 = 4
+                    |pgen%nlitems%kind.off88 = 
+                    |pgen%nlitems%size.off96 = 
+                    |pgen%nlitems%name_addr.off104 = &
+                &     "pgenidirectIampIx0stream.f90" + 12
+                    |pgen%nlitems%name_len.off112 = 3
+                    |pgen%nlitems%item_addr.off120 = loc(amp)
+                    |pgen%version = 129
+                    |pgen%name_addr = "pgenidirectIampIx0stream.f90"
+                    |pgen%name_len = 4
+                    |pgen%num_of_items = 3
+                    |pgen%nlitems%type.off128 = 4
+                    |pgen%nlitems%kind.off136 = 
+                    |pgen%nlitems%size.off144 = 
+                    |pgen%nlitems%name_addr.off152 = &
+                &     "pgenidirectIampIx0stream.f90" + 16
+                    |pgen%nlitems%name_len.off160 = 2
+                    |pgen%nlitems%item_addr.off168 = loc(x0)
+    44|             |pgen%name_flags = 0
+                    #2 = _xlfBeginIO(1,2,#1,32768,NULL,0,|pgen)
+                    _xlfEndIO(%VAL(#2))
+    45|             |pgen%name_flags = 0
+                    #4 = _xlfBeginIO(2,258,#3,32768,NULL,0,|pgen)
+                    _xlfEndIO(%VAL(#4))
+    46|             buf_in[].off1744 = amp
+    47|             buf_in[].off1752 = x0
+    48|             ibuf_in[].off144 = idirect
+    49|           ENDIF
+    50|           T_2 = 2
+                  T_3 = 1275070495
+                  T_4 = 0
+                  CALL mpi_bcast(buf_in,T_2,T_3,T_4,comm3d,ierr)
+    52|           T_5 = 1
+                  T_6 = 1275069467
+                  T_7 = 0
+                  CALL mpi_bcast(ibuf_in,T_5,T_6,T_7,comm3d,ierr)
+    54|           IF ((myid <> 0)) THEN
+    55|             amp = buf_in[].off1744
+    56|             x0 = buf_in[].off1752
+    57|             idirect = ibuf_in[].off144
+    58|           ENDIF
+    61|           IF ((int(kn) > 0)) THEN
+                    $$CIV2 = 0
+       Id=1         DO $$CIV2 = $$CIV2, int(int(kn))-1
+    62|               IF ((int(jn) > 0)) THEN
+                        $$CIV1 = 0
+       Id=2             DO $$CIV1 = $$CIV1, int(int(jn))-1
+    63|                   IF ((int(in) > 0)) THEN
+                            $$CIV0 = 0
+       Id=3                 DO $$CIV0 = $$CIV0, int(int(in))-1
+    64|                       d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = &
+                &               erfloor
+    65|                       IF ((idirect == 1)) THEN
+                                d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = MERGE(erfloor + amp, erfloor, d-x1b%addr%x1b($$CIV0 + 1) <= x0)
+                              ENDIF
+    67|                       IF ((idirect == 2)) THEN
+                                d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = MERGE(d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) + amp, d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1), d-x2b%addr%x2b($$CIV1 + 1) <= x0)
+                              ENDIF
+    69|                       IF ((idirect == 3)) THEN
+                                d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = MERGE(d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) + amp, d-er%addr%er($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1), d-x3b%addr%x3b($$CIV2 + 1) <= x0)
+                              ENDIF
+    71|                       d-e%addr%e($$CIV0 + 1,$$CIV1 + 1,$$CIV2 + 1) = (((&
+                &               dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &               1.0000000000000000E+000)) * ( &
+                &               1.3221396614849456E+014 **  &
+                &               2.5000000000000000E-001)) * (d-er%addr%er($$CIV0 &
+                &               + 1,$$CIV1 + 1,$$CIV2 + 1) **  &
+                &               2.5000000000000000E-001)
+    72|                     ENDDO
+                          ENDIF
+                        ENDDO
+                      ENDIF
+                    ENDDO
+                  ENDIF
+    74|           IF ((idirect == 1)) THEN
+    75|             IF (.NOT.(int(kn) > 0)) GOTO lab_57
+                    $$CIV4 = 0
+       Id=4         DO $$CIV4 = $$CIV4, int(int(kn))-1
+    76|               IF ((int(jn) > 0)) THEN
+                        $$CIV3 = 0
+       Id=5             DO $$CIV3 = $$CIV3, int(int(jn))-1
+    77|                   d-niib%addr%niib($$CIV3 + 1,$$CIV4 + 1) = 3
+    78|                   d-liib%addr%liib($$CIV3 + 1,$$CIV4 + 1) = 3
+    79|                   d-noib%addr%noib($$CIV3 + 1,$$CIV4 + 1) = 2
+    80|                   d-loib%addr%loib($$CIV3 + 1,$$CIV4 + 1) = 2
+    81|                   d-eriib%addr%eriib($$CIV3 + 1,$$CIV4 + 1,1) = &
+                &           fiis[].off88
+    82|                   d-eriib%addr%eriib($$CIV3 + 1,$$CIV4 + 1,2) = &
+                &           fiis[].off88
+    83|                   d-eiib%addr%eiib($$CIV3 + 1,$$CIV4 + 1,1) = (((dfloor &
+                &           *  8.6250000000000000E+007) / (gamma -  &
+                &           1.0000000000000000E+000)) * ( 1.3221396614849456E+014 &
+                &           **  2.5000000000000000E-001)) * (d-eriib%addr%eriib(&
+                &           $$CIV3 + 1,$$CIV4 + 1,1) **  2.5000000000000000E-001)
+    84|                   d-eiib%addr%eiib($$CIV3 + 1,$$CIV4 + 1,2) = (((dfloor &
+                &           *  8.6250000000000000E+007) / (gamma -  &
+                &           1.0000000000000000E+000)) * ( 1.3221396614849456E+014 &
+                &           **  2.5000000000000000E-001)) * (fiis[].off88 **  &
+                &           2.5000000000000000E-001)
+    85|                 ENDDO
+                      ENDIF
+                    ENDDO
+                    lab_57
+    86|             lab_24
+    88|             IF ((idirect == 2)) THEN
+    89|               IF (.NOT.(int(kn) > 0)) GOTO lab_61
+                      $$CIV6 = 0
+       Id=6           DO $$CIV6 = $$CIV6, int(int(kn))-1
+    90|                 IF ((int(in) > 0)) THEN
+                          $$CIV5 = 0
+       Id=7               DO $$CIV5 = $$CIV5, int(int(in))-1
+    91|                     d-nijb%addr%nijb($$CIV5 + 1,$$CIV6 + 1) = 3
+    92|                     d-lijb%addr%lijb($$CIV5 + 1,$$CIV6 + 1) = 3
+    93|                     d-nojb%addr%nojb($$CIV5 + 1,$$CIV6 + 1) = 2
+    94|                     d-lojb%addr%lojb($$CIV5 + 1,$$CIV6 + 1) = 2
+    95|                     d-erijb%addr%erijb($$CIV5 + 1,$$CIV6 + 1,1) = &
+                &             fijs[].off312
+    96|                     d-erijb%addr%erijb($$CIV5 + 1,$$CIV6 + 1,2) = &
+                &             fijs[].off312
+    97|                     d-eijb%addr%eijb($$CIV5 + 1,$$CIV6 + 1,1) = (((&
+                &             dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &             1.0000000000000000E+000)) * ( &
+                &             1.3221396614849456E+014 **  2.5000000000000000E-001)&
+                &             ) * (d-erijb%addr%erijb($$CIV5 + 1,$$CIV6 + 1,1) ** &
+                &              2.5000000000000000E-001)
+    98|                     d-eijb%addr%eijb($$CIV5 + 1,$$CIV6 + 1,2) = (((&
+                &             dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &             1.0000000000000000E+000)) * ( &
+                &             1.3221396614849456E+014 **  2.5000000000000000E-001)&
+                &             ) * (fijs[].off312 **  2.5000000000000000E-001)
+    99|                   ENDDO
+                        ENDIF
+                      ENDDO
+                      lab_61
+   100|               lab_33
+   102|               IF ((idirect == 3)) THEN
+   103|                 IF (.NOT.(int(jn) > 0)) GOTO lab_65
+                        $$CIV8 = 0
+       Id=8             DO $$CIV8 = $$CIV8, int(int(jn))-1
+   104|                   IF ((int(in) > 0)) THEN
+                            $$CIV7 = 0
+       Id=9                 DO $$CIV7 = $$CIV7, int(int(in))-1
+   105|                       d-nikb%addr%nikb($$CIV7 + 1,$$CIV8 + 1) = 3
+   106|                       d-likb%addr%likb($$CIV7 + 1,$$CIV8 + 1) = 3
+   107|                       d-nokb%addr%nokb($$CIV7 + 1,$$CIV8 + 1) = 2
+   108|                       d-lokb%addr%lokb($$CIV7 + 1,$$CIV8 + 1) = 2
+   109|                       d-erikb%addr%erikb($$CIV7 + 1,$$CIV8 + 1,1) = &
+                &               fiks[].off536
+   110|                       d-erikb%addr%erikb($$CIV7 + 1,$$CIV8 + 1,2) = &
+                &               fiks[].off536
+   111|                       d-eikb%addr%eikb($$CIV7 + 1,$$CIV8 + 1,1) = (((&
+                &               dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &               1.0000000000000000E+000)) * ( &
+                &               1.3221396614849456E+014 **  &
+                &               2.5000000000000000E-001)) * (d-erikb%addr%erikb(&
+                &               $$CIV7 + 1,$$CIV8 + 1,1) **  &
+                &               2.5000000000000000E-001)
+   112|                       d-eikb%addr%eikb($$CIV7 + 1,$$CIV8 + 1,2) = (((&
+                &               dfloor *  8.6250000000000000E+007) / (gamma -  &
+                &               1.0000000000000000E+000)) * ( &
+                &               1.3221396614849456E+014 **  &
+                &               2.5000000000000000E-001)) * (fiks[].off536 **  &
+                &               2.5000000000000000E-001)
+   113|                     ENDDO
+                          ENDIF
+                        ENDDO
+                        lab_65
+   114|                 lab_42
+   117|                 RETURN
+                      END SUBROUTINE stream
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s-ss  ssss ssss ssss ssss
+ FPR's set/used:   ssss ssss ssss ss--  ---- ---- ---s ssss
+ CCR's set/used:   ssss ssss
+     | 000000                           PDEF     stream
+   11|                                  PROC      
+    0| 000000 stfd     DBE1FFF8   1     STFL      #stack(gr1,-8)=fp31
+    0| 000004 stfd     DBC1FFF0   1     STFL      #stack(gr1,-16)=fp30
+    0| 000008 stfd     DBA1FFE8   1     STFL      #stack(gr1,-24)=fp29
+    0| 00000C stfd     DB81FFE0   1     STFL      #stack(gr1,-32)=fp28
+    0| 000010 stfd     DB61FFD8   1     STFL      #stack(gr1,-40)=fp27
+    0| 000014 std      FBE1FFD0   1     ST8       #stack(gr1,-48)=gr31
+    0| 000018 std      FBC1FFC8   1     ST8       #stack(gr1,-56)=gr30
+    0| 00001C std      FBA1FFC0   1     ST8       #stack(gr1,-64)=gr29
+    0| 000020 std      FB81FFB8   1     ST8       #stack(gr1,-72)=gr28
+    0| 000024 std      FB61FFB0   1     ST8       #stack(gr1,-80)=gr27
+    0| 000028 std      FB41FFA8   1     ST8       #stack(gr1,-88)=gr26
+    0| 00002C std      FB21FFA0   1     ST8       #stack(gr1,-96)=gr25
+    0| 000030 std      FB01FF98   1     ST8       #stack(gr1,-104)=gr24
+    0| 000034 std      FAE1FF90   1     ST8       #stack(gr1,-112)=gr23
+    0| 000038 std      FAC1FF88   1     ST8       #stack(gr1,-120)=gr22
+    0| 00003C std      FAA1FF80   1     ST8       #stack(gr1,-128)=gr21
+    0| 000040 std      FA81FF78   1     ST8       #stack(gr1,-136)=gr20
+    0| 000044 std      FA61FF70   1     ST8       #stack(gr1,-144)=gr19
+    0| 000048 std      FA41FF68   1     ST8       #stack(gr1,-152)=gr18
+    0| 00004C std      FA21FF60   1     ST8       #stack(gr1,-160)=gr17
+    0| 000050 std      FA01FF58   1     ST8       #stack(gr1,-168)=gr16
+    0| 000054 std      F9E1FF50   1     ST8       #stack(gr1,-176)=gr15
+    0| 000058 std      F9C1FF48   1     ST8       #stack(gr1,-184)=gr14
+    0| 00005C mfspr    7C0802A6   1     LFLR      gr0=lr
+    0| 000060 mfcr     7D800026   1     LFCR      gr12=cr[234],2
+    0| 000064 stw      91810008   1     ST4A      #stack(gr1,8)=gr12
+    0| 000068 std      F8010010   1     ST8       #stack(gr1,16)=gr0
+    0| 00006C stdu     F821FBE1   1     ST8U      gr1,#stack(gr1,-1056)=gr1
+   43| 000070 ld       EB620000   1     L8        gr27=.&&N&&mpipar(gr2,0)
+   41| 000074 ld       EBE20000   1     L8        gr31=.+CONSTANT_AREA(gr2,0)
+   41| 000078 addi     380003FF   1     LI        gr0=1023
+   40| 00007C addi     38600001   1     LI        gr3=1
+   41| 000080 rldicr   7800A2C6   1     SLL8      gr0=gr0,52
+   40| 000084 stw      90610080   1     ST4Z      idirect(gr1,128)=gr3
+   41| 000088 std      F80100A0   1     ST8       amp(gr1,160)=gr0
+   43| 00008C lwz      801B0004   1     L4Z       gr0=<s233:d4:l4>(gr27,4)
+   42| 000090 lfs      C3FF002C   1     LFS       fp31=+CONSTANT_AREA(gr31,44)
+   40| 000094 addi     38800001   1     LI        gr4=1
+   41| 000098 lfs      C37F0028   1     LFS       fp27=+CONSTANT_AREA(gr31,40)
+   40| 00009C std      F8810190   1     ST8       #SPILL0(gr1,400)=gr4
+   43| 0000A0 cmpdi    2C200000   1     C8        cr0=gr0,0
+   42| 0000A4 stfd     DBE100A8   1     STFL      x0(gr1,168)=fp31
+   43| 0000A8 bc       40820114   1     BF        CL.1,cr0,0x4/eq,taken=60%(60,40)
+    0| 0000AC addi     38000004   1     LI        gr0=4
+    0| 0000B0 addi     38600007   1     LI        gr3=7
+    0| 0000B4 std      F80100E8   1     ST8       <a1:d232:l8>(gr1,232)=gr0
+    0| 0000B8 std      F80100F0   1     ST8       <a1:d240:l8>(gr1,240)=gr0
+    0| 0000BC std      F8010110   1     ST8       <a1:d272:l8>(gr1,272)=gr0
+    0| 0000C0 std      F80100D0   1     ST8       <a1:d208:l8>(gr1,208)=gr0
+    0| 0000C4 std      F8010140   1     ST8       <a1:d320:l8>(gr1,320)=gr0
+    0| 0000C8 std      F8610100   1     ST8       <a1:d256:l8>(gr1,256)=gr3
+    0| 0000CC addi     381F0010   1     AI        gr0=gr31,16
+   44| 0000D0 ld       EBA20000   1     L8        gr29=.$STATIC(gr2,0)
+    0| 0000D4 std      F80100F8   1     ST8       <a1:d248:l8>(gr1,248)=gr0
+    0| 0000D8 addi     38A00000   1     LI        gr5=0
+    0| 0000DC addi     38010080   1     AI        gr0=gr1,128
+    0| 0000E0 std      F8A100E0   1     ST8       <a1:d224:l8>(gr1,224)=gr5
+   44| 0000E4 stw      90A100C4   1     ST4Z      <a1:d196:l4>(gr1,196)=gr5
+    0| 0000E8 std      F8010108   1     ST8       <a1:d264:l8>(gr1,264)=gr0
+    0| 0000EC addi     38600008   1     LI        gr3=8
+    0| 0000F0 addi     389F001C   1     AI        gr4=gr31,28
+    0| 0000F4 std      F8610118   1     ST8       <a1:d280:l8>(gr1,280)=gr3
+    0| 0000F8 std      F8610120   1     ST8       <a1:d288:l8>(gr1,288)=gr3
+    0| 0000FC std      F8610148   1     ST8       <a1:d328:l8>(gr1,328)=gr3
+    0| 000100 addi     38000002   1     LI        gr0=2
+    0| 000104 std      F8610150   1     ST8       <a1:d336:l8>(gr1,336)=gr3
+    0| 000108 std      F8810158   1     ST8       <a1:d344:l8>(gr1,344)=gr4
+    0| 00010C addi     390100A8   1     AI        gr8=gr1,168
+   44| 000110 ori      60BE8000   1     OIL       gr30=gr5,0x8000
+    0| 000114 addi     387F0018   1     AI        gr3=gr31,24
+    0| 000118 addi     38800003   1     LI        gr4=3
+    0| 00011C std      F8610128   1     ST8       <a1:d296:l8>(gr1,296)=gr3
+    0| 000120 addi     38A100A0   1     AI        gr5=gr1,160
+    0| 000124 addi     38C00081   1     LI        gr6=129
+    0| 000128 std      F8810130   1     ST8       <a1:d304:l8>(gr1,304)=gr4
+    0| 00012C std      F8A10138   1     ST8       <a1:d312:l8>(gr1,312)=gr5
+    0| 000130 addi     38FF000C   1     AI        gr7=gr31,12
+    0| 000134 std      F88100D8   1     ST8       <a1:d216:l8>(gr1,216)=gr4
+    0| 000138 stw      90C100C0   1     ST4Z      <a1:d192:l4>(gr1,192)=gr6
+    0| 00013C std      F8E100C8   1     ST8       <a1:d200:l8>(gr1,200)=gr7
+    0| 000140 std      F8010160   1     ST8       <a1:d352:l8>(gr1,352)=gr0
+    0| 000144 std      F9010168   1     ST8       <a1:d360:l8>(gr1,360)=gr8
+   44| 000148 addi     38600001   1     LI        gr3=1
+   44| 00014C addi     38800002   1     LI        gr4=2
+   44| 000150 or       7FA5EB78   1     LR        gr5=gr29
+   44| 000154 or       7FC6F378   1     LR        gr6=gr30
+   44| 000158 addi     38E00000   1     LI        gr7=0
+   44| 00015C addi     39000000   1     LI        gr8=0
+   44| 000160 addi     392100C0   1     AI        gr9=gr1,192
+   44| 000164 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#1",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|pgen,gr9,#def_xlfBeginIO11",_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   44| 000168 ori      60000000   1
+   44| 00016C bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   44| 000170 ori      60000000   1
+   45| 000174 addi     38BD0040   1     AI        gr5=gr29,64
+   45| 000178 addi     38600002   1     LI        gr3=2
+   45| 00017C addi     38800102   1     LI        gr4=258
+   45| 000180 or       7FC6F378   1     LR        gr6=gr30
+   45| 000184 addi     38E00000   1     LI        gr7=0
+   45| 000188 addi     39000000   1     LI        gr8=0
+   45| 00018C addi     392100C0   1     AI        gr9=gr1,192
+   45| 000190 bl       48000001   1     CALL      gr3=_xlfBeginIO,7,gr3,gr4,#3",gr5,gr6,@PALI_SHADOW_CONST.rns0.,gr7,gr8,|pgen,gr9,#use_xlfBeginIO21,_xlfBeginIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   45| 000194 ori      60000000   1
+   45| 000198 bl       48000001   1     CALL      gr3=_xlfEndIO,1,gr3,_xlfEndIO",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr4"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   45| 00019C ori      60000000   1
+   46| 0001A0 lfd      CB6100A0   1     LFL       fp27=amp(gr1,160)
+   47| 0001A4 lfd      CBE100A8   1     LFL       fp31=x0(gr1,168)
+   48| 0001A8 lwa      EB810082   1     L4A       gr28=idirect(gr1,128)
+   48| 0001AC std      FB810190   1     ST8       #SPILL0(gr1,400)=gr28
+   46| 0001B0 stfd     DB7B06D0   1     STFL      <s233:d1744:l8>(gr27,1744)=fp27
+   47| 0001B4 stfd     DBFB06D8   1     STFL      <s233:d1752:l8>(gr27,1752)=fp31
+   48| 0001B8 stw      939B0090   1     ST4Z      <s233:d144:l4>(gr27,144)=gr28
+   49|                              CL.1:
+   50| 0001BC addis    3FA04C00   1     LIU       gr29=19456
+   50| 0001C0 addi     3BC00002   1     LI        gr30=2
+   50| 0001C4 addi     381D081F   1     AI        gr0=gr29,2079
+   50| 0001C8 addi     387B06D0   1     AI        gr3=gr27,1744
+   50| 0001CC stw      93C10084   1     ST4Z      T_2(gr1,132)=gr30
+   50| 0001D0 stw      90010088   1     ST4Z      T_3(gr1,136)=gr0
+   50| 0001D4 addi     3B800000   1     LI        gr28=0
+   50| 0001D8 addi     38C1008C   1     AI        gr6=gr1,140
+   50| 0001DC stw      9381008C   1     ST4Z      T_4(gr1,140)=gr28
+   50| 0001E0 addi     38A10088   1     AI        gr5=gr1,136
+   50| 0001E4 addi     38810084   1     AI        gr4=gr1,132
+   50| 0001E8 addi     38FB0020   1     AI        gr7=gr27,32
+   50| 0001EC addi     391B0014   1     AI        gr8=gr27,20
+   50| 0001F0 bl       48000001   1     CALL      mpi_bcast,6,buf_in[]",gr3,T_2",gr4,T_3",gr5,T_4",gr6,comm3d",gr7,ierr",gr8,#ProcAlias",mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   50| 0001F4 ori      60000000   1
+   52| 0001F8 addi     387D041B   1     AI        gr3=gr29,1051
+   52| 0001FC stw      93810098   1     ST4Z      T_7(gr1,152)=gr28
+   52| 000200 addi     38000001   1     LI        gr0=1
+   52| 000204 stw      90610094   1     ST4Z      T_6(gr1,148)=gr3
+   52| 000208 stw      90010090   1     ST4Z      T_5(gr1,144)=gr0
+   52| 00020C addi     38C10098   1     AI        gr6=gr1,152
+   52| 000210 addi     38A10094   1     AI        gr5=gr1,148
+   52| 000214 addi     38810090   1     AI        gr4=gr1,144
+   52| 000218 addi     387B0090   1     AI        gr3=gr27,144
+   52| 00021C addi     38FB0020   1     AI        gr7=gr27,32
+   52| 000220 addi     391B0014   1     AI        gr8=gr27,20
+   52| 000224 bl       48000001   1     CALL      mpi_bcast,6,ibuf_in[]",gr3,T_5",gr4,T_6",gr5,T_7",gr6,comm3d",gr7,ierr",gr8,#ProcAlias",mpi_bcast",fcr",#MX_TEMP1",gr1,cr[01567]",gr0",gr3"-gr12",fp0"-fp13",mq",lr",xer",fsr",ca",ctr"
+   52| 000228 ori      60000000   1
+   54| 00022C lwz      801B0004   1     L4Z       gr0=<s233:d4:l4>(gr27,4)
+   54| 000230 cmpdi    2C200000   1     C8        cr0=gr0,0
+   54| 000234 bc       41820014   1     BT        CL.2,cr0,0x4/eq,taken=50%(0,0)
+   57| 000238 lwa      E81B0092   1     L4A       gr0=<s233:d144:l4>(gr27,144)
+   55| 00023C lfd      CB7B06D0   1     LFL       fp27=<s233:d1744:l8>(gr27,1744)
+   56| 000240 lfd      CBFB06D8   1     LFL       fp31=<s233:d1752:l8>(gr27,1752)
+   57| 000244 std      F8010190   1     ST8       #SPILL0(gr1,400)=gr0
+   58|                              CL.2:
+   58| 000248 ld       EB820000   1     L8        gr28=.&&N&&root(gr2,0)
+   58| 00024C lfs      C01F0030   1     LFS       fp0=+CONSTANT_AREA(gr31,48)
+   58| 000250 lfs      C07F0034   1     LFS       fp3=+CONSTANT_AREA(gr31,52)
+   58| 000254 lfd      C83F0038   1     LFL       fp1=+CONSTANT_AREA(gr31,56)
+   58| 000258 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+   58| 00025C lfd      C89C0028   1     LFL       fp4=<s260:d40:l8>(gr28,40)
+   58| 000260 lfd      C8BC00E0   1     LFL       fp5=<s260:d224:l8>(gr28,224)
+   58| 000264 fmul     FC040032   1     MFL       fp0=fp4,fp0,fcr
+   58| 000268 fadd     FC65182A   2     AFL       fp3=fp5,fp3,fcr
+   58| 00026C fdiv     FFC01824   2     DFL       fp30=fp0,fp3,fcr
+   58| 000270 bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   58| 000274 ori      60000000   1
+   61| 000278 ld       EBA20000   1     L8        gr29=.&&N&&param(gr2,0)
+   61| 00027C lwa      EB7D000A   1     L4A       gr27=<s264:d8:l4>(gr29,8)
+   61| 000280 std      FB610198   1     ST8       #SPILL1(gr1,408)=gr27
+   61| 000284 cmpwi    2C1B0000   1     C4        cr0=gr27,0
+   58| 000288 fmul     FFDE0072   1     MFL       fp30=fp30,fp1,fcr
+   61| 00028C bc       4081062C   1     BF        CL.33,cr0,0x2/gt,taken=40%(40,60)
+   71| 000290 ld       E9220000   1     L8        gr9=.&&N&field(gr2,0)
+   65| 000294 ld       E8E20000   1     L8        gr7=.&&N&grid(gr2,0)
+   62| 000298 lwa      EB1D0006   1     L4A       gr24=<s264:d4:l4>(gr29,4)
+   64| 00029C lfd      CBBC00D8   1     LFL       fp29=<s260:d216:l8>(gr28,216)
+   61| 0002A0 addi     3AE00000   1     LI        gr23=0
+   63| 0002A4 lwa      EBBD0002   1     L4A       gr29=<s264:d0:l4>(gr29,0)
+   61| 0002A8 std      FAE101A8   1     ST8       #SPILL3(gr1,424)=gr23
+   64| 0002AC ld       E8090410   1     L8        gr0=<s50:d1040:l8>(gr9,1040)
+   62| 0002B0 std      FB0101A0   1     ST8       #SPILL2(gr1,416)=gr24
+   64| 0002B4 ld       E9690428   1     L8        gr11=<s50:d1064:l8>(gr9,1064)
+   67| 0002B8 ld       E9070700   1     L8        gr8=<s21:d1792:l8>(gr7,1792)
+   69| 0002BC ld       E8870738   1     L8        gr4=<s21:d1848:l8>(gr7,1848)
+   71| 0002C0 ld       E8690068   1     L8        gr3=<s50:d104:l8>(gr9,104)
+   71| 0002C4 ld       E9890080   1     L8        gr12=<s50:d128:l8>(gr9,128)
+   71| 0002C8 ld       EAC90098   1     L8        gr22=<s50:d152:l8>(gr9,152)
+   71| 0002CC ld       EB8900B0   1     L8        gr28=<s50:d176:l8>(gr9,176)
+   64| 0002D0 ld       EAA90440   1     L8        gr21=<s50:d1088:l8>(gr9,1088)
+   65| 0002D4 ld       E8A706C8   1     L8        gr5=<s21:d1736:l8>(gr7,1736)
+   65| 0002D8 ld       E8C706E0   1     L8        gr6=<s21:d1760:l8>(gr7,1760)
+   67| 0002DC ld       E9470718   1     L8        gr10=<s21:d1816:l8>(gr7,1816)
+   71| 0002E0 std      FAC101B0   1     ST8       #SPILL4(gr1,432)=gr22
+   69| 0002E4 ld       E8E70750   1     L8        gr7=<s21:d1872:l8>(gr7,1872)
+   64| 0002E8 std      FAA101B8   1     ST8       #SPILL5(gr1,440)=gr21
+   64| 0002EC ld       EB690458   1     L8        gr27=<s50:d1112:l8>(gr9,1112)
+    0| 0002F0 add      7C005A14   1     A         gr0=gr0,gr11
+    0| 0002F4 cmpwi    2C180000   1     C4        cr0=gr24,0
+   67| 0002F8 addi     39680008   1     AI        gr11=gr8,8
+   69| 0002FC addi     39040008   1     AI        gr8=gr4,8
+    0| 000300 add      7C80AA14   1     A         gr4=gr0,gr21
+    0| 000304 add      7C16E214   1     A         gr0=gr22,gr28
+    0| 000308 add      7C636214   1     A         gr3=gr3,gr12
+   71| 00030C ld       EB4900C8   1     L8        gr26=<s50:d200:l8>(gr9,200)
+   64| 000310 ld       EB290470   1     L8        gr25=<s50:d1136:l8>(gr9,1136)
+    0| 000314 bc       4081012C   1     BF        CL.51,cr0,0x2/gt,taken=20%(20,80)
+   69| 000318 add      7EE74214   1     A         gr23=gr7,gr8
+   65| 00031C add      7CE53214   1     A         gr7=gr5,gr6
+    0| 000320 add      7CA4DA14   1     A         gr5=gr4,gr27
+   65| 000324 std      F8E101C0   1     ST8       #SPILL6(gr1,448)=gr7
+    0| 000328 std      F8A101C8   1     ST8       #SPILL7(gr1,456)=gr5
+    0| 00032C add      7C801A14   1     A         gr4=gr0,gr3
+    0| 000330 ld       E8010190   1     L8        gr0=#SPILL0(gr1,400)
+    0| 000334 std      F88101D0   1     ST8       #SPILL8(gr1,464)=gr4
+   67| 000338 add      7F0A5A14   1     A         gr24=gr10,gr11
+    0| 00033C cmpwi    2E000001   1     C4        cr4=gr0,1
+    0| 000340 cmpwi    2D000002   1     C4        cr2=gr0,2
+    0| 000344 cmpwi    2D800003   1     C4        cr3=gr0,3
+   61|                              CL.52:
+    0| 000348 cmpdi    2C3D0000   1     C8        cr0=gr29,0
+   62| 00034C addi     38800000   1     LI        gr4=0
+    0| 000350 bc       408100B8   1     BF        CL.53,cr0,0x2/gt,taken=20%(20,80)
+    0| 000354 ld       E80101A8   1     L8        gr0=#SPILL3(gr1,424)
+    0| 000358 ld       EAC101D0   1     L8        gr22=#SPILL8(gr1,464)
+    0| 00035C ld       EAA101C8   1     L8        gr21=#SPILL7(gr1,456)
+    0| 000360 rldicr   78141F24   1     SLL8      gr20=gr0,3
+   62|                              CL.54:
+    0| 000364 addi     3A640001   1     AI        gr19=gr4,1
+    0| 000368 bc       4092081C   1     BF        CL.163,cr4,0x4/eq,taken=50%(0,0)
+    0| 00036C fadd     FF9BE82A   1     AFL       fp28=fp27,fp29,fcr
+    0| 000370 rldicr   78921F24   2     SLL8      gr18=gr4,3
+   65| 000374 or       7EB1AB78   1     LR        gr17=gr21
+   71| 000378 or       7ED0B378   1     LR        gr16=gr22
+   65| 00037C ld       E9E101C0   1     L8        gr15=#SPILL6(gr1,448)
+   64| 000380 addi     39C00001   1     LI        gr14=1
+   71| 000384 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 000388 ori      60210000   1     XNOP      
+    0| 00038C ori      60210000   1     XNOP      
+   63|                              CL.56:
+   65| 000390 lfdu     CC0F0008   1     LFDU      fp0,gr15=x1b(gr15,8)
+   65| 000394 fsub     FC1F0028   1     SFL       fp0=fp31,fp0,fcr
+   65| 000398 fsel     FC20EF2E   2     FSEL      fp1=fp0,fp29,fp28
+   65| 00039C stfdux   7C31CDEE   2     STFDU     gr17,er(gr17,gr25,0)=fp1
+   67| 0003A0 bc       408A0018   1     BF        CL.10,cr2,0x4/eq,taken=50%(0,0)
+   67| 0003A4 fadd     FC7B082A   1     AFL       fp3=fp27,fp1,fcr
+   67| 0003A8 lfdx     7C1894AE   1     LFL       fp0=x2b(gr24,gr18,0)
+   67| 0003AC fsub     FC1F0028   1     SFL       fp0=fp31,fp0,fcr
+   67| 0003B0 fsel     FC2008EE   2     FSEL      fp1=fp0,fp1,fp3
+   67| 0003B4 stfd     D8310000   1     STFL      er(gr17,0)=fp1
+   67|                              CL.10:
+   69| 0003B8 bc       408E0018   1     BF        CL.13,cr3,0x4/eq,taken=50%(0,0)
+   69| 0003BC fadd     FC7B082A   1     AFL       fp3=fp27,fp1,fcr
+   69| 0003C0 lfdx     7C17A4AE   1     LFL       fp0=x3b(gr23,gr20,0)
+   69| 0003C4 fsub     FC1F0028   1     SFL       fp0=fp31,fp0,fcr
+   69| 0003C8 fsel     FC2008EE   2     FSEL      fp1=fp0,fp1,fp3
+   69| 0003CC stfd     D8310000   1     STFL      er(gr17,0)=fp1
+   69|                              CL.13:
+   71| 0003D0 bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   71| 0003D4 ori      60000000   1
+   71| 0003D8 fmul     FC1E0072   1     MFL       fp0=fp30,fp1,fcr
+   72| 0003DC cmpld    7C2EE840   1     CL8       cr0=gr14,gr29
+   64| 0003E0 addi     39CE0001   1     AI        gr14=gr14,1
+   71| 0003E4 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+   71| 0003E8 stfdux   7C10D5EE   1     STFDU     gr16,e(gr16,gr26,0)=fp0
+   72| 0003EC bc       4180FFA4   1     BT        CL.56,cr0,0x8/llt,taken=80%(80,20)
+   72|                              CL.55:
+   72| 0003F0 ld       E80101A0   1     L8        gr0=#SPILL2(gr1,416)
+   72| 0003F4 or       7E649B78   1     LR        gr4=gr19
+    0| 0003F8 add      7ED6E214   1     A         gr22=gr22,gr28
+    0| 0003FC add      7EB5DA14   1     A         gr21=gr21,gr27
+   72| 000400 cmpld    7C330040   1     CL8       cr0=gr19,gr0
+   72| 000404 bc       4180FF60   1     BT        CL.54,cr0,0x8/llt,taken=80%(80,20)
+   72|                              CL.53:
+   72| 000408 ld       E86101A8   1     L8        gr3=#SPILL3(gr1,424)
+    0| 00040C ld       E80101B8   1     L8        gr0=#SPILL5(gr1,440)
+    0| 000410 ld       E88101C8   1     L8        gr4=#SPILL7(gr1,456)
+   72| 000414 ld       E8A10198   1     L8        gr5=#SPILL1(gr1,408)
+    0| 000418 ld       E8C101B0   1     L8        gr6=#SPILL4(gr1,432)
+    0| 00041C ld       E8E101D0   1     L8        gr7=#SPILL8(gr1,464)
+   72| 000420 addi     38630001   1     AI        gr3=gr3,1
+   72| 000424 std      F86101A8   1     ST8       #SPILL3(gr1,424)=gr3
+    0| 000428 add      7C802214   1     A         gr4=gr0,gr4
+   72| 00042C cmpld    7C232840   1     CL8       cr0=gr3,gr5
+    0| 000430 std      F88101C8   1     ST8       #SPILL7(gr1,456)=gr4
+    0| 000434 add      7CE63A14   1     A         gr7=gr6,gr7
+    0| 000438 std      F8E101D0   1     ST8       #SPILL8(gr1,464)=gr7
+   72| 00043C bc       4180FF0C   1     BT        CL.52,cr0,0x8/llt,taken=80%(80,20)
+   72|                              CL.51:
+   74| 000440 ld       E8010190   1     L8        gr0=#SPILL0(gr1,400)
+   74| 000444 cmpwi    2C000001   1     C4        cr0=gr0,1
+   74| 000448 bc       40820230   1     BF        CL.24,cr0,0x4/eq,taken=50%(0,0)
+   77| 00044C ld       E9620000   1     L8        gr11=.&&N&bndry(gr2,0)
+   76| 000450 ld       EB020000   1     L8        gr24=.&&N&&param(gr2,0)
+   81| 000454 ld       EAE20000   1     L8        gr23=.&&N&&bndry(gr2,0)
+   75| 000458 addi     3AC00000   1     LI        gr22=0
+   75| 00045C std      FAC101D8   1     ST8       #SPILL9(gr1,472)=gr22
+   83| 000460 ld       E80B0BD0   1     L8        gr0=<s70:d3024:l8>(gr11,3024)
+   81| 000464 ld       E86B2730   1     L8        gr3=<s70:d10032:l8>(gr11,10032)
+   81| 000468 ld       EB2B2748   1     L8        gr25=<s70:d10056:l8>(gr11,10056)
+   83| 00046C ld       EB4B0BE8   1     L8        gr26=<s70:d3048:l8>(gr11,3048)
+   76| 000470 lwa      EBB80006   1     L4A       gr29=<s264:d4:l4>(gr24,4)
+   77| 000474 ld       E98B0000   1     L8        gr12=<s70:d0:l8>(gr11,0)
+   79| 000478 ld       E90B0140   1     L8        gr8=<s70:d320:l8>(gr11,320)
+   78| 00047C ld       E94B0780   1     L8        gr10=<s70:d1920:l8>(gr11,1920)
+   80| 000480 ld       E8CB07D0   1     L8        gr6=<s70:d2000:l8>(gr11,2000)
+   77| 000484 ld       EB6B0018   1     L8        gr27=<s70:d24:l8>(gr11,24)
+   78| 000488 ld       EB8B0798   1     L8        gr28=<s70:d1944:l8>(gr11,1944)
+   79| 00048C ld       E92B0158   1     L8        gr9=<s70:d344:l8>(gr11,344)
+   80| 000490 ld       E8EB07E8   1     L8        gr7=<s70:d2024:l8>(gr11,2024)
+   83| 000494 ld       E88B0C00   1     L8        gr4=<s70:d3072:l8>(gr11,3072)
+   83| 000498 ld       EAAB0C18   1     L8        gr21=<s70:d3096:l8>(gr11,3096)
+   81| 00049C ld       E8AB2760   1     L8        gr5=<s70:d10080:l8>(gr11,10080)
+   81| 0004A0 ld       EA8B2778   1     L8        gr20=<s70:d10104:l8>(gr11,10104)
+   77| 0004A4 ld       EA6B0030   1     L8        gr19=<s70:d48:l8>(gr11,48)
+   79| 0004A8 ld       EA4B0170   1     L8        gr18=<s70:d368:l8>(gr11,368)
+   78| 0004AC ld       EA2B07B0   1     L8        gr17=<s70:d1968:l8>(gr11,1968)
+   83| 0004B0 std      FAA101E0   1     ST8       #SPILL10(gr1,480)=gr21
+   80| 0004B4 ld       EA0B0800   1     L8        gr16=<s70:d2048:l8>(gr11,2048)
+   81| 0004B8 std      FA8101E8   1     ST8       #SPILL11(gr1,488)=gr20
+   77| 0004BC std      FA6101F0   1     ST8       #SPILL12(gr1,496)=gr19
+   79| 0004C0 std      FA4101F8   1     ST8       #SPILL13(gr1,504)=gr18
+   78| 0004C4 std      FA210200   1     ST8       #SPILL14(gr1,512)=gr17
+   77| 0004C8 ld       E9EB0048   1     L8        gr15=<s70:d72:l8>(gr11,72)
+   80| 0004CC std      FA010208   1     ST8       #SPILL15(gr1,520)=gr16
+    0| 0004D0 add      7C63CA14   1     A         gr3=gr3,gr25
+    0| 0004D4 add      7C00D214   1     A         gr0=gr0,gr26
+    0| 0004D8 cmpwi    2C1D0000   1     C4        cr0=gr29,0
+    0| 0004DC add      7D8CDA14   1     A         gr12=gr12,gr27
+   77| 0004E0 std      F9E10210   1     ST8       #SPILL16(gr1,528)=gr15
+    0| 0004E4 add      7D4AE214   1     A         gr10=gr10,gr28
+    0| 0004E8 add      7D284A14   1     A         gr9=gr8,gr9
+    0| 0004EC add      7D063A14   1     A         gr8=gr6,gr7
+    0| 0004F0 rldicr   78A70FA4   1     SLL8      gr7=gr5,1
+    0| 0004F4 add      7CC3A214   1     A         gr6=gr3,gr20
+    0| 0004F8 add      7C00AA14   1     A         gr0=gr0,gr21
+    0| 0004FC rldicr   78830FA4   1     SLL8      gr3=gr4,1
+   79| 000500 ld       EB8B0188   1     L8        gr28=<s70:d392:l8>(gr11,392)
+   78| 000504 ld       EB6B07C8   1     L8        gr27=<s70:d1992:l8>(gr11,1992)
+   80| 000508 ld       EB4B0818   1     L8        gr26=<s70:d2072:l8>(gr11,2072)
+   83| 00050C ld       EB2B0C30   1     L8        gr25=<s70:d3120:l8>(gr11,3120)
+   81| 000510 ld       EB0B2790   1     L8        gr24=<s70:d10128:l8>(gr11,10128)
+   81| 000514 lfd      CBF70058   1     LFL       fp31=<s279:d88:l8>(gr23,88)
+    0| 000518 bc       40810160   1     BF        CL.24,cr0,0x2/gt,taken=20%(20,80)
+    0| 00051C add      7D6C9A14   1     A         gr11=gr12,gr19
+    0| 000520 add      7D8A8A14   1     A         gr12=gr10,gr17
+    0| 000524 std      F9610218   1     ST8       #SPILL17(gr1,536)=gr11
+    0| 000528 std      F9810220   1     ST8       #SPILL18(gr1,544)=gr12
+    0| 00052C add      7D499214   1     A         gr10=gr9,gr18
+    0| 000530 add      7D288214   1     A         gr9=gr8,gr16
+    0| 000534 std      F9410228   1     ST8       #SPILL19(gr1,552)=gr10
+    0| 000538 std      F9210230   1     ST8       #SPILL20(gr1,560)=gr9
+    0| 00053C add      7D063A14   1     A         gr8=gr6,gr7
+    0| 000540 add      7CE53214   1     A         gr7=gr5,gr6
+    0| 000544 std      F9010238   1     ST8       #SPILL21(gr1,568)=gr8
+    0| 000548 std      F8E10240   1     ST8       #SPILL22(gr1,576)=gr7
+    0| 00054C add      7CA02214   1     A         gr5=gr0,gr4
+    0| 000550 add      7C801A14   1     A         gr4=gr0,gr3
+    0| 000554 std      F8A10248   1     ST8       #SPILL23(gr1,584)=gr5
+    0| 000558 std      F8810250   1     ST8       #SPILL24(gr1,592)=gr4
+    0| 00055C addi     3AE00003   1     LI        gr23=3
+   75|                              CL.58:
+    0| 000560 ld       E86101D8   1     L8        gr3=#SPILL9(gr1,472)
+   84| 000564 fmr      FC20F890   1     LRFL      fp1=fp31
+   84| 000568 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 00056C addi     38630001   1     AI        gr3=gr3,1
+    0| 000570 std      F86101D8   1     ST8       #SPILL9(gr1,472)=gr3
+   84| 000574 bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   84| 000578 ori      60000000   1
+    0| 00057C fmul     FFBE0072   1     MFL       fp29=fp30,fp1,fcr
+   81| 000580 ld       EAC10240   1     L8        gr22=#SPILL22(gr1,576)
+   84| 000584 ld       EAA10250   1     L8        gr21=#SPILL24(gr1,592)
+   83| 000588 ld       EA810248   1     L8        gr20=#SPILL23(gr1,584)
+   82| 00058C ld       EA610238   1     L8        gr19=#SPILL21(gr1,568)
+   80| 000590 ld       EA410230   1     L8        gr18=#SPILL20(gr1,560)
+   79| 000594 ld       EA210228   1     L8        gr17=#SPILL19(gr1,552)
+   78| 000598 ld       EA010220   1     L8        gr16=#SPILL18(gr1,544)
+   77| 00059C ld       E9E10218   1     L8        gr15=#SPILL17(gr1,536)
+   77| 0005A0 addi     39C00001   1     LI        gr14=1
+   83| 0005A4 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 0005A8 ori      60210000   1     XNOP      
+   76|                              CL.60:
+   81| 0005AC stfdux   7FF6C5EE   1     STFDU     gr22,eriib(gr22,gr24,0)=fp31
+   77| 0005B0 ld       E8610210   1     L8        gr3=#SPILL16(gr1,528)
+   82| 0005B4 stfdux   7FF3C5EE   1     STFDU     gr19,eriib(gr19,gr24,0)=fp31
+   83| 0005B8 lfd      C8360000   1     LFL       fp1=eriib(gr22,0)
+   78| 0005BC stwux    7EF0D96E   1     ST4U      gr16,liib(gr16,gr27,0)=gr23
+   79| 0005C0 stwux    7FD1E16E   1     ST4U      gr17,noib(gr17,gr28,0)=gr30
+   80| 0005C4 stwux    7FD2D16E   1     ST4U      gr18,loib(gr18,gr26,0)=gr30
+   77| 0005C8 stwux    7EEF196E   1     ST4U      gr15,niib(gr15,gr3,0)=gr23
+   83| 0005CC bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   83| 0005D0 ori      60000000   1
+   85| 0005D4 cmpld    7C2EE840   1     CL8       cr0=gr14,gr29
+   83| 0005D8 fmul     FC1E0072   1     MFL       fp0=fp30,fp1,fcr
+   77| 0005DC addi     39CE0001   1     AI        gr14=gr14,1
+   83| 0005E0 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+   83| 0005E4 stfdux   7C14CDEE   1     STFDU     gr20,eiib(gr20,gr25,0)=fp0
+   84| 0005E8 stfdux   7FB5CDEE   1     STFDU     gr21,eiib(gr21,gr25,0)=fp29
+   85| 0005EC bc       4180FFC0   1     BT        CL.60,cr0,0x8/llt,taken=80%(80,20)
+   85| 0005F0 ld       E80101D8   1     L8        gr0=#SPILL9(gr1,472)
+   85| 0005F4 ld       E8610198   1     L8        gr3=#SPILL1(gr1,408)
+    0| 0005F8 ld       E88101F0   1     L8        gr4=#SPILL12(gr1,496)
+    0| 0005FC ld       E8A10218   1     L8        gr5=#SPILL17(gr1,536)
+    0| 000600 ld       E8C10200   1     L8        gr6=#SPILL14(gr1,512)
+    0| 000604 ld       E8E10220   1     L8        gr7=#SPILL18(gr1,544)
+    0| 000608 ld       E90101F8   1     L8        gr8=#SPILL13(gr1,504)
+    0| 00060C ld       E9210228   1     L8        gr9=#SPILL19(gr1,552)
+    0| 000610 ld       E9410208   1     L8        gr10=#SPILL15(gr1,520)
+    0| 000614 ld       E9610230   1     L8        gr11=#SPILL20(gr1,560)
+    0| 000618 ld       E98101E8   1     L8        gr12=#SPILL11(gr1,488)
+    0| 00061C ld       EAC10238   1     L8        gr22=#SPILL21(gr1,568)
+    0| 000620 ld       EAA10240   1     L8        gr21=#SPILL22(gr1,576)
+    0| 000624 ld       EA8101E0   1     L8        gr20=#SPILL10(gr1,480)
+    0| 000628 ld       EA610248   1     L8        gr19=#SPILL23(gr1,584)
+    0| 00062C ld       EA410250   1     L8        gr18=#SPILL24(gr1,592)
+   85| 000630 cmpld    7C201840   1     CL8       cr0=gr0,gr3
+    0| 000634 add      7CA42A14   1     A         gr5=gr4,gr5
+    0| 000638 add      7CE63A14   1     A         gr7=gr6,gr7
+    0| 00063C std      F8A10218   1     ST8       #SPILL17(gr1,536)=gr5
+    0| 000640 std      F8E10220   1     ST8       #SPILL18(gr1,544)=gr7
+    0| 000644 add      7D284A14   1     A         gr9=gr8,gr9
+    0| 000648 add      7D6A5A14   1     A         gr11=gr10,gr11
+    0| 00064C std      F9210228   1     ST8       #SPILL19(gr1,552)=gr9
+    0| 000650 std      F9610230   1     ST8       #SPILL20(gr1,560)=gr11
+    0| 000654 add      7ECCB214   1     A         gr22=gr12,gr22
+    0| 000658 add      7EACAA14   1     A         gr21=gr12,gr21
+    0| 00065C std      FAC10238   1     ST8       #SPILL21(gr1,568)=gr22
+    0| 000660 std      FAA10240   1     ST8       #SPILL22(gr1,576)=gr21
+    0| 000664 add      7E73A214   1     A         gr19=gr19,gr20
+    0| 000668 add      7E52A214   1     A         gr18=gr18,gr20
+    0| 00066C std      FA610248   1     ST8       #SPILL23(gr1,584)=gr19
+    0| 000670 std      FA410250   1     ST8       #SPILL24(gr1,592)=gr18
+   85| 000674 bc       4180FEEC   1     BT        CL.58,cr0,0x8/llt,taken=80%(80,20)
+   86|                              CL.24:
+   88| 000678 ld       E8010190   1     L8        gr0=#SPILL0(gr1,400)
+   88| 00067C cmpwi    2C000002   1     C4        cr0=gr0,2
+   88| 000680 bc       40820238   1     BF        CL.33,cr0,0x4/eq,taken=50%(0,0)
+   91| 000684 ld       E9620000   1     L8        gr11=.&&N&bndry(gr2,0)
+   90| 000688 ld       EB020000   1     L8        gr24=.&&N&&param(gr2,0)
+   95| 00068C ld       EAE20000   1     L8        gr23=.&&N&&bndry(gr2,0)
+   89| 000690 addi     3AC00000   1     LI        gr22=0
+   89| 000694 std      FAC10258   1     ST8       #SPILL25(gr1,600)=gr22
+   97| 000698 ld       E80B0CA0   1     L8        gr0=<s70:d3232:l8>(gr11,3232)
+   95| 00069C ld       E86B2800   1     L8        gr3=<s70:d10240:l8>(gr11,10240)
+   95| 0006A0 ld       EB2B2818   1     L8        gr25=<s70:d10264:l8>(gr11,10264)
+   97| 0006A4 ld       EB4B0CB8   1     L8        gr26=<s70:d3256:l8>(gr11,3256)
+   90| 0006A8 lwa      EBB80002   1     L4A       gr29=<s264:d0:l4>(gr24,0)
+   91| 0006AC ld       E98B0280   1     L8        gr12=<s70:d640:l8>(gr11,640)
+   93| 0006B0 ld       E90B03C0   1     L8        gr8=<s70:d960:l8>(gr11,960)
+   92| 0006B4 ld       E94B0820   1     L8        gr10=<s70:d2080:l8>(gr11,2080)
+   94| 0006B8 ld       E8CB0870   1     L8        gr6=<s70:d2160:l8>(gr11,2160)
+   91| 0006BC ld       EB6B0298   1     L8        gr27=<s70:d664:l8>(gr11,664)
+   92| 0006C0 ld       EB8B0838   1     L8        gr28=<s70:d2104:l8>(gr11,2104)
+   93| 0006C4 ld       E92B03D8   1     L8        gr9=<s70:d984:l8>(gr11,984)
+   94| 0006C8 ld       E8EB0888   1     L8        gr7=<s70:d2184:l8>(gr11,2184)
+   97| 0006CC ld       E88B0CD0   1     L8        gr4=<s70:d3280:l8>(gr11,3280)
+   97| 0006D0 ld       EAAB0CE8   1     L8        gr21=<s70:d3304:l8>(gr11,3304)
+   95| 0006D4 ld       E8AB2830   1     L8        gr5=<s70:d10288:l8>(gr11,10288)
+   95| 0006D8 ld       EA8B2848   1     L8        gr20=<s70:d10312:l8>(gr11,10312)
+   91| 0006DC ld       EA6B02B0   1     L8        gr19=<s70:d688:l8>(gr11,688)
+   93| 0006E0 ld       EA4B03F0   1     L8        gr18=<s70:d1008:l8>(gr11,1008)
+   92| 0006E4 ld       EA2B0850   1     L8        gr17=<s70:d2128:l8>(gr11,2128)
+   97| 0006E8 std      FAA10260   1     ST8       #SPILL26(gr1,608)=gr21
+   94| 0006EC ld       EA0B08A0   1     L8        gr16=<s70:d2208:l8>(gr11,2208)
+   95| 0006F0 std      FA810268   1     ST8       #SPILL27(gr1,616)=gr20
+   91| 0006F4 std      FA610270   1     ST8       #SPILL28(gr1,624)=gr19
+   93| 0006F8 std      FA410278   1     ST8       #SPILL29(gr1,632)=gr18
+   92| 0006FC std      FA210280   1     ST8       #SPILL30(gr1,640)=gr17
+   91| 000700 ld       E9EB02C8   1     L8        gr15=<s70:d712:l8>(gr11,712)
+   94| 000704 std      FA010288   1     ST8       #SPILL31(gr1,648)=gr16
+    0| 000708 add      7C63CA14   1     A         gr3=gr3,gr25
+    0| 00070C add      7C00D214   1     A         gr0=gr0,gr26
+    0| 000710 cmpwi    2C1D0000   1     C4        cr0=gr29,0
+    0| 000714 add      7D8CDA14   1     A         gr12=gr12,gr27
+   91| 000718 std      F9E10290   1     ST8       #SPILL32(gr1,656)=gr15
+    0| 00071C add      7D4AE214   1     A         gr10=gr10,gr28
+    0| 000720 add      7D284A14   1     A         gr9=gr8,gr9
+    0| 000724 add      7D063A14   1     A         gr8=gr6,gr7
+    0| 000728 rldicr   78A70FA4   1     SLL8      gr7=gr5,1
+    0| 00072C add      7CC3A214   1     A         gr6=gr3,gr20
+    0| 000730 add      7C00AA14   1     A         gr0=gr0,gr21
+    0| 000734 rldicr   78830FA4   1     SLL8      gr3=gr4,1
+   93| 000738 ld       EB8B0408   1     L8        gr28=<s70:d1032:l8>(gr11,1032)
+   92| 00073C ld       EB6B0868   1     L8        gr27=<s70:d2152:l8>(gr11,2152)
+   94| 000740 ld       EB4B08B8   1     L8        gr26=<s70:d2232:l8>(gr11,2232)
+   97| 000744 ld       EB2B0D00   1     L8        gr25=<s70:d3328:l8>(gr11,3328)
+   95| 000748 ld       EB0B2860   1     L8        gr24=<s70:d10336:l8>(gr11,10336)
+   95| 00074C lfd      CBF70138   1     LFL       fp31=<s279:d312:l8>(gr23,312)
+    0| 000750 bc       40810168   1     BF        CL.33,cr0,0x2/gt,taken=20%(20,80)
+    0| 000754 add      7D6C9A14   1     A         gr11=gr12,gr19
+    0| 000758 add      7D8A8A14   1     A         gr12=gr10,gr17
+    0| 00075C std      F9610298   1     ST8       #SPILL33(gr1,664)=gr11
+    0| 000760 std      F98102A0   1     ST8       #SPILL34(gr1,672)=gr12
+    0| 000764 add      7D499214   1     A         gr10=gr9,gr18
+    0| 000768 add      7D288214   1     A         gr9=gr8,gr16
+    0| 00076C std      F94102A8   1     ST8       #SPILL35(gr1,680)=gr10
+    0| 000770 std      F92102B0   1     ST8       #SPILL36(gr1,688)=gr9
+    0| 000774 add      7D063A14   1     A         gr8=gr6,gr7
+    0| 000778 add      7CE53214   1     A         gr7=gr5,gr6
+    0| 00077C std      F90102B8   1     ST8       #SPILL37(gr1,696)=gr8
+    0| 000780 std      F8E102C0   1     ST8       #SPILL38(gr1,704)=gr7
+    0| 000784 add      7CA02214   1     A         gr5=gr0,gr4
+    0| 000788 add      7C801A14   1     A         gr4=gr0,gr3
+    0| 00078C std      F8A102C8   1     ST8       #SPILL39(gr1,712)=gr5
+    0| 000790 std      F88102D0   1     ST8       #SPILL40(gr1,720)=gr4
+    0| 000794 addi     3AE00003   1     LI        gr23=3
+   89|                              CL.62:
+    0| 000798 ld       E8610258   1     L8        gr3=#SPILL25(gr1,600)
+   98| 00079C fmr      FC20F890   1     LRFL      fp1=fp31
+   98| 0007A0 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 0007A4 addi     38630001   1     AI        gr3=gr3,1
+    0| 0007A8 std      F8610258   1     ST8       #SPILL25(gr1,600)=gr3
+   98| 0007AC bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   98| 0007B0 ori      60000000   1
+    0| 0007B4 fmul     FFBE0072   1     MFL       fp29=fp30,fp1,fcr
+   95| 0007B8 ld       EAC102C0   1     L8        gr22=#SPILL38(gr1,704)
+   98| 0007BC ld       EAA102D0   1     L8        gr21=#SPILL40(gr1,720)
+   97| 0007C0 ld       EA8102C8   1     L8        gr20=#SPILL39(gr1,712)
+   96| 0007C4 ld       EA6102B8   1     L8        gr19=#SPILL37(gr1,696)
+   94| 0007C8 ld       EA4102B0   1     L8        gr18=#SPILL36(gr1,688)
+   93| 0007CC ld       EA2102A8   1     L8        gr17=#SPILL35(gr1,680)
+   92| 0007D0 ld       EA0102A0   1     L8        gr16=#SPILL34(gr1,672)
+   91| 0007D4 ld       E9E10298   1     L8        gr15=#SPILL33(gr1,664)
+   91| 0007D8 addi     39C00001   1     LI        gr14=1
+   97| 0007DC lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 0007E0 ori      60210000   1     XNOP      
+    0| 0007E4 ori      60210000   1     XNOP      
+    0| 0007E8 ori      60210000   1     XNOP      
+   90|                              CL.64:
+   95| 0007EC stfdux   7FF6C5EE   1     STFDU     gr22,erijb(gr22,gr24,0)=fp31
+   91| 0007F0 ld       E8610290   1     L8        gr3=#SPILL32(gr1,656)
+   96| 0007F4 stfdux   7FF3C5EE   1     STFDU     gr19,erijb(gr19,gr24,0)=fp31
+   97| 0007F8 lfd      C8360000   1     LFL       fp1=erijb(gr22,0)
+   92| 0007FC stwux    7EF0D96E   1     ST4U      gr16,lijb(gr16,gr27,0)=gr23
+   93| 000800 stwux    7FD1E16E   1     ST4U      gr17,nojb(gr17,gr28,0)=gr30
+   94| 000804 stwux    7FD2D16E   1     ST4U      gr18,lojb(gr18,gr26,0)=gr30
+   91| 000808 stwux    7EEF196E   1     ST4U      gr15,nijb(gr15,gr3,0)=gr23
+   97| 00080C bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   97| 000810 ori      60000000   1
+   99| 000814 cmpld    7C2EE840   1     CL8       cr0=gr14,gr29
+   97| 000818 fmul     FC1E0072   1     MFL       fp0=fp30,fp1,fcr
+   91| 00081C addi     39CE0001   1     AI        gr14=gr14,1
+   97| 000820 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+   97| 000824 stfdux   7C14CDEE   1     STFDU     gr20,eijb(gr20,gr25,0)=fp0
+   98| 000828 stfdux   7FB5CDEE   1     STFDU     gr21,eijb(gr21,gr25,0)=fp29
+   99| 00082C bc       4180FFC0   1     BT        CL.64,cr0,0x8/llt,taken=80%(80,20)
+   99| 000830 ld       E8010258   1     L8        gr0=#SPILL25(gr1,600)
+   99| 000834 ld       E8610198   1     L8        gr3=#SPILL1(gr1,408)
+    0| 000838 ld       E8810270   1     L8        gr4=#SPILL28(gr1,624)
+    0| 00083C ld       E8A10298   1     L8        gr5=#SPILL33(gr1,664)
+    0| 000840 ld       E8C10280   1     L8        gr6=#SPILL30(gr1,640)
+    0| 000844 ld       E8E102A0   1     L8        gr7=#SPILL34(gr1,672)
+    0| 000848 ld       E9010278   1     L8        gr8=#SPILL29(gr1,632)
+    0| 00084C ld       E92102A8   1     L8        gr9=#SPILL35(gr1,680)
+    0| 000850 ld       E9410288   1     L8        gr10=#SPILL31(gr1,648)
+    0| 000854 ld       E96102B0   1     L8        gr11=#SPILL36(gr1,688)
+    0| 000858 ld       E9810268   1     L8        gr12=#SPILL27(gr1,616)
+    0| 00085C ld       EAC102B8   1     L8        gr22=#SPILL37(gr1,696)
+    0| 000860 ld       EAA102C0   1     L8        gr21=#SPILL38(gr1,704)
+    0| 000864 ld       EA810260   1     L8        gr20=#SPILL26(gr1,608)
+    0| 000868 ld       EA6102C8   1     L8        gr19=#SPILL39(gr1,712)
+    0| 00086C ld       EA4102D0   1     L8        gr18=#SPILL40(gr1,720)
+   99| 000870 cmpld    7C201840   1     CL8       cr0=gr0,gr3
+    0| 000874 add      7CA42A14   1     A         gr5=gr4,gr5
+    0| 000878 add      7CE63A14   1     A         gr7=gr6,gr7
+    0| 00087C std      F8A10298   1     ST8       #SPILL33(gr1,664)=gr5
+    0| 000880 std      F8E102A0   1     ST8       #SPILL34(gr1,672)=gr7
+    0| 000884 add      7D284A14   1     A         gr9=gr8,gr9
+    0| 000888 add      7D6A5A14   1     A         gr11=gr10,gr11
+    0| 00088C std      F92102A8   1     ST8       #SPILL35(gr1,680)=gr9
+    0| 000890 std      F96102B0   1     ST8       #SPILL36(gr1,688)=gr11
+    0| 000894 add      7ECCB214   1     A         gr22=gr12,gr22
+    0| 000898 add      7EACAA14   1     A         gr21=gr12,gr21
+    0| 00089C std      FAC102B8   1     ST8       #SPILL37(gr1,696)=gr22
+    0| 0008A0 std      FAA102C0   1     ST8       #SPILL38(gr1,704)=gr21
+    0| 0008A4 add      7E73A214   1     A         gr19=gr19,gr20
+    0| 0008A8 add      7E52A214   1     A         gr18=gr18,gr20
+    0| 0008AC std      FA6102C8   1     ST8       #SPILL39(gr1,712)=gr19
+    0| 0008B0 std      FA4102D0   1     ST8       #SPILL40(gr1,720)=gr18
+   99| 0008B4 bc       4180FEE4   1     BT        CL.62,cr0,0x8/llt,taken=80%(80,20)
+  100|                              CL.33:
+  102| 0008B8 ld       E8010190   1     L8        gr0=#SPILL0(gr1,400)
+  102| 0008BC cmpwi    2C000003   1     C4        cr0=gr0,3
+  102| 0008C0 bc       40820248   1     BF        CL.71,cr0,0x4/eq,taken=30%(30,70)
+  103| 0008C4 ld       E8620000   1     L8        gr3=.&&N&&param(gr2,0)
+  103| 0008C8 lwa      E8030006   1     L4A       gr0=<s264:d4:l4>(gr3,4)
+  103| 0008CC std      F80102D8   1     ST8       #SPILL41(gr1,728)=gr0
+  103| 0008D0 cmpwi    2C000000   1     C4        cr0=gr0,0
+  103| 0008D4 bc       40810234   1     BF        CL.71,cr0,0x2/gt,taken=30%(30,70)
+  105| 0008D8 ld       E9420000   1     L8        gr10=.&&N&bndry(gr2,0)
+  104| 0008DC lwa      EBA30002   1     L4A       gr29=<s264:d0:l4>(gr3,0)
+  109| 0008E0 ld       E9620000   1     L8        gr11=.&&N&&bndry(gr2,0)
+  103| 0008E4 addi     3AC00000   1     LI        gr22=0
+  103| 0008E8 std      FAC102E0   1     ST8       #SPILL42(gr1,736)=gr22
+  111| 0008EC ld       E80A0D70   1     L8        gr0=<s70:d3440:l8>(gr10,3440)
+  109| 0008F0 ld       E86A28D0   1     L8        gr3=<s70:d10448:l8>(gr10,10448)
+  109| 0008F4 ld       EB0A28E8   1     L8        gr24=<s70:d10472:l8>(gr10,10472)
+  111| 0008F8 ld       EB2A0D88   1     L8        gr25=<s70:d3464:l8>(gr10,3464)
+  105| 0008FC ld       EB6A0500   1     L8        gr27=<s70:d1280:l8>(gr10,1280)
+  107| 000900 ld       E90A0640   1     L8        gr8=<s70:d1600:l8>(gr10,1600)
+  106| 000904 ld       E98A08C0   1     L8        gr12=<s70:d2240:l8>(gr10,2240)
+  108| 000908 ld       E8CA0910   1     L8        gr6=<s70:d2320:l8>(gr10,2320)
+  105| 00090C ld       EB4A0518   1     L8        gr26=<s70:d1304:l8>(gr10,1304)
+  106| 000910 ld       EB8A08D8   1     L8        gr28=<s70:d2264:l8>(gr10,2264)
+  107| 000914 ld       E92A0658   1     L8        gr9=<s70:d1624:l8>(gr10,1624)
+  108| 000918 ld       E8EA0928   1     L8        gr7=<s70:d2344:l8>(gr10,2344)
+  111| 00091C ld       E88A0DA0   1     L8        gr4=<s70:d3488:l8>(gr10,3488)
+  111| 000920 ld       EAAA0DB8   1     L8        gr21=<s70:d3512:l8>(gr10,3512)
+  109| 000924 ld       E8AA2900   1     L8        gr5=<s70:d10496:l8>(gr10,10496)
+  109| 000928 ld       EA8A2918   1     L8        gr20=<s70:d10520:l8>(gr10,10520)
+  105| 00092C ld       EA6A0530   1     L8        gr19=<s70:d1328:l8>(gr10,1328)
+  107| 000930 ld       EA4A0670   1     L8        gr18=<s70:d1648:l8>(gr10,1648)
+  106| 000934 ld       EA2A08F0   1     L8        gr17=<s70:d2288:l8>(gr10,2288)
+  111| 000938 std      FAA102E8   1     ST8       #SPILL43(gr1,744)=gr21
+  108| 00093C ld       EA0A0940   1     L8        gr16=<s70:d2368:l8>(gr10,2368)
+  109| 000940 std      FA8102F0   1     ST8       #SPILL44(gr1,752)=gr20
+  105| 000944 std      FA6102F8   1     ST8       #SPILL45(gr1,760)=gr19
+  107| 000948 std      FA410300   1     ST8       #SPILL46(gr1,768)=gr18
+  106| 00094C std      FA210308   1     ST8       #SPILL47(gr1,776)=gr17
+  105| 000950 ld       E9EA0548   1     L8        gr15=<s70:d1352:l8>(gr10,1352)
+  108| 000954 std      FA010310   1     ST8       #SPILL48(gr1,784)=gr16
+    0| 000958 add      7C63C214   1     A         gr3=gr3,gr24
+    0| 00095C add      7C00CA14   1     A         gr0=gr0,gr25
+    0| 000960 cmpwi    2C1D0000   1     C4        cr0=gr29,0
+    0| 000964 add      7EFADA14   1     A         gr23=gr26,gr27
+  105| 000968 std      F9E10318   1     ST8       #SPILL49(gr1,792)=gr15
+    0| 00096C add      7D8CE214   1     A         gr12=gr12,gr28
+    0| 000970 add      7D284A14   1     A         gr9=gr8,gr9
+    0| 000974 add      7D063A14   1     A         gr8=gr6,gr7
+    0| 000978 rldicr   78A70FA4   1     SLL8      gr7=gr5,1
+    0| 00097C add      7CC3A214   1     A         gr6=gr3,gr20
+    0| 000980 add      7C00AA14   1     A         gr0=gr0,gr21
+    0| 000984 rldicr   78830FA4   1     SLL8      gr3=gr4,1
+  107| 000988 ld       EB8A0688   1     L8        gr28=<s70:d1672:l8>(gr10,1672)
+  106| 00098C ld       EB6A0908   1     L8        gr27=<s70:d2312:l8>(gr10,2312)
+  108| 000990 ld       EB4A0958   1     L8        gr26=<s70:d2392:l8>(gr10,2392)
+  111| 000994 ld       EB2A0DD0   1     L8        gr25=<s70:d3536:l8>(gr10,3536)
+  109| 000998 ld       EB0A2930   1     L8        gr24=<s70:d10544:l8>(gr10,10544)
+  109| 00099C lfd      CBEB0218   1     LFL       fp31=<s279:d536:l8>(gr11,536)
+    0| 0009A0 bc       40810168   1     BF        CL.71,cr0,0x2/gt,taken=20%(20,80)
+    0| 0009A4 add      7D53BA14   1     A         gr10=gr19,gr23
+    0| 0009A8 add      7D6C8A14   1     A         gr11=gr12,gr17
+    0| 0009AC std      F9410320   1     ST8       #SPILL50(gr1,800)=gr10
+    0| 0009B0 std      F9610328   1     ST8       #SPILL51(gr1,808)=gr11
+    0| 0009B4 add      7D899214   1     A         gr12=gr9,gr18
+    0| 0009B8 add      7D288214   1     A         gr9=gr8,gr16
+    0| 0009BC std      F9810330   1     ST8       #SPILL52(gr1,816)=gr12
+    0| 0009C0 std      F9210338   1     ST8       #SPILL53(gr1,824)=gr9
+    0| 0009C4 add      7D063A14   1     A         gr8=gr6,gr7
+    0| 0009C8 add      7CE53214   1     A         gr7=gr5,gr6
+    0| 0009CC std      F9010340   1     ST8       #SPILL54(gr1,832)=gr8
+    0| 0009D0 std      F8E10348   1     ST8       #SPILL55(gr1,840)=gr7
+    0| 0009D4 add      7CA02214   1     A         gr5=gr0,gr4
+    0| 0009D8 add      7C801A14   1     A         gr4=gr0,gr3
+    0| 0009DC std      F8A10350   1     ST8       #SPILL56(gr1,848)=gr5
+    0| 0009E0 std      F8810358   1     ST8       #SPILL57(gr1,856)=gr4
+    0| 0009E4 addi     3AE00003   1     LI        gr23=3
+  103|                              CL.66:
+    0| 0009E8 ld       E86102E0   1     L8        gr3=#SPILL42(gr1,736)
+  112| 0009EC fmr      FC20F890   1     LRFL      fp1=fp31
+  112| 0009F0 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 0009F4 addi     38630001   1     AI        gr3=gr3,1
+    0| 0009F8 std      F86102E0   1     ST8       #SPILL42(gr1,736)=gr3
+  112| 0009FC bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+  112| 000A00 ori      60000000   1
+    0| 000A04 fmul     FFBE0072   1     MFL       fp29=fp30,fp1,fcr
+  109| 000A08 ld       EAC10348   1     L8        gr22=#SPILL55(gr1,840)
+  112| 000A0C ld       EAA10358   1     L8        gr21=#SPILL57(gr1,856)
+  111| 000A10 ld       EA810350   1     L8        gr20=#SPILL56(gr1,848)
+  110| 000A14 ld       EA610340   1     L8        gr19=#SPILL54(gr1,832)
+  108| 000A18 ld       EA410338   1     L8        gr18=#SPILL53(gr1,824)
+  107| 000A1C ld       EA210330   1     L8        gr17=#SPILL52(gr1,816)
+  106| 000A20 ld       EA010328   1     L8        gr16=#SPILL51(gr1,808)
+  105| 000A24 ld       E9E10320   1     L8        gr15=#SPILL50(gr1,800)
+  105| 000A28 addi     39C00001   1     LI        gr14=1
+  111| 000A2C lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+    0| 000A30 ori      60210000   1     XNOP      
+    0| 000A34 ori      60210000   1     XNOP      
+    0| 000A38 ori      60210000   1     XNOP      
+  104|                              CL.68:
+  109| 000A3C stfdux   7FF6C5EE   1     STFDU     gr22,erikb(gr22,gr24,0)=fp31
+  105| 000A40 ld       E8610318   1     L8        gr3=#SPILL49(gr1,792)
+  110| 000A44 stfdux   7FF3C5EE   1     STFDU     gr19,erikb(gr19,gr24,0)=fp31
+  111| 000A48 lfd      C8360000   1     LFL       fp1=erikb(gr22,0)
+  106| 000A4C stwux    7EF0D96E   1     ST4U      gr16,likb(gr16,gr27,0)=gr23
+  107| 000A50 stwux    7FD1E16E   1     ST4U      gr17,nokb(gr17,gr28,0)=gr30
+  108| 000A54 stwux    7FD2D16E   1     ST4U      gr18,lokb(gr18,gr26,0)=gr30
+  105| 000A58 stwux    7EEF196E   1     ST4U      gr15,nikb(gr15,gr3,0)=gr23
+  111| 000A5C bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+  111| 000A60 ori      60000000   1
+  113| 000A64 cmpld    7C2EE840   1     CL8       cr0=gr14,gr29
+  111| 000A68 fmul     FC1E0072   1     MFL       fp0=fp30,fp1,fcr
+  105| 000A6C addi     39CE0001   1     AI        gr14=gr14,1
+  111| 000A70 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+  111| 000A74 stfdux   7C14CDEE   1     STFDU     gr20,eikb(gr20,gr25,0)=fp0
+  112| 000A78 stfdux   7FB5CDEE   1     STFDU     gr21,eikb(gr21,gr25,0)=fp29
+  113| 000A7C bc       4180FFC0   1     BT        CL.68,cr0,0x8/llt,taken=80%(80,20)
+  113| 000A80 ld       E80102E0   1     L8        gr0=#SPILL42(gr1,736)
+  113| 000A84 ld       E86102D8   1     L8        gr3=#SPILL41(gr1,728)
+    0| 000A88 ld       E88102F8   1     L8        gr4=#SPILL45(gr1,760)
+    0| 000A8C ld       E8A10320   1     L8        gr5=#SPILL50(gr1,800)
+    0| 000A90 ld       E8C10308   1     L8        gr6=#SPILL47(gr1,776)
+    0| 000A94 ld       E8E10328   1     L8        gr7=#SPILL51(gr1,808)
+    0| 000A98 ld       E9010300   1     L8        gr8=#SPILL46(gr1,768)
+    0| 000A9C ld       E9210330   1     L8        gr9=#SPILL52(gr1,816)
+    0| 000AA0 ld       E9410310   1     L8        gr10=#SPILL48(gr1,784)
+    0| 000AA4 ld       E9610338   1     L8        gr11=#SPILL53(gr1,824)
+    0| 000AA8 ld       E98102F0   1     L8        gr12=#SPILL44(gr1,752)
+    0| 000AAC ld       EAC10340   1     L8        gr22=#SPILL54(gr1,832)
+    0| 000AB0 ld       EAA10348   1     L8        gr21=#SPILL55(gr1,840)
+    0| 000AB4 ld       EA8102E8   1     L8        gr20=#SPILL43(gr1,744)
+    0| 000AB8 ld       EA610350   1     L8        gr19=#SPILL56(gr1,848)
+    0| 000ABC ld       EA410358   1     L8        gr18=#SPILL57(gr1,856)
+  113| 000AC0 cmpld    7C201840   1     CL8       cr0=gr0,gr3
+    0| 000AC4 add      7CA42A14   1     A         gr5=gr4,gr5
+    0| 000AC8 add      7CE63A14   1     A         gr7=gr6,gr7
+    0| 000ACC std      F8A10320   1     ST8       #SPILL50(gr1,800)=gr5
+    0| 000AD0 std      F8E10328   1     ST8       #SPILL51(gr1,808)=gr7
+    0| 000AD4 add      7D284A14   1     A         gr9=gr8,gr9
+    0| 000AD8 add      7D6A5A14   1     A         gr11=gr10,gr11
+    0| 000ADC std      F9210330   1     ST8       #SPILL52(gr1,816)=gr9
+    0| 000AE0 std      F9610338   1     ST8       #SPILL53(gr1,824)=gr11
+    0| 000AE4 add      7ECCB214   1     A         gr22=gr12,gr22
+    0| 000AE8 add      7EACAA14   1     A         gr21=gr12,gr21
+    0| 000AEC std      FAC10340   1     ST8       #SPILL54(gr1,832)=gr22
+    0| 000AF0 std      FAA10348   1     ST8       #SPILL55(gr1,840)=gr21
+    0| 000AF4 add      7E73A214   1     A         gr19=gr19,gr20
+    0| 000AF8 add      7E52A214   1     A         gr18=gr18,gr20
+    0| 000AFC std      FA610350   1     ST8       #SPILL56(gr1,848)=gr19
+    0| 000B00 std      FA410358   1     ST8       #SPILL57(gr1,856)=gr18
+  113| 000B04 bc       4180FEE4   1     BT        CL.66,cr0,0x8/llt,taken=80%(80,20)
+  117|                              CL.71:
+  117| 000B08 ld       E8010430   1     L8        gr0=#stack(gr1,1072)
+  117| 000B0C lwa      E981042A   1     L4A       gr12=#stack(gr1,1064)
+  117| 000B10 lfd      CBE10418   1     LFL       fp31=#stack(gr1,1048)
+  117| 000B14 lfd      CBC10410   1     LFL       fp30=#stack(gr1,1040)
+  117| 000B18 lfd      CBA10408   1     LFL       fp29=#stack(gr1,1032)
+  117| 000B1C lfd      CB810400   1     LFL       fp28=#stack(gr1,1024)
+  117| 000B20 lfd      CB6103F8   1     LFL       fp27=#stack(gr1,1016)
+  117| 000B24 addi     38210420   1     AI        gr1=gr1,1056
+  117| 000B28 mtspr    7C0803A6   1     LLR       lr=gr0
+  117| 000B2C mtcrf    7D820120   1     MTCRF     cr2=gr12
+  117| 000B30 mtcrf    7D810120   1     MTCRF     cr3=gr12
+  117| 000B34 mtcrf    7D808120   1     MTCRF     cr4=gr12
+  117| 000B38 ld       E9C1FF48   1     L8        gr14=#stack(gr1,-184)
+  117| 000B3C ld       E9E1FF50   1     L8        gr15=#stack(gr1,-176)
+  117| 000B40 ld       EA01FF58   1     L8        gr16=#stack(gr1,-168)
+  117| 000B44 ld       EA21FF60   1     L8        gr17=#stack(gr1,-160)
+  117| 000B48 ld       EA41FF68   1     L8        gr18=#stack(gr1,-152)
+  117| 000B4C ld       EA61FF70   1     L8        gr19=#stack(gr1,-144)
+  117| 000B50 ld       EA81FF78   1     L8        gr20=#stack(gr1,-136)
+  117| 000B54 ld       EAA1FF80   1     L8        gr21=#stack(gr1,-128)
+  117| 000B58 ld       EAC1FF88   1     L8        gr22=#stack(gr1,-120)
+  117| 000B5C ld       EAE1FF90   1     L8        gr23=#stack(gr1,-112)
+  117| 000B60 ld       EB01FF98   1     L8        gr24=#stack(gr1,-104)
+  117| 000B64 ld       EB21FFA0   1     L8        gr25=#stack(gr1,-96)
+  117| 000B68 ld       EB41FFA8   1     L8        gr26=#stack(gr1,-88)
+  117| 000B6C ld       EB61FFB0   1     L8        gr27=#stack(gr1,-80)
+  117| 000B70 ld       EB81FFB8   1     L8        gr28=#stack(gr1,-72)
+  117| 000B74 ld       EBA1FFC0   1     L8        gr29=#stack(gr1,-64)
+  117| 000B78 ld       EBC1FFC8   1     L8        gr30=#stack(gr1,-56)
+  117| 000B7C ld       EBE1FFD0   1     L8        gr31=#stack(gr1,-48)
+  117| 000B80 bclr     4E800020   1     BA        lr
+    0|                              CL.163:
+    0| 000B84 rldicr   78921F24   1     SLL8      gr18=gr4,3
+   64| 000B88 fmr      FC20E890   1     LRFL      fp1=fp29
+   64| 000B8C or       7EB1AB78   2     LR        gr17=gr21
+   71| 000B90 or       7ED0B378   1     LR        gr16=gr22
+   64| 000B94 addi     39E00001   1     LI        gr15=1
+   71| 000B98 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+   63|                              CL.158:
+   64| 000B9C stfdux   7FB1CDEE   1     STFDU     gr17,er(gr17,gr25,0)=fp29
+   67| 000BA0 bc       408A0018   1     BF        CL.160,cr2,0x4/eq,taken=50%(0,0)
+   67| 000BA4 fadd     FC3BE82A   1     AFL       fp1=fp27,fp29,fcr
+   67| 000BA8 lfdx     7C1894AE   1     LFL       fp0=x2b(gr24,gr18,0)
+   67| 000BAC fsub     FC1F0028   1     SFL       fp0=fp31,fp0,fcr
+   67| 000BB0 fsel     FC20E86E   2     FSEL      fp1=fp0,fp29,fp1
+   67| 000BB4 stfd     D8310000   1     STFL      er(gr17,0)=fp1
+   67|                              CL.160:
+   69| 000BB8 bc       408E0018   1     BF        CL.161,cr3,0x4/eq,taken=50%(0,0)
+   69| 000BBC fadd     FC7B082A   1     AFL       fp3=fp27,fp1,fcr
+   69| 000BC0 lfdx     7C17A4AE   1     LFL       fp0=x3b(gr23,gr20,0)
+   69| 000BC4 fsub     FC1F0028   1     SFL       fp0=fp31,fp0,fcr
+   69| 000BC8 fsel     FC2008EE   2     FSEL      fp1=fp0,fp1,fp3
+   69| 000BCC stfd     D8310000   1     STFL      er(gr17,0)=fp1
+   69|                              CL.161:
+   71| 000BD0 bl       48000001   1     CALLN     fp1=__xl_pow,2,fp1,fp2,#MX_TEMP1",__xl_pow",gr1,cr[01567]",gr0",gr3"-gr12",fp0",fp2"-fp13",mq",lr",xer",fsr",ca",ctr"
+   71| 000BD4 ori      60000000   1
+   71| 000BD8 fmul     FC1E0072   1     MFL       fp0=fp30,fp1,fcr
+   72| 000BDC cmpld    7C2FE840   1     CL8       cr0=gr15,gr29
+   64| 000BE0 fmr      FC20E890   1     LRFL      fp1=fp29
+   64| 000BE4 addi     39EF0001   1     AI        gr15=gr15,1
+   71| 000BE8 lfs      C05F0040   1     LFS       fp2=+CONSTANT_AREA(gr31,64)
+   71| 000BEC stfdux   7C10D5EE   1     STFDU     gr16,e(gr16,gr26,0)=fp0
+   72| 000BF0 bc       4080F800   1     BF        CL.55,cr0,0x8/llt,taken=20%(20,80)
+   72| 000BF4 b        4BFFFFA8   1     B         CL.158,-1
+     |               Tag Table
+     | 000BF8        00000000 00012203 85120000 00000BF8
+     |               Instruction count          766
+     |               Straight-line exec time    776
+     |               Constant Area
+     | 000000        73747265 616D2E66 39300000 7067656E 69646972 65637449
+     | 000018        616D7049 78307374 7265616D 2E663930 3F800000 3DCCCCCD
+     | 000030        4CA48242 BF800000 42DE0FDD 9F24E3A4 3E800000
+
+ 
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    stream.f90                  07/08/15   15:48:49
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     117
+1501-510  Compilation successful for file stream.f90.
+1501-543  Object file created.

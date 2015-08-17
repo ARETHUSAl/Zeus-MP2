@@ -262,7 +262,7 @@ subroutine auto_h5
 60    CONTINUE
 !
       write(*,"(/'AUTO_H5: Enter beginning and ending dump', &
-                  ' numbers'/)")
+                  & ' numbers'/)")
 !
       read(*,*) nbeg, nend
 !

@@ -1,0 +1,1881 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- difco3.f90 07/08/15 15:47:33
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** difco3   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-534 (I) Loop (loop index 1) at difco3.f90 <line 45> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 2) at difco3.f90 <line 46> was not SIMD vectorized because the loop is not the innermost loop.
+1586-550 (I) Loop (loop index 3) at difco3.f90 <line 47> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 3) at difco3.f90 <line 48> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 3) at difco3.f90 <line 48> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 3) at difco3.f90 <line 48> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-554 (I) Loop (loop index 3) at difco3.f90 <line 48> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-534 (I) Loop (loop index 4) at difco3.f90 <line 54> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 5) at difco3.f90 <line 55> was not SIMD vectorized because the loop is not the innermost loop.
+1586-538 (I) Loop (loop index 6) at difco3.f90 <line 56> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 6) at difco3.f90 <line 56> was not SIMD vectorized because it contains control flow.
+1586-534 (I) Loop (loop index 10) at difco3.f90 <line 45> was not SIMD vectorized because the loop is not the innermost loop.
+1586-534 (I) Loop (loop index 11) at difco3.f90 <line 46> was not SIMD vectorized because the loop is not the innermost loop.
+1586-550 (I) Loop (loop index 12) at difco3.f90 <line 47> was not SIMD vectorized because it is not profitable to vectorize.
+1586-554 (I) Loop (loop index 12) at difco3.f90 <line 48> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"3">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+    16|         SUBROUTINE difco3 (erold, dfc, ibeg, iend, jbeg, jend, kbeg, kend)
+    16|           d-r%addr = _alloca((8 * (max(int(%VAL(kn)),0) * (max(int(%VAL(&
+                &   jn)),0) * max(int(%VAL(in)),0)))))
+    44|           IF ((ldimen <> 3)) THEN
+    45|             IF ((MOD((1 + (int(kend) - int(kbeg))), 4) > 0  .AND.  1 + (&
+                &     int(kend) - int(kbeg)) > 0)) THEN
+                      $$CIV2 = 0
+       Id=10          DO $$CIV2 = $$CIV2, MOD((1 + (int(kend) - int(kbeg))), &
+                &         int(4))-1
+    46|                 IF ((1 + (int(jend) - int(jbeg)) > 0)) THEN
+                          $$CIV1 = 0
+       Id=11              DO $$CIV1 = $$CIV1, int((1 + (int(jend) - int(jbeg))&
+                &             ))-1
+    47|                     IF ((1 + (int(iend) - int(ibeg)) > 0)) THEN
+                              $$CIV0 = 0
+       Id=12                  DO $$CIV0 = $$CIV0, int((1 + (int(iend) - int(&
+                &                 ibeg))))-1
+    48|                         dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,int(&
+                &                 kbeg) + $$CIV2) =  0.0000000000000000E+000
+    49|                       ENDDO
+                            ENDIF
+    50|                   ENDDO
+                        ENDIF
+    51|               ENDDO
+                    ENDIF
+    45|             IF ((1 + (int(kend) - int(kbeg)) > 0  .AND.  1 + (int(kend) &
+                &     - int(kbeg)) > MOD((1 + (int(kend) - int(kbeg))), 4))) THEN
+                      $$CIV6 = int(0)
+       Id=1           DO $$CIV6 = $$CIV6, int(((int(kend) - (MOD((1 + (int(&
+                &         kend) - int(kbeg))), 4) + int(kbeg))) / 4 + 1))-1
+    46|                 IF ((1 + (int(jend) - int(jbeg)) > 0)) THEN
+                          $$CIV1 = 0
+       Id=2               DO $$CIV1 = $$CIV1, int((1 + (int(jend) - int(jbeg))&
+                &             ))-1
+    47|                     IF ((1 + (int(iend) - int(ibeg)) > 0)) THEN
+                              $$CIV0 = 0
+       Id=3                   DO $$CIV0 = $$CIV0, int((1 + (int(iend) - int(&
+                &                 ibeg))))-1
+    48|                         dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,(&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg)) =  0.0000000000000000E+000
+                                dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,1 + ((&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg))) =  0.0000000000000000E+000
+                                dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,2 + ((&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg))) =  0.0000000000000000E+000
+                                dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,3 + ((&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg))) =  0.0000000000000000E+000
+    49|                       ENDDO
+                            ENDIF
+    50|                   ENDDO
+                        ENDIF
+    51|               ENDDO
+                    ENDIF
+    52|           ELSE
+    53|             lab_1
+    54|             IF (.NOT.(1 + (int(kend) - int(kbeg)) > 0)) GOTO lab_36
+                    $$CIV5 = 0
+       Id=4         DO $$CIV5 = $$CIV5, int((1 + (int(kend) - int(kbeg))))-1
+    55|               IF ((1 + (int(jend) - int(jbeg)) > 0)) THEN
+                        $$CIV4 = 0
+       Id=5             DO $$CIV4 = $$CIV4, int((1 + (int(jend) - int(jbeg))))&
+                &           -1
+    56|                   IF ((1 + (int(iend) - int(ibeg)) > 0)) THEN
+                            $$CIV3 = 0
+                            $$PRC0 = erold(int(ibeg) - 1,$$CIV4 + int(jbeg),&
+                &             $$CIV5 + int(kbeg))
+                            $$PRC2 = erold(int(ibeg) - 1,$$CIV4 + int(jbeg),(&
+                &             $$CIV5 + int(kbeg)) - 1)
+       Id=6                 DO $$CIV3 = $$CIV3, int((1 + (int(iend) - int(&
+                &               ibeg))))-1
+                              $$PRC1 = erold(int(ibeg) + $$CIV3,$$CIV4 + int(&
+                &               jbeg),$$CIV5 + int(kbeg))
+                              $$PRC3 = erold(int(ibeg) + $$CIV3,$$CIV4 + int(&
+                &               jbeg),($$CIV5 + int(kbeg)) - 1)
+    57|                       der1.rnn1 = ($$PRC3 - $$PRC2) * &
+                &               d-dx1bi%addr%dx1bi(int(ibeg) + $$CIV3) + ($$PRC1 &
+                &               - $$PRC0) * d-dx1bi%addr%dx1bi(int(ibeg) + $$CIV3)&
+                &               
+    60|                       der2.rnn0 = ($$PRC3 - erold(int(ibeg) + $$CIV3,(&
+                &               $$CIV4 + int(jbeg)) - 1,($$CIV5 + int(kbeg)) - 1))&
+                &                * d-dx2bi%addr%dx2bi(int(jbeg) + $$CIV4) + (&
+                &               $$PRC1 - erold(int(ibeg) + $$CIV3,($$CIV4 + int(&
+                &               jbeg)) - 1,int(kbeg) + $$CIV5)) * &
+                &               d-dx2bi%addr%dx2bi(int(jbeg) + $$CIV4)
+    63|                       der3 = ((($$PRC1 - $$PRC3) * d-dx3bi%addr%dx3bi(&
+                &               int(kbeg) + $$CIV5)) * d-g31bi%addr%g31bi(int(&
+                &               ibeg) + $$CIV3)) * d-g32bi%addr%g32bi(int(jbeg) + &
+                &               $$CIV4)
+    69|                       d-r%addr%r[].rns6.(int(ibeg) + $$CIV3,int(jbeg) + &
+                &               $$CIV4,int(kbeg) + $$CIV5) = (( &
+                &               2.0000000000000000E+000 * _sqrt(((%VAL(der1.rnn1) &
+                &               *  5.0000000000000000E-001) * (%VAL(der1.rnn1) *  &
+                &               5.0000000000000000E-001) + ((%VAL(der2.rnn0) *  &
+                &               5.0000000000000000E-001) * d-g2bi%addr%g2bi(int(&
+                &               ibeg) + %VAL($$CIV3))) * ((%VAL(der2.rnn0) *  &
+                &               5.0000000000000000E-001) * d-g2bi%addr%g2bi(int(&
+                &               ibeg) + %VAL($$CIV3)))) + %VAL(der3) * %VAL(der3))&
+                &               ) * ( 2.0000000000000000E+000 / (d-kapr%addr%kapr(&
+                &               int(ibeg) + $$CIV3,int(jbeg) + $$CIV4,($$CIV5 + &
+                &               int(kbeg)) - 1) + d-kapr%addr%kapr(int(ibeg) + &
+                &               $$CIV3,int(jbeg) + $$CIV4,int(kbeg) + $$CIV5)))) &
+                &               / max($$PRC1 + $$PRC3, 1.0000000000000000E-099)
+    75|                       IF ((ifld == 1)) THEN
+    76|                         lmda = ( 2.0000000000000000E+000 + &
+                &                 d-r%addr%r[].rns6.(int(ibeg) + $$CIV3,int(jbeg) &
+                &                 + $$CIV4,int(kbeg) + $$CIV5)) / (( &
+                &                 6.0000000000000000E+000 +  &
+                &                 3.0000000000000000E+000 * d-r%addr%r[].rns6.(&
+                &                 int(ibeg) + $$CIV3,int(jbeg) + $$CIV4,int(kbeg) &
+                &                 + $$CIV5)) + d-r%addr%r[].rns6.(int(ibeg) + &
+                &                 $$CIV3,int(jbeg) + $$CIV4,int(kbeg) + $$CIV5) * &
+                &                 d-r%addr%r[].rns6.(int(ibeg) + $$CIV3,int(jbeg) &
+                &                 + $$CIV4,int(kbeg) + $$CIV5))
+    77|                       ENDIF
+    82|                       IF ((ifld == 2)) THEN
+                                lmda = MERGE( 2.0000000000000000E+000 / ( 3.0000000000000000E+000 + _sqrt( 9.0000000000000000E+000 +  1.2000000000000000E+001 * (d-r%addr%r[].rns6.(int(ibeg) + %VAL($$CIV3),int(jbeg) + %VAL($$CIV4),int(kbeg) + %VAL($$CIV5)) * d-r%addr%r[].rns6.(int(ibeg) + %VAL($$CIV3),int(jbeg) + %VAL($$CIV4),int(kbeg) + %VAL($$CIV5))))),  1.0000000000000000E+000 / (( 1.0000000000000000E+000 + d-r%addr%r[].rns6.(int(ibeg) + $$CIV3,int(jbeg) + $$CIV4,int(kbeg) + $$CIV5)) + _sqrt( 1.0000000000000000E+000 +  2.0000000000000000E+000 * d-r%addr%r[].rns6.(int(ibeg) + %VAL($$CIV3),int(jbeg) + %VAL($$CIV4),int(kbeg) + %VAL($$CIV5)))), d-r%addr%r[].rns6.(int(ibeg) + $$CIV3,int(jbeg) + $$CIV4,int(kbeg) + $$CIV5) <=  1.5000000000000000E+000)
+    90|                       ENDIF
+    91|                       dfc(int(ibeg) + $$CIV3,int(jbeg) + $$CIV4,int(&
+                &               kbeg) + $$CIV5) = ( 2.9979199488000000E+010 * &
+                &               lmda) * ( 2.0000000000000000E+000 / (&
+                &               d-kapr%addr%kapr(int(ibeg) + $$CIV3,int(jbeg) + &
+                &               $$CIV4,($$CIV5 + int(kbeg)) - 1) + &
+                &               d-kapr%addr%kapr(int(ibeg) + $$CIV3,int(jbeg) + &
+                &               $$CIV4,int(kbeg) + $$CIV5)))
+                              $$PRC2 = $$PRC3
+                              $$PRC0 = $$PRC1
+    93|                     ENDDO
+                          ENDIF
+    94|                 ENDDO
+                      ENDIF
+    95|             ENDDO
+                    lab_36
+    98|             lab_42
+                    RETURN
+                  END SUBROUTINE difco3
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            45            10    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            46            11    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            47            12    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0            48                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            45             1    Outer loop has been unrolled 4 time(s).
+         0            45             1    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            46             2    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            47             3    Loop was not SIMD vectorized because it is not 
+                                          profitable to vectorize.
+         0            48                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            48                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            48                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            48                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0            54             4    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            55             5    Loop was not SIMD vectorized because the loop is not 
+                                          the innermost loop.
+         0            56             6    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            56             6    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+
+
+    16|         SUBROUTINE difco3 (erold, dfc, ibeg, iend, jbeg, jend, kbeg, kend)
+    16|           d-r%addr = _alloca(8 * (max(int(%VAL(kn)),0) * (max(int(%VAL(&
+                &   jn)),0) * max(int(%VAL(in)),0))))
+    44|           IF ((ldimen <> 3)) THEN
+    45|             IF ((MOD((1 + (int(kend) - int(kbeg))), 4) > 0  .AND.  1 + (&
+                &     int(kend) - int(kbeg)) > 0)) THEN
+                      $$CIV2 = 0
+       Id=10          DO $$CIV2 = $$CIV2, MOD((1 + (int(kend) - int(kbeg))), &
+                &         int(4))-1
+    46|                 IF ((1 + (int(jend) - int(jbeg)) > 0)) THEN
+                          $$CIV1 = 0
+       Id=11              DO $$CIV1 = $$CIV1, int((1 + (int(jend) - int(jbeg))&
+                &             ))-1
+    47|                     IF ((1 + (int(iend) - int(ibeg)) > 0)) THEN
+                              $$CIV0 = 0
+       Id=12                  DO $$CIV0 = $$CIV0, int((1 + (int(iend) - int(&
+                &                 ibeg))))-1
+    48|                         dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,int(&
+                &                 kbeg) + $$CIV2) =  0.0000000000000000E+000
+    49|                       ENDDO
+                            ENDIF
+    50|                   ENDDO
+                        ENDIF
+    51|               ENDDO
+                    ENDIF
+    45|             IF ((1 + (int(kend) - int(kbeg)) > 0  .AND.  1 + (int(kend) &
+                &     - int(kbeg)) > MOD((1 + (int(kend) - int(kbeg))), 4))) THEN
+                      $$CIV6 = int(0)
+       Id=1           DO $$CIV6 = $$CIV6, int(((int(kend) - (MOD((1 + (int(&
+                &         kend) - int(kbeg))), 4) + int(kbeg))) / 4 + 1))-1
+    46|                 IF ((1 + (int(jend) - int(jbeg)) > 0)) THEN
+                          $$CIV1 = 0
+       Id=2               DO $$CIV1 = $$CIV1, int((1 + (int(jend) - int(jbeg))&
+                &             ))-1
+    47|                     IF ((1 + (int(iend) - int(ibeg)) > 0)) THEN
+                              $$CIV0 = 0
+       Id=3                   DO $$CIV0 = $$CIV0, int((1 + (int(iend) - int(&
+                &                 ibeg))))-1
+    48|                         dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,(&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg)) =  0.0000000000000000E+000
+                                dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,1 + ((&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg))) =  0.0000000000000000E+000
+                                dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,2 + ((&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg))) =  0.0000000000000000E+000
+                                dfc(int(ibeg) + $$CIV0,int(jbeg) + $$CIV1,3 + ((&
+                &                 $$CIV6 * 4 + MOD((1 + (int(kend) - int(kbeg))), &
+                &                 4)) + int(kbeg))) =  0.0000000000000000E+000
+    49|                       ENDDO
+                            ENDIF
+    50|                   ENDDO
+                        ENDIF
+    51|               ENDDO
+                    ENDIF
+    52|           ELSE
+    53|             lab_1
+    54|             IF (.NOT.(1 + (int(kend) - int(kbeg)) > 0)) GOTO lab_36
+                    $$CIV5 = 0
+       Id=4         DO $$CIV5 = $$CIV5, int((1 + (int(kend) - int(kbeg))))-1
+    55|               IF ((1 + (int(jend) - int(jbeg)) > 0)) THEN
+                        $$CIV4 = 0
+       Id=5             DO $$CIV4 = $$CIV4, int((1 + (int(jend) - int(jbeg))))&
+                &           -1
+    56|                   IF ((1 + (int(iend) - int(ibeg)) > 0)) THEN
+                            $$CIV3 = 0
+                            $$PRC0 = erold(int(ibeg) - 1,$$CIV4 + int(jbeg),&
+                &             $$CIV5 + int(kbeg))
+                            $$PRC2 = erold(int(ibeg) - 1,$$CIV4 + int(jbeg),(&
+                &             $$CIV5 + int(kbeg)) - 1)
+                            $$ICM0 = $$CIV4 + int(jbeg)
+    63|                     $$ICM1 = d-g32bi%addr%g32bi(int(jbeg) + $$CIV4)
+    56|                     $$ICM2 = $$CIV5 + int(kbeg)
+    63|                     $$ICM3 = d-dx3bi%addr%dx3bi(int(kbeg) + $$CIV5)
+    60|                     $$ICM4 = d-dx2bi%addr%dx2bi(int(jbeg) + $$CIV4)
+    56|Id=6                 DO $$CIV3 = $$CIV3, int((1 + (int(iend) - int(&
+                &               ibeg))))-1
+                              $$PRC1 = erold(int(ibeg) + $$CIV3,$$ICM0,$$ICM2)
+                              $$PRC3 = erold(int(ibeg) + $$CIV3,$$ICM0,($$CIV5 &
+                &               + int(kbeg)) - 1)
+    57|                       der1.rnn1 = ($$PRC3 - $$PRC2) * &
+                &               d-dx1bi%addr%dx1bi(int(ibeg) + $$CIV3) + ($$PRC1 &
+                &               - $$PRC0) * d-dx1bi%addr%dx1bi(int(ibeg) + $$CIV3)&
+                &               
+    60|                       der2.rnn0 = ($$PRC3 - erold(int(ibeg) + $$CIV3,(&
+                &               $$CIV4 + int(jbeg)) - 1,($$CIV5 + int(kbeg)) - 1))&
+                &                * $$ICM4 + ($$PRC1 - erold(int(ibeg) + $$CIV3,(&
+                &               $$CIV4 + int(jbeg)) - 1,$$ICM2)) * $$ICM4
+    63|                       der3 = ((($$PRC1 - $$PRC3) * $$ICM3) * &
+                &               d-g31bi%addr%g31bi(int(ibeg) + $$CIV3)) * $$ICM1
+    69|                       $$csx0 = (( 2.0000000000000000E+000 * _sqrt(((&
+                &               %VAL(der1.rnn1) *  5.0000000000000000E-001) * (&
+                &               %VAL(der1.rnn1) *  5.0000000000000000E-001) + ((&
+                &               %VAL(der2.rnn0) *  5.0000000000000000E-001) * &
+                &               d-g2bi%addr%g2bi(int(ibeg) + %VAL($$CIV3))) * ((&
+                &               %VAL(der2.rnn0) *  5.0000000000000000E-001) * &
+                &               d-g2bi%addr%g2bi(int(ibeg) + %VAL($$CIV3)))) + &
+                &               %VAL(der3) * %VAL(der3))) * ( &
+                &               2.0000000000000000E+000 / (d-kapr%addr%kapr(int(&
+                &               ibeg) + $$CIV3,$$ICM0,($$CIV5 + int(kbeg)) - 1) + &
+                &               d-kapr%addr%kapr(int(ibeg) + $$CIV3,$$ICM0,$$ICM2)&
+                &               ))) / max($$PRC1 + $$PRC3, &
+                &               1.0000000000000000E-099)
+                              d-r%addr%r[].rns6.(int(ibeg) + $$CIV3,$$ICM0,&
+                &               $$ICM2) = $$csx0
+    75|                       IF ((ifld == 1)) THEN
+    76|                         lmda = ( 2.0000000000000000E+000 + $$csx0) / (( &
+                &                 6.0000000000000000E+000 +  &
+                &                 3.0000000000000000E+000 * $$csx0) + $$csx0 * &
+                &                 $$csx0)
+    77|                       ENDIF
+    82|                       IF ((ifld == 2)) THEN
+                                lmda = MERGE( 2.0000000000000000E+000 / ( 3.0000000000000000E+000 + _sqrt( 9.0000000000000000E+000 +  1.2000000000000000E+001 * (%VAL($$csx0) * %VAL($$csx0)))),  1.0000000000000000E+000 / (( 1.0000000000000000E+000 + $$csx0) + _sqrt( 1.0000000000000000E+000 +  2.0000000000000000E+000 * %VAL($$csx0))), $$csx0 <=  1.5000000000000000E+000)
+    90|                       ENDIF
+    91|                       dfc(int(ibeg) + $$CIV3,$$ICM0,$$ICM2) = ( &
+                &               2.9979199488000000E+010 * lmda) * ( &
+                &               2.0000000000000000E+000 / (d-kapr%addr%kapr(int(&
+                &               ibeg) + $$CIV3,$$ICM0,($$CIV5 + int(kbeg)) - 1) + &
+                &               d-kapr%addr%kapr(int(ibeg) + $$CIV3,$$ICM0,$$ICM2)&
+                &               ))
+                              $$PRC2 = $$PRC3
+                              $$PRC0 = $$PRC1
+    93|                     ENDDO
+                          ENDIF
+    94|                 ENDDO
+                      ENDIF
+    95|             ENDDO
+                    lab_36
+    98|             lab_42
+                    RETURN
+                  END SUBROUTINE difco3
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   ssus ssss ssss s-ss  ssss ssss ssss ssss
+ FPR's set/used:   ssss ssss ssss ssss  ssss ssss ssss ssss
+ CCR's set/used:   ss-- --ss
+     | 000000                           PDEF     difco3
+   16|                                  PROC      .erold,.dfc,.ibeg,.iend,.jbeg,.jend,.kbeg,.kend,gr3-gr10
+    0| 000000 stfd     DBE1FFF8   1     STFL      #stack(gr1,-8)=fp31
+    0| 000004 stfd     DBC1FFF0   1     STFL      #stack(gr1,-16)=fp30
+    0| 000008 stfd     DBA1FFE8   1     STFL      #stack(gr1,-24)=fp29
+    0| 00000C stfd     DB81FFE0   1     STFL      #stack(gr1,-32)=fp28
+    0| 000010 stfd     DB61FFD8   1     STFL      #stack(gr1,-40)=fp27
+    0| 000014 stfd     DB41FFD0   1     STFL      #stack(gr1,-48)=fp26
+    0| 000018 stfd     DB21FFC8   1     STFL      #stack(gr1,-56)=fp25
+    0| 00001C stfd     DB01FFC0   1     STFL      #stack(gr1,-64)=fp24
+    0| 000020 stfd     DAE1FFB8   1     STFL      #stack(gr1,-72)=fp23
+    0| 000024 stfd     DAC1FFB0   1     STFL      #stack(gr1,-80)=fp22
+    0| 000028 stfd     DAA1FFA8   1     STFL      #stack(gr1,-88)=fp21
+    0| 00002C stfd     DA81FFA0   1     STFL      #stack(gr1,-96)=fp20
+    0| 000030 stfd     DA61FF98   1     STFL      #stack(gr1,-104)=fp19
+    0| 000034 stfd     DA41FF90   1     STFL      #stack(gr1,-112)=fp18
+    0| 000038 stfd     DA21FF88   1     STFL      #stack(gr1,-120)=fp17
+    0| 00003C stfd     DA01FF80   1     STFL      #stack(gr1,-128)=fp16
+    0| 000040 stfd     D9E1FF78   1     STFL      #stack(gr1,-136)=fp15
+    0| 000044 stfd     D9C1FF70   1     STFL      #stack(gr1,-144)=fp14
+    0| 000048 std      FBE1FF68   1     ST8       #stack(gr1,-152)=gr31
+    0| 00004C std      FBC1FF60   1     ST8       #stack(gr1,-160)=gr30
+    0| 000050 std      FBA1FF58   1     ST8       #stack(gr1,-168)=gr29
+    0| 000054 std      FB81FF50   1     ST8       #stack(gr1,-176)=gr28
+    0| 000058 std      FB61FF48   1     ST8       #stack(gr1,-184)=gr27
+    0| 00005C std      FB41FF40   1     ST8       #stack(gr1,-192)=gr26
+    0| 000060 std      FB21FF38   1     ST8       #stack(gr1,-200)=gr25
+    0| 000064 std      FB01FF30   1     ST8       #stack(gr1,-208)=gr24
+    0| 000068 std      FAE1FF28   1     ST8       #stack(gr1,-216)=gr23
+    0| 00006C std      FAC1FF20   1     ST8       #stack(gr1,-224)=gr22
+    0| 000070 std      FAA1FF18   1     ST8       #stack(gr1,-232)=gr21
+    0| 000074 std      FA81FF10   1     ST8       #stack(gr1,-240)=gr20
+    0| 000078 std      FA61FF08   1     ST8       #stack(gr1,-248)=gr19
+    0| 00007C std      FA41FF00   1     ST8       #stack(gr1,-256)=gr18
+    0| 000080 std      FA21FEF8   1     ST8       #stack(gr1,-264)=gr17
+    0| 000084 std      FA01FEF0   1     ST8       #stack(gr1,-272)=gr16
+    0| 000088 std      F9E1FEE8   1     ST8       #stack(gr1,-280)=gr15
+    0| 00008C std      F9C1FEE0   1     ST8       #stack(gr1,-288)=gr14
+    0| 000090 stdu     F821FC81   1     ST8U      gr1,#stack(gr1,-896)=gr1
+    0| 000094 or       7C3F0B78   1     LR        gr31=gr1
+    0| 000098 ld       E9620000   1     L8        gr11=.&&N&&param(gr2,0)
+   44| 00009C ld       E9820000   1     L8        gr12=.&&N&&config(gr2,0)
+    0| 0000A0 lwa      EB690002   1     L4A       gr27=kbeg(gr9,0)
+    0| 0000A4 lwa      EB8A0002   1     L4A       gr28=kend(gr10,0)
+    0| 0000A8 ld       E8010000   1     L8        gr0=#stack(gr1,0)
+    0| 0000AC lwa      EBCB0002   1     L4A       gr30=<s17:d0:l4>(gr11,0)
+    0| 0000B0 lwa      E92B0006   1     L4A       gr9=<s17:d4:l4>(gr11,4)
+    0| 0000B4 lwa      E94B000A   1     L4A       gr10=<s17:d8:l4>(gr11,8)
+   44| 0000B8 lwz      83AC0004   1     L4Z       gr29=<s111:d4:l4>(gr12,4)
+    0| 0000BC subf     7D9BE050   1     S         gr12=gr28,gr27
+    0| 0000C0 std      FB7F0150   1     ST8       #SPILL0(gr31,336)=gr27
+    0| 0000C4 sradi    7FCBFE76   1     SRA8      gr11=gr30,63,ca"
+    0| 0000C8 sradi    7D3CFE76   1     SRA8      gr28=gr9,63,ca"
+    0| 0000CC andc     7FCB5878   1     ANDC      gr11=gr30,gr11
+    0| 0000D0 andc     7D29E078   1     ANDC      gr9=gr9,gr28
+    0| 0000D4 mulld    7F8959D2   1     M         gr28=gr9,gr11
+    0| 0000D8 sradi    7D5EFE76   1     SRA8      gr30=gr10,63,ca"
+   44| 0000DC cmpwi    2C9D0003   1     C4        cr1=gr29,3
+    0| 0000E0 andc     7D4AF078   1     ANDC      gr10=gr10,gr30
+    0| 0000E4 mulld    7D4AE1D2   1     M         gr10=gr10,gr28
+    0| 0000E8 addic.   374C0001   1     AI_R      gr26,cr0=gr12,1,ca"
+    0| 0000EC rldicr   794A1F24   1     SLL8      gr10=gr10,3
+    0| 0000F0 std      FB5F0158   1     ST8       #SPILL1(gr31,344)=gr26
+    0| 0000F4 neg      7D4A00D0   1     COMP      gr10=gr10
+    0| 0000F8 mcrf     4F000000   1     LRCR      cr6=cr0
+    0| 0000FC rldicr   794A06A4   1     RN8       gr10=gr10,0,0xFFFFFFFFFFFFFFE0
+    0| 000100 stdux    7C01516A   1     ST8U      gr1,#stack(gr1,gr10,0)=gr0
+    0| 000104 addi     3B210080   1     AI        gr25=gr1,128
+    0| 000108 std      FB3F0160   1     ST8       #SPILL2(gr31,352)=gr25
+   44| 00010C bc       41860248   1     BT        CL.1,cr1,0x4/eq,taken=50%(0,0)
+   44| 000110 sradi    7F401674   1     SRA8CA    gr0,ca=gr26,2
+   44| 000114 addze    7C000194   1     ADDE      gr0,ca=gr0,0,ca
+   45| 000118 rldicr   78031764   1     SLL8      gr3=gr0,2
+   45| 00011C subf     7C03D051   1     S_R       gr0,cr0=gr26,gr3
+   45| 000120 crand    4C390A02   1     CR_N      cr0=cr[60],0x2/gt,0x2/gt,0x2/gt,cr0
+   45| 000124 bc       408100BC   1     BF        CL.54,cr0,0x2/gt,taken=50%(0,0)
+   45| 000128 lwa      EBC70002   1     L4A       gr30=jbeg(gr7,0)
+   45| 00012C lwa      E9880002   1     L4A       gr12=jend(gr8,0)
+   45| 000130 addi     39400000   1     LI        gr10=0
+   45| 000134 subf     7D9E6050   1     S         gr12=gr12,gr30
+   45| 000138 addic.   37AC0001   1     AI_R      gr29,cr0=gr12,1,ca"
+    0| 00013C bc       40810204   1     BF        CL.159,cr0,0x2/gt,taken=50%(0,0)
+    0| 000140 rldicr   792C1F24   1     SLL8      gr12=gr9,3
+    0| 000144 ld       EABF0150   1     L8        gr21=#SPILL0(gr31,336)
+    0| 000148 mulld    7F6B61D2   1     M         gr27=gr11,gr12
+    0| 00014C rldicr   797C1F24   1     SLL8      gr28=gr11,3
+    0| 000150 neg      7D8C00D0   1     COMP      gr12=gr12
+    0| 000154 mulld    7EFCF1D2   1     M         gr23=gr28,gr30
+    0| 000158 mulld    7ED5D9D2   1     M         gr22=gr21,gr27
+    0| 00015C lwa      EB450002   1     L4A       gr26=ibeg(gr5,0)
+    0| 000160 lwa      EB260002   1     L4A       gr25=iend(gr6,0)
+    0| 000164 subfic   23DCFFF0   1     SFI       gr30=-16,gr28,ca"
+    0| 000168 mulld    7F0B61D2   1     M         gr24=gr11,gr12
+    0| 00016C ld       E9820000   1     L8        gr12=.+CONSTANT_AREA(gr2,0)
+    0| 000170 add      7ED6BA14   1     A         gr22=gr22,gr23
+    0| 000174 add      7EE4F214   1     A         gr23=gr4,gr30
+    0| 000178 subf     7FDAC850   1     S         gr30=gr25,gr26
+    0| 00017C add      7EF6BA14   1     A         gr23=gr22,gr23
+    0| 000180 addic.   37DE0001   1     AI_R      gr30,cr0=gr30,1,ca"
+    0| 000184 add      7FD7C214   1     A         gr30=gr23,gr24
+    0| 000188 lfs      C00C0000   1     LFS       fp0=+CONSTANT_AREA(gr12,0)
+   45|                              CL.49:
+    0| 00018C rldicr   7B571F24   1     SLL8      gr23=gr26,3
+   46| 000190 addi     39800000   1     LI        gr12=0
+    0| 000194 bc       4081003C   1     BF        CL.53,cr0,0x2/gt,taken=20%(20,80)
+    0| 000198 subfic   231A0001   1     SFI       gr24=1,gr26,ca"
+    0| 00019C add      7ED7F214   1     A         gr22=gr23,gr30
+    0| 0001A0 add      7EF8CA14   1     A         gr23=gr24,gr25
+   46|                              CL.50:
+   48| 0001A4 or       7ED8B378   1     LR        gr24=gr22
+    0| 0001A8 mtspr    7EE903A6   1     LCTR      ctr=gr23
+    0| 0001AC ori      60210000   1     XNOP      
+    0| 0001B0 ori      60210000   1     XNOP      
+    0| 0001B4 ori      60210000   1     XNOP      
+   47|                              CL.51:
+   48| 0001B8 stfdu    DC180008   1     STFDU     gr24,dfc[](gr24,8)=fp0
+   49| 0001BC bc       4200FFFC   1     BCT       ctr=CL.51,taken=100%(100,0)
+   50| 0001C0 addi     398C0001   1     AI        gr12=gr12,1
+    0| 0001C4 add      7ED6E214   1     A         gr22=gr22,gr28
+   50| 0001C8 cmpld    7CACE840   1     CL8       cr1=gr12,gr29
+   50| 0001CC bc       4184FFD8   1     BT        CL.50,cr1,0x8/llt,taken=80%(80,20)
+   50|                              CL.53:
+   51| 0001D0 addi     394A0001   1     AI        gr10=gr10,1
+    0| 0001D4 add      7FDBF214   1     A         gr30=gr27,gr30
+   51| 0001D8 cmpd     7CA05000   1     C8        cr1=gr0,gr10
+   51| 0001DC bc       4185FFB0   1     BT        CL.49,cr1,0x2/gt,taken=80%(80,20)
+   51|                              CL.54:
+   45| 0001E0 ld       E95F0158   1     L8        gr10=#SPILL1(gr31,344)
+   45| 0001E4 cmpd     7CAA0000   1     C8        cr1=gr10,gr0
+   45| 0001E8 crand    4C392A02   1     CR_N      cr0=cr[61],0x2/gt,0x2/gt,0x2/gt,cr0
+   45| 0001EC bc       40810120   1     BF        CL.333,cr0,0x2/gt,taken=30%(30,70)
+    0| 0001F0 rldicr   793C1F24   1     SLL8      gr28=gr9,3
+   45| 0001F4 lwa      E9470002   1     L4A       gr10=jbeg(gr7,0)
+    0| 0001F8 mulld    7D8BE1D2   1     M         gr12=gr11,gr28
+    0| 0001FC ld       EB5F0150   1     L8        gr26=#SPILL0(gr31,336)
+   45| 000200 lwa      EBA80002   1     L4A       gr29=jend(gr8,0)
+    0| 000204 rldicr   79671F24   1     SLL8      gr7=gr11,3
+   51| 000208 addi     3863FFFF   1     AI        gr3=gr3,-1
+    0| 00020C mulld    7FC751D2   1     M         gr30=gr7,gr10
+   51| 000210 sradi    7C681674   1     SRA8CA    gr8,ca=gr3,2
+   45| 000214 subf     7C6AE850   1     S         gr3=gr29,gr10
+   51| 000218 addze    7D480194   1     ADDE      gr10,ca=gr8,0,ca
+    0| 00021C mulld    7FACD1D2   1     M         gr29=gr12,gr26
+   45| 000220 addic.   35030001   1     AI_R      gr8,cr0=gr3,1,ca"
+    0| 000224 neg      7F9C00D0   1     COMP      gr28=gr28
+    0| 000228 rldicr   793B26E4   1     SLL8      gr27=gr9,4
+   45| 00022C addi     38600000   1     LI        gr3=0
+    0| 000230 bc       408100DC   1     BF        CL.333,cr0,0x2/gt,taken=20%(20,80)
+    0| 000234 subfic   2347FFF0   1     SFI       gr26=-16,gr7,ca"
+    0| 000238 mulld    7F2061D2   1     M         gr25=gr0,gr12
+    0| 00023C lwa      E8050002   1     L4A       gr0=ibeg(gr5,0)
+    0| 000240 lwa      E8A60002   1     L4A       gr5=iend(gr6,0)
+    0| 000244 add      7CDDF214   1     A         gr6=gr29,gr30
+    0| 000248 add      7C84D214   1     A         gr4=gr4,gr26
+    0| 00024C rldicr   793E2EA4   1     SLL8      gr30=gr9,5
+    0| 000250 mulld    7F8BE1D2   1     M         gr28=gr11,gr28
+    0| 000254 mulld    7F6BD9D2   1     M         gr27=gr11,gr27
+    0| 000258 ld       E9220000   1     L8        gr9=.+CONSTANT_AREA(gr2,0)
+    0| 00025C add      7C843214   1     A         gr4=gr4,gr6
+    0| 000260 subf     7CC02850   1     S         gr6=gr5,gr0
+    0| 000264 add      7C84CA14   1     A         gr4=gr4,gr25
+    0| 000268 mulld    7FCBF1D2   1     M         gr30=gr11,gr30
+    0| 00026C add      7FA46214   1     A         gr29=gr4,gr12
+    0| 000270 add      7F84E214   1     A         gr28=gr4,gr28
+    0| 000274 add      7EA4DA14   1     A         gr21=gr4,gr27
+    0| 000278 addi     3B6A0001   1     AI        gr27=gr10,1
+    0| 00027C addic.   34C60001   1     AI_R      gr6,cr0=gr6,1,ca"
+    0| 000280 lfs      C0090000   1     LFS       fp0=+CONSTANT_AREA(gr9,0)
+   45|                              CL.31:
+    0| 000284 rldicr   78091F24   1     SLL8      gr9=gr0,3
+   46| 000288 addi     38C00000   1     LI        gr6=0
+    0| 00028C bc       40810064   1     BF        CL.32,cr0,0x2/gt,taken=20%(20,80)
+    0| 000290 subfic   21400001   1     SFI       gr10=1,gr0,ca"
+    0| 000294 add      7F444A14   1     A         gr26=gr4,gr9
+    0| 000298 add      7F255214   1     A         gr25=gr5,gr10
+    0| 00029C add      7F09AA14   1     A         gr24=gr9,gr21
+    0| 0002A0 add      7EE9E214   1     A         gr23=gr9,gr28
+    0| 0002A4 add      7EC9EA14   1     A         gr22=gr9,gr29
+    0| 0002A8 ori      60210000   1     XNOP      
+   46|                              CL.33:
+   48| 0002AC or       7F09C378   1     LR        gr9=gr24
+   48| 0002B0 or       7EEABB78   1     LR        gr10=gr23
+   48| 0002B4 or       7ECBB378   1     LR        gr11=gr22
+   48| 0002B8 or       7F4CD378   1     LR        gr12=gr26
+    0| 0002BC mtspr    7F2903A6   1     LCTR      ctr=gr25
+    0|                              CL.249:
+   48| 0002C0 stfdu    DC0A0008   1     STFDU     gr10,dfc[](gr10,8)=fp0
+   48| 0002C4 stfdu    DC0C0008   1     STFDU     gr12,dfc[](gr12,8)=fp0
+   48| 0002C8 stfdu    DC0B0008   1     STFDU     gr11,dfc[](gr11,8)=fp0
+   48| 0002CC stfdu    DC090008   1     STFDU     gr9,dfc[](gr9,8)=fp0
+    0| 0002D0 bc       4200FFF0   1     BCT       ctr=CL.249,taken=100%(100,0)
+   50| 0002D4 addi     38C60001   1     AI        gr6=gr6,1
+    0| 0002D8 add      7F5A3A14   1     A         gr26=gr26,gr7
+   50| 0002DC cmpld    7CA64040   1     CL8       cr1=gr6,gr8
+    0| 0002E0 add      7F183A14   1     A         gr24=gr24,gr7
+    0| 0002E4 add      7EF73A14   1     A         gr23=gr23,gr7
+    0| 0002E8 add      7ED63A14   1     A         gr22=gr22,gr7
+   50| 0002EC bc       4184FFC0   1     BT        CL.33,cr1,0x8/llt,taken=80%(80,20)
+   50|                              CL.32:
+   51| 0002F0 addi     38630001   1     AI        gr3=gr3,1
+    0| 0002F4 add      7FBDF214   1     A         gr29=gr29,gr30
+   51| 0002F8 cmpld    7CA3D840   1     CL8       cr1=gr3,gr27
+    0| 0002FC add      7C84F214   1     A         gr4=gr4,gr30
+    0| 000300 add      7F9CF214   1     A         gr28=gr28,gr30
+    0| 000304 add      7EB5F214   1     A         gr21=gr21,gr30
+   51| 000308 bc       4184FF7C   1     BT        CL.31,cr1,0x8/llt,taken=80%(80,20)
+   45|                              CL.333:
+   98| 00030C ld       E8210000   1     L8        gr1=#stack(gr1,0),gr31"
+   98| 000310 ld       EAA1FF18   1     L8        gr21=#stack(gr1,-232)
+   98| 000314 ld       EAC1FF20   1     L8        gr22=#stack(gr1,-224)
+   98| 000318 ld       EAE1FF28   1     L8        gr23=#stack(gr1,-216)
+   98| 00031C ld       EB01FF30   1     L8        gr24=#stack(gr1,-208)
+   98| 000320 ld       EB21FF38   1     L8        gr25=#stack(gr1,-200)
+   98| 000324 ld       EB41FF40   1     L8        gr26=#stack(gr1,-192)
+   98| 000328 ld       EB61FF48   1     L8        gr27=#stack(gr1,-184)
+   98| 00032C ld       EB81FF50   1     L8        gr28=#stack(gr1,-176)
+   98| 000330 ld       EBA1FF58   1     L8        gr29=#stack(gr1,-168)
+   98| 000334 ld       EBC1FF60   1     L8        gr30=#stack(gr1,-160)
+   98| 000338 ld       EBE1FF68   1     L8        gr31=#stack(gr1,-152)
+   98| 00033C bclr     4E800020   1     BA        lr
+   50|                              CL.159:
+    0| 000340 mtspr    7C0903A6   1     LCTR      ctr=gr0
+   50|                              CL.148:
+   51| 000344 addi     394A0001   1     AI        gr10=gr10,1
+   51| 000348 cmpd     7CAA0000   1     C8        cr1=gr10,gr0
+   51| 00034C bc       4104FFF8   1     BCTT      ctr=CL.148,cr1,0x1/lt,taken=80%(80,20)
+    0| 000350 b        4BFFFE90   1     B         CL.54,-1
+   53|                              CL.1:
+   54| 000354 bc       4099124C   1     BF        CL.334,cr6,0x2/gt,taken=30%(30,70)
+   56| 000358 rldicr   792A1F24   1     SLL8      gr10=gr9,3
+   54| 00035C lwa      EA670002   1     L4A       gr19=jbeg(gr7,0)
+   54| 000360 lwa      E9880002   1     L4A       gr12=jend(gr8,0)
+   69| 000364 ld       EB620000   1     L8        gr27=.&&N&opac(gr2,0)
+   56| 000368 rldicr   79671F24   1     SLL8      gr7=gr11,3
+    0| 00036C mulld    7C0A59D2   1     M         gr0=gr10,gr11
+   54| 000370 std      FA7F0168   1     ST8       #SPILL3(gr31,360)=gr19
+   56| 000374 neg      7F8A00D0   1     COMP      gr28=gr10
+    0| 000378 rldicr   792A26E4   1     SLL8      gr10=gr9,4
+   54| 00037C subf     7D336050   1     S         gr9=gr12,gr19
+   69| 000380 ld       EA1B03D8   1     L8        gr16=<s100:d984:l8>(gr27,984)
+   54| 000384 addic.   37A90001   1     AI_R      gr29,cr0=gr9,1,ca"
+    0| 000388 mulld    7D2799D2   1     M         gr9=gr7,gr19
+   69| 00038C std      FA1F0170   1     ST8       #SPILL4(gr31,368)=gr16
+   54| 000390 std      FBBF0178   1     ST8       #SPILL5(gr31,376)=gr29
+    0| 000394 ld       EA7F0150   1     L8        gr19=#SPILL0(gr31,336)
+   57| 000398 ld       E9020000   1     L8        gr8=.&&N&grid(gr2,0)
+   56| 00039C mulld    7E8BE1D2   1     M         gr20=gr11,gr28
+    0| 0003A0 mulld    7F9099D2   1     M         gr28=gr16,gr19
+    0| 0003A4 neg      7EAA00D0   1     COMP      gr21=gr10
+   69| 0003A8 ld       EB1B03A8   1     L8        gr24=<s100:d936:l8>(gr27,936)
+   69| 0003AC ld       EAFB03C0   1     L8        gr23=<s100:d960:l8>(gr27,960)
+   63| 0003B0 ld       EB280C40   1     L8        gr25=<s44:d3136:l8>(gr8,3136)
+   54| 0003B4 addi     3B400000   1     LI        gr26=0
+    0| 0003B8 subf     7E30E050   1     S         gr17=gr28,gr16
+   54| 0003BC std      FB5F0180   1     ST8       #SPILL6(gr31,384)=gr26
+    0| 0003C0 std      FA3F0188   1     ST8       #SPILL7(gr31,392)=gr17
+    0| 0003C4 mulld    7D4099D2   1     M         gr10=gr0,gr19
+    0| 0003C8 rldicr   796C26E4   1     SLL8      gr12=gr11,4
+   57| 0003CC ld       EBA808C0   1     L8        gr29=<s44:d2240:l8>(gr8,2240)
+   60| 0003D0 ld       E9E808F8   1     L8        gr15=<s44:d2296:l8>(gr8,2296)
+   63| 0003D4 ld       EAC80930   1     L8        gr22=<s44:d2352:l8>(gr8,2352)
+   63| 0003D8 ld       EB480C08   1     L8        gr26=<s44:d3080:l8>(gr8,3080)
+    0| 0003DC mulld    7DCBA9D2   1     M         gr14=gr11,gr21
+    0| 0003E0 add      7D77C214   1     A         gr11=gr23,gr24
+   63| 0003E4 addi     3B19FFF8   1     AI        gr24=gr25,-8
+   63| 0003E8 ld       EA280CE8   1     L8        gr17=<s44:d3304:l8>(gr8,3304)
+   57| 0003EC ld       EB8808D8   1     L8        gr28=<s44:d2264:l8>(gr8,2264)
+   60| 0003F0 ld       EA080910   1     L8        gr16=<s44:d2320:l8>(gr8,2320)
+   63| 0003F4 ld       EB280C20   1     L8        gr25=<s44:d3104:l8>(gr8,3104)
+   63| 0003F8 ld       EAA80948   1     L8        gr21=<s44:d2376:l8>(gr8,2376)
+   63| 0003FC ld       EAE80C58   1     L8        gr23=<s44:d3160:l8>(gr8,3160)
+   63| 000400 ld       EA680D00   1     L8        gr19=<s44:d3328:l8>(gr8,3328)
+   69| 000404 ld       E91B03F0   1     L8        gr8=<s100:d1008:l8>(gr27,1008)
+   75| 000408 ld       EBC20000   1     L8        gr30=.&&N&&radiation(gr2,0)
+    0| 00040C add      7E495214   1     A         gr18=gr9,gr10
+   63| 000410 addi     3B5AFFF8   1     AI        gr26=gr26,-8
+   57| 000414 addi     3BBDFFF8   1     AI        gr29=gr29,-8
+   69| 000418 std      F91F0190   1     ST8       #SPILL8(gr31,400)=gr8
+   69| 00041C ld       E91B0408   1     L8        gr8=<s100:d1032:l8>(gr27,1032)
+   75| 000420 lwa      EBDE005A   1     L4A       gr30=<s122:d88:l4>(gr30,88)
+    0| 000424 bc       4081112C   1     BF        CL.335,cr0,0x2/gt,taken=20%(20,80)
+   63| 000428 add      7F75B214   1     A         gr27=gr21,gr22
+   63| 00042C ld       EABF0168   1     L8        gr21=#SPILL3(gr31,360)
+   63| 000430 std      FB7F0198   1     ST8       #SPILL9(gr31,408)=gr27
+   63| 000434 add      7ED7C214   1     A         gr22=gr23,gr24
+   63| 000438 add      7F19D214   1     A         gr24=gr25,gr26
+   63| 00043C std      FADF01A0   1     ST8       #SPILL10(gr31,416)=gr22
+   63| 000440 std      FB1F01A8   1     ST8       #SPILL11(gr31,424)=gr24
+    0| 000444 lwa      EB260002   1     L4A       gr25=iend(gr6,0)
+    0| 000448 subfic   20CCFFF0   1     SFI       gr6=-16,gr12,ca"
+    0| 00044C subf     7EE85850   1     S         gr23=gr11,gr8
+   56| 000450 subfic   2167FFF0   1     SFI       gr11=-16,gr7,ca"
+    0| 000454 std      FAFF01C8   1     ST8       #SPILL15(gr31,456)=gr23
+   57| 000458 add      7F5CEA14   1     A         gr26=gr28,gr29
+    0| 00045C std      FB3F01C0   1     ST8       #SPILL14(gr31,448)=gr25
+   57| 000460 std      FB5F01B0   1     ST8       #SPILL12(gr31,432)=gr26
+    0| 000464 cmpwi    2C9E0001   1     C4        cr1=gr30,1
+    0| 000468 cmpwi    2F9E0002   1     C4        cr7=gr30,2
+    0| 00046C add      7FA33214   1     A         gr29=gr3,gr6
+   91| 000470 add      7FC45A14   1     A         gr30=gr4,gr11
+   63| 000474 rldicr   7AA61F24   1     SLL8      gr6=gr21,3
+    0| 000478 add      7C92EA14   1     A         gr4=gr18,gr29
+   91| 00047C add      7E54F214   1     A         gr18=gr20,gr30
+   69| 000480 ld       EBDF0160   1     L8        gr30=#SPILL2(gr31,352)
+   91| 000484 std      FA5F01D8   1     ST8       #SPILL17(gr31,472)=gr18
+   63| 000488 addi     38C6FFF8   1     AI        gr6=gr6,-8
+    0| 00048C lwa      EB850002   1     L4A       gr28=ibeg(gr5,0)
+    0| 000490 add      7D8A5A14   1     A         gr12=gr10,gr11
+   56| 000494 add      7D4BA214   1     A         gr10=gr11,gr20
+    0| 000498 add      7D69EA14   1     A         gr11=gr9,gr29
+   63| 00049C add      7D269A14   1     A         gr9=gr6,gr19
+   60| 0004A0 add      7CC67A14   1     A         gr6=gr6,gr15
+    0| 0004A4 std      FB9F01B8   1     ST8       #SPILL13(gr31,440)=gr28
+   56| 0004A8 add      7E635214   1     A         gr19=gr3,gr10
+    0| 0004AC add      7DEBA214   1     A         gr15=gr11,gr20
+   56| 0004B0 std      FA7F01D0   1     ST8       #SPILL16(gr31,464)=gr19
+    0| 0004B4 std      F9FF01E0   1     ST8       #SPILL18(gr31,480)=gr15
+   69| 0004B8 add      7D6AF214   1     A         gr11=gr10,gr30
+   63| 0004BC add      7D498A14   1     A         gr10=gr9,gr17
+   69| 0004C0 std      F97F01E8   1     ST8       #SPILL19(gr31,488)=gr11
+   63| 0004C4 std      F95F01F0   1     ST8       #SPILL20(gr31,496)=gr10
+   60| 0004C8 add      7E268214   1     A         gr17=gr6,gr16
+    0| 0004CC add      7E047214   1     A         gr16=gr4,gr14
+   60| 0004D0 std      FA3F01F8   1     ST8       #SPILL21(gr31,504)=gr17
+    0| 0004D4 std      FA1F0200   1     ST8       #SPILL22(gr31,512)=gr16
+    0| 0004D8 ld       E8A20000   1     L8        gr5=.+CONSTANT_AREA(gr2,0)
+    0| 0004DC add      7D836214   1     A         gr12=gr3,gr12
+    0| 0004E0 subf     7FBCC850   1     S         gr29=gr25,gr28
+    0| 0004E4 add      7D24A214   1     A         gr9=gr4,gr20
+    0| 0004E8 add      7E8C7214   1     A         gr20=gr12,gr14
+    0| 0004EC ld       E9DF0188   1     L8        gr14=#SPILL7(gr31,392)
+    0| 0004F0 ld       E8DF0150   1     L8        gr6=#SPILL0(gr31,336)
+    0| 0004F4 std      F93F0208   1     ST8       #SPILL23(gr31,520)=gr9
+    0| 0004F8 lfd      C8A50020   1     LFL       fp5=+CONSTANT_AREA(gr5,32)
+    0| 0004FC lfs      C0C50028   1     LFS       fp6=+CONSTANT_AREA(gr5,40)
+    0| 000500 std      FA9F0210   1     ST8       #SPILL24(gr31,528)=gr20
+    0| 000504 lfs      C145003C   1     LFS       fp10=+CONSTANT_AREA(gr5,60)
+    0| 000508 add      7C8EBA14   1     A         gr4=gr14,gr23
+    0| 00050C rldicr   78CC1F24   1     SLL8      gr12=gr6,3
+    0| 000510 std      F89F0218   1     ST8       #SPILL25(gr31,536)=gr4
+    0| 000514 std      F99F0220   1     ST8       #SPILL26(gr31,544)=gr12
+    0| 000518 stfd     D8BF0088   1     STFL      #SPILL27(gr31,136)=fp5
+    0| 00051C addic.   347D0001   1     AI_R      gr3,cr0=gr29,1,ca"
+    0| 000520 lfs      C1650004   1     LFS       fp11=+CONSTANT_AREA(gr5,4)
+    0| 000524 lfs      C1E50008   1     LFS       fp15=+CONSTANT_AREA(gr5,8)
+    0| 000528 stfd     D8DF0090   1     STFL      #SPILL28(gr31,144)=fp6
+    0| 00052C lfs      C005000C   1     LFS       fp0=+CONSTANT_AREA(gr5,12)
+    0| 000530 lfs      C0250010   1     LFS       fp1=+CONSTANT_AREA(gr5,16)
+    0| 000534 lfs      C0450014   1     LFS       fp2=+CONSTANT_AREA(gr5,20)
+    0| 000538 stfd     D95F0098   1     STFL      #SPILL29(gr31,152)=fp10
+    0| 00053C lfs      C1850018   1     LFS       fp12=+CONSTANT_AREA(gr5,24)
+    0| 000540 lfs      C065001C   1     LFS       fp3=+CONSTANT_AREA(gr5,28)
+    0| 000544 lfs      C085002C   1     LFS       fp4=+CONSTANT_AREA(gr5,44)
+   54|                              CL.37:
+   69| 000548 ld       E89F01B8   1     L8        gr4=#SPILL13(gr31,440)
+   55| 00054C addi     38600000   1     LI        gr3=0
+   69| 000550 mulld    7CC441D2   1     M         gr6=gr4,gr8
+   56| 000554 rldicr   788A1F24   1     SLL8      gr10=gr4,3
+    0| 000558 bc       4081085C   1     BF        CL.38,cr0,0x2/gt,taken=20%(20,80)
+   56| 00055C ld       E97F0200   1     L8        gr11=#SPILL22(gr31,512)
+    0| 000560 subfic   21240001   1     SFI       gr9=1,gr4,ca"
+   69| 000564 ld       E99F01C8   1     L8        gr12=#SPILL15(gr31,456)
+    0| 000568 ld       E9FF0150   1     L8        gr15=#SPILL0(gr31,336)
+   63| 00056C ld       EABF01A0   1     L8        gr21=#SPILL10(gr31,416)
+   69| 000570 ld       EA9F01E8   1     L8        gr20=#SPILL19(gr31,488)
+   56| 000574 add      7C8A5A14   1     A         gr4=gr10,gr11
+    0| 000578 ld       E97F0180   1     L8        gr11=#SPILL6(gr31,384)
+   69| 00057C add      7FC66214   1     A         gr30=gr6,gr12
+    0| 000580 ld       E99F0220   1     L8        gr12=#SPILL26(gr31,544)
+   69| 000584 std      FBDF0228   1     ST8       #SPILL30(gr31,552)=gr30
+   56| 000588 ld       EA7F0210   1     L8        gr19=#SPILL24(gr31,528)
+    0| 00058C ld       EA5F01C0   1     L8        gr18=#SPILL14(gr31,448)
+    0| 000590 add      7DEF5A14   1     A         gr15=gr15,gr11
+    0| 000594 ld       E97F0198   1     L8        gr11=#SPILL9(gr31,408)
+   69| 000598 ld       EA3F0218   1     L8        gr17=#SPILL25(gr31,536)
+   56| 00059C ld       EBBF01D0   1     L8        gr29=#SPILL16(gr31,464)
+   57| 0005A0 ld       EB7F01B0   1     L8        gr27=#SPILL12(gr31,432)
+   63| 0005A4 ld       EB3F01A8   1     L8        gr25=#SPILL11(gr31,424)
+   91| 0005A8 ld       EAFF01D8   1     L8        gr23=#SPILL17(gr31,472)
+    0| 0005AC lfdx     7CAB64AE   1     LFL       fp5=dx3bi(gr11,gr12,0)
+   63| 0005B0 add      7DCAAA14   1     A         gr14=gr10,gr21
+   69| 0005B4 add      7EAAA214   1     A         gr21=gr10,gr20
+   56| 0005B8 add      7E8A9A14   1     A         gr20=gr10,gr19
+    0| 0005BC add      7E699214   1     A         gr19=gr9,gr18
+   69| 0005C0 add      7E468A14   1     A         gr18=gr6,gr17
+    0| 0005C4 ld       E8DF01E0   1     L8        gr6=#SPILL18(gr31,480)
+   56| 0005C8 ld       EA1F0208   1     L8        gr16=#SPILL23(gr31,520)
+    0| 0005CC stfd     D8BF00A0   1     STFL      #SPILL35(gr31,160)=fp5
+   56| 0005D0 add      7F8AEA14   1     A         gr28=gr10,gr29
+   57| 0005D4 add      7F4ADA14   1     A         gr26=gr10,gr27
+   56| 0005D8 std      FB9F0230   1     ST8       #SPILL31(gr31,560)=gr28
+   57| 0005DC std      FB5F0238   1     ST8       #SPILL32(gr31,568)=gr26
+   63| 0005E0 add      7F0ACA14   1     A         gr24=gr10,gr25
+   91| 0005E4 add      7ECABA14   1     A         gr22=gr10,gr23
+   63| 0005E8 std      FB1F0240   1     ST8       #SPILL33(gr31,576)=gr24
+   91| 0005EC std      FADF0248   1     ST8       #SPILL34(gr31,584)=gr22
+    0| 0005F0 add      7E265214   1     A         gr17=gr6,gr10
+   60| 0005F4 ld       E8DF01F8   1     L8        gr6=#SPILL21(gr31,504)
+   63| 0005F8 ld       E93F01F0   1     L8        gr9=#SPILL20(gr31,496)
+   56| 0005FC add      7D4A8214   1     A         gr10=gr10,gr16
+    0| 000600 or       7C902378   1     LR        gr16=gr4
+   55|                              CL.39:
+   56| 000604 ld       E97F0168   1     L8        gr11=#SPILL3(gr31,360)
+   56| 000608 lfdux    7D0A3CEE   1     LFDU      fp8,gr10=erold[](gr10,gr7,0)
+   56| 00060C lfdux    7CA43CEE   1     LFDU      fp5,gr4=erold[](gr4,gr7,0)
+   63| 000610 lfdu     CF490008   1     LFDU      fp26,gr9=g32bi(gr9,8)
+   60| 000614 lfdu     CFC60008   1     LFDU      fp30,gr6=dx2bi(gr6,8)
+   56| 000618 add      7F235A14   1     A         gr25=gr3,gr11
+    0| 00061C bc       40860888   1     BF        CL.166,cr1,0x4/eq,taken=50%(0,0)
+   56| 000620 mulld    7FC7C9D2   1     M         gr30=gr7,gr25
+   56| 000624 mulld    7D8079D2   1     M         gr12=gr0,gr15
+   56| 000628 ld       EBBF0230   1     L8        gr29=#SPILL31(gr31,560)
+   56| 00062C add      7ECCF214   1     A         gr22=gr12,gr30
+   56| 000630 add      7D74F214   1     A         gr11=gr20,gr30
+   60| 000634 add      7D8C8A14   1     A         gr12=gr12,gr17
+   56| 000638 lfdu     CF8B0008   1     LFDU      fp28,gr11=erold[](gr11,8)
+   60| 00063C lfdu     CCEC0008   1     LFDU      fp7,gr12=erold[](gr12,8)
+   56| 000640 add      7FD6EA14   1     A         gr30=gr22,gr29
+   60| 000644 or       7E1D8378   1     LR        gr29=gr16
+   56| 000648 lfdu     CD5E0008   1     LFDU      fp10,gr30=erold[](gr30,8)
+   60| 00064C lfdu     CD3D0008   1     LFDU      fp9,gr29=erold[](gr29,8)
+   57| 000650 ld       EB9F0238   1     L8        gr28=#SPILL32(gr31,568)
+   57| 000654 fsub     FCBC2828   1     SFL       fp5=fp28,fp5,fcr
+   63| 000658 ld       EB7F0240   1     L8        gr27=#SPILL33(gr31,576)
+   69| 00065C ld       EAFF0170   1     L8        gr23=#SPILL4(gr31,368)
+   63| 000660 lfd      CB1F00A0   1     LFL       fp24=#SPILL35(gr31,160)
+   60| 000664 fsub     FDAA3828   1     SFL       fp13=fp10,fp7,fcr
+   57| 000668 lfdu     CCDC0008   1     LFDU      fp6,gr28=dx1bi(gr28,8)
+   57| 00066C fsub     FFAA4028   1     SFL       fp29=fp10,fp8,fcr
+   63| 000670 lfdu     CCFB0008   1     LFDU      fp7,gr27=g2bi(gr27,8)
+   60| 000674 fsub     FD1C4828   1     SFL       fp8=fp28,fp9,fcr
+   63| 000678 or       7DDA7378   1     LR        gr26=gr14
+   60| 00067C fmul     FDBE0372   1     MFL       fp13=fp30,fp13,fcr
+   69| 000680 mulld    7F0FB9D2   1     M         gr24=gr15,gr23
+   63| 000684 fsub     FFEAE028   1     SFL       fp31=fp10,fp28,fcr
+   57| 000688 fmul     FFA60772   2     MFL       fp29=fp6,fp29,fcr
+   69| 00068C fadd     FF7C502A   2     AFL       fp27=fp28,fp10,fcr
+   69| 000690 ld       EAFF0190   1     L8        gr23=#SPILL8(gr31,400)
+   60| 000694 fmadd    FD086FBA   1     FMA       fp8=fp13,fp8,fp30,fcr
+   63| 000698 lfdu     CD3A0008   1     LFDU      fp9,gr26=g31bi(gr26,8)
+   63| 00069C fmul     FDBF0632   1     MFL       fp13=fp31,fp24,fcr
+   69| 0006A0 lfd      CABF0088   1     LFL       fp21=#SPILL27(gr31,136)
+   57| 0006A4 fmadd    FCA5E9BA   1     FMA       fp5=fp29,fp5,fp6,fcr
+   69| 0006A8 mulld    7EF7C9D2   1     M         gr23=gr23,gr25
+   63| 0006AC fmul     FD0802F2   1     MFL       fp8=fp8,fp11,fcr
+   63| 0006B0 fmul     FFED0272   2     MFL       fp31=fp13,fp9,fcr
+   69| 0006B4 ld       EB3F0228   1     L8        gr25=#SPILL30(gr31,552)
+   63| 0006B8 fmul     FDA502F2   1     MFL       fp13=fp5,fp11,fcr
+    0| 0006BC mtspr    7E6903A6   1     LCTR      ctr=gr19
+   63| 0006C0 fmul     FD0801F2   1     MFL       fp8=fp8,fp7,fcr
+   63| 0006C4 fmul     FCFF06B2   2     MFL       fp7=fp31,fp26,fcr
+   69| 0006C8 fsub     FCD5D828   2     SFL       fp6=fp21,fp27,fcr
+   69| 0006CC add      7F38CA14   1     A         gr25=gr24,gr25
+   69| 0006D0 add      7F12BA14   1     A         gr24=gr18,gr23
+   69| 0006D4 add      7F37CA14   1     A         gr25=gr23,gr25
+   63| 0006D8 fmul     FD080232   1     MFL       fp8=fp8,fp8,fcr
+   69| 0006DC lfdux    7D3844EE   1     LFDU      fp9,gr24=kapr(gr24,gr8,0)
+   69| 0006E0 fsel     FCA6DD6E   1     FSEL      fp5=fp6,fp27,fp21
+   69| 0006E4 lfdux    7FB944EE   1     LFDU      fp29,gr25=kapr(gr25,gr8,0)
+   91| 0006E8 ld       EAFF0248   1     L8        gr23=#SPILL34(gr31,584)
+   69| 0006EC fmadd    FDAD437A   1     FMA       fp13=fp8,fp13,fp13,fcr
+   91| 0006F0 add      7EF7B214   1     A         gr23=gr23,gr22
+   69| 0006F4 fadd     FCC9E82A   1     AFL       fp6=fp9,fp29,fcr
+   69| 0006F8 add      7ED5B214   1     A         gr22=gr21,gr22
+   69| 0006FC fmadd    FCE769FA   1     FMA       fp7=fp13,fp7,fp7,fcr
+   69| 000700 qvfre    11202830   1     QVFRE     fp9=fp5
+   69| 000704 qvfre    12C03030   1     QVFRE     fp22=fp6
+   69| 000708 frsqrte  FFA03834   1     FRSQRE    fp29=fp7
+   69| 00070C fmsub    FD051A78   2     FMS       fp8=fp3,fp5,fp9,fcr
+   69| 000710 fnabs    FF603910   2     NABSFL    fp27=fp7
+   69| 000714 fmul     FFE70772   2     MFL       fp31=fp7,fp29,fcr
+   69| 000718 fnmsub   FDA94A3C   2     FNMS      fp13=fp9,fp9,fp8,fcr
+   69| 00071C fmadd    FF3D7FFA   2     FMA       fp25=fp15,fp29,fp31,fcr
+   69| 000720 fmadd    FEF9083A   2     FMA       fp23=fp1,fp25,fp0,fcr
+    0| 000724 bc       424004F4   1     BCF       ctr=CL.250,taken=0%(0,100)
+   69| 000728 fmsub    FE661DB8   1     FMS       fp19=fp3,fp6,fp22,fcr
+   56| 00072C lfdu     CD1E0008   1     LFDU      fp8,gr30=erold[](gr30,8)
+   69| 000730 fmsub    FEA51B78   1     FMS       fp21=fp3,fp5,fp13,fcr
+   60| 000734 lfdu     CF0C0008   1     LFDU      fp24,gr12=erold[](gr12,8)
+   69| 000738 fmadd    FE9915FA   1     FMA       fp20=fp2,fp25,fp23,fcr
+   56| 00073C lfdu     CD2B0008   1     LFDU      fp9,gr11=erold[](gr11,8)
+   69| 000740 fnmsub   FEF6B4FC   1     FNMS      fp23=fp22,fp22,fp19,fcr
+   60| 000744 lfdu     CEDD0008   1     LFDU      fp22,gr29=erold[](gr29,8)
+   69| 000748 fnmsub   FDAD6D7C   1     FNMS      fp13=fp13,fp13,fp21,fcr
+   57| 00074C lfdu     CEBC0008   1     LFDU      fp21,gr28=dx1bi(gr28,8)
+   69| 000750 fmul     FE990532   1     MFL       fp20=fp25,fp20,fcr
+   63| 000754 lfd      CA3F00A0   1     LFL       fp17=#SPILL35(gr31,160)
+   60| 000758 fsub     FF08C028   1     SFL       fp24=fp8,fp24,fcr
+   63| 00075C lfdu     CF3B0008   1     LFDU      fp25,gr27=g2bi(gr27,8)
+   57| 000760 fsub     FD485028   1     SFL       fp10=fp8,fp10,fcr
+   60| 000764 fsub     FEC9B028   2     SFL       fp22=fp9,fp22,fcr
+   69| 000768 fmadd    FE7DED3A   2     FMA       fp19=fp29,fp29,fp20,fcr
+   69| 00076C fmul     FFFF0532   2     MFL       fp31=fp31,fp20,fcr
+   60| 000770 fmul     FF1E0632   2     MFL       fp24=fp30,fp24,fcr
+   63| 000774 fsub     FE484828   2     SFL       fp18=fp8,fp9,fcr
+   57| 000778 fmul     FE9502B2   2     MFL       fp20=fp21,fp10,fcr
+   69| 00077C fmsub    FD461DF8   2     FMS       fp10=fp3,fp6,fp23,fcr
+   57| 000780 fsub     FF89E028   2     SFL       fp28=fp9,fp28,fcr
+   69| 000784 fmul     FE7302F2   2     MFL       fp19=fp19,fp11,fcr
+   69| 000788 fmadd    FFE7FF7A   2     FMA       fp31=fp31,fp7,fp29,fcr
+   60| 00078C fmadd    FFB6C7BA   2     FMA       fp29=fp24,fp22,fp30,fcr
+   63| 000790 fmul     FF120472   2     MFL       fp24=fp18,fp17,fcr
+   69| 000794 fnmsub   FD57BABC   2     FNMS      fp10=fp23,fp23,fp10,fcr
+   69| 000798 fmsub    FEFF3FF8   2     FMS       fp23=fp7,fp31,fp31,fcr
+   69| 00079C lfd      CA1F0088   1     LFL       fp16=#SPILL27(gr31,136)
+   69| 0007A0 fadd     FECA502A   1     AFL       fp22=fp10,fp10,fcr
+   76| 0007A4 lfd      C9DF0090   1     LFL       fp14=#SPILL28(gr31,144)
+   63| 0007A8 fmul     FFBD02F2   1     MFL       fp29=fp29,fp11,fcr
+   69| 0007AC fnmsub   FFF7FCFC   2     FNMS      fp31=fp31,fp23,fp19,fcr
+   69| 0007B0 fmsub    FCC665B8   2     FMS       fp6=fp12,fp6,fp22,fcr
+   69| 0007B4 fsel     FCFBF9EE   2     FSEL      fp7=fp27,fp31,fp7
+   63| 0007B8 lfdu     CFFA0008   1     LFDU      fp31,gr26=g31bi(gr26,8)
+   69| 0007BC fnmsub   FD4AB1BC   1     FNMS      fp10=fp22,fp10,fp6,fcr
+   69| 0007C0 lfdux    7F7844EE   1     LFDU      fp27,gr24=kapr(gr24,gr8,0)
+   69| 0007C4 fadd     FCC7382A   1     AFL       fp6=fp7,fp7,fcr
+   57| 0007C8 fmadd    FCFCA57A   2     FMA       fp7=fp20,fp28,fp21,fcr
+   63| 0007CC fmul     FF9D0672   2     MFL       fp28=fp29,fp25,fcr
+   69| 0007D0 lfdux    7F3944EE   1     LFDU      fp25,gr25=kapr(gr25,gr8,0)
+   63| 0007D4 fmul     FFF807F2   1     MFL       fp31=fp24,fp31,fcr
+   69| 0007D8 fmul     FCC602B2   2     MFL       fp6=fp6,fp10,fcr
+   63| 0007DC fmul     FEE702F2   2     MFL       fp23=fp7,fp11,fcr
+   69| 0007E0 fadd     FCE9402A   2     AFL       fp7=fp9,fp8,fcr
+   63| 0007E4 fmul     FF9C0732   2     MFL       fp28=fp28,fp28,fcr
+   63| 0007E8 fmul     FFFF06B2   2     MFL       fp31=fp31,fp26,fcr
+   69| 0007EC fmul     FFA60372   2     MFL       fp29=fp6,fp13,fcr
+   69| 0007F0 fmadd    FF97E5FA   2     FMA       fp28=fp28,fp23,fp23,fcr
+   69| 0007F4 fmsub    FCA53778   2     FMS       fp5=fp6,fp5,fp29,fcr
+   69| 0007F8 fadd     FCDBC82A   2     AFL       fp6=fp27,fp25,fcr
+   69| 0007FC fsub     FF703828   2     SFL       fp27=fp16,fp7,fcr
+   69| 000800 fnmsub   FECDE97C   2     FNMS      fp22=fp29,fp13,fp5,fcr
+   69| 000804 fsel     FCBB3C2E   2     FSEL      fp5=fp27,fp7,fp16
+   69| 000808 fmadd    FCFFE7FA   2     FMA       fp7=fp28,fp31,fp31,fcr
+   76| 00080C fmadd    FDB6713A   2     FMA       fp13=fp14,fp22,fp4,fcr
+   69| 000810 stfdu    DED60008   2     STFDU     gr22,r[].rns6.(gr22,8)=fp22
+   69| 000814 qvfre    13202830   1     QVFRE     fp25=fp5
+   69| 000818 frsqrte  FFA03834   1     FRSQRE    fp29=fp7
+   76| 00081C fadd     FF96602A   2     AFL       fp28=fp22,fp12,fcr
+   76| 000820 fmadd    FF766DBA   2     FMA       fp27=fp13,fp22,fp22,fcr
+   69| 000824 fmsub    FDA51E78   2     FMS       fp13=fp3,fp5,fp25,fcr
+   69| 000828 fmul     FFE70772   2     MFL       fp31=fp7,fp29,fcr
+   76| 00082C qvfre    1300D830   1     QVFRE     fp24=fp27
+   69| 000830 fnmsub   FDB9CB7C   1     FNMS      fp13=fp25,fp25,fp13,fcr
+   69| 000834 fmadd    FF3D7FFA   2     FMA       fp25=fp15,fp29,fp31,fcr
+   76| 000838 fmsub    FEBB1E38   2     FMS       fp21=fp3,fp27,fp24,fcr
+   69| 00083C fmadd    FEF9083A   2     FMA       fp23=fp1,fp25,fp0,fcr
+   76| 000840 fnmsub   FF18C57C   2     FNMS      fp24=fp24,fp24,fp21,fcr
+    0| 000844 bc       424002D4   1     BCF       ctr=CL.252,taken=0%(0,100)
+    0| 000848 stfd     D97F00A8   1     STFL      #SPILL36(gr31,168)=fp11
+    0| 00084C stfd     D99F00B0   1     STFL      #SPILL37(gr31,176)=fp12
+    0| 000850 stfd     D9FF00B8   1     STFL      #SPILL38(gr31,184)=fp15
+    0| 000854 stfd     D81F00C0   1     STFL      #SPILL39(gr31,192)=fp0
+    0| 000858 stfd     D83F00C8   1     STFL      #SPILL40(gr31,200)=fp1
+    0| 00085C stfd     D85F00D0   1     STFL      #SPILL41(gr31,208)=fp2
+    0| 000860 stfd     D87F00D8   1     STFL      #SPILL42(gr31,216)=fp3
+    0| 000864 stfd     D89F00E0   1     STFL      #SPILL43(gr31,224)=fp4
+    0| 000868 stfd     DBDF00E8   1     STFL      #SPILL44(gr31,232)=fp30
+    0| 00086C stfd     DB5F00F0   1     STFL      #SPILL45(gr31,240)=fp26
+    0| 000870 ori      60210000   1     XNOP      
+    0| 000874 ori      60210000   1     XNOP      
+    0| 000878 ori      60210000   1     XNOP      
+    0|                              CL.254:
+    0| 00087C lfd      C97F00A8   1     LFL       fp11=#SPILL36(gr31,168)
+   69| 000880 qvfre    13C03030   1     QVFRE     fp30=fp6
+   69| 000884 fmsub    FEA51B78   1     FMS       fp21=fp3,fp5,fp13,fcr
+   69| 000888 fmadd    FE9915FA   2     FMA       fp20=fp2,fp25,fp23,fcr
+   76| 00088C fmsub    FEFB1E38   2     FMS       fp23=fp3,fp27,fp24,fcr
+    0| 000890 lfd      CA7F00B0   1     LFL       fp19=#SPILL37(gr31,176)
+    0| 000894 stfd     DA7F00F8   1     STFL      #SPILL46(gr31,248)=fp19
+    0| 000898 lfd      CA5F00E8   1     LFL       fp18=#SPILL44(gr31,232)
+    0| 00089C stfd     DA5F0100   1     STFL      #SPILL47(gr31,256)=fp18
+   69| 0008A0 fmsub    FF461FB8   1     FMS       fp26=fp3,fp6,fp30,fcr
+   69| 0008A4 fnabs    FD803910   2     NABSFL    fp12=fp7
+   69| 0008A8 fmul     FF390532   2     MFL       fp25=fp25,fp20,fcr
+   76| 0008AC fnmsub   FEF8C5FC   2     FNMS      fp23=fp24,fp24,fp23,fcr
+   69| 0008B0 fnmsub   FDAD6D7C   2     FNMS      fp13=fp13,fp13,fp21,fcr
+    0| 0008B4 lfd      CA3F00A0   1     LFL       fp17=#SPILL35(gr31,160)
+    0| 0008B8 stfd     DA3F0108   1     STFL      #SPILL48(gr31,264)=fp17
+   69| 0008BC fnmsub   FF5EF6BC   1     FNMS      fp26=fp30,fp30,fp26,fcr
+    0| 0008C0 lfd      CA1F0098   1     LFL       fp16=#SPILL29(gr31,152)
+    0| 0008C4 stfd     DA1F0110   1     STFL      #SPILL49(gr31,272)=fp16
+   69| 0008C8 fmul     FE9F0672   1     MFL       fp20=fp31,fp25,fcr
+   76| 0008CC fmul     FEBC05F2   2     MFL       fp21=fp28,fp23,fcr
+   63| 0008D0 lfdu     CFFB0008   1     LFDU      fp31,gr27=g2bi(gr27,8)
+   56| 0008D4 lfdu     CFCB0008   1     LFDU      fp30,gr11=erold[](gr11,8)
+   69| 0008D8 fmsub    FF061EB8   1     FMS       fp24=fp3,fp6,fp26,fcr
+   69| 0008DC fmadd    FF3DEE7A   2     FMA       fp25=fp29,fp29,fp25,fcr
+   69| 0008E0 fmadd    FFA7A77A   2     FMA       fp29=fp20,fp7,fp29,fcr
+   76| 0008E4 fmsub    FE9BE578   2     FMS       fp20=fp28,fp27,fp21,fcr
+   56| 0008E8 lfdu     CF9E0008   1     LFDU      fp28,gr30=erold[](gr30,8)
+   60| 0008EC lfdu     CF6C0008   1     LFDU      fp27,gr12=erold[](gr12,8)
+   69| 0008F0 fnmsub   FF5AD63C   1     FNMS      fp26=fp26,fp26,fp24,fcr
+   69| 0008F4 fmul     FF3902F2   2     MFL       fp25=fp25,fp11,fcr
+   69| 0008F8 fmsub    FF1D3F78   2     FMS       fp24=fp7,fp29,fp29,fcr
+   76| 0008FC fnmsub   FEF7AD3C   2     FNMS      fp23=fp21,fp23,fp20,fcr
+   82| 000900 bc       409E00F8   1     BF        CL.255,cr7,0x4/eq,taken=50%(0,0)
+   86| 000904 fmadd    FEF61CFA   1     FMA       fp23=fp3,fp22,fp19,fcr
+   86| 000908 lfs      C2650038   1     LFS       fp19=+CONSTANT_AREA(gr5,56)
+   86| 00090C fmul     FEB605B2   1     MFL       fp21=fp22,fp22,fcr
+   86| 000910 lfs      C2450030   1     LFS       fp18=+CONSTANT_AREA(gr5,48)
+   86| 000914 fadd     FE96182A   1     AFL       fp20=fp22,fp3,fcr
+   86| 000918 lfs      C2250034   1     LFS       fp17=+CONSTANT_AREA(gr5,52)
+   86| 00091C fnabs    FE00B910   1     NABSFL    fp16=fp23
+   86| 000920 fsub     FED3B028   2     SFL       fp22=fp19,fp22,fcr
+   86| 000924 stfd     DA1F0128   1     STFL      #SPILL52(gr31,296)=fp16
+   86| 000928 stfd     DA9F0118   1     STFL      #SPILL50(gr31,280)=fp20
+   86| 00092C stfd     DADF0120   1     STFL      #SPILL51(gr31,288)=fp22
+   86| 000930 fmadd    FED5947A   1     FMA       fp22=fp18,fp21,fp17,fcr
+   86| 000934 frsqrte  FEA0B834   2     FRSQRE    fp21=fp23
+   86| 000938 frsqrte  FE80B034   2     FRSQRE    fp20=fp22
+   86| 00093C fmul     FE770572   2     MFL       fp19=fp23,fp21,fcr
+   86| 000940 fnabs    FE40B110   2     NABSFL    fp18=fp22
+   86| 000944 fmul     FE360532   2     MFL       fp17=fp22,fp20,fcr
+   86| 000948 fmadd    FE157CFA   2     FMA       fp16=fp15,fp21,fp19,fcr
+   86| 00094C fmadd    FDF47C7A   2     FMA       fp15=fp15,fp20,fp17,fcr
+   86| 000950 fmadd    FDD0083A   2     FMA       fp14=fp1,fp16,fp0,fcr
+   86| 000954 fmadd    FC0F083A   2     FMA       fp0=fp1,fp15,fp0,fcr
+   86| 000958 fmadd    FC3013BA   2     FMA       fp1=fp2,fp16,fp14,fcr
+   86| 00095C fmadd    FC0F103A   2     FMA       fp0=fp2,fp15,fp0,fcr
+   86| 000960 fmul     FC300072   2     MFL       fp1=fp16,fp1,fcr
+   86| 000964 lfd      CA1F0120   1     LFL       fp16=#SPILL51(gr31,288)
+   86| 000968 fmul     FC0F0032   1     MFL       fp0=fp15,fp0,fcr
+   86| 00096C fmul     FC530072   2     MFL       fp2=fp19,fp1,fcr
+   86| 000970 fmadd    FC35A87A   2     FMA       fp1=fp21,fp21,fp1,fcr
+   86| 000974 fmul     FE710032   2     MFL       fp19=fp17,fp0,fcr
+   86| 000978 lfd      CA3F0128   1     LFL       fp17=#SPILL52(gr31,296)
+   86| 00097C fmadd    FC57157A   1     FMA       fp2=fp2,fp23,fp21,fcr
+   86| 000980 fmadd    FC14A03A   2     FMA       fp0=fp20,fp20,fp0,fcr
+   86| 000984 fmul     FC2102F2   2     MFL       fp1=fp1,fp11,fcr
+   86| 000988 fmadd    FEB69D3A   2     FMA       fp21=fp19,fp22,fp20,fcr
+   86| 00098C fmsub    FE82B8B8   2     FMS       fp20=fp23,fp2,fp2,fcr
+   86| 000990 fmul     FC0002F2   2     MFL       fp0=fp0,fp11,fcr
+   86| 000994 fmsub    FE75B578   2     FMS       fp19=fp22,fp21,fp21,fcr
+   86| 000998 fnmsub   FC34107C   2     FNMS      fp1=fp2,fp20,fp1,fcr
+   86| 00099C fnmsub   FC13A83C   2     FNMS      fp0=fp21,fp19,fp0,fcr
+   86| 0009A0 lfd      CA7F00F8   1     LFL       fp19=#SPILL46(gr31,248)
+   86| 0009A4 fsel     FC310DEE   1     FSEL      fp1=fp17,fp1,fp23
+   86| 0009A8 fsel     FC5205AE   2     FSEL      fp2=fp18,fp0,fp22
+   86| 0009AC lfd      CA5F0118   1     LFL       fp18=#SPILL50(gr31,280)
+   86| 0009B0 fadd     FC12082A   1     AFL       fp0=fp18,fp1,fcr
+   86| 0009B4 fadd     FC22202A   2     AFL       fp1=fp2,fp4,fcr
+   86| 0009B8 qvfre    10400030   1     QVFRE     fp2=fp0
+   86| 0009BC qvfre    10800830   1     QVFRE     fp4=fp1
+   86| 0009C0 fmsub    FEE018B8   1     FMS       fp23=fp3,fp0,fp2,fcr
+   86| 0009C4 fmsub    FEC11938   2     FMS       fp22=fp3,fp1,fp4,fcr
+   86| 0009C8 fnmsub   FC4215FC   2     FNMS      fp2=fp2,fp2,fp23,fcr
+   86| 0009CC fnmsub   FC8425BC   2     FNMS      fp4=fp4,fp4,fp22,fcr
+   86| 0009D0 fmsub    FEE018B8   2     FMS       fp23=fp3,fp0,fp2,fcr
+   86| 0009D4 fmsub    FEC11938   2     FMS       fp22=fp3,fp1,fp4,fcr
+   86| 0009D8 fnmsub   FC4215FC   2     FNMS      fp2=fp2,fp2,fp23,fcr
+   86| 0009DC fnmsub   FC8425BC   2     FNMS      fp4=fp4,fp4,fp22,fcr
+   86| 0009E0 fmsub    FC0018B8   2     FMS       fp0=fp3,fp0,fp2,fcr
+   86| 0009E4 fadd     FC64202A   2     AFL       fp3=fp4,fp4,fcr
+   86| 0009E8 fnmsub   FC02103C   2     FNMS      fp0=fp2,fp2,fp0,fcr
+   86| 0009EC fmsub    FC2198F8   2     FMS       fp1=fp19,fp1,fp3,fcr
+   86| 0009F0 fnmsub   FC24187C   2     FNMS      fp1=fp3,fp4,fp1,fcr
+   86| 0009F4 fsel     FEF0006E   2     FSEL      fp23=fp16,fp0,fp1
+   90|                              CL.255:
+   60| 0009F8 lfdu     CC1D0008   1     LFDU      fp0,gr29=erold[](gr29,8)
+   57| 0009FC lfdu     CC3C0008   1     LFDU      fp1,gr28=dx1bi(gr28,8)
+   60| 000A00 fsub     FC5CD828   1     SFL       fp2=fp28,fp27,fcr
+   69| 000A04 fadd     FC7AD02A   2     AFL       fp3=fp26,fp26,fcr
+   69| 000A08 fnmsub   FC98EE7C   2     FNMS      fp4=fp29,fp24,fp25,fcr
+   91| 000A0C lfd      CB3F0110   1     LFL       fp25=#SPILL49(gr31,272)
+   91| 000A10 fmul     FFB70672   1     MFL       fp29=fp23,fp25,fcr
+   63| 000A14 fsub     FF7CF028   2     SFL       fp27=fp28,fp30,fcr
+   60| 000A18 fsub     FC1E0028   2     SFL       fp0=fp30,fp0,fcr
+   60| 000A1C lfd      CB1F0100   1     LFL       fp24=#SPILL47(gr31,256)
+   60| 000A20 fmul     FC5800B2   1     MFL       fp2=fp24,fp2,fcr
+   69| 000A24 fmsub    FCC698F8   2     FMS       fp6=fp19,fp6,fp3,fcr
+   69| 000A28 fsel     FC8C21EE   2     FSEL      fp4=fp12,fp4,fp7
+   91| 000A2C fmul     FCEA0772   2     MFL       fp7=fp10,fp29,fcr
+   57| 000A30 fsub     FD1C4028   2     SFL       fp8=fp28,fp8,fcr
+   63| 000A34 lfd      CAFF0108   1     LFL       fp23=#SPILL48(gr31,264)
+   63| 000A38 fmul     FD9B05F2   1     MFL       fp12=fp27,fp23,fcr
+   60| 000A3C fmadd    FC00163A   2     FMA       fp0=fp2,fp0,fp24,fcr
+   69| 000A40 fnmsub   FD5A19BC   2     FNMS      fp10=fp3,fp26,fp6,fcr
+   69| 000A44 fadd     FC44202A   2     AFL       fp2=fp4,fp4,fcr
+   91| 000A48 stfdu    DCF70008   2     STFDU     gr23,dfc[](gr23,8)=fp7
+   57| 000A4C fsub     FC7E4828   1     SFL       fp3=fp30,fp9,fcr
+   57| 000A50 fmul     FC810232   2     MFL       fp4=fp1,fp8,fcr
+   63| 000A54 fmul     FC0002F2   2     MFL       fp0=fp0,fp11,fcr
+   69| 000A58 fmul     FC4202B2   2     MFL       fp2=fp2,fp10,fcr
+   63| 000A5C lfdu     CCDA0008   1     LFDU      fp6,gr26=g31bi(gr26,8)
+   57| 000A60 fmadd    FC23207A   1     FMA       fp1=fp4,fp3,fp1,fcr
+   63| 000A64 fmul     FC0007F2   2     MFL       fp0=fp0,fp31,fcr
+   69| 000A68 fmul     FC620372   2     MFL       fp3=fp2,fp13,fcr
+    0| 000A6C lfd      C89F00E0   1     LFL       fp4=#SPILL43(gr31,224)
+    0| 000A70 lfd      C8FF00F0   1     LFL       fp7=#SPILL45(gr31,240)
+   63| 000A74 fmul     FCCC01B2   1     MFL       fp6=fp12,fp6,fcr
+   63| 000A78 fmul     FC2102F2   2     MFL       fp1=fp1,fp11,fcr
+   63| 000A7C fmul     FD000032   2     MFL       fp8=fp0,fp0,fcr
+   69| 000A80 fmsub    FD2510F8   2     FMS       fp9=fp2,fp5,fp3,fcr
+    0| 000A84 lfd      C81F0088   1     LFL       fp0=#SPILL27(gr31,136)
+    0| 000A88 lfd      C85F0090   1     LFL       fp2=#SPILL28(gr31,144)
+   69| 000A8C fadd     FCBEE02A   1     AFL       fp5=fp30,fp28,fcr
+   63| 000A90 fmul     FCC601F2   2     MFL       fp6=fp6,fp7,fcr
+   69| 000A94 fmadd    FC21407A   2     FMA       fp1=fp8,fp1,fp1,fcr
+   69| 000A98 fnmsub   FECD1A7C   2     FNMS      fp22=fp3,fp13,fp9,fcr
+    0| 000A9C lfd      C87F00D8   1     LFL       fp3=#SPILL42(gr31,216)
+   69| 000AA0 fsub     FD002828   1     SFL       fp8=fp0,fp5,fcr
+   69| 000AA4 fmadd    FCE609BA   2     FMA       fp7=fp1,fp6,fp6,fcr
+   76| 000AA8 fmadd    FCD6113A   2     FMA       fp6=fp2,fp22,fp4,fcr
+   69| 000AAC stfdu    DED60008   2     STFDU     gr22,r[].rns6.(gr22,8)=fp22
+    0| 000AB0 lfd      C85F00B0   1     LFL       fp2=#SPILL37(gr31,176)
+    0| 000AB4 lfd      C83F00C8   1     LFL       fp1=#SPILL40(gr31,200)
+   69| 000AB8 fsel     FCA8282E   1     FSEL      fp5=fp8,fp5,fp0
+   69| 000ABC frsqrte  FFA03834   2     FRSQRE    fp29=fp7
+   76| 000AC0 fmadd    FF7635BA   2     FMA       fp27=fp6,fp22,fp22,fcr
+   91| 000AC4 fmr      FD00E090   2     LRFL      fp8=fp28
+   91| 000AC8 fmr      FD20F090   2     LRFL      fp9=fp30
+    0| 000ACC lfd      C9FF00B8   1     LFL       fp15=#SPILL38(gr31,184)
+   69| 000AD0 qvfre    11A02830   1     QVFRE     fp13=fp5
+   69| 000AD4 fmul     FFE70772   1     MFL       fp31=fp7,fp29,fcr
+   76| 000AD8 qvfre    1160D830   1     QVFRE     fp11=fp27
+   69| 000ADC lfdux    7CD844EE   1     LFDU      fp6,gr24=kapr(gr24,gr8,0)
+   69| 000AE0 lfdux    7F5944EE   1     LFDU      fp26,gr25=kapr(gr25,gr8,0)
+    0| 000AE4 lfd      C81F00C0   1     LFL       fp0=#SPILL39(gr31,192)
+   69| 000AE8 fmsub    FFC51B78   1     FMS       fp30=fp3,fp5,fp13,fcr
+   69| 000AEC fmadd    FF3D7FFA   2     FMA       fp25=fp15,fp29,fp31,fcr
+   76| 000AF0 fmsub    FD9B1AF8   2     FMS       fp12=fp3,fp27,fp11,fcr
+   76| 000AF4 fadd     FF96102A   2     AFL       fp28=fp22,fp2,fcr
+    0| 000AF8 lfd      C85F00D0   1     LFL       fp2=#SPILL41(gr31,208)
+   69| 000AFC fadd     FCC6D02A   1     AFL       fp6=fp6,fp26,fcr
+   69| 000B00 fnmsub   FDAD6FBC   2     FNMS      fp13=fp13,fp13,fp30,fcr
+   69| 000B04 fmadd    FEF9083A   2     FMA       fp23=fp1,fp25,fp0,fcr
+   76| 000B08 fnmsub   FF0B5B3C   2     FNMS      fp24=fp11,fp11,fp12,fcr
+    0| 000B0C bc       4200FD70   1     BCT       ctr=CL.254,taken=100%(100,0)
+    0| 000B10 lfd      C97F00A8   1     LFL       fp11=#SPILL36(gr31,168)
+    0| 000B14 lfd      C99F00B0   1     LFL       fp12=#SPILL37(gr31,176)
+    0|                              CL.252:
+   76| 000B18 fmsub    FD1B1E38   1     FMS       fp8=fp3,fp27,fp24,fcr
+   76| 000B1C fnmsub   FD18C23C   2     FNMS      fp8=fp24,fp24,fp8,fcr
+   76| 000B20 fmul     FD3C0232   2     MFL       fp9=fp28,fp8,fcr
+   76| 000B24 fmsub    FFDBE278   2     FMS       fp30=fp28,fp27,fp9,fcr
+   76| 000B28 fnmsub   FD084FBC   2     FNMS      fp8=fp9,fp8,fp30,fcr
+   82| 000B2C bc       409E00DC   1     BF        CL.253,cr7,0x4/eq,taken=50%(0,0)
+   86| 000B30 fmul     FD3605B2   1     MFL       fp9=fp22,fp22,fcr
+   86| 000B34 lfs      C3C50030   1     LFS       fp30=+CONSTANT_AREA(gr5,48)
+   86| 000B38 fmadd    FD161B3A   1     FMA       fp8=fp3,fp22,fp12,fcr
+   86| 000B3C lfs      C3850034   1     LFS       fp28=+CONSTANT_AREA(gr5,52)
+   86| 000B40 fadd     FE16182A   1     AFL       fp16=fp22,fp3,fcr
+   86| 000B44 lfs      C1C50038   1     LFS       fp14=+CONSTANT_AREA(gr5,56)
+   86| 000B48 fmadd    FD29F73A   1     FMA       fp9=fp30,fp9,fp28,fcr
+   86| 000B4C frsqrte  FFC04034   2     FRSQRE    fp30=fp8
+   86| 000B50 fsub     FE2EB028   2     SFL       fp17=fp14,fp22,fcr
+   86| 000B54 fnabs    FF804110   2     NABSFL    fp28=fp8
+   86| 000B58 frsqrte  FF604834   2     FRSQRE    fp27=fp9
+   86| 000B5C fmul     FF4807B2   2     MFL       fp26=fp8,fp30,fcr
+   86| 000B60 fnabs    FF004910   2     NABSFL    fp24=fp9
+   86| 000B64 fmul     FEC906F2   2     MFL       fp22=fp9,fp27,fcr
+   86| 000B68 fmadd    FEBE7EBA   2     FMA       fp21=fp15,fp30,fp26,fcr
+   86| 000B6C fmadd    FE9B7DBA   2     FMA       fp20=fp15,fp27,fp22,fcr
+   86| 000B70 fmadd    FE75083A   2     FMA       fp19=fp1,fp21,fp0,fcr
+   86| 000B74 fmadd    FE54083A   2     FMA       fp18=fp1,fp20,fp0,fcr
+   86| 000B78 fmadd    FE7514FA   2     FMA       fp19=fp2,fp21,fp19,fcr
+   86| 000B7C fmadd    FE5414BA   2     FMA       fp18=fp2,fp20,fp18,fcr
+   86| 000B80 fmul     FEB504F2   2     MFL       fp21=fp21,fp19,fcr
+   86| 000B84 fmul     FE9404B2   2     MFL       fp20=fp20,fp18,fcr
+   86| 000B88 fmul     FF5A0572   2     MFL       fp26=fp26,fp21,fcr
+   86| 000B8C fmadd    FEBEF57A   2     FMA       fp21=fp30,fp30,fp21,fcr
+   86| 000B90 fmul     FED60532   2     MFL       fp22=fp22,fp20,fcr
+   86| 000B94 fmadd    FE9BDD3A   2     FMA       fp20=fp27,fp27,fp20,fcr
+   86| 000B98 fmadd    FFC8D7BA   2     FMA       fp30=fp26,fp8,fp30,fcr
+   86| 000B9C fmul     FF5502F2   2     MFL       fp26=fp21,fp11,fcr
+   86| 000BA0 fmadd    FF69B6FA   2     FMA       fp27=fp22,fp9,fp27,fcr
+   86| 000BA4 fmul     FED402F2   2     MFL       fp22=fp20,fp11,fcr
+   86| 000BA8 fmsub    FEBE47B8   2     FMS       fp21=fp8,fp30,fp30,fcr
+   86| 000BAC fmsub    FE9B4EF8   2     FMS       fp20=fp9,fp27,fp27,fcr
+   86| 000BB0 fnmsub   FFD5F6BC   2     FNMS      fp30=fp30,fp21,fp26,fcr
+   86| 000BB4 fnmsub   FF74DDBC   2     FNMS      fp27=fp27,fp20,fp22,fcr
+   86| 000BB8 fsel     FD1CF22E   2     FSEL      fp8=fp28,fp30,fp8
+   86| 000BBC fsel     FD38DA6E   2     FSEL      fp9=fp24,fp27,fp9
+   86| 000BC0 fadd     FD10402A   2     AFL       fp8=fp16,fp8,fcr
+   86| 000BC4 fadd     FD29202A   2     AFL       fp9=fp9,fp4,fcr
+   86| 000BC8 qvfre    13C04030   1     QVFRE     fp30=fp8
+   86| 000BCC qvfre    13804830   1     QVFRE     fp28=fp9
+   86| 000BD0 fmsub    FF681FB8   1     FMS       fp27=fp3,fp8,fp30,fcr
+   86| 000BD4 fmsub    FF491F38   2     FMS       fp26=fp3,fp9,fp28,fcr
+   86| 000BD8 fnmsub   FFDEF6FC   2     FNMS      fp30=fp30,fp30,fp27,fcr
+   86| 000BDC fnmsub   FF9CE6BC   2     FNMS      fp28=fp28,fp28,fp26,fcr
+   86| 000BE0 fmsub    FF681FB8   2     FMS       fp27=fp3,fp8,fp30,fcr
+   86| 000BE4 fmsub    FF491F38   2     FMS       fp26=fp3,fp9,fp28,fcr
+   86| 000BE8 fnmsub   FFDEF6FC   2     FNMS      fp30=fp30,fp30,fp27,fcr
+   86| 000BEC fnmsub   FF9CE6BC   2     FNMS      fp28=fp28,fp28,fp26,fcr
+   86| 000BF0 fmsub    FD081FB8   2     FMS       fp8=fp3,fp8,fp30,fcr
+   86| 000BF4 fadd     FF7CE02A   2     AFL       fp27=fp28,fp28,fcr
+   86| 000BF8 fnmsub   FD1EF23C   2     FNMS      fp8=fp30,fp30,fp8,fcr
+   86| 000BFC fmsub    FD2966F8   2     FMS       fp9=fp12,fp9,fp27,fcr
+   86| 000C00 fnmsub   FD3CDA7C   2     FNMS      fp9=fp27,fp28,fp9,fcr
+   86| 000C04 fsel     FD11426E   2     FSEL      fp8=fp17,fp8,fp9
+   90|                              CL.253:
+   91| 000C08 lfd      C93F0098   1     LFL       fp9=#SPILL29(gr31,152)
+   91| 000C0C fmul     FD080272   1     MFL       fp8=fp8,fp9,fcr
+   91| 000C10 fmul     FD0A0232   2     MFL       fp8=fp10,fp8,fcr
+   91| 000C14 stfdu    DD170008   2     STFDU     gr23,dfc[](gr23,8)=fp8
+    0|                              CL.250:
+   69| 000C18 qvfre    11003030   1     QVFRE     fp8=fp6
+   76| 000C1C lfd      CB7F0090   1     LFL       fp27=#SPILL28(gr31,144)
+   69| 000C20 fmadd    FD3915FA   1     FMA       fp9=fp2,fp25,fp23,fcr
+   69| 000C24 fmsub    FFC51B78   2     FMS       fp30=fp3,fp5,fp13,fcr
+   69| 000C28 fnabs    FD403910   2     NABSFL    fp10=fp7
+   69| 000C2C fmsub    FF861A38   2     FMS       fp28=fp3,fp6,fp8,fcr
+   69| 000C30 fmul     FD390272   2     MFL       fp9=fp25,fp9,fcr
+   69| 000C34 fnmsub   FDAD6FBC   2     FNMS      fp13=fp13,fp13,fp30,fcr
+   69| 000C38 fnmsub   FD08473C   2     FNMS      fp8=fp8,fp8,fp28,fcr
+   69| 000C3C fmul     FFFF0272   2     MFL       fp31=fp31,fp9,fcr
+   69| 000C40 fmadd    FD3DEA7A   2     FMA       fp9=fp29,fp29,fp9,fcr
+   69| 000C44 fmsub    FFC61A38   2     FMS       fp30=fp3,fp6,fp8,fcr
+   69| 000C48 fmadd    FFE7FF7A   2     FMA       fp31=fp31,fp7,fp29,fcr
+   69| 000C4C fmul     FD2902F2   2     MFL       fp9=fp9,fp11,fcr
+   69| 000C50 fnmsub   FD0847BC   2     FNMS      fp8=fp8,fp8,fp30,fcr
+   69| 000C54 fmsub    FFDF3FF8   2     FMS       fp30=fp7,fp31,fp31,fcr
+   69| 000C58 fadd     FFA8402A   2     AFL       fp29=fp8,fp8,fcr
+   69| 000C5C fnmsub   FD3EFA7C   2     FNMS      fp9=fp31,fp30,fp9,fcr
+   69| 000C60 fmsub    FCC66778   2     FMS       fp6=fp12,fp6,fp29,fcr
+   69| 000C64 fsel     FCEA49EE   2     FSEL      fp7=fp10,fp9,fp7
+   69| 000C68 fnmsub   FCC8E9BC   2     FNMS      fp6=fp29,fp8,fp6,fcr
+   69| 000C6C fadd     FCE7382A   2     AFL       fp7=fp7,fp7,fcr
+   69| 000C70 fmul     FCE701B2   2     MFL       fp7=fp7,fp6,fcr
+   69| 000C74 fmul     FD070372   2     MFL       fp8=fp7,fp13,fcr
+   69| 000C78 fmsub    FCA53A38   2     FMS       fp5=fp7,fp5,fp8,fcr
+   69| 000C7C fnmsub   FD0D417C   2     FNMS      fp8=fp8,fp13,fp5,fcr
+   76| 000C80 fmadd    FCE8D93A   2     FMA       fp7=fp27,fp8,fp4,fcr
+   69| 000C84 stfdu    DD160008   2     STFDU     gr22,r[].rns6.(gr22,8)=fp8
+   76| 000C88 fadd     FCA8602A   1     AFL       fp5=fp8,fp12,fcr
+   76| 000C8C fmadd    FD483A3A   2     FMA       fp10=fp7,fp8,fp8,fcr
+   76| 000C90 qvfre    10E05030   1     QVFRE     fp7=fp10
+   76| 000C94 fmsub    FD2A19F8   1     FMS       fp9=fp3,fp10,fp7,fcr
+   76| 000C98 fnmsub   FCE73A7C   2     FNMS      fp7=fp7,fp7,fp9,fcr
+   76| 000C9C fmsub    FD2A19F8   2     FMS       fp9=fp3,fp10,fp7,fcr
+   76| 000CA0 fnmsub   FCE73A7C   2     FNMS      fp7=fp7,fp7,fp9,fcr
+   76| 000CA4 fmul     FD2501F2   2     MFL       fp9=fp5,fp7,fcr
+   76| 000CA8 fmsub    FCAA2A78   2     FMS       fp5=fp5,fp10,fp9,fcr
+   76| 000CAC fnmsub   FF27497C   2     FNMS      fp25=fp9,fp7,fp5,fcr
+   82| 000CB0 bc       409E00DC   1     BF        CL.251,cr7,0x4/eq,taken=50%(0,0)
+   86| 000CB4 fmul     FD280232   1     MFL       fp9=fp8,fp8,fcr
+   86| 000CB8 lfs      C2C50030   1     LFS       fp22=+CONSTANT_AREA(gr5,48)
+   86| 000CBC fmadd    FCA81B3A   1     FMA       fp5=fp3,fp8,fp12,fcr
+   86| 000CC0 lfs      C2A50034   1     LFS       fp21=+CONSTANT_AREA(gr5,52)
+   86| 000CC4 fadd     FCE8182A   1     AFL       fp7=fp8,fp3,fcr
+   86| 000CC8 lfs      C2E50038   1     LFS       fp23=+CONSTANT_AREA(gr5,56)
+   86| 000CCC frsqrte  FD402834   1     FRSQRE    fp10=fp5
+   86| 000CD0 fnabs    FDA02910   2     NABSFL    fp13=fp5
+   86| 000CD4 fmadd    FD29B57A   2     FMA       fp9=fp22,fp9,fp21,fcr
+   86| 000CD8 fsub     FD174028   2     SFL       fp8=fp23,fp8,fcr
+   86| 000CDC fmul     FFC502B2   2     MFL       fp30=fp5,fp10,fcr
+   86| 000CE0 frsqrte  FFE04834   2     FRSQRE    fp31=fp9
+   86| 000CE4 fnabs    FFA04910   2     NABSFL    fp29=fp9
+   86| 000CE8 fmadd    FF6A7FBA   2     FMA       fp27=fp15,fp10,fp30,fcr
+   86| 000CEC fmul     FF8907F2   2     MFL       fp28=fp9,fp31,fcr
+   86| 000CF0 fmadd    FF3B083A   2     FMA       fp25=fp1,fp27,fp0,fcr
+   86| 000CF4 fmadd    FF5F7F3A   2     FMA       fp26=fp15,fp31,fp28,fcr
+   86| 000CF8 fmadd    FF3B167A   2     FMA       fp25=fp2,fp27,fp25,fcr
+   86| 000CFC fmadd    FF1A083A   2     FMA       fp24=fp1,fp26,fp0,fcr
+   86| 000D00 fmul     FF7B0672   2     MFL       fp27=fp27,fp25,fcr
+   86| 000D04 fmadd    FF1A163A   2     FMA       fp24=fp2,fp26,fp24,fcr
+   86| 000D08 fmul     FFDE06F2   2     MFL       fp30=fp30,fp27,fcr
+   86| 000D0C fmadd    FF6A56FA   2     FMA       fp27=fp10,fp10,fp27,fcr
+   86| 000D10 fmul     FF5A0632   2     MFL       fp26=fp26,fp24,fcr
+   86| 000D14 fmadd    FD45F2BA   2     FMA       fp10=fp30,fp5,fp10,fcr
+   86| 000D18 fmul     FFDB02F2   2     MFL       fp30=fp27,fp11,fcr
+   86| 000D1C fmul     FF9C06B2   2     MFL       fp28=fp28,fp26,fcr
+   86| 000D20 fmadd    FF5FFEBA   2     FMA       fp26=fp31,fp31,fp26,fcr
+   86| 000D24 fmsub    FF6A2AB8   2     FMS       fp27=fp5,fp10,fp10,fcr
+   86| 000D28 fmadd    FFE9E7FA   2     FMA       fp31=fp28,fp9,fp31,fcr
+   86| 000D2C fmul     FF9A02F2   2     MFL       fp28=fp26,fp11,fcr
+   86| 000D30 fnmsub   FD5B57BC   2     FNMS      fp10=fp10,fp27,fp30,fcr
+   86| 000D34 fmsub    FF5F4FF8   2     FMS       fp26=fp9,fp31,fp31,fcr
+   86| 000D38 fsel     FCAD516E   2     FSEL      fp5=fp13,fp10,fp5
+   86| 000D3C fnmsub   FFFAFF3C   2     FNMS      fp31=fp31,fp26,fp28,fcr
+   86| 000D40 fadd     FCA7282A   2     AFL       fp5=fp7,fp5,fcr
+   86| 000D44 fsel     FD3DFA6E   2     FSEL      fp9=fp29,fp31,fp9
+   86| 000D48 fadd     FCE9202A   2     AFL       fp7=fp9,fp4,fcr
+   86| 000D4C qvfre    11202830   1     QVFRE     fp9=fp5
+   86| 000D50 qvfre    11403830   1     QVFRE     fp10=fp7
+   86| 000D54 fmsub    FDA51A78   1     FMS       fp13=fp3,fp5,fp9,fcr
+   86| 000D58 fmsub    FFE71AB8   2     FMS       fp31=fp3,fp7,fp10,fcr
+   86| 000D5C fnmsub   FD294B7C   2     FNMS      fp9=fp9,fp9,fp13,fcr
+   86| 000D60 fnmsub   FD4A57FC   2     FNMS      fp10=fp10,fp10,fp31,fcr
+   86| 000D64 fmsub    FDA51A78   2     FMS       fp13=fp3,fp5,fp9,fcr
+   86| 000D68 fmsub    FFE71AB8   2     FMS       fp31=fp3,fp7,fp10,fcr
+   86| 000D6C fnmsub   FD294B7C   2     FNMS      fp9=fp9,fp9,fp13,fcr
+   86| 000D70 fnmsub   FD4A57FC   2     FNMS      fp10=fp10,fp10,fp31,fcr
+   86| 000D74 fmsub    FCA51A78   2     FMS       fp5=fp3,fp5,fp9,fcr
+   86| 000D78 fadd     FDAA502A   2     AFL       fp13=fp10,fp10,fcr
+   86| 000D7C fnmsub   FCA9497C   2     FNMS      fp5=fp9,fp9,fp5,fcr
+   86| 000D80 fmsub    FCE76378   2     FMS       fp7=fp12,fp7,fp13,fcr
+   86| 000D84 fnmsub   FCEA69FC   2     FNMS      fp7=fp13,fp10,fp7,fcr
+   86| 000D88 fsel     FF2829EE   2     FSEL      fp25=fp8,fp5,fp7
+   90|                              CL.251:
+   91| 000D8C lfd      C8FF0098   1     LFL       fp7=#SPILL29(gr31,152)
+   91| 000D90 fmul     FCB901F2   1     MFL       fp5=fp25,fp7,fcr
+   91| 000D94 fmul     FCA60172   2     MFL       fp5=fp6,fp5,fcr
+   91| 000D98 stfdu    DCB70008   2     STFDU     gr23,dfc[](gr23,8)=fp5
+   93|                              CL.40:
+   94| 000D9C ld       E97F0178   1     L8        gr11=#SPILL5(gr31,376)
+   94| 000DA0 addi     38630001   1     AI        gr3=gr3,1
+    0| 000DA4 add      7E313A14   1     A         gr17=gr17,gr7
+    0| 000DA8 add      7E103A14   1     A         gr16=gr16,gr7
+   94| 000DAC cmpld    7F235840   1     CL8       cr6=gr3,gr11
+   94| 000DB0 bc       4198F854   1     BT        CL.39,cr6,0x8/llt,taken=80%(80,20)
+   94|                              CL.38:
+   95| 000DB4 ld       E87F0180   1     L8        gr3=#SPILL6(gr31,384)
+    0| 000DB8 ld       E89F0200   1     L8        gr4=#SPILL22(gr31,512)
+   95| 000DBC ld       E8DF0158   1     L8        gr6=#SPILL1(gr31,344)
+    0| 000DC0 ld       E93F0208   1     L8        gr9=#SPILL23(gr31,520)
+    0| 000DC4 ld       E95F0210   1     L8        gr10=#SPILL24(gr31,528)
+    0| 000DC8 ld       E97F0170   1     L8        gr11=#SPILL4(gr31,368)
+    0| 000DCC ld       E99F0218   1     L8        gr12=#SPILL25(gr31,536)
+    0| 000DD0 ld       EBDF0220   1     L8        gr30=#SPILL26(gr31,544)
+   95| 000DD4 addi     38630001   1     AI        gr3=gr3,1
+    0| 000DD8 add      7C802214   1     A         gr4=gr0,gr4
+   95| 000DDC std      F87F0180   1     ST8       #SPILL6(gr31,384)=gr3
+    0| 000DE0 std      F89F0200   1     ST8       #SPILL22(gr31,512)=gr4
+   95| 000DE4 cmpld    7F233040   1     CL8       cr6=gr3,gr6
+    0| 000DE8 add      7D204A14   1     A         gr9=gr0,gr9
+    0| 000DEC add      7D405214   1     A         gr10=gr0,gr10
+    0| 000DF0 std      F93F0208   1     ST8       #SPILL23(gr31,520)=gr9
+    0| 000DF4 std      F95F0210   1     ST8       #SPILL24(gr31,528)=gr10
+    0| 000DF8 add      7D8B6214   1     A         gr12=gr11,gr12
+    0| 000DFC addi     3BDE0008   1     AI        gr30=gr30,8
+    0| 000E00 std      F99F0218   1     ST8       #SPILL25(gr31,536)=gr12
+    0| 000E04 std      FBDF0220   1     ST8       #SPILL26(gr31,544)=gr30
+   95| 000E08 bc       4198F740   1     BT        CL.37,cr6,0x8/llt,taken=80%(80,20)
+   98|                              CL.55:
+   98| 000E0C ld       E8210000   1     L8        gr1=#stack(gr1,0),gr31"
+   98| 000E10 ld       E9C1FEE0   1     L8        gr14=#stack(gr1,-288)
+   98| 000E14 ld       E9E1FEE8   1     L8        gr15=#stack(gr1,-280)
+   98| 000E18 ld       EA01FEF0   1     L8        gr16=#stack(gr1,-272)
+   98| 000E1C ld       EA21FEF8   1     L8        gr17=#stack(gr1,-264)
+   98| 000E20 ld       EA41FF00   1     L8        gr18=#stack(gr1,-256)
+   98| 000E24 ld       EA61FF08   1     L8        gr19=#stack(gr1,-248)
+   98| 000E28 ld       EA81FF10   1     L8        gr20=#stack(gr1,-240)
+   98| 000E2C ld       EAA1FF18   1     L8        gr21=#stack(gr1,-232)
+   98| 000E30 ld       EAC1FF20   1     L8        gr22=#stack(gr1,-224)
+   98| 000E34 ld       EAE1FF28   1     L8        gr23=#stack(gr1,-216)
+   98| 000E38 ld       EB01FF30   1     L8        gr24=#stack(gr1,-208)
+   98| 000E3C ld       EB21FF38   1     L8        gr25=#stack(gr1,-200)
+   98| 000E40 ld       EB41FF40   1     L8        gr26=#stack(gr1,-192)
+   98| 000E44 ld       EB61FF48   1     L8        gr27=#stack(gr1,-184)
+   98| 000E48 ld       EB81FF50   1     L8        gr28=#stack(gr1,-176)
+   98| 000E4C ld       EBA1FF58   1     L8        gr29=#stack(gr1,-168)
+   98| 000E50 ld       EBC1FF60   1     L8        gr30=#stack(gr1,-160)
+   98| 000E54 ld       EBE1FF68   1     L8        gr31=#stack(gr1,-152)
+   98| 000E58 lfd      CBE1FFF8   1     LFL       fp31=#stack(gr1,-8)
+   98| 000E5C lfd      CBC1FFF0   1     LFL       fp30=#stack(gr1,-16)
+   98| 000E60 lfd      CBA1FFE8   1     LFL       fp29=#stack(gr1,-24)
+   98| 000E64 lfd      CB81FFE0   1     LFL       fp28=#stack(gr1,-32)
+   98| 000E68 lfd      CB61FFD8   1     LFL       fp27=#stack(gr1,-40)
+   98| 000E6C lfd      CB41FFD0   1     LFL       fp26=#stack(gr1,-48)
+   98| 000E70 lfd      CB21FFC8   1     LFL       fp25=#stack(gr1,-56)
+   98| 000E74 lfd      CB01FFC0   1     LFL       fp24=#stack(gr1,-64)
+   98| 000E78 lfd      CAE1FFB8   1     LFL       fp23=#stack(gr1,-72)
+   98| 000E7C lfd      CAC1FFB0   1     LFL       fp22=#stack(gr1,-80)
+   98| 000E80 lfd      CAA1FFA8   1     LFL       fp21=#stack(gr1,-88)
+   98| 000E84 lfd      CA81FFA0   1     LFL       fp20=#stack(gr1,-96)
+   98| 000E88 lfd      CA61FF98   1     LFL       fp19=#stack(gr1,-104)
+   98| 000E8C lfd      CA41FF90   1     LFL       fp18=#stack(gr1,-112)
+   98| 000E90 lfd      CA21FF88   1     LFL       fp17=#stack(gr1,-120)
+   98| 000E94 lfd      CA01FF80   1     LFL       fp16=#stack(gr1,-128)
+   98| 000E98 lfd      C9E1FF78   1     LFL       fp15=#stack(gr1,-136)
+   98| 000E9C lfd      C9C1FF70   1     LFL       fp14=#stack(gr1,-144)
+   98| 000EA0 bclr     4E800020   1     BA        lr
+    0|                              CL.166:
+   56| 000EA4 mulld    7FC7C9D2   1     M         gr30=gr7,gr25
+   56| 000EA8 mulld    7D8079D2   1     M         gr12=gr0,gr15
+   56| 000EAC ld       EBBF0230   1     L8        gr29=#SPILL31(gr31,560)
+   56| 000EB0 add      7F0CF214   1     A         gr24=gr12,gr30
+   56| 000EB4 add      7D74F214   1     A         gr11=gr20,gr30
+   60| 000EB8 add      7D8C8A14   1     A         gr12=gr12,gr17
+   56| 000EBC lfdu     CF8B0008   1     LFDU      fp28,gr11=erold[](gr11,8)
+   60| 000EC0 lfdu     CD2C0008   1     LFDU      fp9,gr12=erold[](gr12,8)
+   56| 000EC4 add      7FD8EA14   1     A         gr30=gr24,gr29
+   60| 000EC8 or       7E1D8378   1     LR        gr29=gr16
+   56| 000ECC lfdu     CDBE0008   1     LFDU      fp13,gr30=erold[](gr30,8)
+   60| 000ED0 lfdu     CCDD0008   1     LFDU      fp6,gr29=erold[](gr29,8)
+   57| 000ED4 ld       EB9F0238   1     L8        gr28=#SPILL32(gr31,568)
+   69| 000ED8 ld       EADF0170   1     L8        gr22=#SPILL4(gr31,368)
+   63| 000EDC ld       EB7F0240   1     L8        gr27=#SPILL33(gr31,576)
+   63| 000EE0 lfd      CADF00A0   1     LFL       fp22=#SPILL35(gr31,160)
+   69| 000EE4 lfd      CABF0088   1     LFL       fp21=#SPILL27(gr31,136)
+   60| 000EE8 fsub     FFED4828   1     SFL       fp31=fp13,fp9,fcr
+   57| 000EEC lfdu     CCFC0008   1     LFDU      fp7,gr28=dx1bi(gr28,8)
+   57| 000EF0 fsub     FFAD4028   1     SFL       fp29=fp13,fp8,fcr
+   69| 000EF4 mulld    7EEFB1D2   1     M         gr23=gr15,gr22
+   60| 000EF8 fsub     FD3C3028   1     SFL       fp9=fp28,fp6,fcr
+   63| 000EFC fsub     FD0DE028   2     SFL       fp8=fp13,fp28,fcr
+   60| 000F00 fmul     FF7E07F2   2     MFL       fp27=fp30,fp31,fcr
+   57| 000F04 fsub     FFFC2828   2     SFL       fp31=fp28,fp5,fcr
+   69| 000F08 ld       EADF0190   1     L8        gr22=#SPILL8(gr31,400)
+   57| 000F0C fmul     FFA70772   1     MFL       fp29=fp7,fp29,fcr
+   63| 000F10 lfdu     CD5B0008   1     LFDU      fp10,gr27=g2bi(gr27,8)
+   69| 000F14 fadd     FCBC682A   1     AFL       fp5=fp28,fp13,fcr
+   63| 000F18 or       7DDA7378   1     LR        gr26=gr14
+   60| 000F1C fmadd    FD29DFBA   1     FMA       fp9=fp27,fp9,fp30,fcr
+   69| 000F20 mulld    7ED6C9D2   1     M         gr22=gr22,gr25
+   57| 000F24 fmadd    FCFFE9FA   1     FMA       fp7=fp29,fp31,fp7,fcr
+   63| 000F28 fmul     FD0805B2   2     MFL       fp8=fp8,fp22,fcr
+   69| 000F2C fsub     FFF52828   2     SFL       fp31=fp21,fp5,fcr
+   69| 000F30 ld       EB3F0228   1     L8        gr25=#SPILL30(gr31,552)
+   63| 000F34 fmul     FFA902F2   1     MFL       fp29=fp9,fp11,fcr
+   63| 000F38 lfdu     CCDA0008   1     LFDU      fp6,gr26=g31bi(gr26,8)
+   63| 000F3C fmul     FCE702F2   1     MFL       fp7=fp7,fp11,fcr
+    0| 000F40 mtspr    7E6903A6   1     LCTR      ctr=gr19
+   69| 000F44 fsel     FCBF2D6E   1     FSEL      fp5=fp31,fp5,fp21
+   69| 000F48 add      7F37CA14   1     A         gr25=gr23,gr25
+   63| 000F4C fmul     FD5D02B2   1     MFL       fp10=fp29,fp10,fcr
+   69| 000F50 add      7F36CA14   1     A         gr25=gr22,gr25
+   63| 000F54 fmul     FCC801B2   1     MFL       fp6=fp8,fp6,fcr
+   69| 000F58 add      7EF2B214   1     A         gr23=gr18,gr22
+   69| 000F5C lfdux    7D3944EE   1     LFDU      fp9,gr25=kapr(gr25,gr8,0)
+   69| 000F60 lfdux    7D1744EE   1     LFDU      fp8,gr23=kapr(gr23,gr8,0)
+   63| 000F64 fmul     FD4A02B2   1     MFL       fp10=fp10,fp10,fcr
+   91| 000F68 ld       EADF0248   1     L8        gr22=#SPILL34(gr31,584)
+   63| 000F6C fmul     FCC606B2   1     MFL       fp6=fp6,fp26,fcr
+   69| 000F70 fadd     FFE8482A   2     AFL       fp31=fp8,fp9,fcr
+   91| 000F74 add      7ED6C214   1     A         gr22=gr22,gr24
+   69| 000F78 qvfre    11002830   1     QVFRE     fp8=fp5
+   69| 000F7C add      7F15C214   1     A         gr24=gr21,gr24
+   69| 000F80 fmadd    FD2751FA   1     FMA       fp9=fp10,fp7,fp7,fcr
+   69| 000F84 qvfre    12E0F830   1     QVFRE     fp23=fp31
+   69| 000F88 fmsub    FCE51A38   1     FMS       fp7=fp3,fp5,fp8,fcr
+   69| 000F8C fmadd    FCC649BA   2     FMA       fp6=fp9,fp6,fp6,fcr
+   69| 000F90 fnmsub   FF6841FC   2     FNMS      fp27=fp8,fp8,fp7,fcr
+   69| 000F94 frsqrte  FCE03034   2     FRSQRE    fp7=fp6
+   69| 000F98 fnabs    FFA03110   2     NABSFL    fp29=fp6
+   69| 000F9C fmul     FD0601F2   2     MFL       fp8=fp6,fp7,fcr
+   69| 000FA0 fmadd    FF077A3A   2     FMA       fp24=fp15,fp7,fp8,fcr
+   69| 000FA4 fmadd    FE78083A   2     FMA       fp19=fp1,fp24,fp0,fcr
+    0| 000FA8 bc       42400450   1     BCF       ctr=CL.256,taken=0%(0,100)
+   69| 000FAC fmsub    FE9F1DF8   1     FMS       fp20=fp3,fp31,fp23,fcr
+   56| 000FB0 lfdu     CD3E0008   1     LFDU      fp9,gr30=erold[](gr30,8)
+   69| 000FB4 fmsub    FEC51EF8   1     FMS       fp22=fp3,fp5,fp27,fcr
+   60| 000FB8 lfdu     CEAC0008   1     LFDU      fp21,gr12=erold[](gr12,8)
+   69| 000FBC fmadd    FE7814FA   1     FMA       fp19=fp2,fp24,fp19,fcr
+   56| 000FC0 lfdu     CD4B0008   1     LFDU      fp10,gr11=erold[](gr11,8)
+   69| 000FC4 fnmsub   FEF7BD3C   1     FNMS      fp23=fp23,fp23,fp20,fcr
+   60| 000FC8 lfdu     CE9D0008   1     LFDU      fp20,gr29=erold[](gr29,8)
+   69| 000FCC fnmsub   FF7BDDBC   1     FNMS      fp27=fp27,fp27,fp22,fcr
+   57| 000FD0 lfdu     CEDC0008   1     LFDU      fp22,gr28=dx1bi(gr28,8)
+   69| 000FD4 fmul     FF1804F2   1     MFL       fp24=fp24,fp19,fcr
+   63| 000FD8 lfd      C9DF00A0   1     LFL       fp14=#SPILL35(gr31,160)
+   60| 000FDC fsub     FEA9A828   1     SFL       fp21=fp9,fp21,fcr
+   63| 000FE0 lfdu     CE1B0008   1     LFDU      fp16,gr27=g2bi(gr27,8)
+   69| 000FE4 fmsub    FE7F1DF8   1     FMS       fp19=fp3,fp31,fp23,fcr
+   63| 000FE8 lfdu     CE3A0008   1     LFDU      fp17,gr26=g31bi(gr26,8)
+   60| 000FEC fsub     FE8AA028   1     SFL       fp20=fp10,fp20,fcr
+   69| 000FF0 fmul     FD080632   2     MFL       fp8=fp8,fp24,fcr
+   60| 000FF4 fmul     FEBE0572   2     MFL       fp21=fp30,fp21,fcr
+   57| 000FF8 fsub     FDA96828   2     SFL       fp13=fp9,fp13,fcr
+   69| 000FFC fnmsub   FEF7BCFC   2     FNMS      fp23=fp23,fp23,fp19,fcr
+   69| 001000 fmadd    FF073E3A   2     FMA       fp24=fp7,fp7,fp24,fcr
+   57| 001004 fsub     FF8AE028   2     SFL       fp28=fp10,fp28,fcr
+   69| 001008 fmadd    FCE641FA   2     FMA       fp7=fp8,fp6,fp7,fcr
+   60| 00100C fmadd    FEB4AFBA   2     FMA       fp21=fp21,fp20,fp30,fcr
+   57| 001010 fmul     FDB60372   2     MFL       fp13=fp22,fp13,fcr
+   63| 001014 fsub     FE895028   2     SFL       fp20=fp9,fp10,fcr
+   69| 001018 fadd     FE77B82A   2     AFL       fp19=fp23,fp23,fcr
+   69| 00101C fmul     FD1802F2   2     MFL       fp8=fp24,fp11,fcr
+   69| 001020 fmsub    FE4731F8   2     FMS       fp18=fp6,fp7,fp7,fcr
+   69| 001024 fadd     FF0A482A   2     AFL       fp24=fp10,fp9,fcr
+   63| 001028 fmul     FEB502F2   2     MFL       fp21=fp21,fp11,fcr
+   57| 00102C fmadd    FDBC6DBA   2     FMA       fp13=fp13,fp28,fp22,fcr
+   63| 001030 fmul     FF9403B2   2     MFL       fp28=fp20,fp14,fcr
+   69| 001034 fmsub    FFFF64F8   2     FMS       fp31=fp12,fp31,fp19,fcr
+   69| 001038 fnmsub   FCF23A3C   2     FNMS      fp7=fp7,fp18,fp8,fcr
+   63| 00103C fmul     FED50432   2     MFL       fp22=fp21,fp16,fcr
+   69| 001040 lfd      CABF0088   1     LFL       fp21=#SPILL27(gr31,136)
+   63| 001044 fmul     FD0D02F2   1     MFL       fp8=fp13,fp11,fcr
+   69| 001048 fnmsub   FDB79FFC   2     FNMS      fp13=fp19,fp23,fp31,fcr
+   69| 00104C lfdux    7FF744EE   1     LFDU      fp31,gr23=kapr(gr23,gr8,0)
+   69| 001050 fsel     FCDD39AE   1     FSEL      fp6=fp29,fp7,fp6
+   69| 001054 lfdux    7FB944EE   1     LFDU      fp29,gr25=kapr(gr25,gr8,0)
+   63| 001058 fmul     FF9C0472   1     MFL       fp28=fp28,fp17,fcr
+   63| 00105C fmul     FEF605B2   2     MFL       fp23=fp22,fp22,fcr
+   69| 001060 fadd     FCC6302A   2     AFL       fp6=fp6,fp6,fcr
+   69| 001064 fmadd    FEE8BA3A   2     FMA       fp23=fp23,fp8,fp8,fcr
+   69| 001068 fmul     FCE60372   2     MFL       fp7=fp6,fp13,fcr
+   63| 00106C fmul     FCDC06B2   2     MFL       fp6=fp28,fp26,fcr
+    0| 001070 fmr      FF802890   2     LRFL      fp28=fp5
+   69| 001074 fsub     FCB5C028   2     SFL       fp5=fp21,fp24,fcr
+   69| 001078 fmul     FD0706F2   2     MFL       fp8=fp7,fp27,fcr
+   69| 00107C fmadd    FCC6B9BA   2     FMA       fp6=fp23,fp6,fp6,fcr
+   69| 001080 fsel     FCA5C56E   2     FSEL      fp5=fp5,fp24,fp21
+   69| 001084 fmsub    FF1C3A38   2     FMS       fp24=fp7,fp28,fp8,fcr
+   69| 001088 frsqrte  FCE03034   2     FRSQRE    fp7=fp6
+   69| 00108C qvfre    13802830   1     QVFRE     fp28=fp5
+   69| 001090 fnmsub   FF7B463C   1     FNMS      fp27=fp8,fp27,fp24,fcr
+   69| 001094 fmul     FD0601F2   2     MFL       fp8=fp6,fp7,fcr
+   82| 001098 bc       409E00F4   1     BF        CL.258,cr7,0x4/eq,taken=50%(0,0)
+   86| 00109C lfs      C2850030   1     LFS       fp20=+CONSTANT_AREA(gr5,48)
+   86| 0010A0 lfs      C2650034   1     LFS       fp19=+CONSTANT_AREA(gr5,52)
+   86| 0010A4 lfs      C2C50038   1     LFS       fp22=+CONSTANT_AREA(gr5,56)
+   86| 0010A8 fmul     FF1B06F2   1     MFL       fp24=fp27,fp27,fcr
+   86| 0010AC fadd     FEFB182A   2     AFL       fp23=fp27,fp3,fcr
+   86| 0010B0 fmadd    FF3B1B3A   2     FMA       fp25=fp3,fp27,fp12,fcr
+   86| 0010B4 fmadd    FF18A4FA   2     FMA       fp24=fp20,fp24,fp19,fcr
+   86| 0010B8 fsub     FEB6D828   2     SFL       fp21=fp22,fp27,fcr
+   86| 0010BC stfd     DAFF0130   1     STFL      #SPILL53(gr31,304)=fp23
+   86| 0010C0 frsqrte  FEE0C834   1     FRSQRE    fp23=fp25
+   86| 0010C4 fnabs    FE40C910   2     NABSFL    fp18=fp25
+   86| 0010C8 frsqrte  FEC0C034   2     FRSQRE    fp22=fp24
+   86| 0010CC stfd     DA5F0140   1     STFL      #SPILL55(gr31,320)=fp18
+   86| 0010D0 fnabs    FDC0C110   1     NABSFL    fp14=fp24
+   86| 0010D4 stfd     DABF0138   1     STFL      #SPILL54(gr31,312)=fp21
+   86| 0010D8 fmul     FEB905F2   1     MFL       fp21=fp25,fp23,fcr
+   86| 0010DC fmul     FE9805B2   2     MFL       fp20=fp24,fp22,fcr
+   86| 0010E0 fmadd    FE777D7A   2     FMA       fp19=fp15,fp23,fp21,fcr
+   86| 0010E4 fmadd    FE567D3A   2     FMA       fp18=fp15,fp22,fp20,fcr
+   86| 0010E8 fmadd    FE33083A   2     FMA       fp17=fp1,fp19,fp0,fcr
+   86| 0010EC fmadd    FE12083A   2     FMA       fp16=fp1,fp18,fp0,fcr
+   86| 0010F0 fmadd    FE33147A   2     FMA       fp17=fp2,fp19,fp17,fcr
+   86| 0010F4 fmadd    FE12143A   2     FMA       fp16=fp2,fp18,fp16,fcr
+   86| 0010F8 fmul     FE730472   2     MFL       fp19=fp19,fp17,fcr
+   86| 0010FC lfd      CA3F0140   1     LFL       fp17=#SPILL55(gr31,320)
+   86| 001100 fmul     FE520432   1     MFL       fp18=fp18,fp16,fcr
+   86| 001104 lfd      CA1F0138   1     LFL       fp16=#SPILL54(gr31,312)
+   86| 001108 fmul     FEB504F2   1     MFL       fp21=fp21,fp19,fcr
+   86| 00110C fmadd    FE77BCFA   2     FMA       fp19=fp23,fp23,fp19,fcr
+   86| 001110 fmul     FE9404B2   2     MFL       fp20=fp20,fp18,fcr
+   86| 001114 fmadd    FEF9ADFA   2     FMA       fp23=fp21,fp25,fp23,fcr
+   86| 001118 fmadd    FEB6B4BA   2     FMA       fp21=fp22,fp22,fp18,fcr
+   86| 00111C fmadd    FED8A5BA   2     FMA       fp22=fp20,fp24,fp22,fcr
+   86| 001120 fmul     FE7302F2   2     MFL       fp19=fp19,fp11,fcr
+   86| 001124 fmsub    FE97CDF8   2     FMS       fp20=fp25,fp23,fp23,fcr
+   86| 001128 fmul     FEB502F2   2     MFL       fp21=fp21,fp11,fcr
+   86| 00112C fmsub    FE56C5B8   2     FMS       fp18=fp24,fp22,fp22,fcr
+   86| 001130 fnmsub   FEF4BCFC   2     FNMS      fp23=fp23,fp20,fp19,fcr
+   86| 001134 fnmsub   FED2B57C   2     FNMS      fp22=fp22,fp18,fp21,fcr
+   86| 001138 fsel     FF31BE6E   2     FSEL      fp25=fp17,fp23,fp25
+   86| 00113C fsel     FF0EB62E   2     FSEL      fp24=fp14,fp22,fp24
+   86| 001140 lfd      C9DF0130   1     LFL       fp14=#SPILL53(gr31,304)
+   86| 001144 fadd     FF18202A   1     AFL       fp24=fp24,fp4,fcr
+   86| 001148 fadd     FF2EC82A   2     AFL       fp25=fp14,fp25,fcr
+   86| 00114C qvfre    12C0C030   1     QVFRE     fp22=fp24
+   86| 001150 qvfre    12E0C830   1     QVFRE     fp23=fp25
+   86| 001154 fmsub    FE981DB8   1     FMS       fp20=fp3,fp24,fp22,fcr
+   86| 001158 fmsub    FEB91DF8   2     FMS       fp21=fp3,fp25,fp23,fcr
+   86| 00115C fnmsub   FED6B53C   2     FNMS      fp22=fp22,fp22,fp20,fcr
+   86| 001160 fnmsub   FEF7BD7C   2     FNMS      fp23=fp23,fp23,fp21,fcr
+   86| 001164 fmsub    FE981DB8   2     FMS       fp20=fp3,fp24,fp22,fcr
+   86| 001168 fmsub    FEB91DF8   2     FMS       fp21=fp3,fp25,fp23,fcr
+   86| 00116C fnmsub   FED6B53C   2     FNMS      fp22=fp22,fp22,fp20,fcr
+   86| 001170 fnmsub   FEF7BD7C   2     FNMS      fp23=fp23,fp23,fp21,fcr
+   86| 001174 fadd     FEB6B02A   2     AFL       fp21=fp22,fp22,fcr
+   86| 001178 fmsub    FF391DF8   2     FMS       fp25=fp3,fp25,fp23,fcr
+   86| 00117C fmsub    FF186578   2     FMS       fp24=fp12,fp24,fp21,fcr
+   86| 001180 fnmsub   FF37BE7C   2     FNMS      fp25=fp23,fp23,fp25,fcr
+   86| 001184 fnmsub   FF16AE3C   2     FNMS      fp24=fp21,fp22,fp24,fcr
+   86| 001188 fsel     FF30CE2E   2     FSEL      fp25=fp16,fp25,fp24
+   90|                              CL.258:
+   91| 00118C lfd      CADF0098   1     LFL       fp22=#SPILL29(gr31,152)
+   69| 001190 fmadd    FF077A3A   1     FMA       fp24=fp15,fp7,fp8,fcr
+   69| 001194 stfdu    DF780008   2     STFDU     gr24,r[].rns6.(gr24,8)=fp27
+   69| 001198 fmsub    FF651F38   1     FMS       fp27=fp3,fp5,fp28,fcr
+   69| 00119C fadd     FFFFE82A   2     AFL       fp31=fp31,fp29,fcr
+   91| 0011A0 fmul     FEF905B2   2     MFL       fp23=fp25,fp22,fcr
+   69| 0011A4 fmadd    FE78083A   2     FMA       fp19=fp1,fp24,fp0,fcr
+   69| 0011A8 fnmsub   FF7CE6FC   2     FNMS      fp27=fp28,fp28,fp27,fcr
+   91| 0011AC fmul     FDAD05F2   2     MFL       fp13=fp13,fp23,fcr
+    0| 0011B0 bc       42400244   1     BCF       ctr=CL.259,taken=0%(0,100)
+    0| 0011B4 stfd     DB5F00F0   1     STFL      #SPILL45(gr31,240)=fp26
+    0| 0011B8 stfd     D85F00D0   1     STFL      #SPILL41(gr31,208)=fp2
+    0| 0011BC stfd     DBDF00E8   1     STFL      #SPILL44(gr31,232)=fp30
+    0| 0011C0 stfd     D9FF00B8   1     STFL      #SPILL38(gr31,184)=fp15
+    0| 0011C4 stfd     D81F00C0   1     STFL      #SPILL39(gr31,192)=fp0
+    0| 0011C8 ori      60210000   1     XNOP      
+    0| 0011CC ori      60210000   1     XNOP      
+    0|                              CL.260:
+    0| 0011D0 lfd      CBBF00E8   1     LFL       fp29=#SPILL44(gr31,232)
+   56| 0011D4 lfdu     CFCB0008   1     LFDU      fp30,gr11=erold[](gr11,8)
+   69| 0011D8 qvfre    1380F830   1     QVFRE     fp28=fp31
+   91| 0011DC stfdu    DDB60008   1     STFDU     gr22,dfc[](gr22,8)=fp13
+   69| 0011E0 fmsub    FEE51EF8   1     FMS       fp23=fp3,fp5,fp27,fcr
+   69| 0011E4 fmadd    FED814FA   2     FMA       fp22=fp2,fp24,fp19,fcr
+   56| 0011E8 lfdu     CF5E0008   1     LFDU      fp26,gr30=erold[](gr30,8)
+   60| 0011EC lfdu     CEAC0008   1     LFDU      fp21,gr12=erold[](gr12,8)
+   60| 0011F0 lfdu     CDBD0008   1     LFDU      fp13,gr29=erold[](gr29,8)
+   69| 0011F4 fmsub    FE9F1F38   1     FMS       fp20=fp3,fp31,fp28,fcr
+   69| 0011F8 fnmsub   FF7BDDFC   2     FNMS      fp27=fp27,fp27,fp23,fcr
+   69| 0011FC fmul     FF1805B2   2     MFL       fp24=fp24,fp22,fcr
+   69| 001200 fnabs    FEE03110   2     NABSFL    fp23=fp6
+    0| 001204 lfd      CADF00A0   1     LFL       fp22=#SPILL35(gr31,160)
+   60| 001208 fsub     FEBAA828   1     SFL       fp21=fp26,fp21,fcr
+   69| 00120C fnmsub   FF9CE53C   2     FNMS      fp28=fp28,fp28,fp20,fcr
+   57| 001210 lfdu     CE9C0008   1     LFDU      fp20,gr28=dx1bi(gr28,8)
+   69| 001214 fmul     FD080632   1     MFL       fp8=fp8,fp24,fcr
+   63| 001218 fsub     FE7AF028   2     SFL       fp19=fp26,fp30,fcr
+   60| 00121C fsub     FDBE6828   2     SFL       fp13=fp30,fp13,fcr
+   60| 001220 fmul     FEBD0572   2     MFL       fp21=fp29,fp21,fcr
+   69| 001224 fmsub    FE5F1F38   2     FMS       fp18=fp3,fp31,fp28,fcr
+   69| 001228 fmadd    FF073E3A   2     FMA       fp24=fp7,fp7,fp24,fcr
+   69| 00122C fmadd    FCE641FA   2     FMA       fp7=fp8,fp6,fp7,fcr
+   57| 001230 fsub     FD1A4828   2     SFL       fp8=fp26,fp9,fcr
+   63| 001234 fmul     FD3305B2   2     MFL       fp9=fp19,fp22,fcr
+   60| 001238 fmadd    FDADAF7A   2     FMA       fp13=fp21,fp13,fp29,fcr
+   69| 00123C fnmsub   FFBCE4BC   2     FNMS      fp29=fp28,fp28,fp18,fcr
+   69| 001240 fmul     FF9802F2   2     MFL       fp28=fp24,fp11,fcr
+   69| 001244 fmsub    FF0731F8   2     FMS       fp24=fp6,fp7,fp7,fcr
+   63| 001248 lfdu     CEDB0008   1     LFDU      fp22,gr27=g2bi(gr27,8)
+   57| 00124C fsub     FD5E5028   1     SFL       fp10=fp30,fp10,fcr
+   57| 001250 fmul     FD140232   2     MFL       fp8=fp20,fp8,fcr
+   63| 001254 fmul     FDAD02F2   2     MFL       fp13=fp13,fp11,fcr
+   69| 001258 fadd     FEBDE82A   2     AFL       fp21=fp29,fp29,fcr
+   69| 00125C fnmsub   FCF83F3C   2     FNMS      fp7=fp7,fp24,fp28,fcr
+   63| 001260 lfdu     CF9A0008   1     LFDU      fp28,gr26=g31bi(gr26,8)
+   57| 001264 fmadd    FD0A453A   1     FMA       fp8=fp8,fp10,fp20,fcr
+   63| 001268 fmul     FD4D05B2   2     MFL       fp10=fp13,fp22,fcr
+   69| 00126C fmsub    FDBF6578   2     FMS       fp13=fp12,fp31,fp21,fcr
+   69| 001270 fsel     FCD739AE   2     FSEL      fp6=fp23,fp7,fp6
+    0| 001274 lfd      C8FF00F0   1     LFL       fp7=#SPILL45(gr31,240)
+   63| 001278 fmul     FD290732   1     MFL       fp9=fp9,fp28,fcr
+   63| 00127C fmul     FD0802F2   2     MFL       fp8=fp8,fp11,fcr
+   63| 001280 fmul     FD4A02B2   2     MFL       fp10=fp10,fp10,fcr
+   69| 001284 fnmsub   FDBDAB7C   2     FNMS      fp13=fp21,fp29,fp13,fcr
+   69| 001288 fadd     FF86302A   2     AFL       fp28=fp6,fp6,fcr
+    0| 00128C lfd      CBFF0088   1     LFL       fp31=#SPILL27(gr31,136)
+   69| 001290 fadd     FFBED02A   1     AFL       fp29=fp30,fp26,fcr
+   63| 001294 fmul     FCC901F2   2     MFL       fp6=fp9,fp7,fcr
+   69| 001298 fmadd    FCE8523A   2     FMA       fp7=fp10,fp8,fp8,fcr
+   69| 00129C fmul     FD1C0372   2     MFL       fp8=fp28,fp13,fcr
+   91| 0012A0 fmr      FD20D090   2     LRFL      fp9=fp26
+   69| 0012A4 fsub     FF9FE828   2     SFL       fp28=fp31,fp29,fcr
+   91| 0012A8 fmr      FD40F090   2     LRFL      fp10=fp30
+   69| 0012AC fmadd    FCC639BA   2     FMA       fp6=fp7,fp6,fp6,fcr
+   69| 0012B0 fmul     FF0806F2   2     MFL       fp24=fp8,fp27,fcr
+    0| 0012B4 fmr      FFC02890   2     LRFL      fp30=fp5
+   69| 0012B8 fsel     FCBCEFEE   2     FSEL      fp5=fp28,fp29,fp31
+    0| 0012BC lfd      CBFF00B8   1     LFL       fp31=#SPILL38(gr31,184)
+   69| 0012C0 frsqrte  FCE03034   1     FRSQRE    fp7=fp6
+   69| 0012C4 fmsub    FF5E4638   2     FMS       fp26=fp8,fp30,fp24,fcr
+    0| 0012C8 lfd      CA3F0098   1     LFL       fp17=#SPILL29(gr31,152)
+    0| 0012CC stfd     DA3F0148   1     STFL      #SPILL56(gr31,328)=fp17
+   69| 0012D0 lfdux    7FD744EE   1     LFDU      fp30,gr23=kapr(gr23,gr8,0)
+   69| 0012D4 lfdux    7FB944EE   1     LFDU      fp29,gr25=kapr(gr25,gr8,0)
+   69| 0012D8 qvfre    13802830   1     QVFRE     fp28=fp5
+   69| 0012DC fmul     FD0601F2   1     MFL       fp8=fp6,fp7,fcr
+   69| 0012E0 fnmsub   FF7BC6BC   2     FNMS      fp27=fp24,fp27,fp26,fcr
+   82| 0012E4 bc       409E00DC   1     BF        CL.261,cr7,0x4/eq,taken=50%(0,0)
+   86| 0012E8 lfs      C2A50030   1     LFS       fp21=+CONSTANT_AREA(gr5,48)
+   86| 0012EC fmul     FEFB06F2   1     MFL       fp23=fp27,fp27,fcr
+   86| 0012F0 lfs      C2850034   1     LFS       fp20=+CONSTANT_AREA(gr5,52)
+   86| 0012F4 fmadd    FF5B1B3A   1     FMA       fp26=fp3,fp27,fp12,fcr
+   86| 0012F8 lfs      C2C50038   1     LFS       fp22=+CONSTANT_AREA(gr5,56)
+   86| 0012FC fadd     FF3B182A   1     AFL       fp25=fp27,fp3,fcr
+   86| 001300 fmadd    FEF7AD3A   2     FMA       fp23=fp21,fp23,fp20,fcr
+   86| 001304 fnabs    FEA0D110   2     NABSFL    fp21=fp26
+   86| 001308 fsub     FF16D828   2     SFL       fp24=fp22,fp27,fcr
+   86| 00130C frsqrte  FEC0D034   2     FRSQRE    fp22=fp26
+   86| 001310 frsqrte  FE80B834   2     FRSQRE    fp20=fp23
+   86| 001314 fnabs    FE40B910   2     NABSFL    fp18=fp23
+   86| 001318 fmul     FE7A05B2   2     MFL       fp19=fp26,fp22,fcr
+   86| 00131C fmul     FE370532   2     MFL       fp17=fp23,fp20,fcr
+   86| 001320 fmadd    FE16FCFA   2     FMA       fp16=fp31,fp22,fp19,fcr
+   86| 001324 fmadd    FDF4FC7A   2     FMA       fp15=fp31,fp20,fp17,fcr
+   86| 001328 fmadd    FDD0083A   2     FMA       fp14=fp1,fp16,fp0,fcr
+   86| 00132C fmadd    FC0F083A   2     FMA       fp0=fp1,fp15,fp0,fcr
+   86| 001330 fmadd    FDD013BA   2     FMA       fp14=fp2,fp16,fp14,fcr
+   86| 001334 fmadd    FC0F103A   2     FMA       fp0=fp2,fp15,fp0,fcr
+   86| 001338 fmul     FC5003B2   2     MFL       fp2=fp16,fp14,fcr
+   86| 00133C fmul     FC0F0032   2     MFL       fp0=fp15,fp0,fcr
+   86| 001340 fmul     FE7300B2   2     MFL       fp19=fp19,fp2,fcr
+   86| 001344 fmadd    FC56B0BA   2     FMA       fp2=fp22,fp22,fp2,fcr
+   86| 001348 fmul     FE310032   2     MFL       fp17=fp17,fp0,fcr
+   86| 00134C fmadd    FC14A03A   2     FMA       fp0=fp20,fp20,fp0,fcr
+   86| 001350 fmadd    FEDA9DBA   2     FMA       fp22=fp19,fp26,fp22,fcr
+   86| 001354 fmul     FC4202F2   2     MFL       fp2=fp2,fp11,fcr
+   86| 001358 fmadd    FE978D3A   2     FMA       fp20=fp17,fp23,fp20,fcr
+   86| 00135C fmul     FC0002F2   2     MFL       fp0=fp0,fp11,fcr
+   86| 001360 fmsub    FE76D5B8   2     FMS       fp19=fp26,fp22,fp22,fcr
+   86| 001364 fmsub    FE34BD38   2     FMS       fp17=fp23,fp20,fp20,fcr
+   86| 001368 fnmsub   FC53B0BC   2     FNMS      fp2=fp22,fp19,fp2,fcr
+   86| 00136C fnmsub   FC11A03C   2     FNMS      fp0=fp20,fp17,fp0,fcr
+   86| 001370 fsel     FC5516AE   2     FSEL      fp2=fp21,fp2,fp26
+   86| 001374 fsel     FF5205EE   2     FSEL      fp26=fp18,fp0,fp23
+   86| 001378 fadd     FC19102A   2     AFL       fp0=fp25,fp2,fcr
+   86| 00137C fadd     FC5A202A   2     AFL       fp2=fp26,fp4,fcr
+   86| 001380 qvfre    13400030   1     QVFRE     fp26=fp0
+   86| 001384 qvfre    13201030   1     QVFRE     fp25=fp2
+   86| 001388 fmsub    FEE01EB8   1     FMS       fp23=fp3,fp0,fp26,fcr
+   86| 00138C fmsub    FEC21E78   2     FMS       fp22=fp3,fp2,fp25,fcr
+   86| 001390 fnmsub   FF5AD5FC   2     FNMS      fp26=fp26,fp26,fp23,fcr
+   86| 001394 fnmsub   FF39CDBC   2     FNMS      fp25=fp25,fp25,fp22,fcr
+   86| 001398 fmsub    FEE01EB8   2     FMS       fp23=fp3,fp0,fp26,fcr
+   86| 00139C fmsub    FEC21E78   2     FMS       fp22=fp3,fp2,fp25,fcr
+   86| 0013A0 fnmsub   FF5AD5FC   2     FNMS      fp26=fp26,fp26,fp23,fcr
+   86| 0013A4 fnmsub   FF39CDBC   2     FNMS      fp25=fp25,fp25,fp22,fcr
+   86| 0013A8 fmsub    FC001EB8   2     FMS       fp0=fp3,fp0,fp26,fcr
+   86| 0013AC fadd     FEF9C82A   2     AFL       fp23=fp25,fp25,fcr
+   86| 0013B0 fnmsub   FC1AD03C   2     FNMS      fp0=fp26,fp26,fp0,fcr
+   86| 0013B4 fmsub    FC4265F8   2     FMS       fp2=fp12,fp2,fp23,fcr
+   86| 0013B8 fnmsub   FC59B8BC   2     FNMS      fp2=fp23,fp25,fp2,fcr
+   86| 0013BC fsel     FF3800AE   2     FSEL      fp25=fp24,fp0,fp2
+   90|                              CL.261:
+   91| 0013C0 lfd      CADF0148   1     LFL       fp22=#SPILL56(gr31,328)
+   91| 0013C4 fmul     FEF905B2   1     MFL       fp23=fp25,fp22,fcr
+    0| 0013C8 lfd      C81F00C0   1     LFL       fp0=#SPILL39(gr31,192)
+   69| 0013CC fmsub    FF451F38   1     FMS       fp26=fp3,fp5,fp28,fcr
+   69| 0013D0 fmadd    FF07FA3A   2     FMA       fp24=fp31,fp7,fp8,fcr
+    0| 0013D4 lfd      C85F00D0   1     LFL       fp2=#SPILL41(gr31,208)
+   69| 0013D8 fadd     FFFEE82A   1     AFL       fp31=fp30,fp29,fcr
+   91| 0013DC fmul     FDAD05F2   2     MFL       fp13=fp13,fp23,fcr
+   69| 0013E0 stfdu    DF780008   2     STFDU     gr24,r[].rns6.(gr24,8)=fp27
+   69| 0013E4 fnmsub   FF7CE6BC   1     FNMS      fp27=fp28,fp28,fp26,fcr
+   69| 0013E8 fmadd    FE78083A   2     FMA       fp19=fp1,fp24,fp0,fcr
+    0| 0013EC bc       4200FDE4   1     BCT       ctr=CL.260,taken=100%(100,0)
+    0| 0013F0 lfd      C9FF00B8   1     LFL       fp15=#SPILL38(gr31,184)
+    0|                              CL.259:
+   91| 0013F4 stfdu    DDB60008   1     STFDU     gr22,dfc[](gr22,8)=fp13
+    0|                              CL.256:
+   69| 0013F8 qvfre    1120F830   1     QVFRE     fp9=fp31
+   69| 0013FC fmadd    FD5814FA   1     FMA       fp10=fp2,fp24,fp19,fcr
+   69| 001400 fnabs    FDA03110   2     NABSFL    fp13=fp6
+   69| 001404 fmsub    FFC51EF8   2     FMS       fp30=fp3,fp5,fp27,fcr
+   69| 001408 fmsub    FFBF1A78   2     FMS       fp29=fp3,fp31,fp9,fcr
+   69| 00140C fmul     FD5802B2   2     MFL       fp10=fp24,fp10,fcr
+   69| 001410 fnmsub   FFDBDFBC   2     FNMS      fp30=fp27,fp27,fp30,fcr
+   69| 001414 fnmsub   FD294F7C   2     FNMS      fp9=fp9,fp9,fp29,fcr
+   69| 001418 fmul     FD0802B2   2     MFL       fp8=fp8,fp10,fcr
+   69| 00141C fmadd    FD473ABA   2     FMA       fp10=fp7,fp7,fp10,fcr
+   69| 001420 fmsub    FFBF1A78   2     FMS       fp29=fp3,fp31,fp9,fcr
+   69| 001424 fmadd    FCE641FA   2     FMA       fp7=fp8,fp6,fp7,fcr
+   69| 001428 fmul     FD0A02F2   2     MFL       fp8=fp10,fp11,fcr
+   69| 00142C fnmsub   FD294F7C   2     FNMS      fp9=fp9,fp9,fp29,fcr
+   69| 001430 fmsub    FD4731F8   2     FMS       fp10=fp6,fp7,fp7,fcr
+   69| 001434 fadd     FFA9482A   2     AFL       fp29=fp9,fp9,fcr
+   69| 001438 fnmsub   FCEA3A3C   2     FNMS      fp7=fp7,fp10,fp8,fcr
+   69| 00143C fmsub    FD1F6778   2     FMS       fp8=fp12,fp31,fp29,fcr
+   69| 001440 fsel     FCED39AE   2     FSEL      fp7=fp13,fp7,fp6
+   69| 001444 fnmsub   FCC9EA3C   2     FNMS      fp6=fp29,fp9,fp8,fcr
+   69| 001448 fadd     FCE7382A   2     AFL       fp7=fp7,fp7,fcr
+   69| 00144C fmul     FCE701B2   2     MFL       fp7=fp7,fp6,fcr
+   69| 001450 fmul     FD0707B2   2     MFL       fp8=fp7,fp30,fcr
+   69| 001454 fmsub    FCA53A38   2     FMS       fp5=fp7,fp5,fp8,fcr
+   69| 001458 fnmsub   FCBE417C   2     FNMS      fp5=fp8,fp30,fp5,fcr
+   82| 00145C bc       409E00DC   1     BF        CL.257,cr7,0x4/eq,taken=50%(0,0)
+   86| 001460 lfs      C2A50030   1     LFS       fp21=+CONSTANT_AREA(gr5,48)
+   86| 001464 lfs      C2850034   1     LFS       fp20=+CONSTANT_AREA(gr5,52)
+   86| 001468 lfs      C2C50038   1     LFS       fp22=+CONSTANT_AREA(gr5,56)
+   86| 00146C fmul     FD450172   1     MFL       fp10=fp5,fp5,fcr
+   86| 001470 fmadd    FCE51B3A   2     FMA       fp7=fp3,fp5,fp12,fcr
+   86| 001474 fadd     FD05182A   2     AFL       fp8=fp5,fp3,fcr
+   86| 001478 fsub     FD362828   2     SFL       fp9=fp22,fp5,fcr
+   86| 00147C fmadd    FD4AAD3A   2     FMA       fp10=fp21,fp10,fp20,fcr
+   86| 001480 frsqrte  FDA03834   2     FRSQRE    fp13=fp7
+   86| 001484 fnabs    FFE03910   2     NABSFL    fp31=fp7
+   86| 001488 frsqrte  FFC05034   2     FRSQRE    fp30=fp10
+   86| 00148C fmul     FFA70372   2     MFL       fp29=fp7,fp13,fcr
+   86| 001490 fnabs    FF805110   2     NABSFL    fp28=fp10
+   86| 001494 fmul     FF6A07B2   2     MFL       fp27=fp10,fp30,fcr
+   86| 001498 fmadd    FF4D7F7A   2     FMA       fp26=fp15,fp13,fp29,fcr
+   86| 00149C fmadd    FF3E7EFA   2     FMA       fp25=fp15,fp30,fp27,fcr
+   86| 0014A0 fmadd    FF1A083A   2     FMA       fp24=fp1,fp26,fp0,fcr
+   86| 0014A4 fmadd    FEF9083A   2     FMA       fp23=fp1,fp25,fp0,fcr
+   86| 0014A8 fmadd    FF1A163A   2     FMA       fp24=fp2,fp26,fp24,fcr
+   86| 0014AC fmadd    FEF915FA   2     FMA       fp23=fp2,fp25,fp23,fcr
+   86| 0014B0 fmul     FF5A0632   2     MFL       fp26=fp26,fp24,fcr
+   86| 0014B4 fmul     FF3905F2   2     MFL       fp25=fp25,fp23,fcr
+   86| 0014B8 fmul     FFBD06B2   2     MFL       fp29=fp29,fp26,fcr
+   86| 0014BC fmadd    FF4D6EBA   2     FMA       fp26=fp13,fp13,fp26,fcr
+   86| 0014C0 fmul     FF7B0672   2     MFL       fp27=fp27,fp25,fcr
+   86| 0014C4 fmadd    FF3EF67A   2     FMA       fp25=fp30,fp30,fp25,fcr
+   86| 0014C8 fmadd    FDA7EB7A   2     FMA       fp13=fp29,fp7,fp13,fcr
+   86| 0014CC fmul     FFBA02F2   2     MFL       fp29=fp26,fp11,fcr
+   86| 0014D0 fmadd    FFCADFBA   2     FMA       fp30=fp27,fp10,fp30,fcr
+   86| 0014D4 fmul     FF7902F2   2     MFL       fp27=fp25,fp11,fcr
+   86| 0014D8 fmsub    FF4D3B78   2     FMS       fp26=fp7,fp13,fp13,fcr
+   86| 0014DC fmsub    FF3E57B8   2     FMS       fp25=fp10,fp30,fp30,fcr
+   86| 0014E0 fnmsub   FDBA6F7C   2     FNMS      fp13=fp13,fp26,fp29,fcr
+   86| 0014E4 fnmsub   FFD9F6FC   2     FNMS      fp30=fp30,fp25,fp27,fcr
+   86| 0014E8 fsel     FCFF69EE   2     FSEL      fp7=fp31,fp13,fp7
+   86| 0014EC fsel     FD5CF2AE   2     FSEL      fp10=fp28,fp30,fp10
+   86| 0014F0 fadd     FCE8382A   2     AFL       fp7=fp8,fp7,fcr
+   86| 0014F4 fadd     FD0A202A   2     AFL       fp8=fp10,fp4,fcr
+   86| 0014F8 qvfre    11403830   1     QVFRE     fp10=fp7
+   86| 0014FC qvfre    11A04030   1     QVFRE     fp13=fp8
+   86| 001500 fmsub    FFE71AB8   1     FMS       fp31=fp3,fp7,fp10,fcr
+   86| 001504 fmsub    FFC81B78   2     FMS       fp30=fp3,fp8,fp13,fcr
+   86| 001508 fnmsub   FD4A57FC   2     FNMS      fp10=fp10,fp10,fp31,fcr
+   86| 00150C fnmsub   FDAD6FBC   2     FNMS      fp13=fp13,fp13,fp30,fcr
+   86| 001510 fmsub    FFE71AB8   2     FMS       fp31=fp3,fp7,fp10,fcr
+   86| 001514 fmsub    FFC81B78   2     FMS       fp30=fp3,fp8,fp13,fcr
+   86| 001518 fnmsub   FD4A57FC   2     FNMS      fp10=fp10,fp10,fp31,fcr
+   86| 00151C fnmsub   FDAD6FBC   2     FNMS      fp13=fp13,fp13,fp30,fcr
+   86| 001520 fmsub    FCE71AB8   2     FMS       fp7=fp3,fp7,fp10,fcr
+   86| 001524 fadd     FFED682A   2     AFL       fp31=fp13,fp13,fcr
+   86| 001528 fnmsub   FCEA51FC   2     FNMS      fp7=fp10,fp10,fp7,fcr
+   86| 00152C fmsub    FD0867F8   2     FMS       fp8=fp12,fp8,fp31,fcr
+   86| 001530 fnmsub   FD0DFA3C   2     FNMS      fp8=fp31,fp13,fp8,fcr
+   86| 001534 fsel     FF293A2E   2     FSEL      fp25=fp9,fp7,fp8
+   90|                              CL.257:
+   91| 001538 lfd      C8FF0098   1     LFL       fp7=#SPILL29(gr31,152)
+   69| 00153C stfdu    DCB80008   1     STFDU     gr24,r[].rns6.(gr24,8)=fp5
+   91| 001540 fmul     FCB901F2   1     MFL       fp5=fp25,fp7,fcr
+   91| 001544 fmul     FCA60172   2     MFL       fp5=fp6,fp5,fcr
+   91| 001548 stfdu    DCB60008   2     STFDU     gr22,dfc[](gr22,8)=fp5
+    0| 00154C b        4BFFF850   1     B         CL.40,-1
+    0|                              CL.335:
+   98| 001550 ld       E8210000   1     L8        gr1=#stack(gr1,0),gr31"
+   98| 001554 ld       E9C1FEE0   1     L8        gr14=#stack(gr1,-288)
+   98| 001558 ld       E9E1FEE8   1     L8        gr15=#stack(gr1,-280)
+   98| 00155C ld       EA01FEF0   1     L8        gr16=#stack(gr1,-272)
+   98| 001560 ld       EA21FEF8   1     L8        gr17=#stack(gr1,-264)
+   98| 001564 ld       EA41FF00   1     L8        gr18=#stack(gr1,-256)
+   98| 001568 ld       EA61FF08   1     L8        gr19=#stack(gr1,-248)
+   98| 00156C ld       EA81FF10   1     L8        gr20=#stack(gr1,-240)
+   98| 001570 ld       EAA1FF18   1     L8        gr21=#stack(gr1,-232)
+   98| 001574 ld       EAC1FF20   1     L8        gr22=#stack(gr1,-224)
+   98| 001578 ld       EAE1FF28   1     L8        gr23=#stack(gr1,-216)
+   98| 00157C ld       EB01FF30   1     L8        gr24=#stack(gr1,-208)
+   98| 001580 ld       EB21FF38   1     L8        gr25=#stack(gr1,-200)
+   98| 001584 ld       EB41FF40   1     L8        gr26=#stack(gr1,-192)
+   98| 001588 ld       EB61FF48   1     L8        gr27=#stack(gr1,-184)
+   98| 00158C ld       EB81FF50   1     L8        gr28=#stack(gr1,-176)
+   98| 001590 ld       EBA1FF58   1     L8        gr29=#stack(gr1,-168)
+   98| 001594 ld       EBC1FF60   1     L8        gr30=#stack(gr1,-160)
+   98| 001598 ld       EBE1FF68   1     L8        gr31=#stack(gr1,-152)
+   98| 00159C bclr     4E800020   1     BA        lr
+   54|                              CL.334:
+   98| 0015A0 ld       E8210000   1     L8        gr1=#stack(gr1,0),gr31"
+   98| 0015A4 ld       EB21FF38   1     L8        gr25=#stack(gr1,-200)
+   98| 0015A8 ld       EB41FF40   1     L8        gr26=#stack(gr1,-192)
+   98| 0015AC ld       EB61FF48   1     L8        gr27=#stack(gr1,-184)
+   98| 0015B0 ld       EB81FF50   1     L8        gr28=#stack(gr1,-176)
+   98| 0015B4 ld       EBA1FF58   1     L8        gr29=#stack(gr1,-168)
+   98| 0015B8 ld       EBC1FF60   1     L8        gr30=#stack(gr1,-160)
+   98| 0015BC ld       EBE1FF68   1     L8        gr31=#stack(gr1,-152)
+   98| 0015C0 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 0015C4        00000000 00012220 92120000 000015C4 1F
+     |               Instruction count         1393
+     |               Straight-line exec time   1917
+     |               Constant Area
+     | 000000        00000000 3F000000 BF800000 BEA00000 3EC00000 BF000000
+     | 000018        40000000 3F800000 2B617F7D 4ED8C33E 40C00000 40400000
+     | 000030        41100000 41400000 3FC00000 50DF5CC9
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    difco3.f90                  07/08/15   15:47:33
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     105
+1501-510  Compilation successful for file difco3.f90.
+1501-543  Object file created.

@@ -1,0 +1,1801 @@
+IBM XL Fortran for Blue Gene, V14.1 (5799-AH1) Version 14.01.0000.0012 --- linpck.f90 07/08/15 15:48:46
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** isamax   === End of Compilation 1 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+1586-538 (I) Loop (loop index 1) at linpck.f90 <line 26> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 1) at linpck.f90 <line 26> was not SIMD vectorized because it contains control flow.
+1586-538 (I) Loop (loop index 2) at linpck.f90 <line 37> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 2) at linpck.f90 <line 37> was not SIMD vectorized because it contains control flow.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"2">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+     6|         INTEGER*4 FUNCTION isamax (n, sx, incx)
+    16|           IF (.NOT.(n < 1)) GOTO lab_1
+                  RETURN
+                  lab_1
+    18|           IF (.NOT.(n == 1)) GOTO lab_2
+                  RETURN
+                  lab_2
+    17|           isamax.rnn5 = 1
+    19|           IF (incx == 1) GOTO lab_4
+    26|           IF ((int(n) - 1 > 0)) THEN
+    24|             smax = abs(sx(1))
+    26|             $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((int(n) - 1))-1
+    27|               IF (.NOT.abs(sx(1 + (int(incx) * $$CIV0 + int(incx)))) <= &
+                &       smax) THEN
+    28|                 isamax.rnn5 = int($$CIV0) + 2
+    29|                 smax = abs(sx(1 + (int(incx) * $$CIV0 + int(incx))))
+    30|               ENDIF
+    31|             ENDDO
+                  ENDIF
+    32|           RETURN
+    36|           lab_4
+    37|           IF ((int(n) - 1 > 0)) THEN
+    36|             smax.rnn3 = abs(sx(1))
+    37|             $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int((int(n) - 1))-1
+    38|               IF (.NOT.abs(sx($$CIV1 + 2)) <= smax.rnn3) THEN
+    39|                 isamax.rnn5 = int($$CIV1) + 2
+    40|                 smax.rnn3 = abs(sx($$CIV1 + 2))
+    41|               ENDIF
+                    ENDDO
+                  ENDIF
+    42|           RETURN
+    43|         END FUNCTION isamax
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            26             1    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            26             1    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+         0            37             2    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            37             2    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+
+
+     6|         INTEGER*4 FUNCTION isamax (n, sx, incx)
+    16|           IF (.NOT.(n < 1)) GOTO lab_1
+                  RETURN
+                  lab_1
+    18|           IF (.NOT.(n == 1)) GOTO lab_2
+                  RETURN
+                  lab_2
+    17|           isamax.rnn5 = 1
+    19|           IF (incx == 1) GOTO lab_4
+    26|           IF ((int(n) - 1 > 0)) THEN
+    24|             smax = abs(sx(1))
+    26|             $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((int(n) - 1))-1
+    27|               IF (.NOT.abs(sx(1 + (int(incx) * $$CIV0 + int(incx)))) <= &
+                &       smax) THEN
+    28|                 isamax.rnn5 = int($$CIV0) + 2
+    29|                 smax = abs(sx(1 + (int(incx) * $$CIV0 + int(incx))))
+    30|               ENDIF
+    31|             ENDDO
+                  ENDIF
+    32|           RETURN
+    36|           lab_4
+    37|           IF ((int(n) - 1 > 0)) THEN
+    36|             smax.rnn3 = abs(sx(1))
+    37|             $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int((int(n) - 1))-1
+    38|               IF (.NOT.abs(sx($$CIV1 + 2)) <= smax.rnn3) THEN
+    39|                 isamax.rnn5 = int($$CIV1) + 2
+    40|                 smax.rnn3 = abs(sx($$CIV1 + 2))
+    41|               ENDIF
+                    ENDDO
+                  ENDIF
+    42|           RETURN
+    43|         END FUNCTION isamax
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   s--s ssss s--- ----  ---- ---- ---- ----
+ FPR's set/used:   ssss ss-- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ss-- ----
+     | 000000                           PDEF     isamax
+    6|                                  PROC      .n,.sx,.incx,gr3-gr5
+   16| 000000 lwa      E8630002   1     L4A       gr3=n(gr3,0)
+   17| 000004 addi     38000001   1     LI        gr0=1
+   16| 000008 cmpwi    2C030000   1     C4        cr0=gr3,0
+   16| 00000C cmpwi    2C830001   1     C4        cr1=gr3,1
+   16| 000010 bc       408102F8   1     BF        CL.196,cr0,0x2/gt,taken=30%(30,70)
+   18| 000014 bc       418602EC   1     BT        CL.73,cr1,0x4/eq,taken=30%(30,70)
+   19| 000018 lwa      E8A50002   1     L4A       gr5=incx(gr5,0)
+    0| 00001C addic.   3463FFFF   1     AI_R      gr3,cr0=gr3,-1,ca"
+   19| 000020 cmpwi    2C850001   1     C4        cr1=gr5,1
+   19| 000024 bc       41860168   1     BT        CL.4,cr1,0x4/eq,taken=50%(0,0)
+   26| 000028 bc       40810154   1     BF        CL.70,cr0,0x2/gt,taken=30%(30,70)
+   24| 00002C lfd      C8040000   1     LFL       fp0=sx[](gr4,0)
+    0| 000030 rldicl   7866F082   1     SRL8      gr6=gr3,2
+   27| 000034 rldicr   78A51F24   1     SLL8      gr5=gr5,3
+    0| 000038 andi.    70670003   1     RN4_R     gr7,cr0=gr3,0,0x3
+    0| 00003C cmpdi    2CA60000   1     C8        cr1=gr6,0
+   26| 000040 addi     38600000   1     LI        gr3=0
+    0| 000044 mtspr    7CE903A6   1     LCTR      ctr=gr7
+   24| 000048 fabs     FC000210   1     ABSFL     fp0=fp0
+    0| 00004C bc       41820058   1     BT        CL.54,cr0,0x4/eq,taken=50%(0,0)
+   27| 000050 lfdux    7C242CEE   1     LFDU      fp1,gr4=sx[](gr4,gr5,0)
+   27| 000054 fabs     FC200A10   1     ABSFL     fp1=fp1
+   27| 000058 fcmpu    FC010000   2     CFL       cr0=fp1,fp0
+   26| 00005C bc       42400034   1     BCF       ctr=CL.90,taken=0%(0,100)
+    0| 000060 ori      60210000   1     XNOP      
+    0| 000064 ori      60210000   1     XNOP      
+    0| 000068 ori      60210000   1     XNOP      
+   26|                              CL.92:
+   27| 00006C lfdux    7C442CEE   1     LFDU      fp2,gr4=sx[](gr4,gr5,0)
+    0| 000070 fmr      FC600890   1     LRFL      fp3=fp1
+   27| 000074 fabs     FC201210   2     ABSFL     fp1=fp2
+   27| 000078 bc       4081000C   1     BF        CL.93,cr0,0x40/fgt,taken=50%(0,0)
+   28| 00007C addi     38030002   1     AI        gr0=gr3,2
+   29| 000080 fmr      FC001890   1     LRFL      fp0=fp3
+   30|                              CL.93:
+   31| 000084 addi     38630001   1     AI        gr3=gr3,1
+   27| 000088 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 00008C bc       4200FFE0   1     BCT       ctr=CL.92,taken=100%(100,0)
+   26|                              CL.90:
+   27| 000090 bc       4081000C   1     BF        CL.91,cr0,0x40/fgt,taken=50%(0,0)
+   29| 000094 fmr      FC000890   1     LRFL      fp0=fp1
+   28| 000098 addi     38030002   1     AI        gr0=gr3,2
+   30|                              CL.91:
+   31| 00009C addi     38630001   1     AI        gr3=gr3,1
+    0| 0000A0 bc       418600E4   1     BT        CL.197,cr1,0x4/eq,taken=30%(30,70)
+    0|                              CL.54:
+   27| 0000A4 lfdux    7C242CEE   1     LFDU      fp1,gr4=sx[](gr4,gr5,0)
+    0| 0000A8 mtspr    7CC903A6   1     LCTR      ctr=gr6
+   27| 0000AC fabs     FC600A10   1     ABSFL     fp3=fp1
+   27| 0000B0 lfdux    7C242CEE   1     LFDU      fp1,gr4=sx[](gr4,gr5,0)
+   27| 0000B4 fcmpu    FC030000   1     CFL       cr0=fp3,fp0
+   27| 0000B8 lfdux    7C442CEE   1     LFDU      fp2,gr4=sx[](gr4,gr5,0)
+   27| 0000BC fabs     FC200A10   1     ABSFL     fp1=fp1
+   27| 0000C0 bc       4081000C   1     BF        CL.94,cr0,0x40/fgt,taken=50%(0,0)
+   29| 0000C4 fmr      FC001890   1     LRFL      fp0=fp3
+   28| 0000C8 addi     38030002   1     AI        gr0=gr3,2
+   30|                              CL.94:
+   27| 0000CC fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   27| 0000D0 lfdux    7C642CEE   1     LFDU      fp3,gr4=sx[](gr4,gr5,0)
+   27| 0000D4 fabs     FCA01210   1     ABSFL     fp5=fp2
+   27| 0000D8 bc       4081000C   1     BF        CL.95,cr0,0x40/fgt,taken=50%(0,0)
+   29| 0000DC fmr      FC000890   1     LRFL      fp0=fp1
+   28| 0000E0 addi     38030003   1     AI        gr0=gr3,3
+   30|                              CL.95:
+   27| 0000E4 fcmpu    FC050000   1     CFL       cr0=fp5,fp0
+    0| 0000E8 bc       42400078   1     BCF       ctr=CL.96,taken=0%(0,100)
+    0| 0000EC ori      60210000   1     XNOP      
+    0| 0000F0 ori      60210000   1     XNOP      
+    0| 0000F4 ori      60210000   1     XNOP      
+    0|                              CL.99:
+   27| 0000F8 lfdux    7C242CEE   1     LFDU      fp1,gr4=sx[](gr4,gr5,0)
+   27| 0000FC fabs     FC401A10   1     ABSFL     fp2=fp3
+   27| 000100 bc       4081000C   1     BF        CL.100,cr0,0x40/fgt,taken=50%(0,0)
+   28| 000104 addi     38030004   1     AI        gr0=gr3,4
+   29| 000108 fmr      FC002890   1     LRFL      fp0=fp5
+   30|                              CL.100:
+   27| 00010C fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   27| 000110 lfdux    7C642CEE   1     LFDU      fp3,gr4=sx[](gr4,gr5,0)
+   27| 000114 fabs     FC200A10   1     ABSFL     fp1=fp1
+   27| 000118 bc       4081000C   1     BF        CL.101,cr0,0x40/fgt,taken=50%(0,0)
+   28| 00011C addi     38030005   1     AI        gr0=gr3,5
+   29| 000120 fmr      FC001090   1     LRFL      fp0=fp2
+   30|                              CL.101:
+   27| 000124 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   31| 000128 addi     38630004   1     AI        gr3=gr3,4
+   27| 00012C lfdux    7C442CEE   1     LFDU      fp2,gr4=sx[](gr4,gr5,0)
+   27| 000130 fabs     FC801A10   1     ABSFL     fp4=fp3
+   27| 000134 bc       4081000C   1     BF        CL.102,cr0,0x40/fgt,taken=50%(0,0)
+   28| 000138 addi     38030002   1     AI        gr0=gr3,2
+   29| 00013C fmr      FC000890   1     LRFL      fp0=fp1
+   30|                              CL.102:
+   27| 000140 fcmpu    FC040000   1     CFL       cr0=fp4,fp0
+   27| 000144 lfdux    7C642CEE   1     LFDU      fp3,gr4=sx[](gr4,gr5,0)
+   27| 000148 fabs     FCA01210   1     ABSFL     fp5=fp2
+   27| 00014C bc       4081000C   1     BF        CL.103,cr0,0x40/fgt,taken=50%(0,0)
+   28| 000150 addi     38030003   1     AI        gr0=gr3,3
+   29| 000154 fmr      FC002090   1     LRFL      fp0=fp4
+   30|                              CL.103:
+   27| 000158 fcmpu    FC050000   1     CFL       cr0=fp5,fp0
+    0| 00015C bc       4200FF9C   1     BCT       ctr=CL.99,taken=100%(100,0)
+    0|                              CL.96:
+   27| 000160 fabs     FC201A10   1     ABSFL     fp1=fp3
+   27| 000164 bc       4081000C   1     BF        CL.97,cr0,0x40/fgt,taken=50%(0,0)
+   29| 000168 fmr      FC002890   1     LRFL      fp0=fp5
+   28| 00016C addi     38030004   1     AI        gr0=gr3,4
+   30|                              CL.97:
+   27| 000170 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   27| 000174 bc       40810008   1     BF        CL.70,cr0,0x40/fgt,taken=50%(0,0)
+   28| 000178 addi     38030005   1     AI        gr0=gr3,5
+    0|                              CL.70:
+   42| 00017C extsw    7C0307B4   1     EXTS4     gr3=gr0
+    0| 000180 bclr     4E800020   1     BA        lr
+    0|                              CL.197:
+   42| 000184 extsw    7C0307B4   1     EXTS4     gr3=gr0
+    0| 000188 bclr     4E800020   1     BA        lr
+   36|                              CL.4:
+   37| 00018C bc       4081FFF0   1     BF        CL.70,cr0,0x2/gt,taken=50%(0,0)
+   36| 000190 lfd      C8040000   1     LFL       fp0=sx[](gr4,0)
+    0| 000194 rldicl   7866F082   1     SRL8      gr6=gr3,2
+    0| 000198 andi.    70650003   1     RN4_R     gr5,cr0=gr3,0,0x3
+    0| 00019C cmpdi    2CA60000   1     C8        cr1=gr6,0
+   37| 0001A0 addi     38600000   1     LI        gr3=0
+    0| 0001A4 mtspr    7CA903A6   1     LCTR      ctr=gr5
+   36| 0001A8 fabs     FC000210   1     ABSFL     fp0=fp0
+    0| 0001AC bc       4182005C   1     BT        CL.61,cr0,0x4/eq,taken=50%(0,0)
+   38| 0001B0 lfdu     CC240008   1     LFDU      fp1,gr4=sx[](gr4,8)
+   38| 0001B4 fabs     FC200A10   1     ABSFL     fp1=fp1
+   38| 0001B8 fcmpu    FC010000   2     CFL       cr0=fp1,fp0
+    0| 0001BC bc       42400034   1     BCF       ctr=CL.104,taken=0%(0,100)
+    0| 0001C0 ori      60210000   1     XNOP      
+    0| 0001C4 ori      60210000   1     XNOP      
+    0| 0001C8 ori      60210000   1     XNOP      
+    0|                              CL.106:
+   38| 0001CC lfdu     CC440008   1     LFDU      fp2,gr4=sx[](gr4,8)
+   38| 0001D0 addi     38A30002   1     AI        gr5=gr3,2
+   38| 0001D4 bc       4081000C   1     BF        CL.107,cr0,0x40/fgt,taken=50%(0,0)
+   39| 0001D8 or       7CA02B78   1     LR        gr0=gr5
+   40| 0001DC fmr      FC000890   1     LRFL      fp0=fp1
+   41|                              CL.107:
+   38| 0001E0 fabs     FC201210   1     ABSFL     fp1=fp2
+   38| 0001E4 fcmpu    FC010000   2     CFL       cr0=fp1,fp0
+   41| 0001E8 addi     38630001   1     AI        gr3=gr3,1
+    0| 0001EC bc       4200FFE0   1     BCT       ctr=CL.106,taken=100%(100,0)
+    0|                              CL.104:
+   38| 0001F0 addi     38A30002   1     AI        gr5=gr3,2
+   41| 0001F4 addi     38630001   1     AI        gr3=gr3,1
+   38| 0001F8 bc       4081000C   1     BF        CL.105,cr0,0x40/fgt,taken=50%(0,0)
+   40| 0001FC fmr      FC000890   1     LRFL      fp0=fp1
+   39| 000200 or       7CA02B78   2     LR        gr0=gr5
+   41|                              CL.105:
+    0| 000204 bc       4186FF78   1     BT        CL.70,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.61:
+   38| 000208 lfd      C8240008   1     LFL       fp1=sx[](gr4,8)
+   38| 00020C lfd      C8440010   1     LFL       fp2=sx[](gr4,16)
+   38| 000210 lfd      C8840018   1     LFL       fp4=sx[](gr4,24)
+   38| 000214 addi     38A30002   1     AI        gr5=gr3,2
+   38| 000218 lfdu     CC640020   1     LFDU      fp3,gr4=sx[](gr4,32)
+   38| 00021C addi     39030003   1     AI        gr8=gr3,3
+    0| 000220 mtspr    7CC903A6   1     LCTR      ctr=gr6
+   38| 000224 fabs     FC200A10   1     ABSFL     fp1=fp1
+   38| 000228 addi     38C30004   1     AI        gr6=gr3,4
+   38| 00022C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   38| 000230 addi     38E30005   1     AI        gr7=gr3,5
+   38| 000234 fabs     FC401210   1     ABSFL     fp2=fp2
+   38| 000238 fabs     FCA02210   2     ABSFL     fp5=fp4
+   38| 00023C bc       4081000C   1     BF        CL.108,cr0,0x40/fgt,taken=50%(0,0)
+   40| 000240 fmr      FC000890   1     LRFL      fp0=fp1
+   39| 000244 or       7CA02B78   2     LR        gr0=gr5
+   41|                              CL.108:
+   38| 000248 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   38| 00024C bc       4081000C   1     BF        CL.109,cr0,0x40/fgt,taken=50%(0,0)
+   40| 000250 fmr      FC001090   1     LRFL      fp0=fp2
+   39| 000254 or       7D004378   2     LR        gr0=gr8
+   41|                              CL.109:
+   38| 000258 fcmpu    FC050000   1     CFL       cr0=fp5,fp0
+    0| 00025C bc       42400084   1     BCF       ctr=CL.110,taken=0%(0,100)
+    0| 000260 ori      60210000   1     XNOP      
+    0| 000264 ori      60210000   1     XNOP      
+    0|                              CL.113:
+   38| 000268 lfd      C8240008   1     LFL       fp1=sx[](gr4,8)
+   38| 00026C fabs     FC401A10   1     ABSFL     fp2=fp3
+   38| 000270 bc       4081000C   1     BF        CL.114,cr0,0x40/fgt,taken=50%(0,0)
+   39| 000274 or       7CC03378   1     LR        gr0=gr6
+   40| 000278 fmr      FC002890   1     LRFL      fp0=fp5
+   41|                              CL.114:
+   38| 00027C fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   41| 000280 addi     38630004   1     AI        gr3=gr3,4
+   38| 000284 lfd      C8640010   1     LFL       fp3=sx[](gr4,16)
+   38| 000288 fabs     FC200A10   1     ABSFL     fp1=fp1
+   38| 00028C bc       4081000C   1     BF        CL.115,cr0,0x40/fgt,taken=50%(0,0)
+   39| 000290 or       7CE03B78   1     LR        gr0=gr7
+   40| 000294 fmr      FC001090   1     LRFL      fp0=fp2
+   41|                              CL.115:
+   38| 000298 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   38| 00029C addi     38A30002   1     AI        gr5=gr3,2
+   38| 0002A0 lfd      C8440018   1     LFL       fp2=sx[](gr4,24)
+   38| 0002A4 fabs     FC801A10   1     ABSFL     fp4=fp3
+   38| 0002A8 bc       4081000C   1     BF        CL.116,cr0,0x40/fgt,taken=50%(0,0)
+   39| 0002AC or       7CA02B78   1     LR        gr0=gr5
+   40| 0002B0 fmr      FC000890   1     LRFL      fp0=fp1
+   41|                              CL.116:
+   38| 0002B4 fcmpu    FC040000   1     CFL       cr0=fp4,fp0
+   38| 0002B8 addi     38E30005   1     AI        gr7=gr3,5
+   38| 0002BC addi     38A30003   1     AI        gr5=gr3,3
+   38| 0002C0 lfdu     CC640020   1     LFDU      fp3,gr4=sx[](gr4,32)
+   38| 0002C4 fabs     FCA01210   1     ABSFL     fp5=fp2
+   38| 0002C8 bc       4081000C   1     BF        CL.117,cr0,0x40/fgt,taken=50%(0,0)
+   39| 0002CC or       7CA02B78   1     LR        gr0=gr5
+   40| 0002D0 fmr      FC002090   1     LRFL      fp0=fp4
+   41|                              CL.117:
+   38| 0002D4 fcmpu    FC050000   1     CFL       cr0=fp5,fp0
+   38| 0002D8 addi     38C30004   1     AI        gr6=gr3,4
+    0| 0002DC bc       4200FF8C   1     BCT       ctr=CL.113,taken=100%(100,0)
+    0|                              CL.110:
+   38| 0002E0 fabs     FC201A10   1     ABSFL     fp1=fp3
+   38| 0002E4 bc       4081000C   1     BF        CL.111,cr0,0x40/fgt,taken=50%(0,0)
+   40| 0002E8 fmr      FC002890   1     LRFL      fp0=fp5
+   39| 0002EC or       7CC03378   2     LR        gr0=gr6
+   41|                              CL.111:
+   38| 0002F0 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   38| 0002F4 bc       4081FE88   1     BF        CL.70,cr0,0x40/fgt,taken=50%(0,0)
+   39| 0002F8 or       7CE03B78   1     LR        gr0=gr7
+    0| 0002FC b        4BFFFE80   1     B         CL.70,-1
+    0|                              CL.73:
+   18| 000300 addi     38600001   1     LI        gr3=1
+   18| 000304 bclr     4E800020   1     BA        lr
+    0|                              CL.196:
+   16| 000308 addi     38600000   1     LI        gr3=0
+   16| 00030C bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 000310        00000000 00012200 00000000 00000310
+     |               Instruction count          196
+     |               Straight-line exec time    205
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** ismax   === End of Compilation 2 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+1586-538 (I) Loop (loop index 1) at linpck.f90 <line 65> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 1) at linpck.f90 <line 65> was not SIMD vectorized because it contains control flow.
+1586-538 (I) Loop (loop index 2) at linpck.f90 <line 76> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 2) at linpck.f90 <line 76> was not SIMD vectorized because it contains control flow.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"2">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+    45|         INTEGER*4 FUNCTION ismax (n, sx, incx)
+    55|           IF (.NOT.(n < 1)) GOTO lab_1
+                  RETURN
+                  lab_1
+    57|           IF (.NOT.(n == 1)) GOTO lab_2
+                  RETURN
+                  lab_2
+    56|           ismax.rnn10 = 1
+    58|           IF (incx == 1) GOTO lab_4
+    65|           IF ((int(n) - 1 > 0)) THEN
+    63|             smax = sx(1)
+    65|             $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((int(n) - 1))-1
+    66|               IF (.NOT.sx(1 + (int(incx) * $$CIV0 + int(incx))) <= smax)&
+                &        THEN
+    67|                 ismax.rnn10 = int($$CIV0) + 2
+    68|                 smax = sx(1 + (int(incx) * $$CIV0 + int(incx)))
+    69|               ENDIF
+    70|             ENDDO
+                  ENDIF
+    71|           RETURN
+    75|           lab_4
+    76|           IF ((int(n) - 1 > 0)) THEN
+    75|             smax.rnnE = sx(1)
+    76|             $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int((int(n) - 1))-1
+    77|               IF (.NOT.sx($$CIV1 + 2) <= smax.rnnE) THEN
+    78|                 ismax.rnn10 = int($$CIV1) + 2
+    79|                 smax.rnnE = sx($$CIV1 + 2)
+    80|               ENDIF
+                    ENDDO
+                  ENDIF
+    81|           RETURN
+    82|         END FUNCTION ismax
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0            65             1    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            65             1    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+         0            76             2    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0            76             2    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+
+
+    45|         INTEGER*4 FUNCTION ismax (n, sx, incx)
+    55|           IF (.NOT.(n < 1)) GOTO lab_1
+                  RETURN
+                  lab_1
+    57|           IF (.NOT.(n == 1)) GOTO lab_2
+                  RETURN
+                  lab_2
+    56|           ismax.rnn10 = 1
+    58|           IF (incx == 1) GOTO lab_4
+    65|           IF ((int(n) - 1 > 0)) THEN
+    63|             smax = sx(1)
+    65|             $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((int(n) - 1))-1
+    66|               IF (.NOT.sx(1 + (int(incx) * $$CIV0 + int(incx))) <= smax)&
+                &        THEN
+    67|                 ismax.rnn10 = int($$CIV0) + 2
+    68|                 smax = sx(1 + (int(incx) * $$CIV0 + int(incx)))
+    69|               ENDIF
+    70|             ENDDO
+                  ENDIF
+    71|           RETURN
+    75|           lab_4
+    76|           IF ((int(n) - 1 > 0)) THEN
+    75|             smax.rnnE = sx(1)
+    76|             $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int((int(n) - 1))-1
+    77|               IF (.NOT.sx($$CIV1 + 2) <= smax.rnnE) THEN
+    78|                 ismax.rnn10 = int($$CIV1) + 2
+    79|                 smax.rnnE = sx($$CIV1 + 2)
+    80|               ENDIF
+                    ENDDO
+                  ENDIF
+    81|           RETURN
+    82|         END FUNCTION ismax
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   s--s ssss ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ssss ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ss-- ----
+     | 000000                           PDEF     ismax
+   45|                                  PROC      .n,.sx,.incx,gr3-gr5
+   55| 000000 lwa      E8C30002   1     L4A       gr6=n(gr3,0)
+   55| 000004 cmpwi    2C060000   1     C4        cr0=gr6,0
+   55| 000008 cmpwi    2C860001   1     C4        cr1=gr6,1
+   55| 00000C bc       408103F8   1     BF        CL.212,cr0,0x2/gt,taken=30%(30,70)
+   57| 000010 bc       418603EC   1     BT        CL.213,cr1,0x4/eq,taken=30%(30,70)
+   58| 000014 lwa      E8650002   1     L4A       gr3=incx(gr5,0)
+    0| 000018 addic.   34A6FFFF   1     AI_R      gr5,cr0=gr6,-1,ca"
+   56| 00001C addi     38000001   1     LI        gr0=1
+   58| 000020 cmpwi    2C830001   1     C4        cr1=gr3,1
+   58| 000024 bc       418601D8   1     BT        CL.4,cr1,0x4/eq,taken=50%(0,0)
+   65| 000028 bc       408101CC   1     BF        CL.17,cr0,0x2/gt,taken=50%(0,0)
+    0| 00002C rldicl   78A7E8C2   1     SRL8      gr7=gr5,3
+   66| 000030 rldicr   78631F24   1     SLL8      gr3=gr3,3
+    0| 000034 andi.    70A60007   1     RN4_R     gr6,cr0=gr5,0,0x7
+    0| 000038 cmpdi    2CA70000   1     C8        cr1=gr7,0
+   63| 00003C lfd      C8040000   1     LFL       fp0=sx[](gr4,0)
+   65| 000040 addi     38A00000   1     LI        gr5=0
+    0| 000044 bc       41820050   1     BT        CL.54,cr0,0x4/eq,taken=50%(0,0)
+   66| 000048 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+    0| 00004C mtspr    7CC903A6   1     LCTR      ctr=gr6
+   66| 000050 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 000054 bc       4240002C   1     BCF       ctr=CL.82,taken=0%(0,100)
+    0| 000058 ori      60210000   1     XNOP      
+    0| 00005C ori      60210000   1     XNOP      
+    0|                              CL.84:
+   66| 000060 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 000064 bc       4081000C   1     BF        CL.85,cr0,0x40/fgt,taken=50%(0,0)
+   67| 000068 addi     38050002   1     AI        gr0=gr5,2
+   68| 00006C fmr      FC000890   1     LRFL      fp0=fp1
+   69|                              CL.85:
+   70| 000070 addi     38A50001   1     AI        gr5=gr5,1
+   66| 000074 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+    0| 000078 fmr      FC201090   2     LRFL      fp1=fp2
+    0| 00007C bc       4200FFE4   1     BCT       ctr=CL.84,taken=100%(100,0)
+    0|                              CL.82:
+   66| 000080 bc       4081000C   1     BF        CL.83,cr0,0x40/fgt,taken=50%(0,0)
+   68| 000084 fmr      FC000890   1     LRFL      fp0=fp1
+   67| 000088 addi     38050002   1     AI        gr0=gr5,2
+   69|                              CL.83:
+   70| 00008C addi     38A50001   1     AI        gr5=gr5,1
+    0| 000090 bc       41860164   1     BT        CL.17,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.54:
+   66| 000094 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+    0| 000098 mtspr    7CE903A6   1     LCTR      ctr=gr7
+   66| 00009C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 0000A0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 0000A4 bc       4081000C   1     BF        CL.86,cr0,0x40/fgt,taken=50%(0,0)
+   68| 0000A8 fmr      FC000890   1     LRFL      fp0=fp1
+   67| 0000AC addi     38050002   1     AI        gr0=gr5,2
+   69|                              CL.86:
+   66| 0000B0 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   66| 0000B4 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 0000B8 bc       4081000C   1     BF        CL.87,cr0,0x40/fgt,taken=50%(0,0)
+   68| 0000BC fmr      FC001090   1     LRFL      fp0=fp2
+   67| 0000C0 addi     38050003   1     AI        gr0=gr5,3
+   69|                              CL.87:
+   66| 0000C4 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 0000C8 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 0000CC bc       4081000C   1     BF        CL.88,cr0,0x40/fgt,taken=50%(0,0)
+   68| 0000D0 fmr      FC000890   1     LRFL      fp0=fp1
+   67| 0000D4 addi     38050004   1     AI        gr0=gr5,4
+   69|                              CL.88:
+   66| 0000D8 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   66| 0000DC lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 0000E0 bc       4081000C   1     BF        CL.89,cr0,0x40/fgt,taken=50%(0,0)
+   68| 0000E4 fmr      FC001090   1     LRFL      fp0=fp2
+   67| 0000E8 addi     38050005   1     AI        gr0=gr5,5
+   69|                              CL.89:
+   66| 0000EC fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 0000F0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 0000F4 bc       4081000C   1     BF        CL.90,cr0,0x40/fgt,taken=50%(0,0)
+   68| 0000F8 fmr      FC000890   1     LRFL      fp0=fp1
+   67| 0000FC addi     38050006   1     AI        gr0=gr5,6
+   69|                              CL.90:
+   66| 000100 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   66| 000104 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 000108 bc       4081000C   1     BF        CL.91,cr0,0x40/fgt,taken=50%(0,0)
+   68| 00010C fmr      FC001090   1     LRFL      fp0=fp2
+   67| 000110 addi     38050007   1     AI        gr0=gr5,7
+   69|                              CL.91:
+   66| 000114 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 000118 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 00011C bc       4081000C   1     BF        CL.92,cr0,0x40/fgt,taken=50%(0,0)
+   68| 000120 fmr      FC000890   1     LRFL      fp0=fp1
+   67| 000124 addi     38050008   1     AI        gr0=gr5,8
+   69|                              CL.92:
+   66| 000128 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+    0| 00012C bc       424000B4   1     BCF       ctr=CL.93,taken=0%(0,100)
+    0| 000130 ori      60210000   1     XNOP      
+    0| 000134 ori      60210000   1     XNOP      
+    0|                              CL.95:
+   66| 000138 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 00013C bc       4081000C   1     BF        CL.96,cr0,0x40/fgt,taken=50%(0,0)
+   67| 000140 addi     38050009   1     AI        gr0=gr5,9
+   68| 000144 fmr      FC001090   1     LRFL      fp0=fp2
+   69|                              CL.96:
+   70| 000148 addi     38A50008   1     AI        gr5=gr5,8
+   66| 00014C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 000150 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 000154 bc       4081000C   1     BF        CL.97,cr0,0x40/fgt,taken=50%(0,0)
+   67| 000158 addi     38050002   1     AI        gr0=gr5,2
+   68| 00015C fmr      FC000890   1     LRFL      fp0=fp1
+   69|                              CL.97:
+   66| 000160 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   66| 000164 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 000168 bc       4081000C   1     BF        CL.98,cr0,0x40/fgt,taken=50%(0,0)
+   67| 00016C addi     38050003   1     AI        gr0=gr5,3
+   68| 000170 fmr      FC001090   1     LRFL      fp0=fp2
+   69|                              CL.98:
+   66| 000174 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 000178 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 00017C bc       4081000C   1     BF        CL.99,cr0,0x40/fgt,taken=50%(0,0)
+   67| 000180 addi     38050004   1     AI        gr0=gr5,4
+   68| 000184 fmr      FC000890   1     LRFL      fp0=fp1
+   69|                              CL.99:
+   66| 000188 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   66| 00018C lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 000190 bc       4081000C   1     BF        CL.100,cr0,0x40/fgt,taken=50%(0,0)
+   67| 000194 addi     38050005   1     AI        gr0=gr5,5
+   68| 000198 fmr      FC001090   1     LRFL      fp0=fp2
+   69|                              CL.100:
+   66| 00019C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 0001A0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 0001A4 bc       4081000C   1     BF        CL.101,cr0,0x40/fgt,taken=50%(0,0)
+   67| 0001A8 addi     38050006   1     AI        gr0=gr5,6
+   68| 0001AC fmr      FC000890   1     LRFL      fp0=fp1
+   69|                              CL.101:
+   66| 0001B0 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   66| 0001B4 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+   66| 0001B8 bc       4081000C   1     BF        CL.102,cr0,0x40/fgt,taken=50%(0,0)
+   67| 0001BC addi     38050007   1     AI        gr0=gr5,7
+   68| 0001C0 fmr      FC001090   1     LRFL      fp0=fp2
+   69|                              CL.102:
+   66| 0001C4 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   66| 0001C8 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+   66| 0001CC bc       4081000C   1     BF        CL.103,cr0,0x40/fgt,taken=50%(0,0)
+   67| 0001D0 addi     38050008   1     AI        gr0=gr5,8
+   68| 0001D4 fmr      FC000890   1     LRFL      fp0=fp1
+   69|                              CL.103:
+   66| 0001D8 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+    0| 0001DC bc       4200FF5C   1     BCT       ctr=CL.95,taken=100%(100,0)
+    0|                              CL.93:
+   66| 0001E0 bc       40810014   1     BF        CL.17,cr0,0x40/fgt,taken=50%(0,0)
+   67| 0001E4 addi     38050009   1     AI        gr0=gr5,9
+    0| 0001E8 ori      60210000   1     XNOP      
+    0| 0001EC ori      60210000   1     XNOP      
+    0| 0001F0 ori      60210000   1     XNOP      
+   70|                              CL.17:
+   81| 0001F4 extsw    7C0307B4   1     EXTS4     gr3=gr0
+   82| 0001F8 bclr     4E800020   1     BA        lr
+   75|                              CL.4:
+   76| 0001FC bc       4081FFF8   1     BF        CL.17,cr0,0x2/gt,taken=50%(0,0)
+    0| 000200 rldicl   78A3E8C2   1     SRL8      gr3=gr5,3
+    0| 000204 andi.    70A60007   1     RN4_R     gr6,cr0=gr5,0,0x7
+    0| 000208 cmpdi    2CA30000   1     C8        cr1=gr3,0
+   75| 00020C lfd      C8040000   1     LFL       fp0=sx[](gr4,0)
+   76| 000210 addi     38A00000   1     LI        gr5=0
+    0| 000214 bc       41820054   1     BT        CL.65,cr0,0x4/eq,taken=50%(0,0)
+   77| 000218 lfdu     CC240008   1     LFDU      fp1,gr4=sx[](gr4,8)
+    0| 00021C mtspr    7CC903A6   1     LCTR      ctr=gr6
+   77| 000220 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 000224 bc       4240002C   1     BCF       ctr=CL.104,taken=0%(0,100)
+    0| 000228 ori      60210000   1     XNOP      
+    0|                              CL.106:
+   77| 00022C lfdu     CC440008   1     LFDU      fp2,gr4=sx[](gr4,8)
+   77| 000230 addi     38C50002   1     AI        gr6=gr5,2
+   77| 000234 bc       4081000C   1     BF        CL.107,cr0,0x40/fgt,taken=50%(0,0)
+   78| 000238 or       7CC03378   1     LR        gr0=gr6
+   79| 00023C fmr      FC000890   1     LRFL      fp0=fp1
+   80|                              CL.107:
+   77| 000240 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   80| 000244 addi     38A50001   1     AI        gr5=gr5,1
+    0| 000248 fmr      FC201090   1     LRFL      fp1=fp2
+    0| 00024C bc       4200FFE0   1     BCT       ctr=CL.106,taken=100%(100,0)
+    0|                              CL.104:
+   77| 000250 addi     38C50002   1     AI        gr6=gr5,2
+   77| 000254 bc       4081000C   1     BF        CL.105,cr0,0x40/fgt,taken=50%(0,0)
+   79| 000258 fmr      FC000890   1     LRFL      fp0=fp1
+   78| 00025C or       7CC03378   2     LR        gr0=gr6
+   80|                              CL.105:
+   80| 000260 addi     38A50001   1     AI        gr5=gr5,1
+    0| 000264 bc       4186FF90   1     BT        CL.17,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.65:
+   77| 000268 lfd      C8440008   1     LFL       fp2=sx[](gr4,8)
+   77| 00026C addi     38C50002   1     AI        gr6=gr5,2
+    0| 000270 mtspr    7C6903A6   1     LCTR      ctr=gr3
+   77| 000274 lfd      C8240010   1     LFL       fp1=sx[](gr4,16)
+   77| 000278 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 00027C bc       4081000C   1     BF        CL.108,cr0,0x40/fgt,taken=50%(0,0)
+   79| 000280 fmr      FC001090   1     LRFL      fp0=fp2
+   78| 000284 or       7CC03378   2     LR        gr0=gr6
+   80|                              CL.108:
+   77| 000288 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   77| 00028C addi     38650003   1     AI        gr3=gr5,3
+   77| 000290 lfd      C8440018   1     LFL       fp2=sx[](gr4,24)
+   77| 000294 bc       4081000C   1     BF        CL.109,cr0,0x40/fgt,taken=50%(0,0)
+   79| 000298 fmr      FC000890   1     LRFL      fp0=fp1
+   78| 00029C or       7C601B78   2     LR        gr0=gr3
+   80|                              CL.109:
+   77| 0002A0 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 0002A4 addi     38650004   1     AI        gr3=gr5,4
+   77| 0002A8 lfd      C8240020   1     LFL       fp1=sx[](gr4,32)
+   77| 0002AC bc       4081000C   1     BF        CL.110,cr0,0x40/fgt,taken=50%(0,0)
+   79| 0002B0 fmr      FC001090   1     LRFL      fp0=fp2
+   78| 0002B4 or       7C601B78   2     LR        gr0=gr3
+   80|                              CL.110:
+   77| 0002B8 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   77| 0002BC addi     38650005   1     AI        gr3=gr5,5
+   77| 0002C0 lfd      C8440028   1     LFL       fp2=sx[](gr4,40)
+   77| 0002C4 addi     38C50009   1     AI        gr6=gr5,9
+   77| 0002C8 bc       4081000C   1     BF        CL.111,cr0,0x40/fgt,taken=50%(0,0)
+   79| 0002CC fmr      FC000890   1     LRFL      fp0=fp1
+   78| 0002D0 or       7C601B78   2     LR        gr0=gr3
+   80|                              CL.111:
+   77| 0002D4 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 0002D8 addi     38650006   1     AI        gr3=gr5,6
+   77| 0002DC lfd      C8240030   1     LFL       fp1=sx[](gr4,48)
+   77| 0002E0 bc       4081000C   1     BF        CL.112,cr0,0x40/fgt,taken=50%(0,0)
+   79| 0002E4 fmr      FC001090   1     LRFL      fp0=fp2
+   78| 0002E8 or       7C601B78   2     LR        gr0=gr3
+   80|                              CL.112:
+   77| 0002EC fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   77| 0002F0 addi     38650007   1     AI        gr3=gr5,7
+   77| 0002F4 lfd      C8440038   1     LFL       fp2=sx[](gr4,56)
+   77| 0002F8 bc       4081000C   1     BF        CL.113,cr0,0x40/fgt,taken=50%(0,0)
+   79| 0002FC fmr      FC000890   1     LRFL      fp0=fp1
+   78| 000300 or       7C601B78   2     LR        gr0=gr3
+   80|                              CL.113:
+   77| 000304 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 000308 addi     38650008   1     AI        gr3=gr5,8
+   77| 00030C lfdu     CC240040   1     LFDU      fp1,gr4=sx[](gr4,64)
+   77| 000310 bc       4081000C   1     BF        CL.114,cr0,0x40/fgt,taken=50%(0,0)
+   79| 000314 fmr      FC001090   1     LRFL      fp0=fp2
+   78| 000318 or       7C601B78   2     LR        gr0=gr3
+   80|                              CL.114:
+   77| 00031C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 000320 bc       424000D0   1     BCF       ctr=CL.115,taken=0%(0,100)
+    0| 000324 ori      60210000   1     XNOP      
+    0|                              CL.117:
+   77| 000328 lfd      C8440008   1     LFL       fp2=sx[](gr4,8)
+   80| 00032C addi     38A50008   1     AI        gr5=gr5,8
+   77| 000330 lfd      C8640010   1     LFL       fp3=sx[](gr4,16)
+   77| 000334 bc       4081000C   1     BF        CL.118,cr0,0x40/fgt,taken=50%(0,0)
+   78| 000338 or       7CC03378   1     LR        gr0=gr6
+   79| 00033C fmr      FC000890   1     LRFL      fp0=fp1
+   80|                              CL.118:
+   77| 000340 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 000344 addi     38650002   1     AI        gr3=gr5,2
+   77| 000348 bc       4081000C   1     BF        CL.119,cr0,0x40/fgt,taken=50%(0,0)
+   78| 00034C or       7C601B78   1     LR        gr0=gr3
+   79| 000350 fmr      FC001090   1     LRFL      fp0=fp2
+   80|                              CL.119:
+   77| 000354 fcmpu    FC030000   1     CFL       cr0=fp3,fp0
+   77| 000358 lfd      C8240018   1     LFL       fp1=sx[](gr4,24)
+   77| 00035C addi     38650003   1     AI        gr3=gr5,3
+   77| 000360 bc       4081000C   1     BF        CL.120,cr0,0x40/fgt,taken=50%(0,0)
+   78| 000364 or       7C601B78   1     LR        gr0=gr3
+   79| 000368 fmr      FC001890   1     LRFL      fp0=fp3
+   80|                              CL.120:
+   77| 00036C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   77| 000370 lfd      C8440020   1     LFL       fp2=sx[](gr4,32)
+   77| 000374 addi     38650004   1     AI        gr3=gr5,4
+   77| 000378 bc       4081000C   1     BF        CL.121,cr0,0x40/fgt,taken=50%(0,0)
+   78| 00037C or       7C601B78   1     LR        gr0=gr3
+   79| 000380 fmr      FC000890   1     LRFL      fp0=fp1
+   80|                              CL.121:
+   77| 000384 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 000388 lfd      C8240028   1     LFL       fp1=sx[](gr4,40)
+   77| 00038C addi     38C50009   1     AI        gr6=gr5,9
+   77| 000390 addi     38650005   1     AI        gr3=gr5,5
+   77| 000394 bc       4081000C   1     BF        CL.122,cr0,0x40/fgt,taken=50%(0,0)
+   78| 000398 or       7C601B78   1     LR        gr0=gr3
+   79| 00039C fmr      FC001090   1     LRFL      fp0=fp2
+   80|                              CL.122:
+   77| 0003A0 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+   77| 0003A4 lfd      C8440030   1     LFL       fp2=sx[](gr4,48)
+   77| 0003A8 addi     38650006   1     AI        gr3=gr5,6
+   77| 0003AC bc       4081000C   1     BF        CL.123,cr0,0x40/fgt,taken=50%(0,0)
+   78| 0003B0 or       7C601B78   1     LR        gr0=gr3
+   79| 0003B4 fmr      FC000890   1     LRFL      fp0=fp1
+   80|                              CL.123:
+   77| 0003B8 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+   77| 0003BC lfd      C8640038   1     LFL       fp3=sx[](gr4,56)
+   77| 0003C0 addi     38650007   1     AI        gr3=gr5,7
+   77| 0003C4 bc       4081000C   1     BF        CL.124,cr0,0x40/fgt,taken=50%(0,0)
+   78| 0003C8 or       7C601B78   1     LR        gr0=gr3
+   79| 0003CC fmr      FC001090   1     LRFL      fp0=fp2
+   80|                              CL.124:
+   77| 0003D0 fcmpu    FC030000   1     CFL       cr0=fp3,fp0
+   77| 0003D4 lfdu     CC240040   1     LFDU      fp1,gr4=sx[](gr4,64)
+   77| 0003D8 addi     38650008   1     AI        gr3=gr5,8
+   77| 0003DC bc       4081000C   1     BF        CL.125,cr0,0x40/fgt,taken=50%(0,0)
+   78| 0003E0 or       7C601B78   1     LR        gr0=gr3
+   79| 0003E4 fmr      FC001890   1     LRFL      fp0=fp3
+   80|                              CL.125:
+   77| 0003E8 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 0003EC bc       4200FF3C   1     BCT       ctr=CL.117,taken=100%(100,0)
+    0|                              CL.115:
+   77| 0003F0 bc       4081FE04   1     BF        CL.17,cr0,0x40/fgt,taken=50%(0,0)
+   78| 0003F4 or       7CC03378   1     LR        gr0=gr6
+    0| 0003F8 b        4BFFFDFC   1     B         CL.17,-1
+    0|                              CL.213:
+   57| 0003FC addi     38600001   1     LI        gr3=1
+   57| 000400 bclr     4E800020   1     BA        lr
+    0|                              CL.212:
+   55| 000404 addi     38600000   1     LI        gr3=0
+   55| 000408 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 00040C        00000000 00012200 00000000 0000040C
+     |               Instruction count          259
+     |               Straight-line exec time    268
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** ismin   === End of Compilation 3 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+1586-538 (I) Loop (loop index 1) at linpck.f90 <line 103> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 1) at linpck.f90 <line 103> was not SIMD vectorized because it contains control flow.
+1586-538 (I) Loop (loop index 2) at linpck.f90 <line 114> was not SIMD vectorized because it contains unsupported loop structure.
+1586-552 (I) Loop (loop index 2) at linpck.f90 <line 114> was not SIMD vectorized because it contains control flow.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"2">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+    83|         INTEGER*4 FUNCTION ismin (n, sx, incx)
+    93|           IF (.NOT.(n < 1)) GOTO lab_1
+                  RETURN
+                  lab_1
+    95|           IF (.NOT.(n == 1)) GOTO lab_2
+                  RETURN
+                  lab_2
+    94|           ismin.rnn1B = 1
+    96|           IF (incx == 1) GOTO lab_4
+   103|           IF ((int(n) - 1 > 0)) THEN
+   101|             smin = sx(1)
+   103|             $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((int(n) - 1))-1
+   104|               IF (.NOT.sx(1 + (int(incx) * $$CIV0 + int(incx))) >= smin)&
+                &        THEN
+   105|                 ismin.rnn1B = int($$CIV0) + 2
+   106|                 smin = sx(1 + (int(incx) * $$CIV0 + int(incx)))
+   107|               ENDIF
+   108|             ENDDO
+                  ENDIF
+   109|           RETURN
+   113|           lab_4
+   114|           IF ((int(n) - 1 > 0)) THEN
+   113|             smin.rnn19 = sx(1)
+   114|             $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int((int(n) - 1))-1
+   115|               IF (.NOT.sx($$CIV1 + 2) >= smin.rnn19) THEN
+   116|                 ismin.rnn1B = int($$CIV1) + 2
+   117|                 smin.rnn19 = sx($$CIV1 + 2)
+   118|               ENDIF
+                    ENDDO
+                  ENDIF
+   119|           RETURN
+   120|         END FUNCTION ismin
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0           103             1    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0           103             1    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+         0           114             2    Loop was not SIMD vectorized because it contains 
+                                          unsupported loop structure.
+         0           114             2    Loop was not SIMD vectorized because it contains 
+                                          control flow.
+
+
+    83|         INTEGER*4 FUNCTION ismin (n, sx, incx)
+    93|           IF (.NOT.(n < 1)) GOTO lab_1
+                  RETURN
+                  lab_1
+    95|           IF (.NOT.(n == 1)) GOTO lab_2
+                  RETURN
+                  lab_2
+    94|           ismin.rnn1B = 1
+    96|           IF (incx == 1) GOTO lab_4
+   103|           IF ((int(n) - 1 > 0)) THEN
+   101|             smin = sx(1)
+   103|             $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((int(n) - 1))-1
+   104|               IF (.NOT.sx(1 + (int(incx) * $$CIV0 + int(incx))) >= smin)&
+                &        THEN
+   105|                 ismin.rnn1B = int($$CIV0) + 2
+   106|                 smin = sx(1 + (int(incx) * $$CIV0 + int(incx)))
+   107|               ENDIF
+   108|             ENDDO
+                  ENDIF
+   109|           RETURN
+   113|           lab_4
+   114|           IF ((int(n) - 1 > 0)) THEN
+   113|             smin.rnn19 = sx(1)
+   114|             $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int((int(n) - 1))-1
+   115|               IF (.NOT.sx($$CIV1 + 2) >= smin.rnn19) THEN
+   116|                 ismin.rnn1B = int($$CIV1) + 2
+   117|                 smin.rnn19 = sx($$CIV1 + 2)
+   118|               ENDIF
+                    ENDDO
+                  ENDIF
+   119|           RETURN
+   120|         END FUNCTION ismin
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   s--s ssss ---- ----  ---- ---- ---- ----
+ FPR's set/used:   ssss ---- ---- ----  ---- ---- ---- ----
+ CCR's set/used:   ss-- ----
+     | 000000                           PDEF     ismin
+   83|                                  PROC      .n,.sx,.incx,gr3-gr5
+   93| 000000 lwa      E8C30002   1     L4A       gr6=n(gr3,0)
+   93| 000004 cmpwi    2C060000   1     C4        cr0=gr6,0
+   93| 000008 cmpwi    2C860001   1     C4        cr1=gr6,1
+   93| 00000C bc       408103F8   1     BF        CL.212,cr0,0x2/gt,taken=30%(30,70)
+   95| 000010 bc       418603EC   1     BT        CL.213,cr1,0x4/eq,taken=30%(30,70)
+   96| 000014 lwa      E8650002   1     L4A       gr3=incx(gr5,0)
+    0| 000018 addic.   34A6FFFF   1     AI_R      gr5,cr0=gr6,-1,ca"
+   94| 00001C addi     38000001   1     LI        gr0=1
+   96| 000020 cmpwi    2C830001   1     C4        cr1=gr3,1
+   96| 000024 bc       418601D8   1     BT        CL.4,cr1,0x4/eq,taken=50%(0,0)
+  103| 000028 bc       408101CC   1     BF        CL.17,cr0,0x2/gt,taken=50%(0,0)
+    0| 00002C rldicl   78A7E8C2   1     SRL8      gr7=gr5,3
+  104| 000030 rldicr   78631F24   1     SLL8      gr3=gr3,3
+    0| 000034 andi.    70A60007   1     RN4_R     gr6,cr0=gr5,0,0x7
+    0| 000038 cmpdi    2CA70000   1     C8        cr1=gr7,0
+  101| 00003C lfd      C8040000   1     LFL       fp0=sx[](gr4,0)
+  103| 000040 addi     38A00000   1     LI        gr5=0
+    0| 000044 bc       41820050   1     BT        CL.54,cr0,0x4/eq,taken=50%(0,0)
+  104| 000048 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+    0| 00004C mtspr    7CC903A6   1     LCTR      ctr=gr6
+  104| 000050 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 000054 bc       4240002C   1     BCF       ctr=CL.82,taken=0%(0,100)
+    0| 000058 ori      60210000   1     XNOP      
+    0| 00005C ori      60210000   1     XNOP      
+    0|                              CL.84:
+  104| 000060 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 000064 bc       4080000C   1     BF        CL.85,cr0,0x20/flt,taken=50%(0,0)
+  105| 000068 addi     38050002   1     AI        gr0=gr5,2
+  106| 00006C fmr      FC000890   1     LRFL      fp0=fp1
+  107|                              CL.85:
+  108| 000070 addi     38A50001   1     AI        gr5=gr5,1
+  104| 000074 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+    0| 000078 fmr      FC201090   2     LRFL      fp1=fp2
+    0| 00007C bc       4200FFE4   1     BCT       ctr=CL.84,taken=100%(100,0)
+    0|                              CL.82:
+  104| 000080 bc       4080000C   1     BF        CL.83,cr0,0x20/flt,taken=50%(0,0)
+  106| 000084 fmr      FC000890   1     LRFL      fp0=fp1
+  105| 000088 addi     38050002   1     AI        gr0=gr5,2
+  107|                              CL.83:
+  108| 00008C addi     38A50001   1     AI        gr5=gr5,1
+    0| 000090 bc       41860164   1     BT        CL.17,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.54:
+  104| 000094 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+    0| 000098 mtspr    7CE903A6   1     LCTR      ctr=gr7
+  104| 00009C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 0000A0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 0000A4 bc       4080000C   1     BF        CL.86,cr0,0x20/flt,taken=50%(0,0)
+  106| 0000A8 fmr      FC000890   1     LRFL      fp0=fp1
+  105| 0000AC addi     38050002   1     AI        gr0=gr5,2
+  107|                              CL.86:
+  104| 0000B0 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  104| 0000B4 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 0000B8 bc       4080000C   1     BF        CL.87,cr0,0x20/flt,taken=50%(0,0)
+  106| 0000BC fmr      FC001090   1     LRFL      fp0=fp2
+  105| 0000C0 addi     38050003   1     AI        gr0=gr5,3
+  107|                              CL.87:
+  104| 0000C4 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 0000C8 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 0000CC bc       4080000C   1     BF        CL.88,cr0,0x20/flt,taken=50%(0,0)
+  106| 0000D0 fmr      FC000890   1     LRFL      fp0=fp1
+  105| 0000D4 addi     38050004   1     AI        gr0=gr5,4
+  107|                              CL.88:
+  104| 0000D8 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  104| 0000DC lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 0000E0 bc       4080000C   1     BF        CL.89,cr0,0x20/flt,taken=50%(0,0)
+  106| 0000E4 fmr      FC001090   1     LRFL      fp0=fp2
+  105| 0000E8 addi     38050005   1     AI        gr0=gr5,5
+  107|                              CL.89:
+  104| 0000EC fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 0000F0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 0000F4 bc       4080000C   1     BF        CL.90,cr0,0x20/flt,taken=50%(0,0)
+  106| 0000F8 fmr      FC000890   1     LRFL      fp0=fp1
+  105| 0000FC addi     38050006   1     AI        gr0=gr5,6
+  107|                              CL.90:
+  104| 000100 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  104| 000104 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 000108 bc       4080000C   1     BF        CL.91,cr0,0x20/flt,taken=50%(0,0)
+  106| 00010C fmr      FC001090   1     LRFL      fp0=fp2
+  105| 000110 addi     38050007   1     AI        gr0=gr5,7
+  107|                              CL.91:
+  104| 000114 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 000118 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 00011C bc       4080000C   1     BF        CL.92,cr0,0x20/flt,taken=50%(0,0)
+  106| 000120 fmr      FC000890   1     LRFL      fp0=fp1
+  105| 000124 addi     38050008   1     AI        gr0=gr5,8
+  107|                              CL.92:
+  104| 000128 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+    0| 00012C bc       424000B4   1     BCF       ctr=CL.93,taken=0%(0,100)
+    0| 000130 ori      60210000   1     XNOP      
+    0| 000134 ori      60210000   1     XNOP      
+    0|                              CL.95:
+  104| 000138 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 00013C bc       4080000C   1     BF        CL.96,cr0,0x20/flt,taken=50%(0,0)
+  105| 000140 addi     38050009   1     AI        gr0=gr5,9
+  106| 000144 fmr      FC001090   1     LRFL      fp0=fp2
+  107|                              CL.96:
+  108| 000148 addi     38A50008   1     AI        gr5=gr5,8
+  104| 00014C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 000150 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 000154 bc       4080000C   1     BF        CL.97,cr0,0x20/flt,taken=50%(0,0)
+  105| 000158 addi     38050002   1     AI        gr0=gr5,2
+  106| 00015C fmr      FC000890   1     LRFL      fp0=fp1
+  107|                              CL.97:
+  104| 000160 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  104| 000164 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 000168 bc       4080000C   1     BF        CL.98,cr0,0x20/flt,taken=50%(0,0)
+  105| 00016C addi     38050003   1     AI        gr0=gr5,3
+  106| 000170 fmr      FC001090   1     LRFL      fp0=fp2
+  107|                              CL.98:
+  104| 000174 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 000178 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 00017C bc       4080000C   1     BF        CL.99,cr0,0x20/flt,taken=50%(0,0)
+  105| 000180 addi     38050004   1     AI        gr0=gr5,4
+  106| 000184 fmr      FC000890   1     LRFL      fp0=fp1
+  107|                              CL.99:
+  104| 000188 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  104| 00018C lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 000190 bc       4080000C   1     BF        CL.100,cr0,0x20/flt,taken=50%(0,0)
+  105| 000194 addi     38050005   1     AI        gr0=gr5,5
+  106| 000198 fmr      FC001090   1     LRFL      fp0=fp2
+  107|                              CL.100:
+  104| 00019C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 0001A0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 0001A4 bc       4080000C   1     BF        CL.101,cr0,0x20/flt,taken=50%(0,0)
+  105| 0001A8 addi     38050006   1     AI        gr0=gr5,6
+  106| 0001AC fmr      FC000890   1     LRFL      fp0=fp1
+  107|                              CL.101:
+  104| 0001B0 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  104| 0001B4 lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  104| 0001B8 bc       4080000C   1     BF        CL.102,cr0,0x20/flt,taken=50%(0,0)
+  105| 0001BC addi     38050007   1     AI        gr0=gr5,7
+  106| 0001C0 fmr      FC001090   1     LRFL      fp0=fp2
+  107|                              CL.102:
+  104| 0001C4 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  104| 0001C8 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  104| 0001CC bc       4080000C   1     BF        CL.103,cr0,0x20/flt,taken=50%(0,0)
+  105| 0001D0 addi     38050008   1     AI        gr0=gr5,8
+  106| 0001D4 fmr      FC000890   1     LRFL      fp0=fp1
+  107|                              CL.103:
+  104| 0001D8 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+    0| 0001DC bc       4200FF5C   1     BCT       ctr=CL.95,taken=100%(100,0)
+    0|                              CL.93:
+  104| 0001E0 bc       40800014   1     BF        CL.17,cr0,0x20/flt,taken=50%(0,0)
+  105| 0001E4 addi     38050009   1     AI        gr0=gr5,9
+    0| 0001E8 ori      60210000   1     XNOP      
+    0| 0001EC ori      60210000   1     XNOP      
+    0| 0001F0 ori      60210000   1     XNOP      
+  108|                              CL.17:
+  119| 0001F4 extsw    7C0307B4   1     EXTS4     gr3=gr0
+  120| 0001F8 bclr     4E800020   1     BA        lr
+  113|                              CL.4:
+  114| 0001FC bc       4081FFF8   1     BF        CL.17,cr0,0x2/gt,taken=50%(0,0)
+    0| 000200 rldicl   78A3E8C2   1     SRL8      gr3=gr5,3
+    0| 000204 andi.    70A60007   1     RN4_R     gr6,cr0=gr5,0,0x7
+    0| 000208 cmpdi    2CA30000   1     C8        cr1=gr3,0
+  113| 00020C lfd      C8040000   1     LFL       fp0=sx[](gr4,0)
+  114| 000210 addi     38A00000   1     LI        gr5=0
+    0| 000214 bc       41820054   1     BT        CL.65,cr0,0x4/eq,taken=50%(0,0)
+  115| 000218 lfdu     CC240008   1     LFDU      fp1,gr4=sx[](gr4,8)
+    0| 00021C mtspr    7CC903A6   1     LCTR      ctr=gr6
+  115| 000220 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 000224 bc       4240002C   1     BCF       ctr=CL.104,taken=0%(0,100)
+    0| 000228 ori      60210000   1     XNOP      
+    0|                              CL.106:
+  115| 00022C lfdu     CC440008   1     LFDU      fp2,gr4=sx[](gr4,8)
+  115| 000230 addi     38C50002   1     AI        gr6=gr5,2
+  115| 000234 bc       4080000C   1     BF        CL.107,cr0,0x20/flt,taken=50%(0,0)
+  116| 000238 or       7CC03378   1     LR        gr0=gr6
+  117| 00023C fmr      FC000890   1     LRFL      fp0=fp1
+  118|                              CL.107:
+  115| 000240 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  118| 000244 addi     38A50001   1     AI        gr5=gr5,1
+    0| 000248 fmr      FC201090   1     LRFL      fp1=fp2
+    0| 00024C bc       4200FFE0   1     BCT       ctr=CL.106,taken=100%(100,0)
+    0|                              CL.104:
+  115| 000250 addi     38C50002   1     AI        gr6=gr5,2
+  115| 000254 bc       4080000C   1     BF        CL.105,cr0,0x20/flt,taken=50%(0,0)
+  117| 000258 fmr      FC000890   1     LRFL      fp0=fp1
+  116| 00025C or       7CC03378   2     LR        gr0=gr6
+  118|                              CL.105:
+  118| 000260 addi     38A50001   1     AI        gr5=gr5,1
+    0| 000264 bc       4186FF90   1     BT        CL.17,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.65:
+  115| 000268 lfd      C8440008   1     LFL       fp2=sx[](gr4,8)
+  115| 00026C addi     38C50002   1     AI        gr6=gr5,2
+    0| 000270 mtspr    7C6903A6   1     LCTR      ctr=gr3
+  115| 000274 lfd      C8240010   1     LFL       fp1=sx[](gr4,16)
+  115| 000278 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 00027C bc       4080000C   1     BF        CL.108,cr0,0x20/flt,taken=50%(0,0)
+  117| 000280 fmr      FC001090   1     LRFL      fp0=fp2
+  116| 000284 or       7CC03378   2     LR        gr0=gr6
+  118|                              CL.108:
+  115| 000288 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  115| 00028C addi     38650003   1     AI        gr3=gr5,3
+  115| 000290 lfd      C8440018   1     LFL       fp2=sx[](gr4,24)
+  115| 000294 bc       4080000C   1     BF        CL.109,cr0,0x20/flt,taken=50%(0,0)
+  117| 000298 fmr      FC000890   1     LRFL      fp0=fp1
+  116| 00029C or       7C601B78   2     LR        gr0=gr3
+  118|                              CL.109:
+  115| 0002A0 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 0002A4 addi     38650004   1     AI        gr3=gr5,4
+  115| 0002A8 lfd      C8240020   1     LFL       fp1=sx[](gr4,32)
+  115| 0002AC bc       4080000C   1     BF        CL.110,cr0,0x20/flt,taken=50%(0,0)
+  117| 0002B0 fmr      FC001090   1     LRFL      fp0=fp2
+  116| 0002B4 or       7C601B78   2     LR        gr0=gr3
+  118|                              CL.110:
+  115| 0002B8 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  115| 0002BC addi     38650005   1     AI        gr3=gr5,5
+  115| 0002C0 lfd      C8440028   1     LFL       fp2=sx[](gr4,40)
+  115| 0002C4 addi     38C50009   1     AI        gr6=gr5,9
+  115| 0002C8 bc       4080000C   1     BF        CL.111,cr0,0x20/flt,taken=50%(0,0)
+  117| 0002CC fmr      FC000890   1     LRFL      fp0=fp1
+  116| 0002D0 or       7C601B78   2     LR        gr0=gr3
+  118|                              CL.111:
+  115| 0002D4 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 0002D8 addi     38650006   1     AI        gr3=gr5,6
+  115| 0002DC lfd      C8240030   1     LFL       fp1=sx[](gr4,48)
+  115| 0002E0 bc       4080000C   1     BF        CL.112,cr0,0x20/flt,taken=50%(0,0)
+  117| 0002E4 fmr      FC001090   1     LRFL      fp0=fp2
+  116| 0002E8 or       7C601B78   2     LR        gr0=gr3
+  118|                              CL.112:
+  115| 0002EC fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  115| 0002F0 addi     38650007   1     AI        gr3=gr5,7
+  115| 0002F4 lfd      C8440038   1     LFL       fp2=sx[](gr4,56)
+  115| 0002F8 bc       4080000C   1     BF        CL.113,cr0,0x20/flt,taken=50%(0,0)
+  117| 0002FC fmr      FC000890   1     LRFL      fp0=fp1
+  116| 000300 or       7C601B78   2     LR        gr0=gr3
+  118|                              CL.113:
+  115| 000304 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 000308 addi     38650008   1     AI        gr3=gr5,8
+  115| 00030C lfdu     CC240040   1     LFDU      fp1,gr4=sx[](gr4,64)
+  115| 000310 bc       4080000C   1     BF        CL.114,cr0,0x20/flt,taken=50%(0,0)
+  117| 000314 fmr      FC001090   1     LRFL      fp0=fp2
+  116| 000318 or       7C601B78   2     LR        gr0=gr3
+  118|                              CL.114:
+  115| 00031C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 000320 bc       424000D0   1     BCF       ctr=CL.115,taken=0%(0,100)
+    0| 000324 ori      60210000   1     XNOP      
+    0|                              CL.117:
+  115| 000328 lfd      C8440008   1     LFL       fp2=sx[](gr4,8)
+  118| 00032C addi     38A50008   1     AI        gr5=gr5,8
+  115| 000330 lfd      C8640010   1     LFL       fp3=sx[](gr4,16)
+  115| 000334 bc       4080000C   1     BF        CL.118,cr0,0x20/flt,taken=50%(0,0)
+  116| 000338 or       7CC03378   1     LR        gr0=gr6
+  117| 00033C fmr      FC000890   1     LRFL      fp0=fp1
+  118|                              CL.118:
+  115| 000340 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 000344 addi     38650002   1     AI        gr3=gr5,2
+  115| 000348 bc       4080000C   1     BF        CL.119,cr0,0x20/flt,taken=50%(0,0)
+  116| 00034C or       7C601B78   1     LR        gr0=gr3
+  117| 000350 fmr      FC001090   1     LRFL      fp0=fp2
+  118|                              CL.119:
+  115| 000354 fcmpu    FC030000   1     CFL       cr0=fp3,fp0
+  115| 000358 lfd      C8240018   1     LFL       fp1=sx[](gr4,24)
+  115| 00035C addi     38650003   1     AI        gr3=gr5,3
+  115| 000360 bc       4080000C   1     BF        CL.120,cr0,0x20/flt,taken=50%(0,0)
+  116| 000364 or       7C601B78   1     LR        gr0=gr3
+  117| 000368 fmr      FC001890   1     LRFL      fp0=fp3
+  118|                              CL.120:
+  115| 00036C fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  115| 000370 lfd      C8440020   1     LFL       fp2=sx[](gr4,32)
+  115| 000374 addi     38650004   1     AI        gr3=gr5,4
+  115| 000378 bc       4080000C   1     BF        CL.121,cr0,0x20/flt,taken=50%(0,0)
+  116| 00037C or       7C601B78   1     LR        gr0=gr3
+  117| 000380 fmr      FC000890   1     LRFL      fp0=fp1
+  118|                              CL.121:
+  115| 000384 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 000388 lfd      C8240028   1     LFL       fp1=sx[](gr4,40)
+  115| 00038C addi     38C50009   1     AI        gr6=gr5,9
+  115| 000390 addi     38650005   1     AI        gr3=gr5,5
+  115| 000394 bc       4080000C   1     BF        CL.122,cr0,0x20/flt,taken=50%(0,0)
+  116| 000398 or       7C601B78   1     LR        gr0=gr3
+  117| 00039C fmr      FC001090   1     LRFL      fp0=fp2
+  118|                              CL.122:
+  115| 0003A0 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+  115| 0003A4 lfd      C8440030   1     LFL       fp2=sx[](gr4,48)
+  115| 0003A8 addi     38650006   1     AI        gr3=gr5,6
+  115| 0003AC bc       4080000C   1     BF        CL.123,cr0,0x20/flt,taken=50%(0,0)
+  116| 0003B0 or       7C601B78   1     LR        gr0=gr3
+  117| 0003B4 fmr      FC000890   1     LRFL      fp0=fp1
+  118|                              CL.123:
+  115| 0003B8 fcmpu    FC020000   1     CFL       cr0=fp2,fp0
+  115| 0003BC lfd      C8640038   1     LFL       fp3=sx[](gr4,56)
+  115| 0003C0 addi     38650007   1     AI        gr3=gr5,7
+  115| 0003C4 bc       4080000C   1     BF        CL.124,cr0,0x20/flt,taken=50%(0,0)
+  116| 0003C8 or       7C601B78   1     LR        gr0=gr3
+  117| 0003CC fmr      FC001090   1     LRFL      fp0=fp2
+  118|                              CL.124:
+  115| 0003D0 fcmpu    FC030000   1     CFL       cr0=fp3,fp0
+  115| 0003D4 lfdu     CC240040   1     LFDU      fp1,gr4=sx[](gr4,64)
+  115| 0003D8 addi     38650008   1     AI        gr3=gr5,8
+  115| 0003DC bc       4080000C   1     BF        CL.125,cr0,0x20/flt,taken=50%(0,0)
+  116| 0003E0 or       7C601B78   1     LR        gr0=gr3
+  117| 0003E4 fmr      FC001890   1     LRFL      fp0=fp3
+  118|                              CL.125:
+  115| 0003E8 fcmpu    FC010000   1     CFL       cr0=fp1,fp0
+    0| 0003EC bc       4200FF3C   1     BCT       ctr=CL.117,taken=100%(100,0)
+    0|                              CL.115:
+  115| 0003F0 bc       4080FE04   1     BF        CL.17,cr0,0x20/flt,taken=50%(0,0)
+  116| 0003F4 or       7CC03378   1     LR        gr0=gr6
+    0| 0003F8 b        4BFFFDFC   1     B         CL.17,-1
+    0|                              CL.213:
+   95| 0003FC addi     38600001   1     LI        gr3=1
+   95| 000400 bclr     4E800020   1     BA        lr
+    0|                              CL.212:
+   93| 000404 addi     38600000   1     LI        gr3=0
+   93| 000408 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 00040C        00000000 00012200 00000000 0000040C
+     |               Instruction count          259
+     |               Straight-line exec time    268
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> OPTIONS SECTION <<<<<
+***   Options In Effect   ***
+  
+         ==  On / Off Options  ==
+         CR              NODIRECTSTORAG  ESCAPE          I4
+         INLGLUE         NOLIBESSL       NOLIBPOSIX      OBJECT
+         SWAPOMP         THREADED        UNWIND          ZEROSIZE
+  
+         ==  Options Of Integer Type ==
+         ALIAS_SIZE(65536)     MAXMEM(-1)            OPTIMIZE(3)
+         SPILLSIZE(512)        STACKTEMP(0)
+  
+         ==  Options of Integer and Character Type ==
+         CACHE(LEVEL(1),TYPE(I),ASSOC(4),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(I),ASSOC(16),COST(80),LINE(128))
+         CACHE(LEVEL(1),TYPE(D),ASSOC(8),COST(6),LINE(64),SIZE(16))
+         CACHE(LEVEL(2),TYPE(D),ASSOC(16),COST(80),LINE(128))
+         INLINE(NOAUTO,LEVEL(5))
+         HOT(FASTMATH,LEVEL(0))
+         SIMD(AUTO)
+  
+         ==  Options Of Character Type  ==
+         64()                  ALIAS(STD,NOINTPTR)   ALIGN(BINDC(LINUXPPC),STRUCT(NATURAL))
+         ARCH(QP)              AUTODBL(NONE)         DESCRIPTOR(V1)
+         DIRECTIVE(IBM*,IBMT)  ENUM()                FLAG(I,I)
+         FLOAT(MAF,FOLD,RSQRT,FLTINT)
+         FREE(F90)             GNU_VERSION(DOT_TRIPLE)
+         HALT(S)               IEEE(NEAR)            INTSIZE(4)
+         LIST()                LANGLVL(EXTENDED)     REALSIZE(4)
+         REPORT(HOTLIST)       STRICT(NONE,NOPRECISION,NOEXCEPTIONS,NOIEEEFP,NONANS,NOINFINITIES,NOSUBNORMALS,NOZEROSIGNS,NOOPERATIONPRECISION,ORDER,NOLIBRARY,NOCONSTRUCTCOPY,NOVECTORPRECISION)
+         TUNE(QP)              UNROLL(AUTO)          XFLAG()
+         XLF2003(NOPOLYMORPHIC,NOBOZLITARGS,NOSIGNDZEROINTR,NOSTOPEXCEPT,NOVOLATILE,NOAUTOREALLOC,OLDNANINF)
+         XLF2008(NOCHECKPRESENCE)
+         XLF77(LEADZERO,BLANKPAD)
+         XLF90(SIGNEDZERO,AUTODEALLOC)
+  
+>>>>> SOURCE SECTION <<<<<
+** sasum   === End of Compilation 4 ===
+ 
+>>>>> LOOP TRANSFORMATION SECTION <<<<<
+
+
+1586-540 (I) Loop (loop index 1) at linpck.f90 <line 139> was not SIMD vectorized because it contains memory references stemp = stemp + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) .incx->incx * $$CIV0 + 1ll]); with non-vectorizable strides.
+1586-537 (I) Loop (loop index 1) at linpck.f90 <line 140> was not SIMD vectorized because it contains operation in stemp + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) .incx->incx * $$CIV0 + 1ll]) which is not suitable for SIMD vectorization.
+1586-540 (I) Loop (loop index 1) at linpck.f90 <line 140> was not SIMD vectorized because it contains memory references ((char *).sx  + -8ll + (8ll)*((long long) .incx->incx * $$CIV0 + 1ll)) with non-vectorizable strides.
+1586-549 (I) Loop (loop index 1) at linpck.f90 <line 140> was not SIMD vectorized because a data dependence  prevents SIMD vectorization.
+1586-554 (I) Loop (loop index 1) at linpck.f90 <line 140> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-537 (I) Loop (loop index 2) at linpck.f90 <line 153> was not SIMD vectorized because it contains operation in stemp + abs(((double *)((char *).sx  + -8ll))->sx[][$$CIV1 + 1ll]) which is not suitable for SIMD vectorization.
+1586-549 (I) Loop (loop index 2) at linpck.f90 <line 153> was not SIMD vectorized because a data dependence  prevents SIMD vectorization.
+1586-554 (I) Loop (loop index 2) at linpck.f90 <line 153> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-540 (I) Loop (loop index 3) at linpck.f90 <line 157> was not SIMD vectorized because it contains memory references stemp = (((((stemp + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (1 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (2 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (3 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (4 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (5 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (6 + ((int) $$CIV2 * 6 + .n->n % 6))]); with non-vectorizable strides.
+1586-537 (I) Loop (loop index 3) at linpck.f90 <line 158> was not SIMD vectorized because it contains operation in (((((stemp + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (1 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (2 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (3 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (4 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (5 + ((int) $$CIV2 * 6 + .n->n % 6))])) + abs(((double *)((char *).sx  + -8ll))->sx[][(long long) (6 + ((int) $$CIV2 * 6 + .n->n % 6))]) which is not suitable for SIMD vectorization.
+1586-540 (I) Loop (loop index 3) at linpck.f90 <line 158> was not SIMD vectorized because it contains memory references ((char *).sx  + -8ll + (8ll)*((long long) (1 + ((int) $$CIV2 * 6 + .n->n % 6)))) with non-vectorizable strides.
+1586-549 (I) Loop (loop index 3) at linpck.f90 <line 158> was not SIMD vectorized because a data dependence  prevents SIMD vectorization.
+1586-554 (I) Loop (loop index 3) at linpck.f90 <line 158> was not SIMD vectorized because the floating point operation is not vectorizable under -qstrict.
+1586-543 (I) <SIMD info> Total number of the innermost loops considered <"3">. Total number of the innermost loops SIMD vectorized <"0">.
+
+
+   121|         REAL*8 FUNCTION sasum (n, sx, incx)
+   133|           IF (.NOT.(n <= 0)) GOTO lab_1
+                  RETURN
+                  lab_1
+   132|           stemp =  0.0000000000000000E+000
+   134|           IF (incx == 1) GOTO lab_3
+   139|           IF ((((int((incx * n)) + int(incx)) - 1) / int(incx) > 0)) &
+                &   THEN
+                    $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((((int((incx * n)) + int(incx)) - &
+                &       1) / int(incx)))-1
+   140|               stemp = stemp + abs(sx(int(incx) * $$CIV0 + 1))
+   141|             ENDDO
+                  ENDIF
+   143|           RETURN
+   150|           lab_3
+   151|           IF (.NOT.0 == MOD(n, 6)) THEN
+   152|             IF (.NOT.(int(MOD(n, 6)) > 0)) GOTO lab_22
+                    $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int(int(MOD(n, 6)))-1
+   153|               stemp = stemp + abs(sx($$CIV1 + 1))
+   154|             ENDDO
+                  ENDIF
+   155|           IF (n < 6) GOTO lab_15
+   156|         ENDIF
+   157|         IF (.NOT.((6 + (int(n) - int((MOD(n, 6) + 1)))) / 6 > 0)) GOTO &
+                & lab_24
+                $$CIV2 = 0
+       Id=3     DO $$CIV2 = $$CIV2, int(((6 + (int(n) - int((MOD(n, 6) + 1))))&
+                &    / 6))-1
+   158|           stemp = (((((stemp + abs(sx(int((1 + (int($$CIV2) * 6 + MOD(n,&
+                &    6))))))) + abs(sx(int((2 + (int($$CIV2) * 6 + MOD(n, 6)))))))&
+                &    + abs(sx(int((3 + (int($$CIV2) * 6 + MOD(n, 6))))))) + abs(&
+                &   sx(int((4 + (int($$CIV2) * 6 + MOD(n, 6))))))) + abs(sx(int((&
+                &   5 + (int($$CIV2) * 6 + MOD(n, 6))))))) + abs(sx(int((6 + (int(&
+                &   $$CIV2) * 6 + MOD(n, 6))))))
+   160|         ENDDO
+                lab_24
+   161|         lab_15
+   162|         RETURN
+   163|       END FUNCTION sasum
+
+
+Source        Source        Loop Id       Action / Information                                      
+File          Line                                                                                  
+----------    ----------    ----------    ----------------------------------------------------------
+         0           140                  Loop was not SIMD vectorized because it contains 
+                                          operation in stemp + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][(long long) .incx->incx * $$CIV0 + 1ll]) 
+                                          which is not  suitable for SIMD vectorization.
+         0           140                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *).sx  + -8ll + (8ll)*((long 
+                                          long) .incx->incx * $$CIV0 + 1ll)) with  
+                                          non-vectorizable strides.
+         0           140                  Loop was not SIMD vectorized because a data 
+                                          dependence  prevents SIMD  vectorization.
+         0           140                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           153                  Loop was not SIMD vectorized because it contains 
+                                          operation in stemp + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][$$CIV1 + 1ll]) which is not  suitable 
+                                          for SIMD vectorization.
+         0           153                  Loop was not SIMD vectorized because a data 
+                                          dependence  prevents SIMD  vectorization.
+         0           153                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+         0           158                  Loop was not SIMD vectorized because it contains 
+                                          operation in (((((stemp + abs(((double *)((char *).sx 
+                                          + -8ll))->sx[][(long long) (1 + ((int) $$CIV2 * 6 + 
+                                          .n->n % 6))])) + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][(long long) (2 + ((int) $$CIV2 * 6 + 
+                                          .n->n % 6))])) + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][(long long) (3 + ((int) $$CIV2 * 6 + 
+                                          .n->n % 6))])) + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][(long long) (4 + ((int) $$CIV2 * 6 + 
+                                          .n->n % 6))])) + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][(long long) (5 + ((int) $$CIV2 * 6 + 
+                                          .n->n % 6))])) + abs(((double *)((char *).sx  + 
+                                          -8ll))->sx[][(long long) (6 + ((int) $$CIV2 * 6 + 
+                                          .n->n % 6))]) which is not  suitable for SIMD 
+                                          vectorization.
+         0           158                  Loop was not SIMD vectorized because it contains 
+                                          memory references ((char *).sx  + -8ll + (8ll)*((long 
+                                          long) (1 + ((int) $$CIV2 * 6 + .n->n % 6)))) with  
+                                          non-vectorizable strides.
+         0           158                  Loop was not SIMD vectorized because a data 
+                                          dependence  prevents SIMD  vectorization.
+         0           158                  Loop was not SIMD vectorized because the floating 
+                                          point operation is not  vectorizable under -qstrict.
+
+
+   121|         REAL*8 FUNCTION sasum (n, sx, incx)
+   133|           IF (.NOT.(n <= 0)) GOTO lab_1
+                  RETURN
+                  lab_1
+   132|           stemp =  0.0000000000000000E+000
+   134|           IF (incx == 1) GOTO lab_3
+   139|           IF ((((int((incx * n)) + int(incx)) - 1) / int(incx) > 0)) &
+                &   THEN
+                    $$CIV0 = 0
+       Id=1         DO $$CIV0 = $$CIV0, int((((int((incx * n)) + int(incx)) - &
+                &       1) / int(incx)))-1
+   140|               stemp = stemp + abs(sx(int(incx) * $$CIV0 + 1))
+   141|             ENDDO
+                  ENDIF
+   143|           RETURN
+   150|           lab_3
+   151|           IF (.NOT.0 == MOD(n, 6)) THEN
+   152|             IF (.NOT.(int(MOD(n, 6)) > 0)) GOTO lab_22
+                    $$CIV1 = 0
+       Id=2         DO $$CIV1 = $$CIV1, int(int(MOD(n, 6)))-1
+   153|               stemp = stemp + abs(sx($$CIV1 + 1))
+   154|             ENDDO
+                  ENDIF
+   155|           IF (n < 6) GOTO lab_15
+   156|         ENDIF
+   157|         IF (.NOT.((6 + (int(n) - int((MOD(n, 6) + 1)))) / 6 > 0)) GOTO &
+                & lab_24
+                $$CIV2 = 0
+       Id=3     DO $$CIV2 = $$CIV2, int(((6 + (int(n) - int((MOD(n, 6) + 1))))&
+                &    / 6))-1
+   158|           stemp = (((((stemp + abs(sx(int((1 + (int($$CIV2) * 6 + MOD(n,&
+                &    6))))))) + abs(sx(int((2 + (int($$CIV2) * 6 + MOD(n, 6)))))))&
+                &    + abs(sx(int((3 + (int($$CIV2) * 6 + MOD(n, 6))))))) + abs(&
+                &   sx(int((4 + (int($$CIV2) * 6 + MOD(n, 6))))))) + abs(sx(int((&
+                &   5 + (int($$CIV2) * 6 + MOD(n, 6))))))) + abs(sx(int((6 + (int(&
+                &   $$CIV2) * 6 + MOD(n, 6))))))
+   160|         ENDDO
+                lab_24
+   161|         lab_15
+   162|         RETURN
+   163|       END FUNCTION sasum
+
+ 
+ 
+>>>>> OBJECT SECTION <<<<<
+ GPR's set/used:   s-us ssss sss- ----  ---- ---- ---- ----
+ FPR's set/used:   ssss ssss sss- ----  ---- ---- ---- ----
+ CCR's set/used:   ss-- ----
+     | 000000                           PDEF     sasum
+  121|                                  PROC      .n,.sx,.incx,gr3-gr5
+  133| 000000 lwz      80030000   1     L4Z       gr0=n(gr3,0)
+  132| 000004 ld       E8620000   1     L8        gr3=.+CONSTANT_AREA(gr2,0)
+  133| 000008 cmpwi    2C000000   1     C4        cr0=gr0,0
+  133| 00000C extsw    7C0607B4   1     EXTS4     gr6=gr0
+  133| 000010 bc       4081039C   1     BF        CL.197,cr0,0x2/gt,taken=30%(30,70)
+  134| 000014 lwz      80A50000   1     L4Z       gr5=incx(gr5,0)
+  151| 000018 addis    3CE02AAA   1     LIU       gr7=10922
+  132| 00001C lfs      C0230000   1     LFS       fp1=+CONSTANT_AREA(gr3,0)
+  151| 000020 ori      60E7AAAB   1     OIL       gr7=gr7,0xAAAB
+  151| 000024 rlwinm   54090FFE   1     SRL4      gr9=gr0,31
+  151| 000028 mulhw    7CE03896   0     MULHW     gr7=gr0,gr7
+  134| 00002C cmpwi    2C050001   2     C4        cr0=gr5,1
+  134| 000030 extsw    7CA807B4   1     EXTS4     gr8=gr5
+  134| 000034 bc       418200DC   1     BT        CL.3,cr0,0x4/eq,taken=50%(0,0)
+  138| 000038 mulld    7C0029D2   1     M         gr0=gr0,gr5
+  138| 00003C tdi      08880000   1     TCT8     *gr617=gr8,0,0x4/eq,1
+  138| 000040 extsw    7C0007B4   1     EXTS4     gr0=gr0
+  140| 000044 rldicr   79031F24   1     SLL8      gr3=gr8,3
+  138| 000048 add      7CA04214   1     A         gr5=gr0,gr8
+  140| 00004C subf     7C832050   1     S         gr4=gr4,gr3
+  138| 000050 addi     3805FFFF   1     AI        gr0=gr5,-1
+  138| 000054 divd     7C0043D3   1     DIVD_R    gr0,cr0=gr0,gr8,gr617
+    0| 000058 rldicl   7805F082   1     SRL8      gr5=gr0,2
+    0| 00005C cmpdi    2CA50000   1     C8        cr1=gr5,0
+  139| 000060 bc       408100AC   1     BF        CL.15,cr0,0x2/gt,taken=50%(0,0)
+    0| 000064 andi.    70000003   1     RN4_R     gr0,cr0=gr0,0,0x3
+    0| 000068 bc       41820030   1     BT        CL.73,cr0,0x4/eq,taken=50%(0,0)
+  140| 00006C lfdux    7C041CEE   1     LFDU      fp0,gr4=sx[](gr4,gr3,0)
+    0| 000070 mtspr    7C0903A6   1     LCTR      ctr=gr0
+  140| 000074 fabs     FC000210   1     ABSFL     fp0=fp0
+    0| 000078 bc       42400018   1     BCF       ctr=CL.102,taken=0%(0,100)
+    0| 00007C ori      60210000   1     XNOP      
+    0|                              CL.103:
+  140| 000080 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  140| 000084 fadd     FC21002A   1     AFL       fp1=fp1,fp0,fcr
+  140| 000088 fabs     FC001210   2     ABSFL     fp0=fp2
+    0| 00008C bc       4200FFF4   1     BCT       ctr=CL.103,taken=100%(100,0)
+    0|                              CL.102:
+  140| 000090 fadd     FC21002A   1     AFL       fp1=fp1,fp0,fcr
+    0| 000094 bc       41860078   1     BT        CL.15,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.73:
+  140| 000098 lfdux    7C041CEE   1     LFDU      fp0,gr4=sx[](gr4,gr3,0)
+    0| 00009C mtspr    7CA903A6   1     LCTR      ctr=gr5
+  140| 0000A0 fabs     FC000210   1     ABSFL     fp0=fp0
+  140| 0000A4 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  140| 0000A8 fadd     FC01002A   1     AFL       fp0=fp1,fp0,fcr
+  140| 0000AC lfdux    7C241CEE   1     LFDU      fp1,gr4=sx[](gr4,gr3,0)
+  140| 0000B0 fabs     FC401210   1     ABSFL     fp2=fp2
+  140| 0000B4 fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  140| 0000B8 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  140| 0000BC fabs     FC200A10   1     ABSFL     fp1=fp1
+  140| 0000C0 fadd     FC20082A   2     AFL       fp1=fp0,fp1,fcr
+    0| 0000C4 bc       4240003C   1     BCF       ctr=CL.104,taken=0%(0,100)
+    0| 0000C8 ori      60210000   1     XNOP      
+    0|                              CL.105:
+  140| 0000CC lfdux    7C041CEE   1     LFDU      fp0,gr4=sx[](gr4,gr3,0)
+  140| 0000D0 fabs     FC401210   1     ABSFL     fp2=fp2
+  140| 0000D4 fadd     FC21102A   2     AFL       fp1=fp1,fp2,fcr
+  140| 0000D8 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  140| 0000DC fabs     FC000210   1     ABSFL     fp0=fp0
+  140| 0000E0 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+  140| 0000E4 lfdux    7C041CEE   1     LFDU      fp0,gr4=sx[](gr4,gr3,0)
+  140| 0000E8 fabs     FC401210   1     ABSFL     fp2=fp2
+  140| 0000EC fadd     FC21102A   2     AFL       fp1=fp1,fp2,fcr
+  140| 0000F0 lfdux    7C441CEE   1     LFDU      fp2,gr4=sx[](gr4,gr3,0)
+  140| 0000F4 fabs     FC000210   1     ABSFL     fp0=fp0
+  140| 0000F8 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+    0| 0000FC bc       4200FFD0   1     BCT       ctr=CL.105,taken=100%(100,0)
+    0|                              CL.104:
+  140| 000100 fabs     FC001210   1     ABSFL     fp0=fp2
+  140| 000104 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+  143| 000108 bclr     4E800020   1     BA        lr
+  161|                              CL.15:
+  162|                              CL.26:
+  163| 00010C bclr     4E800020   1     BA        lr
+  150|                              CL.3:
+  151| 000110 extsw    7CE507B4   1     EXTS4     gr5=gr7
+  151| 000114 add      7CA54A14   1     A         gr5=gr5,gr9
+  151| 000118 rldicr   78A71764   1     SLL8      gr7=gr5,2
+  151| 00011C subf     7CA53850   1     S         gr5=gr7,gr5
+  151| 000120 rldicr   78A50FA4   1     SLL8      gr5=gr5,1
+  151| 000124 subf     7CA50050   1     S         gr5=gr0,gr5
+  151| 000128 extsw    7CAA07B4   1     EXTS4     gr10=gr5
+  151| 00012C cmpwi    2C050000   1     C4        cr0=gr5,0
+  151| 000130 bc       418200C0   1     BT        CL.9,cr0,0x4/eq,taken=50%(0,0)
+  152| 000134 bc       408100B4   1     BF        CL.22,cr0,0x2/gt,taken=50%(0,0)
+    0| 000138 rldicl   7948F082   1     SRL8      gr8=gr10,2
+  153| 00013C addi     38E4FFF8   1     AI        gr7=gr4,-8
+    0| 000140 andi.    70A90003   1     RN4_R     gr9,cr0=gr5,0,0x3
+    0| 000144 cmpdi    2CA80000   1     C8        cr1=gr8,0
+    0| 000148 bc       41820030   1     BT        CL.76,cr0,0x4/eq,taken=50%(0,0)
+  153| 00014C lfdu     CC070008   1     LFDU      fp0,gr7=sx[](gr7,8)
+    0| 000150 mtspr    7D2903A6   1     LCTR      ctr=gr9
+  153| 000154 fabs     FC000210   1     ABSFL     fp0=fp0
+    0| 000158 bc       42400018   1     BCF       ctr=CL.106,taken=0%(0,100)
+    0| 00015C ori      60210000   1     XNOP      
+    0|                              CL.107:
+  153| 000160 lfdu     CC470008   1     LFDU      fp2,gr7=sx[](gr7,8)
+  153| 000164 fadd     FC21002A   1     AFL       fp1=fp1,fp0,fcr
+  153| 000168 fabs     FC001210   2     ABSFL     fp0=fp2
+    0| 00016C bc       4200FFF4   1     BCT       ctr=CL.107,taken=100%(100,0)
+    0|                              CL.106:
+  153| 000170 fadd     FC21002A   1     AFL       fp1=fp1,fp0,fcr
+    0| 000174 bc       41860074   1     BT        CL.22,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.76:
+  153| 000178 lfd      C8070008   1     LFL       fp0=sx[](gr7,8)
+  153| 00017C lfd      C8470010   1     LFL       fp2=sx[](gr7,16)
+  153| 000180 lfd      C8670018   1     LFL       fp3=sx[](gr7,24)
+    0| 000184 mtspr    7D0903A6   1     LCTR      ctr=gr8
+  153| 000188 lfdu     CC870020   1     LFDU      fp4,gr7=sx[](gr7,32)
+  153| 00018C fabs     FC000210   1     ABSFL     fp0=fp0
+  153| 000190 fabs     FC401210   2     ABSFL     fp2=fp2
+  153| 000194 fadd     FC01002A   2     AFL       fp0=fp1,fp0,fcr
+  153| 000198 fabs     FC201A10   2     ABSFL     fp1=fp3
+  153| 00019C fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  153| 0001A0 fadd     FC20082A   2     AFL       fp1=fp0,fp1,fcr
+    0| 0001A4 bc       4240003C   1     BCF       ctr=CL.108,taken=0%(0,100)
+    0| 0001A8 ori      60210000   1     XNOP      
+    0|                              CL.109:
+  153| 0001AC lfd      C8070008   1     LFL       fp0=sx[](gr7,8)
+  153| 0001B0 fabs     FC402210   1     ABSFL     fp2=fp4
+  153| 0001B4 fadd     FC21102A   2     AFL       fp1=fp1,fp2,fcr
+  153| 0001B8 lfd      C8470010   1     LFL       fp2=sx[](gr7,16)
+  153| 0001BC fabs     FC000210   1     ABSFL     fp0=fp0
+  153| 0001C0 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+  153| 0001C4 lfd      C8070018   1     LFL       fp0=sx[](gr7,24)
+  153| 0001C8 fabs     FC401210   1     ABSFL     fp2=fp2
+  153| 0001CC fadd     FC21102A   2     AFL       fp1=fp1,fp2,fcr
+  153| 0001D0 lfdu     CC870020   1     LFDU      fp4,gr7=sx[](gr7,32)
+  153| 0001D4 fabs     FC000210   1     ABSFL     fp0=fp0
+  153| 0001D8 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+    0| 0001DC bc       4200FFD0   1     BCT       ctr=CL.109,taken=100%(100,0)
+    0|                              CL.108:
+  153| 0001E0 fabs     FC002210   1     ABSFL     fp0=fp4
+  153| 0001E4 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+  154|                              CL.22:
+  155| 0001E8 cmpwi    2C000006   1     C4        cr0=gr0,6
+  155| 0001EC bc       4180FF20   1     BT        CL.15,cr0,0x1/lt,taken=50%(0,0)
+  156|                              CL.9:
+  156| 0001F0 addi     38050001   1     AI        gr0=gr5,1
+  156| 0001F4 ld       E8630008   1     L8        gr3=+CONSTANT_AREA(gr3,8)
+  156| 0001F8 extsw    7C0007B4   1     EXTS4     gr0=gr0
+  158| 0001FC rldicr   79451F24   1     SLL8      gr5=gr10,3
+  156| 000200 subf     7CC03050   1     S         gr6=gr6,gr0
+  158| 000204 addi     3804FFF8   1     AI        gr0=gr4,-8
+  156| 000208 addi     38860006   1     AI        gr4=gr6,6
+  158| 00020C add      7CA50214   1     A         gr5=gr5,gr0
+  156| 000210 mulhd    7C032092   0     MULHD     gr0=gr3,gr4
+  156| 000214 rldicl   78830FE0   2     SRL8      gr3=gr4,63
+  156| 000218 add      7C001A15   1     A_R       gr0,cr0=gr0,gr3
+  157| 00021C bc       4081FEF0   1     BF        CL.15,cr0,0x2/gt,taken=50%(0,0)
+    0| 000220 rldicl   7803F842   1     SRL8      gr3=gr0,1
+    0| 000224 andi.    70000001   1     RN4_R     gr0,cr0=gr0,0,0x1
+    0| 000228 cmpdi    2CA30000   1     C8        cr1=gr3,0
+    0| 00022C mtspr    7C6903A6   1     LCTR      ctr=gr3
+    0| 000230 bc       41820050   1     BT        CL.100,cr0,0x4/eq,taken=50%(0,0)
+  158| 000234 lfd      C8050008   1     LFL       fp0=sx[](gr5,8)
+  158| 000238 lfd      C8450010   1     LFL       fp2=sx[](gr5,16)
+  158| 00023C lfd      C8650018   1     LFL       fp3=sx[](gr5,24)
+  158| 000240 lfd      C8850020   1     LFL       fp4=sx[](gr5,32)
+  158| 000244 lfd      C8A50028   1     LFL       fp5=sx[](gr5,40)
+  158| 000248 lfdu     CCC50030   1     LFDU      fp6,gr5=sx[](gr5,48)
+  158| 00024C fabs     FC000210   1     ABSFL     fp0=fp0
+  158| 000250 fabs     FC401210   2     ABSFL     fp2=fp2
+  158| 000254 fadd     FC01002A   2     AFL       fp0=fp1,fp0,fcr
+  158| 000258 fabs     FC201A10   2     ABSFL     fp1=fp3
+  158| 00025C fabs     FC602210   2     ABSFL     fp3=fp4
+  158| 000260 fabs     FC802A10   2     ABSFL     fp4=fp5
+  158| 000264 fabs     FCA03210   2     ABSFL     fp5=fp6
+  158| 000268 fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  158| 00026C fadd     FC00082A   2     AFL       fp0=fp0,fp1,fcr
+  158| 000270 fadd     FC00182A   2     AFL       fp0=fp0,fp3,fcr
+  158| 000274 fadd     FC00202A   2     AFL       fp0=fp0,fp4,fcr
+  158| 000278 fadd     FC20282A   2     AFL       fp1=fp0,fp5,fcr
+    0| 00027C bc       4186FE90   1     BT        CL.15,cr1,0x4/eq,taken=20%(20,80)
+    0|                              CL.100:
+  158| 000280 lfd      C8C50008   1     LFL       fp6=sx[](gr5,8)
+  158| 000284 lfd      C9050010   1     LFL       fp8=sx[](gr5,16)
+  158| 000288 lfd      C8050018   1     LFL       fp0=sx[](gr5,24)
+  158| 00028C lfd      C8450020   1     LFL       fp2=sx[](gr5,32)
+  158| 000290 lfd      C8650028   1     LFL       fp3=sx[](gr5,40)
+  158| 000294 lfd      C8850030   1     LFL       fp4=sx[](gr5,48)
+  158| 000298 lfd      C8A50038   1     LFL       fp5=sx[](gr5,56)
+  158| 00029C fabs     FCE03210   1     ABSFL     fp7=fp6
+  158| 0002A0 lfd      C8C50040   1     LFL       fp6=sx[](gr5,64)
+  158| 0002A4 fadd     FC21382A   1     AFL       fp1=fp1,fp7,fcr
+  158| 0002A8 lfd      C8E50048   1     LFL       fp7=sx[](gr5,72)
+  158| 0002AC fabs     FD004210   1     ABSFL     fp8=fp8
+  158| 0002B0 lfd      C9250050   1     LFL       fp9=sx[](gr5,80)
+  158| 0002B4 fabs     FC000210   1     ABSFL     fp0=fp0
+  158| 0002B8 lfd      C9450058   1     LFL       fp10=sx[](gr5,88)
+  158| 0002BC fadd     FC21402A   1     AFL       fp1=fp1,fp8,fcr
+  158| 0002C0 lfdu     CD050060   1     LFDU      fp8,gr5=sx[](gr5,96)
+  158| 0002C4 fabs     FC401210   1     ABSFL     fp2=fp2
+  158| 0002C8 fabs     FC601A10   2     ABSFL     fp3=fp3
+  158| 0002CC fabs     FC802210   2     ABSFL     fp4=fp4
+  158| 0002D0 fabs     FCA02A10   2     ABSFL     fp5=fp5
+  158| 0002D4 fadd     FC01002A   2     AFL       fp0=fp1,fp0,fcr
+  158| 0002D8 fabs     FC203210   2     ABSFL     fp1=fp6
+  158| 0002DC fabs     FCC03A10   2     ABSFL     fp6=fp7
+  158| 0002E0 fabs     FCE04A10   2     ABSFL     fp7=fp9
+  158| 0002E4 fabs     FD205210   2     ABSFL     fp9=fp10
+  158| 0002E8 fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  158| 0002EC fadd     FC00182A   2     AFL       fp0=fp0,fp3,fcr
+  158| 0002F0 fadd     FC00202A   2     AFL       fp0=fp0,fp4,fcr
+  158| 0002F4 fadd     FC00282A   2     AFL       fp0=fp0,fp5,fcr
+  158| 0002F8 fadd     FC00082A   2     AFL       fp0=fp0,fp1,fcr
+  158| 0002FC fadd     FC00302A   2     AFL       fp0=fp0,fp6,fcr
+  158| 000300 fadd     FC00382A   2     AFL       fp0=fp0,fp7,fcr
+  158| 000304 fadd     FC20482A   2     AFL       fp1=fp0,fp9,fcr
+    0| 000308 bc       42400098   1     BCF       ctr=CL.110,taken=0%(0,100)
+    0|                              CL.111:
+  158| 00030C lfd      C8050008   1     LFL       fp0=sx[](gr5,8)
+  158| 000310 fabs     FC404210   1     ABSFL     fp2=fp8
+  158| 000314 fadd     FC21102A   2     AFL       fp1=fp1,fp2,fcr
+  158| 000318 lfd      C8450010   1     LFL       fp2=sx[](gr5,16)
+  158| 00031C fabs     FC000210   1     ABSFL     fp0=fp0
+  158| 000320 fadd     FC01002A   2     AFL       fp0=fp1,fp0,fcr
+  158| 000324 lfd      C8250018   1     LFL       fp1=sx[](gr5,24)
+  158| 000328 fabs     FC401210   1     ABSFL     fp2=fp2
+  158| 00032C fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  158| 000330 lfd      C8450020   1     LFL       fp2=sx[](gr5,32)
+  158| 000334 fabs     FC200A10   1     ABSFL     fp1=fp1
+  158| 000338 fadd     FC00082A   2     AFL       fp0=fp0,fp1,fcr
+  158| 00033C lfd      C8250028   1     LFL       fp1=sx[](gr5,40)
+  158| 000340 fabs     FC401210   1     ABSFL     fp2=fp2
+  158| 000344 fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  158| 000348 lfd      C8450030   1     LFL       fp2=sx[](gr5,48)
+  158| 00034C fabs     FC200A10   1     ABSFL     fp1=fp1
+  158| 000350 fadd     FC00082A   2     AFL       fp0=fp0,fp1,fcr
+  158| 000354 lfd      C8250038   1     LFL       fp1=sx[](gr5,56)
+  158| 000358 fabs     FC401210   1     ABSFL     fp2=fp2
+  158| 00035C fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  158| 000360 lfd      C8450040   1     LFL       fp2=sx[](gr5,64)
+  158| 000364 fabs     FC200A10   1     ABSFL     fp1=fp1
+  158| 000368 fadd     FC00082A   2     AFL       fp0=fp0,fp1,fcr
+  158| 00036C lfd      C8250048   1     LFL       fp1=sx[](gr5,72)
+  158| 000370 fabs     FC401210   1     ABSFL     fp2=fp2
+  158| 000374 fadd     FC00102A   2     AFL       fp0=fp0,fp2,fcr
+  158| 000378 lfd      C8450050   1     LFL       fp2=sx[](gr5,80)
+  158| 00037C fabs     FC200A10   1     ABSFL     fp1=fp1
+  158| 000380 fadd     FC20082A   2     AFL       fp1=fp0,fp1,fcr
+  158| 000384 lfd      C8050058   1     LFL       fp0=sx[](gr5,88)
+  158| 000388 fabs     FC401210   1     ABSFL     fp2=fp2
+  158| 00038C fadd     FC21102A   2     AFL       fp1=fp1,fp2,fcr
+  158| 000390 lfdu     CD050060   1     LFDU      fp8,gr5=sx[](gr5,96)
+  158| 000394 fabs     FC000210   1     ABSFL     fp0=fp0
+  158| 000398 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+    0| 00039C bc       4200FF70   1     BCT       ctr=CL.111,taken=100%(100,0)
+    0|                              CL.110:
+  158| 0003A0 fabs     FC004210   1     ABSFL     fp0=fp8
+  158| 0003A4 fadd     FC21002A   2     AFL       fp1=fp1,fp0,fcr
+    0| 0003A8 b        4BFFFD64   1     B         CL.15,-1
+    0|                              CL.197:
+  133| 0003AC lfs      C0230000   1     LFS       fp1=+CONSTANT_AREA(gr3,0)
+  133| 0003B0 bclr     4E800020   1     BA        lr
+     |               Tag Table
+     | 0003B4        00000000 00012200 00000000 000003B4
+     |               Instruction count          237
+     |               Straight-line exec time    295
+     |               Constant Area
+     | 000000        00000000 49424D20 2AAAAAAA AAAAAAAB
+
+ 
+ 
+>>>>> COMPILATION UNIT EPILOGUE SECTION <<<<<
+ 
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+>>>>> FILE TABLE SECTION <<<<<
+ 
+ 
+                                       FILE CREATION        FROM
+FILE NO   FILENAME                    DATE       TIME       FILE    LINE
+     0    linpck.f90                  07/08/15   15:48:46
+ 
+ 
+>>>>> COMPILATION EPILOGUE SECTION <<<<<
+ 
+ 
+FORTRAN Summary of Diagnosed Conditions
+ 
+TOTAL   UNRECOVERABLE  SEVERE       ERROR     WARNING    INFORMATIONAL
+               (U)       (S)         (E)        (W)          (I)
+    0           0         0           0          0            0
+ 
+ 
+    Source records read.......................................     163
+1501-510  Compilation successful for file linpck.f90.
+1501-543  Object file created.
