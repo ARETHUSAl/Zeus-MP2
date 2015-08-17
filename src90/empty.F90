@@ -1,4 +1,4 @@
       subroutine empty
-      implicit NONE
+      implicit none
       return
       end

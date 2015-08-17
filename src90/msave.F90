@@ -97,8 +97,8 @@
       if(nspec .gt. 1) nfieldr = nfieldr +   in*jn*kn*nspec
       allocate(rlfldvr(nfieldr))
 !
-      nbdryr = (2*6*nspec) * (jn*kn + in*jn + in*kn) + 6*nbvar
-!      nbdryr = 60*jn*kn + 60*in*jn + 60*in*kn + 6*nbvar
+!      nbdryr = (2*6*nspec) * (jn*kn + in*jn + in*kn) + 6*nbvar
+      nbdryr = 60*jn*kn + 60*in*jn + 60*in*kn + 6*nbvar
       nbdryi = 10*jn*kn + 10*in*jn + 10*in*kn + 6*nbvar &
                         + 18
       allocate(rlbdryvr(nbdryr))
@@ -217,8 +217,8 @@
       if(nspec .gt. 1) nfieldr = nfieldr +   in*jn*kn*nspec
       allocate(rlfldvr(nfieldr))
 !
-       nbdryr = (2*6*nspec) * (jn*kn + in*jn + in*kn) + 6*nbvar
-!      nbdryr = 60*jn*kn + 60*in*jn + 60*in*kn + 6*nbvar
+!      nbdryr = (2*6*nspec) * (jn*kn + in*jn + in*kn) + 6*nbvar
+      nbdryr = 60*jn*kn + 60*in*jn + 60*in*kn + 6*nbvar
       nbdryi = 10*jn*kn + 10*in*jn + 10*in*kn + 6*nbvar &
                         + 18
       allocate(rlbdryvr(nbdryr))

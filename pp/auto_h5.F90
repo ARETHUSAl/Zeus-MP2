@@ -146,22 +146,22 @@ subroutine auto_h5
        read(1,mpitop)
        write(*,"('H5SPLICE: ntiles is ',3i6)") ntiles(1),ntiles(2) &
        , ntiles(3)
-       allocate(data (izones/ntiles(1)* &
-                      jzones/ntiles(2)* &
-                      kzones/ntiles(3)))
+       allocate(data (izones*jzones*kzones))
 !
-       allocate(xscale(izones/ntiles(1)))
-       allocate(scr_in(izones/ntiles(1)))
-       allocate(yscale(jzones/ntiles(2)))
-       allocate(scr_jn(jzones/ntiles(2)))
-       allocate(zscale(kzones/ntiles(3)))
-       allocate(scr_kn(kzones/ntiles(3)))
+       allocate(xscale(izones))
+       allocate(scr_in(izones))
+       allocate(yscale(jzones))
+       allocate(scr_jn(jzones))
+       allocate(zscale(kzones))
+       allocate(scr_kn(kzones))
 !
-       allocate(xscmb(izones))
-       allocate(yscmb(jzones))
-       allocate(zscmb(kzones))
+       allocate(xscmb(izones*ntiles(1)))
+       allocate(yscmb(jzones*ntiles(2)))
+       allocate(zscmb(kzones*ntiles(3)))
 !
-       allocate(dcmb (izones, jzones, kzones))
+       allocate(dcmb (izones*ntiles(1), &
+                      jzones*ntiles(2), & 
+                      kzones*ntiles(3)))
 !
 !-----------------------------------------------------------------------
 !   Read the "rescon" namelist to find the run's "id".
@@ -401,23 +401,23 @@ subroutine auto_h5
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"time",tval)
 !
-        dims(1  ) = izones
+        dims(1  ) = izones*ntiles(1)
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"i_coord",xscmb)
 !
-        dims(1  ) = jzones
+        dims(1  ) = jzones*ntiles(2)
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"j_coord",yscmb)
 !
-        dims(1  ) = kzones
+        dims(1  ) = kzones*ntiles(3)
         dims(2:7) = 0
         call write_cmb(cfile_id,rank,dims,"k_coord",zscmb)
        endif ! lfunc
 !
        RANK = 3
-       dims(1  ) = izones
-       dims(2  ) = jzones
-       dims(3  ) = kzones
+       dims(1  ) = izones*ntiles(1)
+       dims(2  ) = jzones*ntiles(2)
+       dims(3  ) = kzones*ntiles(3)
        dims(4:7) = 0
        call write_cmb(cfile_id,rank,dims,dsetname(lfunc),dcmb)
 !

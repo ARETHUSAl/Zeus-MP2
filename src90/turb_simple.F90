@@ -90,12 +90,12 @@ subroutine turb_simple
         allocate(ga(mxgrid,mygrid,mzgrid,nv), stat=alloc_err)
         allocate(buffer(mxgrid,mygrid), stat=alloc_err)
 !
-        if (ip <= 8) print *, 'input_snap: open VAR0'
+        if (myid .eq. 0) print *, 'input_snap: open VAR0'
         inquire (IOLENGTH=io_len) tvar
         open (lun_input, FILE=filename, access='direct', &
               recl=mxgrid*mygrid*io_len, status='old')
 !
-        if (ip <= 8) print *, 'input_snap: read dim=', mxgrid, mygrid, mzgrid, nv
+        if (myid .eq. 0) print *, 'input_snap: read dim=', mxgrid, mygrid, mzgrid, nv
         ! iterate through variables
         do pa = 1, nv
           ! iterate through xy-planes and read each plane separately
@@ -115,9 +115,9 @@ subroutine turb_simple
         call backskip_to_time(lun_input)
 !
         read (lun_input) tvar, x, y, z, dx, dy, dz
-        if (ip <= 8) print *, tvar, dx, x(1)
+        if (myid .eq. 0) print *, tvar, dx, x(1)
     
-        if (ip <= 8) print *, shape(v1) 
+        if (myid .eq. 0) print *, shape(v1) 
         if (luse_lnrho) then
           d = exp(ga(1:in, 1:jn, 1:kn, irho))
         else
@@ -130,11 +130,12 @@ subroutine turb_simple
         b2 = ga(1:in, 1:jn, 1:kn, iby)
         b3 = ga(1:in, 1:jn, 1:kn, ibz)
       !endif
-
-      write(*,*) maxval(v1), maxval(b1)
-      write(*,*) maxval(v2), maxval(b2)
-      write(*,*) maxval(v3), maxval(b3)
-      write(*,*) minval(d), maxval(d)
+      if (myid .eq. 0) then
+        write(*,*) maxval(v1), maxval(b1)
+        write(*,*) maxval(v2), maxval(b2)
+        write(*,*) maxval(v3), maxval(b3)
+        write(*,*) minval(d), maxval(d)
+      endif
       if (allocated(ga)) deallocate(ga)
       return
 end subroutine turb_simple

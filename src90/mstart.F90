@@ -128,8 +128,8 @@
 !
 ! Read the remaining namelists (except for iocon) in setup/restart.
 !
-      if (myid_w .eq. 0 ) close(unit=1)
       if (irestart .eq. 0) then
+        !if (myid_w .eq. 0 ) close(unit=1)
         call setup
         time = 0.0D0
       else
@@ -156,7 +156,7 @@
 !  dtusr: time between user dumps
 !
       if (myid_w .eq. 0) then
-        open(1, file='zmp_inp', status='old', iostat=iost)
+        !open(1, file='zmp_inp', status='old', iostat=iost)
         if (irestart .eq. 0) then
            thdf  = 0.0
           dthdf  = 0.0
@@ -225,32 +225,46 @@
         ifsen(4) = 1
         ifsen(5) = 1
         ifsen(6) = 1
-        write(tslfile,"(a3,i4.4,a2)") 'tsl',incr,id
         write(resfile,"(a3,a2,3i2.2,'.',i4.4)") 'res',id,coords(1) &
                                             ,coords(2),coords(3),incr
-        write(hdffile,"(a3,a2,3i2.2,'.',i4.4)") 'hdf',id,coords(1) &
-                                            ,coords(2),coords(3),incr
-        write(hstfile,"(a3,a2,3i2.2,'.',i4.4)") 'hst',id,coords(1) &
-                                            ,coords(2),coords(3),incr
-        write(usrfile,"(a3,a2,3i2.2,'.',i4.4)") 'usr',id,coords(1) &
-                                            ,coords(2),coords(3),incr
+        if (xtsl) then 
+          write(tslfile,"(a3,i4.4,a2)") 'tsl',incr,id
+        endif
+        if (xhdf) then
+          write(hdffile,"(a3,a2,3i2.2,'.',i4.4)") 'hdf',id,coords(1) &
+                                              ,coords(2),coords(3),incr
+        endif
+        if (xhst) then
+          write(hstfile,"(a3,a2,3i2.2,'.',i4.4)") 'hst',id,coords(1) &
+                                              ,coords(2),coords(3),incr
+        endif
+        if (xascii) then
+          write(usrfile,"(a3,a2,3i2.2,'.',i4.4)") 'usr',id,coords(1) &
+                                              ,coords(2),coords(3),incr
+        endif
       else
         ifsen(2) = 0
         ifsen(3) = 0
         ifsen(4) = 0
         ifsen(5) = 0
         ifsen(6) = 0
-        incr = strtoi(tslfile,4,7) + 1
-        write(tslfile,"(a3,i4.4,a2)") 'tsl',incr,id 
         incr = strtoi(resfile,13,16) + 1
         write(resfile,"(a3,a2,3i2.2,'.',i4.4)") 'res',id,coords(1) &
                                             ,coords(2),coords(3),incr
-        incr = strtoi(hdffile,13,16) + 1
-        write(hdffile,"(a3,a2,3i2.2,'.',i4.4)") 'hdf',id,coords(1) &
+        if (xhdf) then
+          incr = strtoi(hdffile,13,16) + 1
+          write(hdffile,"(a3,a2,3i2.2,'.',i4.4)") 'hdf',id,coords(1) &
                                             ,coords(2),coords(3),incr
-        incr = strtoi(usrfile,13,16) + 1
-        write(usrfile,"(a3,a2,3i2.2,'.',i4.4)") 'usr',id,coords(1) &
+        endif
+        if (xtsl) then
+          incr = strtoi(tslfile,4,7) + 1
+          write(tslfile,"(a3,i4.4,a2)") 'tsl',incr,id 
+        endif  
+        if (xascii) then
+          incr = strtoi(usrfile,13,16) + 1
+          write(usrfile,"(a3,a2,3i2.2,'.',i4.4)") 'usr',id,coords(1) &
                                             ,coords(2),coords(3),incr
+        endif
       endif
       if(xtsl) then
        if (myid_w .eq. 0) then

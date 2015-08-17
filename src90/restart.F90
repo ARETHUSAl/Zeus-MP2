@@ -114,6 +114,7 @@
 !
       nred   = 0
       if (myid_w .eq. 0) then
+       !open(1,file='zmp_inp', status='old', status=iost)
        read (1,pcon)
        write(2,pcon)
       endif
@@ -371,10 +372,10 @@
         iOTS     = 1
         iPWA     = 0
         iLW      = 0
-	ibkgnd   = 0
+        ibkgnd   = 0
         iHM      = 0
         iextinct = 0
-	nsrc     = 1
+        nsrc     = 1
         nphdot   = 1.391d50
         ephot    = 15.0
         t_on     = 0.
@@ -385,7 +386,7 @@
         alpha    = -1.8
         nLWdot   = 0.
         L_star   = 6.243
-	J_21     = 0
+        J_21     = 0
       if (myid_w .eq. 0) then
         read (1,rtcon)
         write(2,rtcon)
@@ -540,7 +541,10 @@
 !
 !  Call ctable to set up chemistry coefficient tables
 !
-      call ctable
+      if ( xchem ) then
+        if (myid_w .eq. 0) print *, 'Doing some chemistry'
+        call ctable
+      endif
 !
 !-------------------------  SET MPI DATATYPES  -------------------------c
 ! Define MPI Derived Datatypes for passing 2-D slices of 3-D arrays.
